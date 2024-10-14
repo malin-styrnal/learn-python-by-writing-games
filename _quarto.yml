@@ -1,0 +1,38 @@
+project:
+  type: book
+
+book:
+  site-url: https://alexander-pastukhov.github.io/learning-python-by-writing-games
+  title: "Learn Python by Writing Games"
+  author: "Alexander (Sasha) Pastukhov"
+  date: "10/14/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+
+babelquarto:
+  languagelinks: sidebar
+  languagecodes:
+  - name: de
+    text: "Version in de"
+  - name: ru
+    text: "Version in ru"
+  - name: en
+    text: "Version in en"
+  mainlanguage: 'en'
+  languages: ['de', 'ru']
+title-de: Lerne Python, indem du Spiele schreibst.
+title-ru: Учим Питон программируя игры
+description-de: description in de
+description-ru: description in ru
+author-de: Alexander (Sasha) Pastukhov
+author-ru: Александр Пастухов
+lang: en
