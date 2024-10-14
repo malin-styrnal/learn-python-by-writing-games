@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  site-url: https://alexander-pastukhov.github.io/learning-python-by-writing-games
+  site-url: https://alexander-pastukhov.github.io/learn-python-by-writing-games
   title: "Learn Python by Writing Games"
   author: "Alexander (Sasha) Pastukhov"
   date: "10/14/2024"
