@@ -1,6 +1,5 @@
 project:
   type: book
-  output-dir: docs
 
 book:
   site-url: https://alexander-pastukhov.github.io/learn-python-by-writing-games
