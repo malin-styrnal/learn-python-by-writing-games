@@ -26,6 +26,6 @@ babelquarto:
   mainlanguage: 'en'
   languages: ['de']
 title-de: Lerne Python, indem du Spiele schreibst.
-description-de: description in de
+# description-de: description in de
 author-de: Alexander (Sasha) Pastukhov
 lang: en
