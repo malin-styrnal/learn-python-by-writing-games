@@ -9,7 +9,7 @@ book:
   chapters:
     - index.qmd
 
-bibliography: references.bib
+# bibliography: references.bib
 
 format:
   html:

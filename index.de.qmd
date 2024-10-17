@@ -1,4 +1,4 @@
-# Einleitung {#intro}
+# Einleitung {-}
 
 Dieses Buch wird dir das Programmieren beibringen. Hoffentlich auf eine lustige Art und Weise, denn wenn es etwas Befriedigenderes gibt als ein Videospiel zu spielen, dann ist es eines zu erstellen. Obwohl es für den Kurs *"Python für soziale und experimentelle Psychologie"* geschrieben wurde, ist mein Hauptziel nicht, dir Python beizubringen. Python ist ein fantastisches Werkzeug (mehr dazu später), aber es ist nur eine von vielen existierenden Programmiersprachen. Mein letztendliches Ziel ist es, dir allgemeine Programmierfähigkeiten zu vermitteln, die nicht von einer bestimmten Programmiersprache abhängen, und sicherzustellen, dass du gute Gewohnheiten entwickelt, die deinen Code klar, leicht lesbar und leicht wartbar machen. Letzteres ist entscheidend. Programmieren ist nicht nur darüber, Code zu schreiben, der funktioniert. Das muss zwar stimmen, aber es ist nur die Mindestanforderung. Programmieren geht darum, einen klaren und leicht lesbaren Code zu schreiben, den andere und, noch wichtiger, du-zwei-Wochen-später verstehen können.
 
