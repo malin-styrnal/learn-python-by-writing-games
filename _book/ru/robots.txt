@@ -1,1 +1,0 @@
-Sitemap: https://alexander-pastukhov.github.io/learn-python-by-writing-games/sitemap.xml

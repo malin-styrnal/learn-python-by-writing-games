@@ -8,9 +8,6 @@ book:
   date: "10/14/2024"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
 
 bibliography: references.bib
 
@@ -22,17 +19,12 @@ babelquarto:
   languagelinks: sidebar
   languagecodes:
   - name: de
-    text: "Version in de"
-  - name: ru
-    text: "Version in ru"
+    text: "Deutsch"
   - name: en
-    text: "Version in en"
+    text: "Englisn"
   mainlanguage: 'en'
-  languages: ['de', 'ru']
+  languages: ['de']
 title-de: Lerne Python, indem du Spiele schreibst.
-title-ru: Учим Питон программируя игры
 description-de: description in de
-description-ru: description in ru
 author-de: Alexander (Sasha) Pastukhov
-author-ru: Александр Пастухов
 lang: en
