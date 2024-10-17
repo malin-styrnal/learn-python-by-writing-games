@@ -88,5 +88,55 @@
     "crumbs": [
       "Einleitung"
     ]
+  },
+  {
+    "objectID": "00-software.de.html",
+    "href": "00-software.de.html",
+    "title": "Software",
+    "section": "",
+    "text": "PsychoPy\nWenn du Windows nutzt, lade und installiere die Standalone PsychoPy Version herunter. Nimm einfach die neueste (und beste) PsychoPy Version, die dir empfohlen wird (Stand PsychoPy 2023.2.2 mit Python 3.8) und folge den Anweisungen.\nWenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den aktualen Anweisungen.",
+    "crumbs": [
+      "Software"
+    ]
+  },
+  {
+    "objectID": "00-software.de.html#install-vs-code",
+    "href": "00-software.de.html#install-vs-code",
+    "title": "Software",
+    "section": "VS Code",
+    "text": "VS Code\nVisual Studio Code ist ein kostenloser, leichter und offener Quellcode-Editor mit starker Unterstützung für Python. Lade den Installer für deine Plattform herunter und folge den Anweisungen.\nNächster Schritt: Folge dem Tutorial Erste Schritte mit Python in VS Code. Wenn du Windows und die standalone PsychoPy-Installation verwendest, überspringe den Abschnitt Installiere einen Python-Interpreter, da du bereits eine Python-Installation mit PsychoPy hast. Dies ist der Interpreter, den du im Abschnitt Wähle einen Python-Interpreter verwenden solltest. In meinem Fall ist der Pfad C:\\Program Files\\PsychoPy3\\python.exe.\nInstalliere und aktiviere einen Linter, eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode hervorhebt. Folge der Anleitung auf der VS Code-Website.",
+    "crumbs": [
+      "Software"
+    ]
+  },
+  {
+    "objectID": "00-software.de.html#jupyter-notebooks",
+    "href": "00-software.de.html#jupyter-notebooks",
+    "title": "Software",
+    "section": "Jupyter Notebooks",
+    "text": "Jupyter Notebooks\nJupyter Notebooks bieten eine super bequeme Möglichkeit, Text, Abbildungen und Code in einem einzigen Dokument zu vermischen. Sie erleichtern es auch, verschiedene kleine Snippets parallel auszuprobieren, ohne Skripte auszuführen. Wir werden sie für unser erstes Kapitel und gelegentliche Übungen oder Code-Tests später verwenden. Du kannst sie auf zwei Arten nutzen: 1) in VS Code unter Verwendung der Jupyter-Erweiterung, 2) im Browser unter Verwendung der klassischen Schnittstelle.\n\nJupyter Notebooks in VS Code\nLies die Anleitung darüber, wie du das Jupyter-Paket installierst und Notebooks in VS Code verwendest.\n\n\nJupyter Notebooks in Anaconda\nDie einfachste Möglichkeit, Jupyter Notebooks zusammen mit vielen anderen nützlichen Datenwissenschaft-Tools zu verwenden, ist das Anaconda-Toolkit. Beachte jedoch, dass dies eine zweite Python-Verteilung auf deinem System einführt. Dies kann zu Verwirrung führen, wenn du mit Skripten in VS Code arbeitest, wenn zufällig der Anaconda-Interpreter aktiv ist, anstatt der PsychoPy-Interpreter. Keine Panik, folge den Anweisungen unter Wähle einen Python-Interpreter und stelle sicher, dass der PsychoPy-Interpreter aktiv ist.\nOkay, dann lade und installiere Anaconda herunter. Die Website hat einen super Einstieg Abschnitt.",
+    "crumbs": [
+      "Software"
+    ]
+  },
+  {
+    "objectID": "00-software.de.html#files-folder",
+    "href": "00-software.de.html#files-folder",
+    "title": "Software",
+    "section": "Mach’s sauber",
+    "text": "Mach’s sauber\nBevor wir loslegen, schlage ich vor, dass du einen Ordner namens games-with-python (oder so ähnlich) erstellst. Wenn du Jupyter Notebooks über Anaconda verwendest, solltest du ihn in deinem Benutzerordner erstellen, da Anaconda ihn dort erwartet. Dann erstellst du für jedes Kapitel / Spiel einen neuen Unterordner. Für das Seminar musst du einen Ordner mit allen Dateien zippen und hochladen.",
+    "crumbs": [
+      "Software"
+    ]
+  },
+  {
+    "objectID": "00-software.de.html#footnotes",
+    "href": "00-software.de.html#footnotes",
+    "title": "Software",
+    "section": "",
+    "text": "Wenn du Teil des Seminars bist, frag mich einfach, wenn du Probleme hast oder unsicher bist, wie du fortfahren sollst.↩︎",
+    "crumbs": [
+      "Software"
+    ]
   }
 ]

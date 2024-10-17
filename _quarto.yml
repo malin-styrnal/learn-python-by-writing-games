@@ -8,6 +8,7 @@ book:
   date: "10/14/2024"
   chapters:
     - index.qmd
+    - 00-software.qmd
 
 # bibliography: references.bib
 

@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/index.html" />
-<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/index.de.html" />
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/00-software.html" />
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/00-software.de.html" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Alexander (Sasha) Pastukhov">
-<meta name="dcterms.date" content="2024-10-14">
-<title>Learn Python by Writing Games</title>
+<title>Software – Learn Python by Writing Games</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
-<link href="./00-software.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
@@ -64,7 +62,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-software.html">Software</a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -83,19 +81,19 @@ ul.task-list li input[type="checkbox"] {
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/index.de.html" id="language-link-de">Deutsch</a></li></ul>
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/00-software.de.html" id="language-link-de">Deutsch</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-software.html" class="sidebar-item-text sidebar-link">
+  <a href="./00-software.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Software</span></a>
   </div>
 </li>
@@ -107,99 +105,62 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+<li><a href="#install-psychopy" id="toc-install-psychopy" class="nav-link active" data-scroll-target="#install-psychopy">PsychoPy</a></li>
+  <li><a href="#install-vs-code" id="toc-install-vs-code" class="nav-link" data-scroll-target="#install-vs-code">VS Code</a></li>
+  <li>
+<a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a>
   <ul class="collapse">
-<li><a href="#goal-of-the-book" id="toc-goal-of-the-book" class="nav-link" data-scroll-target="#goal-of-the-book">Goal of the book</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#why-games" id="toc-why-games" class="nav-link" data-scroll-target="#why-games">Why games?</a></li>
-  <li><a href="#why-should-a-psychologist-learn-programming" id="toc-why-should-a-psychologist-learn-programming" class="nav-link" data-scroll-target="#why-should-a-psychologist-learn-programming">Why should a psychologist learn programming?</a></li>
-  <li><a href="#why-python" id="toc-why-python" class="nav-link" data-scroll-target="#why-python">Why Python?</a></li>
-  <li><a href="#seminar-specific-information" id="toc-seminar-specific-information" class="nav-link" data-scroll-target="#seminar-specific-information">Seminar-specific information</a></li>
-  <li><a href="#about-the-material" id="toc-about-the-material" class="nav-link" data-scroll-target="#about-the-material">About the material</a></li>
+<li><a href="#jupyter-notebooks-in-vs-code" id="toc-jupyter-notebooks-in-vs-code" class="nav-link" data-scroll-target="#jupyter-notebooks-in-vs-code">Jupyter Notebooks in VS Code</a></li>
+  <li><a href="#jupyter-notebooks-in-anaconda" id="toc-jupyter-notebooks-in-anaconda" class="nav-link" data-scroll-target="#jupyter-notebooks-in-anaconda">Jupyter Notebooks in Anaconda</a></li>
   </ul>
 </li>
+  <li><a href="#files-folder" id="toc-files-folder" class="nav-link" data-scroll-target="#files-folder">Keeping things tidy</a></li>
   </ul></nav>
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Learn Python by Writing Games</h1>
+<h1 class="title"><span id="software" class="quarto-section-identifier">Software</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Alexander (Sasha) Pastukhov </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2024</p>
-    </div>
-  </div>
   
     
   </div>
   
 
 
-</header><section id="introduction" class="level1 unnumbered"><h1 class="unnumbered">Introduction</h1>
-<p>This book will teach you programming. Hopefully, it will do so in a fun way because if there is something more satisfying than playing a video game then it is creating one. Although it is written for the course called <em>“Python for social and experimental psychology”</em>, my main aim is not to teach you Python per se. Python is a fantastic tool (more on this later) but it is just one of many programming languages that exist. My ultimate goal is to help you to develop general programming skills, which do not depend on a specific programming language, and make sure that you form good habits that will make your code clear, easy to read, and easy to maintain. That last part is crucial. Programming is not about writing code that works. That, obviously, must be true but it is only the minimal requirement. Programming is about writing a clear and easy-to-read code that others and, even more importantly, you-two-weeks later can understand.</p>
-<section id="goal-of-the-book" class="level2"><h2 class="anchored" data-anchor-id="goal-of-the-book">Goal of the book</h2>
-<p>The goal is for you to be able to program a sophisticated experiment that can have multiple blocks and trials, various conditions, complicated visual presentation, automatic logging of data and exception handling. If this sound ambitious, it is but we will proceed in small steps in the process you will learn</p>
+</header><p>For this book and seminar, we will need to install</p>
 <ul>
-<li>Core Python concepts including
-<ul>
-<li>variables and constants</li>
-<li>immutable data types such as integers, floats, strings, logical values, and tuples</li>
-<li>mutable types such as lists and dictionaries</li>
-<li>functions</li>
-<li>control structures such as if-else conditional statements and loops</li>
-<li>object-oriented programming including concepts of inheritance, duck-typing, and mixing</li>
-<li>exceptions</li>
-<li>file operations</li>
+<li>PsychoPy.</li>
+<li>IDE of your choice. My instructions will be for Visual Studio Code, which has a very good Python support.</li>
+<li>Jupyter Notebook for trying out small snippets of code.</li>
 </ul>
-</li>
-<li>PsychoPy: this is not core Python but it is a prime library for psychophysical experiments and you will learn key tools that are required for programming an experiment.</li>
-<li>Good programming style including
-<ul>
-<li>Writing clear code in iterative manner</li>
-<li>Reading (your own) code</li>
-<li>Documenting your code</li>
-<li>Debugging your program in VS Code</li>
-</ul>
-</li>
-</ul>
-<p>I have tried to present concepts within the context that requires them and, therefore, best explain and presents their typical usage scenarios. This means that material is spread around and is presented in the need-to-now basis. For example, the concept of lists is presented first but operations on them are presented in the later chapter both because we only need this later and to keep your feeling of being overwhelmed to within reason. This makes this book harder to use as a reference (there are excellent references out where, starting with <a href="https://docs.python.org/3/">official Python documentation</a>) but the hope is that by giving you bite-sized chunks of new information, it will make it easier to understand the material and integrate it with whatever you already know.</p>
-<p>Same “distributed” logic applies to exercises. Rather than being listed at the end of each chapter, they are embedded in the text and you should do them at that time point. A lot of them are designed to clarify concepts that were presented before them by using illustrative examples, so doing them immediately would be most helpful. Same goes for coding practice, although in that case, you can read the entire material to get a “bird’s eye view” of the entire program and then read the text again, doing the coding practice.</p>
-</section><section id="prerequisites" class="level2"><h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>The material assumes no foreknowledge of Python or programming from the reader. Its purpose is to gradually build up your knowledge and allow you to create more and more complex games.</p>
-</section><section id="why-games" class="level2"><h2 class="anchored" data-anchor-id="why-games">Why games?</h2>
-<p>The actual purpose of this course is to teach psychology and social studies students how to program <em>experiments</em>. That is what the real research is about. However, there is little practical difference between the two. The basic ingredients are the same and, arguably, experiments are just boring games. And, be assured, if you can program a game, you can certainly program an experiment.</p>
-</section><section id="why-should-a-psychologist-learn-programming" class="level2"><h2 class="anchored" data-anchor-id="why-should-a-psychologist-learn-programming">Why should a psychologist learn programming?</h2>
-<p>Why should a psychologist, who is interested in people, learn how to program computers? The most obvious answer is that this is a useful skill. Being able to program gives you freedom to create an experiment that answers your research question, not an experiment that can be implemented given constraints of your software.</p>
-<p>More importantly, at least from my point of view, learning how to program changes the way you think in general. People are smart but computers are dumb<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. When you explain your experiment or travel plans to somebody, you can be fairly vague, make a minor mistake, even skip certain parts. People are smart so they will fill in the missing information with their knowledge, spot and correct a mistake, ask you for more information, and can improvise on their own once they encounter something that you have not covered. Computers are dumb, so you must be precise, you cannot have gray areas, you cannot leave anything to “it will figure it out once it happens” (it won’t). My personal experience, corroborated by psychologists who learned programming, is that it makes you realize just how vague and imprecise people can be without realizing it (and without you realizing this as well). Programming forces you to be precise and thorough, to plan ahead for any eventuality there might be. And this is a very useful skill by itself as it can be applied to any activity that requires planning be that an experimental design or travel arrangements.</p>
-</section><section id="why-python" class="level2"><h2 class="anchored" data-anchor-id="why-python">Why Python?</h2>
-<p>There are many ways to create an experiment for psychological research. You can use drag-and-drop systems either commercial like <a href="https://www.neurobs.com/">Presentation</a>, <a href="https://www.sr-research.com/experiment-builder/">Experiment Builder</a> or free like <a href="https://psychopy.org/builder">PsychoPy Bulder interface</a>. They have a much shallower learning curve, so you can start creating and running your experiments faster. However, the simplicity of their use has a price: They are fairly limited in which stimuli you can use and how you can control the presentation schedule, conditions, feedback, etc. Typically, they allow you to extend them by programming the desired behavior but you do need to know how to program to do this (knowing Python supercharges your PsychoPy experiments). Thus, I think that while these systems, in particular <a href="https://psychopy.org/">PsychoPy</a>, are great tools to quickly bang a simple experiment together, they are most useful if you understand <em>how</em> they create the underlying code and how you would program it yourself. Then, you will not be limited by the software, as you know you can program something the default drag-and-drop won’t allow. At the same time, you can always opt in, if drag-and-drop is sufficient but faster or use a mix of the two approaches. At the end, it is about having options and creative freedom to program an experiment that will answer your research question, not an experiment that your software allows you to program.</p>
-<p>We will learn programming in Python, which is a great language that combines simple and clear syntax with power and ability to tackle almost any problem. In this seminar, we will concentrate on desktop experiments but you can use it for online experiments (<a href="https://otree.readthedocs.io/en/latest/">oTree</a> and <a href="https://psychopy.org/">PsychoPy</a>), scientific programming (<a href="https://numpy.org/">NumPy</a> and <a href="https://www.scipy.org/">SciPy</a>), data analysis (<a href="https://pandas.pydata.org/">pandas</a>), machine learning (<a href="https://scikit-learn.org/">scikit-learn</a>), deep learning (<a href="https://keras.io/">keras</a>), website programming (<a href="https://www.djangoproject.com/">django</a>), computer vision (<a href="https://opencv.org/">OpenCV</a>), etc. Thus, Python is one of the most versatile programming tools that you can use for all stages of your research or work. And, Python is free, so you do not need to worry whether you or your future employer will be able to afford license fees (a very real problem, if you use Matlab).</p>
-</section><section id="seminar-specific-information" class="level2"><h2 class="anchored" data-anchor-id="seminar-specific-information">Seminar-specific information</h2>
-<p>This is a material for <em>Python for social and experimental psychology</em> seminar as taught by me at the University of Bamberg. Each chapter covers a single game, introducing necessary ideas and is accompanied by exercises that you need to complete and submit. To pass the seminar, you will need to complete all assignments, i.e., write all the games. You do not need to complete or provide correct solutions for <em>all</em> the exercises to pass the course and information on how the points for exercises will be converted to an actual grade (if you need one) or “pass” will be available during the seminar.</p>
-<p>The material is structured, so that each chapter or chapter section typically correspond to a single meeting. However, we are all different, so work at your own pace, read the material and submit assignments independently. I will provide detailed feedback for each assignment and you will have an opportunity to address issues and resubmit again with no loss of points. Note that my feedback will cover not only the actual problems with the code but the way you implemented the solution and how clean and well-documented your code is. Remember, our task is not just to learn how to program a working game but how to write a nice clear easy-to-read-and-maintain code<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>Very important: Do not hesitate to ask questions. If I feel that you missed the information in the material, I will point you to the exact location. If you are confused, I’ll gently prod you with questions so that you will solve your own problem. If you need more information, I’ll supply it. If you simply want to know more, ask and I’ll explain why things are the way they are or suggest what to read. If I feel that you should be able to solve the issue without my help, I’ll tell you so (although, I would still probably ask a few hinting questions).</p>
-</section><section id="about-the-material" class="level2"><h2 class="anchored" data-anchor-id="about-the-material">About the material</h2>
-<p>This material is <strong>free to use</strong> and is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives V4.0 International License</a>.</p>
+<p>I will not give detailed instructions on how to install the necessary software but rather point you to official manuals. This makes this text more future-proof as specific details might easily change<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<section id="install-psychopy" class="level2"><h2 class="anchored" data-anchor-id="install-psychopy">PsychoPy</h2>
+<p>If you are using Windows, download and install <a href="https://www.psychopy.org/download.html">Standalone PsychoPy</a> version. Use whatever the latest (and greatest) PsychoPy version is suggested to you (PsychoPy 2023.2.2 using Python 3.8 as of time of writing) and follow instructions.</p>
+<p>If you are using Mac or Linux, installing PsychoPy via pip or Anaconda are your options. Please follow up-to-date <a href="https://www.psychopy.org/download.html#manual-installations">instructions</a>.</p>
+</section><section id="install-vs-code" class="level2"><h2 class="anchored" data-anchor-id="install-vs-code">VS Code</h2>
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a> is a free lightweight open-source editor with strong support for Python. Download the installer for your platform and follow the instructions.</p>
+<p>Next, follow <a href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS Code</a> tutorial. If you are using Windows and the standalone PsychoPy installation, <strong>skip</strong> the <em>Install a Python interpreter</em> section, as you already have Python installation bundled with PsychoPy. This is the interpreter that you should use in the <em>Select a Python interpreter</em> section. In my case the path is <code>C:\Program Files\PsychoPy3\python.exe</code>.</p>
+<p>Install and enable a linter, software that highlights syntactical and stylistic problems in your Python source code. Follow the <a href="https://code.visualstudio.com/docs/python/linting">manual</a> at VS Code website.</p>
+</section><section id="jupyter-notebooks" class="level2"><h2 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h2>
+<p><a href="https://jupyter.org/">Jupyter Notebooks</a> offer a very convenient way to mix text, figure and code in a single document. They also make it easy to play with various small snippets in parallel without running scripts. We will rely on them for our first chapter and for an occasional exercises or code testing later on. There are two way you can use them: 1) in VS Code using Jupyter extension, 2) in your browser using classical interface.</p>
+<section id="jupyter-notebooks-in-vs-code" class="level3"><h3 class="anchored" data-anchor-id="jupyter-notebooks-in-vs-code">Jupyter Notebooks in VS Code</h3>
+<p>Follow <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">the manual</a> on how to install Jupyter package and use notebooks in VS Code.</p>
+</section><section id="jupyter-notebooks-in-anaconda" class="level3"><h3 class="anchored" data-anchor-id="jupyter-notebooks-in-anaconda">Jupyter Notebooks in Anaconda</h3>
+<p>The simplest way to use Jupyter Notebooks along with a lot of other useful data science tools is via <a href="https://www.anaconda.com/products/individual">Anaconda</a> toolkit. However, note that this will introduce a <em>second</em> Python distribution to your system. This, in turn, could lead to some confusion when working with scripts in VS Code if you accidentally have Anaconda interpreter active instead of the PsychoPy one. Do not panic, follow <a href="https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter">Select a Python interpreter</a> instructions and make sure that you have PsychoPy interpreter as the active one.</p>
+<p>Otherwise, download and install Anaconda. The website has an excellent <a href="https://docs.anaconda.com/anaconda/user-guide/getting-started/">Getting started</a> section.</p>
+</section></section><section id="files-folder" class="level2"><h2 class="anchored" data-anchor-id="files-folder">Keeping things tidy</h2>
+<p>Before we start, I suggest that you create a folder called <em>games-with-python</em> (or something along these lines). If you opted to use Jupyter Notebooks via Anaconda, you should create it in your user folder because this is where Anaconda would expects to find them. Then, create a new subfolder for each chapter / game. For the seminar, you would need to zip and upload a folder with all the files.</p>
 
 
-</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>This was written before large language models arrived but is still true when it comes to programming.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Good habits! Form good habits! Thank you for reading this subliminal message.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>If you are part of the seminar, ask me whenever you have problems or are unsure about how to proceeed<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -620,11 +581,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00-software.html" class="pagination-link" aria-label="Software">
-        <span class="nav-page-text">Software</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
