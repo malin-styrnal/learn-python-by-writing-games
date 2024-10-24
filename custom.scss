@@ -1,0 +1,113 @@
+/*-- scss:uses --*/
+
+.filename {
+    font-family: 'Courier New', Courier, monospace; /* Console-style font */
+    /* font-weight: bold;  Make it bold */
+};
+
+
+.filename {
+  display: inline-block;
+  font-family: "Courier New", Courier, monospace; /* Monospaced font for a "code" feel */
+  background-color: #f5f7fa; /* Light background color that complements Cosmo theme */
+  color: #004085; /* Dark blue text color */
+  padding: 0.2em 0.4em; /* Add some padding for space around the text */
+  # border: 1px solid #b8daff; /* Light blue border for a subtle box around the filename */
+  border-radius: 4px; /* Rounded corners to match the Cosmo theme's design language */
+  font-size: 0.95em; /* Slightly smaller font size to distinguish it from regular text */
+  margin: 0.2em 0; /* Add some vertical margin for spacing in case used in block */
+}
+
+.program-filename {
+  font-family: 'Courier New', Courier, monospace; /* Console-style font */
+  color: #31525B;
+}
+
+.program-filename {
+  display: inline-block;
+  font-family: "Courier New", Courier, monospace; /* Monospaced font for filenames */
+  background-color: #9BD7DB; /* Use the specified background color */
+  color: #004d40; /* Dark teal or greenish color for contrast */
+  padding: 0.2em 0.4em; /* Padding for space around the text */
+  # border: 1px solid #00796b; /* A darker teal border for contrast with the background */
+  border-radius: 4px; /* Rounded corners for a soft, polished look */
+  font-size: 0.95em; /* Slightly smaller font size to distinguish it from regular text */
+  margin: 0.2em 0; /* Add some vertical margin */
+}
+
+$practice-border-color: #eee;
+$practice-bg-color: #70CDD3;
+$practice-bg-image-url: "images/assignment.svg";
+
+.practice {
+  margin-top: 1em;
+  margin-bottom: 1em;
+ display: flex;
+  align-items: center; /* Vertically centers the text */
+  /* justify-content: center;  Horizontally centers the text */
+  padding: 0.5em 0; /* Adds 0.5em padding above and below the text */
+  padding-left: 4em; /* Adjust padding to accommodate the image width */
+  position: relative;
+  background-color: $practice-bg-color;
+
+  &::before {
+    content: "";
+    background-image: url($practice-bg-image-url); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-position: left center; /* Center the image vertically and align left */
+    background-size: 2em; /* Adjust this to your image's size */
+
+    /* Image positioning */
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+
+    width: 2em; /* Adjust to your image's width */
+    height: 2em; /* Adjust to your image's height */
+  }
+
+  /* Text styling */
+  p {
+    margin: 0;
+  }
+};
+
+$program-border-color:  #eee;
+$program-bg-color: #70CDD3;
+$program-bg-image-url: "images/laptop.svg";
+
+
+
+.program {
+  display: flex;
+  align-items: center; /* Vertically centers the text */
+  padding: 0.5em 0; /* Adds 0.5em padding above and below the text */
+  padding-left: 4em; /* Adjust padding to accommodate the image width */
+  position: relative;
+  background-color: $program-bg-color;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  &::before {
+    content: "";
+    background-image: url($program-bg-image-url); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-position: left center; /* Center the image vertically and align left */
+    background-size: 2em; /* Adjust this to your image's size */
+
+    /* Image positioning */
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+
+    width: 2em; /* Adjust to your image's width */
+    height: 2em; /* Adjust to your image's height */
+  }
+
+  /* Text styling */
+  p {
+    margin: 0;
+  }
+};

@@ -8,13 +8,22 @@ book:
   date: "10/14/2024"
   chapters:
     - index.qmd
-    - 00-software.qmd
+    - 001-software.qmd
+    - 002-programming-tips.qmd
+    - 01-basics.qmd
+    - 02-guess-the-number-single-round.qmd
+    - 03-guess-the-number-multi-round.qmd
+    - 04-guess-the-number-ai.qmd
+    - 05-psychopy.qmd
+    - 06-whack-a-mole.qmd
 
 # bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme:
+    - cosmo
+    - custom.scss
 
 babelquarto:
   languagelinks: sidebar
@@ -22,7 +31,7 @@ babelquarto:
   - name: de
     text: "Deutsch"
   - name: en
-    text: "Englisn"
+    text: "English"
   mainlanguage: 'en'
   languages: ['de']
 title-de: Lerne Python, indem du Spiele schreibst.
