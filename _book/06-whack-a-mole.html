@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/06-whack-a-mole.html" />
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>6  Whack-a-Mole – Learn Python by Writing Games</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./05-psychopy.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-whack-a-mole.html"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Learn Python by Writing Games</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html" id="language-link-de">Deutsch</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming tips and tricks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Guess the Number: a single round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Guess the Number: a multi round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Guess the Number: AI takes a turn</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="whack-a-mole" class="quarto-section-identifier"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Today you will create your first <em>video</em> game Whack-a-Mole. The game itself is very much a reaction time experiment: moles/targets appear after a random delay at one of the predefined locations, the player’s task is to whack (press a corresponding button) the mole/target before it disappears. Your final game should look approximately like the one in the video: Circles (moles) turn white, if I hit the correct button in time.</p>
+<div style="text-align:center;">
+<video controls=""><source src="videos/whack-a-mole.m4v" type="video/mp4"></source></video>
+</div>
+<p>Grab the <a href="notebooks/Whack-a-mole.ipynb">exercise notebook</a> before we start!</p>
+<section id="chapter-concepts" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="chapter-concepts">
+<span class="header-section-number">6.1</span> Chapter concepts</h2>
+<ul>
+<li>Storing many items in <a href="#lists">lists</a>.</li>
+<li>Iterating over items using <a href="#for-loop">for</a> loop.</li>
+<li>Generating a range of numbers using <a href="#range">range()</a>.</li>
+<li>Making <a href="#clock-wait">a pause</a> and limiting time you <a href="#waitKeys-maxwait">wait for a key</a>.</li>
+</ul></section><section id="lists" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="lists">
+<span class="header-section-number">6.2</span> Lists</h2>
+<p>So far, we were using variables to store single values: computer’s pick, player’s guess, number of attempts, PsychoPy window object, etc. But sometimes we need to handle more than one value. We already had this problem in the <a href="04-guess-the-number-ai.html">computer-based Guess-the-Number</a> game when we needed to store the remaining number range. We got away by using two variables, one for the lower and one for the upper limit. However, this approach clearly does not scale well and, sometimes, we might not even know how many values we will need to store. Python’s <a href="https://docs.python.org/3/library/stdtypes.html#lists">lists</a> are the solution to the problem.</p>
+<p>A list is a mutable<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> sequence of items where individual elements can be accessed via their zero-based index. Extending the idea of <a href="01-basics.html#variables">variable-as-a-box</a>, you can think about lists as a box with numbered slots. To store and retrieve a particular piece you will need to know both the <em>variable name</em> and the <em>index of the item</em> you are interested in within that box. Then, you work with a variable-plus-index in exactly the same way you work with a normal variable, accessing or changing its value via the same syntax as before.</p>
+<p>A list is defined via square brackets <code>&lt;variable&gt; = [&lt;value1&gt;, &lt;value2&gt;, ... &lt;valueN&gt;]</code>. An individual slot within a list is also accessed via square brackets <code>&lt;variable&gt;[&lt;index&gt;]</code> where index is, again, <strong>zero-based</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. This means that the <em>first</em> item is <code>variable[0]</code> and, if there are <em>N</em> items in the list, the last one is <code>variable[N-1]</code>. You can figure out the total number of items in a list by getting its length via a special <a href="https://docs.python.org/3/library/functions.html#len">len()</a> function. Thus, you can access the last item via <code>variable[len(variable)-1]</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Note the <code>-1</code>: If your list has 3 items, the index of the last one is 2, if it has 100, then 99, etc. I am spending so much time on this because it is a fairly common source of confusion.</p>
+<div class="practice">
+<p>Do exercise #1 see how lists are defined and indexed.</p>
+</div>
+<p>Lists also allow you access more than one slot/index at a time via <a href="https://docs.python.org/3/library/functions.html#slice">slicing</a>. You can specify index of elements via <code>&lt;start&gt;:&lt;stop&gt;</code> notation. For example, <code>x[1:3]</code> will give you access to two items with indexes 1 and 2. Yes, <em>two</em> items: Slicing index goes from the <code>start</code> up to <strong>but not including</strong> the <code>stop</code>. Thus, if you want to get <em>all</em> the items of a list, you will need to write <code>x[0:length(x)]</code> and, yet, to get the last item alone you still write <code>x[len(x)-1]</code>. Confusing? I think so! I understand the logic but I find this stop-is-not-included to be counterintuitive and I still have to consciously remind myself about this. Unfortunately, this is a standard way to define sequences of numbers in Python, so you need to memorize this.</p>
+<div class="practice">
+<p>Do exercise #2 to build the intuition.</p>
+</div>
+<p>When slicing, you can omit either <code>start</code> or <code>stop</code>. In this case, Python will assume that a missing <code>start</code> means <code>0</code> (the index of the first element) and missing <code>stop</code> means <code>len(&lt;list&gt;)</code> (so, last item is included). If you omit <em>both</em>, e.g., <code>my_pretty_numbers[:]</code> it will return all values, as this is equivalent to <code>my_pretty_numbers[0:len(my_pretty_numbers)]</code>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="practice">
+<p>Do exercise #3.</p>
+</div>
+<p>You can also use <em>negative</em> indexes that are computed relative to length of the list<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. For example, if you want to get the <em>last</em> element of the list, you can say <code>my_pretty_numbers[len(my_pretty_numbers)-1]</code> or just <code>my_pretty_numbers[-1]</code>. The last-but-one element would be <code>my_pretty_numbers[-2]</code>, etc. You can use negative indexes for slicing but keep in mind the <em>including-the-start-but-excluding-the-stop</em> catch: <code>my_pretty_numbers[:-1]</code> will return all but last element of the list not the entire list!</p>
+<div class="practice">
+<p>Do exercise #4.</p>
+</div>
+<p>Slicing can be extended by specifying a <code>step</code> via <code>start:stop:step</code> notation. <code>step</code> can be negative, allowing you to build indexes in the reverse order:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[5, 4, 3, 2]</code></pre>
+</div>
+</div>
+<p>However, you must pay attention to the sign of the step. If it goes in the wrong direction then <code>stop</code> cannot be reached, Python will return an empty list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[]</code></pre>
+</div>
+</div>
+<p>Steps can be combined with omitted and negative indexes. To get every <em>odd</em> element of the list, you write <code>my_pretty_numbers[::2]</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[::<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 3, 5, 7]</code></pre>
+</div>
+</div>
+<div class="practice">
+<p>Do exercise #5.</p>
+</div>
+<p>If you try to to access indexes <em>outside</em> of a valid range, Python will raise an <a href="https://docs.python.org/3/library/exceptions.html#IndexError">IndexError</a><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Thus, trying to get 6<sup>th</sup> element (index 5) of a five-element-long list will generate a simple and straightforward error. However, if your <em>slice</em> is larger than the range, it will be truncated without an extra warning or an error. So, for a five-element list <code>my_pretty_numbers[:6]</code> or <code>my_pretty_numbers[:600]</code> will both return all numbers (effectively, this is equivalent to <code>my_pretty_numbers[:]</code>). Moreover, if the slice is empty (<code>2:2</code>, cannot include 2 because it is a stop value, even though it starts from 2 as well) or the entire slice is outside of the range, Python will return an empty list, again, neither warning or error is generated.</p>
+<div class="practice">
+<p>Do exercise #6.</p>
+</div>
+<p>In Python lists are dynamic, so you can always add or remove elements to it, see <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">the list of methods</a>. You can add a new item to the of the end of the list via <code>.append(&lt;new_value&gt;)</code> method</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.append(<span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 10]</code></pre>
+</div>
+</div>
+<p>Or, you can <code>insert(&lt;index&gt;, &lt;new_value&gt;)</code> <em>before</em> an element with that index. Unfortunately, this means that you can use an arbitrary large index and it will insert a new value as a <em>last</em> element without generating an error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">2</span>, <span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">500</span>, <span class="dv">20</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 10, 3, 4, 5, 6, 7, 20]</code></pre>
+</div>
+</div>
+<p>You can remove an item using its index via <code>pop(&lt;index&gt;)</code>, note that the item is <em>returned</em> as well. If you omit the index, <code>pop()</code> removes the <em>last</em> element of the list. Here, you can only use valid indexes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="op">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 5, 6]</code></pre>
+</div>
+</div>
+<div class="practice">
+<p>Do exercise #7.</p>
+</div>
+</section><section id="basic-game-scaffolding" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="basic-game-scaffolding">
+<span class="header-section-number">6.3</span> Basic game scaffolding</h2>
+<p>Phew that was <em>a lot</em> about lists<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. However, <a href="https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy">All work and no play makes Jack a dull boy</a>! So let us start with a basic PsychoPy scaffolding. Here the code structure:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> libraries (<span class="im">from</span> psychopy)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>create the PsychoPy window (visual.Window())</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>flip the window (.flip())</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> a player to press the escape key (event.waitKeys())</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>close the window (.close())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Try doing it from scratch. I have left hints to help you with this and you can always consult the <a href="https://psychopy.org/api/index.html">online documentation</a>. Do not forget to document the file and to split your code into meaningful chunks with comments (if needed).</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="three-moles" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="three-moles">
+<span class="header-section-number">6.4</span> Three moles</h2>
+<p>Let us create three moles that will be represented by <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">circles</a>. Create a new list variable <code>moles</code> and put three circles into it. One should go to the left, one dead center, and one to the right. Watch a video above to see what I mean. Think of a reasonable size (which <a href="05-psychopy.html#psychopy-units">units</a> make keeping circle a circle easier?) and position. You can also use different colors for them, as I did.</p>
+<p>You can either create an empty list and then <code>.append()</code> circles one at a time or you can use square brackets to put all three of them into the list in one go. Then <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle.draw">draw()</a> circles before you <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip</a> the window and wait for a key press. Note that you have to draw them one at a time. Therefore, you will need to add three lines for this but the next section will show you an easier way.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="for-loop" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="for-loop">
+<span class="header-section-number">6.5</span> For loop</h2>
+<p>In the code above, we needed to iterate over three moles (circles) that we had in a list. Python has a tool just for that: a <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements">for loop</a> that iterates over the items in any sequence (our list is a sequence!). Here is an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">42</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a_number <span class="kw">in</span> numbers:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of a_number variable on this iteration is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    a_number <span class="op">=</span> a_number <span class="op">+</span> <span class="dv">3</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we incremented it by 3: </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we use in a formula a_number / 10: </span><span class="sc">%g</span><span class="st">"</span><span class="op">%</span>(a_number <span class="op">/</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Value of a_number variable on this iteration is 2
+  Now we incremented it by 3: 5
+  Now we use in a formula a_number / 10: 0.5
+Value of a_number variable on this iteration is 4
+  Now we incremented it by 3: 7
+  Now we use in a formula a_number / 10: 0.7
+Value of a_number variable on this iteration is 42
+  Now we incremented it by 3: 45
+  Now we use in a formula a_number / 10: 4.5</code></pre>
+</div>
+</div>
+<p>Here, the code inside the <code>for</code> loop is repeated three times because there are three items in the list. On each iteration, next value from the list gets assigned to a temporary variable <code>a_number</code> (see the output). Once the value is assigned to a variable, you can use it just like any variable. You can print it out (first <code>print</code>), you can modify it (second line within the loop), use its value for when calling other functions, etc. To better appreciate this, copy-paste this code into a temporary file (call it <code>test01.py</code>), put a <a href="02-guess-the-number-single-round.html#debugging">breakpoint</a> onto the first <code>print</code> statement and then use <strong>F10</strong> to step through the loop and see how value of <code>a_number</code> variable changes on each iteration and then it gets modified in the second line within the loop.</p>
+<p>Note that you can use the same <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#break-and-continue-statements-and-else-clauses-on-loops">break</a> statement as for the <a href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement">while</a> loop.</p>
+<div class="practice">
+<p>Do exercise #8.</p>
+</div>
+</section><section id="drawing-in-a-loop" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="drawing-in-a-loop">
+<span class="header-section-number">6.6</span> Drawing in a loop</h2>
+<p>Now that you have learned about the <a href="#for-loop">for</a> loop, it is easy to draw the moles. Just iterate over the list (come up with a good temporary variable name) and <code>draw()</code> a <em>current</em> item (which is in your temporary variable).</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code03.py</span>.</p>
+</div>
+</section><section id="range" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="range">
+<span class="header-section-number">6.7</span> range() function: Repeating code N times</h2>
+<p>Sometimes, you might need to repeat the code several times. For example, imagine that you have 40 trials in an experiment. Thus, you need to repeat a trial-related code 40 times. You can, of course, build a list 40 items long by hand and iterate over it but Python has a handy <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#the-range-function">range()</a> function for that. <code>range(N)</code> yields N integers from 0 to N-1 (same up-to-but-not-including rule as for slicing) that you can iterate over in a for loop.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of x is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Value of x is 0
+Value of x is 1
+Value of x is 2</code></pre>
+</div>
+</div>
+<p>You can modify <a href="https://docs.python.org/3/library/stdtypes.html#range">range()</a> function behavior by providing a starting value and a step size. But in its simplest form <code>range(N)</code> is a handy tool to repeat the code that many times. Note that while you always need to have a temporary variable in a <code>for</code> loop, sometimes you may not use it at all. In cases like this, you should use <code>_</code> (underscore symbol) as a variable name to indicate the lack of use.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I will be repeated twice!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>I will be repeated twice!
+I will be repeated twice!</code></pre>
+</div>
+</div>
+<p>Alternatively, you can use <code>range()</code> to loop through indexes of a list (remember, you can always access an individual list item via <code>var[index]</code>). Do exactly that<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>! Modify your code to use <a href="(https://docs.python.org/3/library/stdtypes.html#range)">range()</a> function in the for loop (how can you compute the number of iterations you need from the length of the list?), use temporary variable as an <em>index</em> for the list to draw each item<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. When in doubt, put a breakpoint inside (or just before) the loop and step through your code to understand what values a temporary loop variable gets and how it is used.</p>
+<div class="program">
+<p>Put your modified code into <span class="program-filename">code04.py</span>.</p>
+</div>
+</section><section id="random-mole" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="random-mole">
+<span class="header-section-number">6.8</span> A random mole</h2>
+<p>Drawing all three moles served as a practical exercise with loops but in a real game we need to shown only one random target at a time. We could create the three targets as before and draw one of them. However, later on we would like to change the color of the target to indicate that the player did hit it, so it is simpler (if a bit wasteful) to create a single mole every time we need one.</p>
+<p>For this, define one <a href="01-basics.html#constants">CONSTANT</a> with a list of three colors that you used and another one with three horizontal locations (the vertical location is the same, so we do not need to worry about it). Next, randomly pick which target out of three you want to create, i.e., we need to generate an <em>index</em> of the target and use that <em>index</em> to figure out target’s location and color. You can do it either via <a href="https://docs.python.org/3/library/random.html#random.randrange">random.randrange()</a> or via <a href="https://docs.python.org/3/library/random.html#random.choice">random.choice()</a> building the range yourself via <a href="">the function with the same name</a> you have just learned about (remember to organize your imports alphabetically). Store the index in a variable with a meaningful name<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> and use it with constants to create the target of the corresponding color at a corresponding location. Then, you need to draw that single target before waiting for a key press.</p>
+<p>Once you have the code, put a breakpoint and check that the value of the index variable matches what is shown on a screen<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>.</p>
+<div class="program">
+<p>Put your modified code into <span class="program-filename">code05.py</span>.</p>
+</div>
+</section><section id="clock-wait" class="level2" data-number="6.9"><h2 data-number="6.9" class="anchored" data-anchor-id="clock-wait">
+<span class="header-section-number">6.9</span> Random time</h2>
+<p>What makes Whack-a-Mole game fun is not only that you do not know <em>which</em> mole will appear but you also do not know <em>when</em> it will appear and <em>how much time</em> you have to whack it. Thus, we need to modify our presentation schedule. We need a blank period of a random duration (I would suggest between 0.75 s to 1.5 s) and limited presentation duration (between 0.5 to 0.75 s). First, you need to define these ranges as <a href="01-basics.html#constants">constants</a>. Now that you know lists you can use a single variable to hold both ends of the range. Then, you need to generate two numbers (one for the blank another for the presentation) coming from <a href="https://docs.python.org/3/library/random.html#random.uniform">a uniform distrubition</a> within that range.</p>
+<p>Here, a CONSTANT will hold values for <em>two</em> parameters of <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a> function and there are two ways of using them. First, you can use an index <code>0</code> to get the value for the first parameter and <code>1</code> for the second parameter:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>TIME_UNTIL_BEEP <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.3</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>random.uniform(TIME_UNTIL_BEEP[<span class="dv">0</span>], TIME_UNTIL_BEEP[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, Python has a nifty trick called <a href="https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments">Unpacking Argument Lists</a>: You can pass a list of arguments prepended by an asterisk and Python will unpack the list into arguments in the same order they are in the list: first value goes to the parameter, second value to the second parameter, etc. So, in our case, the code can be simplified to</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>random.uniform(<span class="op">*</span>TIME_UNTIL_BEEP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that it is on you to make sure that the number and the order of elements in the list match function parameters!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_parameter_function(x):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Do nothing but require a single paramter</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>TWO_VALUES <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>single_parameter_function(<span class="op">*</span>TWO_VALUES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TypeError: single_parameter_function() takes 1 positional argument but 2 were given</code></pre>
+</div>
+</div>
+<p>Back to the game, use <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a> function to generate random blank and presentation times, store them into variables of your choice, and time your blank and presentation using the <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a> function from the <a href="https://psychopy.org/api/clock.html">clock</a> module.</p>
+<p>Now is time to update and structure you code. Here is a approximate outline (note that I have dropped the wait for keys):</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Document your file</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">all</span> libaries you need <span class="kw">in</span> an alphabetical order</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>define CONSTANTS</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>create window</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># generating random parameters for the trial</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>pick random index <span class="cf">for</span> the mole</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>create the mole</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>generate random durations <span class="cf">for</span> blank <span class="kw">and</span> presentation interval</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># blank</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>clear window (win.flip() alone)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"blank duration"</span> seconds</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># presentation</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>draw the mole</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"presentation duration"</span> seconds</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>close the window</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that it has no response processing at the moment and that window should close right after the stimulus is presented.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code06.py</span>.</p>
+</div>
+</section><section id="repeating-trials" class="level2" data-number="6.10"><h2 data-number="6.10" class="anchored" data-anchor-id="repeating-trials">
+<span class="header-section-number">6.10</span> Repeating trials</h2>
+<p>You already know how to <a href="#range">repeat</a> the same code many times. Decide on number of trials / rounds (define this as a CONSTANT) and repeat the single round that many times. Think about what code goes inside the loop and what should stay outside for the randomization to work properly.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code07.py</span>.</p>
+</div>
+</section><section id="waitKeys-maxwait" class="level2" data-number="6.11"><h2 data-number="6.11" class="anchored" data-anchor-id="waitKeys-maxwait">
+<span class="header-section-number">6.11</span> Exit strategy</h2>
+<p>I hope that you used a small number of trials because (on my advice, yes!) we did not program a possibility to exit the game via the <strong>escape</strong> key. To put it in, we will replace <em>both</em> <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a> calls with <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> function. It has <code>maxWait</code> parameter that by default is set to infinity but can be set to the duration we require. If a player does not press a key, it will work just like <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a> did. If a player presses a key (allow only <code>"escape"</code> for now), it means that they want to abort the game (the only possible action at the moment). Thus, assign the returned value to a temporary variable (<code>keys</code>?) and check whether it is equal to <code>None</code><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>. If it is not equal to <code>None</code>, <a href="03-guess-the-number-multi-round.html#break">break</a> out of the loop!</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="whacking-that-mole" class="level2" data-number="6.12"><h2 data-number="6.12" class="anchored" data-anchor-id="whacking-that-mole">
+<span class="header-section-number">6.12</span> Whacking that mole</h2>
+<p>We have moles that appear at a random location after a random delay for a random period of time. Now we just need to add an ability to whack ’em! You whack a mole only when it is present. Thus, we only need to modify and handle the <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> call for the presentation interval.</p>
+<p>First, create a new constant with three keys that correspond to three locations. I would suggest using <code>["left", "down", "right"]</code>, which are cursor keys<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. Next, you need to use them for the <code>keyList</code> parameter. However, we cannot use this list directly, as we also need the <strong>escape</strong> key. The simplest way is to put “escape” into its own list and concatenate the two lists via <code>+</code>: <code>["escape"] + YOUR_CONSTANT_WITH_KEYS</code>. Do this concatenation directly when you set a value to the <code>keyList</code> in the function call. Before we continue, run the code and test that you can abort the program during the presentation (but not during the blank interval) by pressing any of these three keys. Also check that <strong>escape</strong> still works!</p>
+<p>Now that we have keys to press, we need more sophisticated processing (we gonna have quite a few nested conditional statements). We still need to check whether <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> returned <code>None</code> first. If it did not, it must have returned a list of pressed keys. Actually, it will be a list with just a single item<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>, so we can work with it directly via <code>keys[0]</code>. Use conditional <a href="02-guess-the-number-single-round.html#if-statement">if-else statement</a> to break out of the loop if the player pressed <strong>escape</strong>. Otherwise, it was one of the three “whack” keys.</p>
+<p>Our next step is to establish which index the key corresponds to. Python makes it extremely easy as lists have <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">.index(value)</a> method that returns the index of the value within the list. You have the (CONSTANT) list with the keys and you have the pressed key: Figure out the index and check whether it matches the index of the target (<code>imole</code> variable in my code). If it does, let us provide a visual feedback of success: change mole (circle) <code>fillColor</code> to white, draw it, and <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait</a> for 300 ms (setup a constant for feedback duration). This way, the mole will turn white and remain briefly on the screen when hit but will disappear immediately, if you missed.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="you-did-it" class="level2" data-number="6.13"><h2 data-number="6.13" class="anchored" data-anchor-id="you-did-it">
+<span class="header-section-number">6.13</span> You did it!</h2>
+<p>Congratulations on your first video game! It could use some bells-and-whistles like having a score, combos would be cool, proper mole images instead of a circle, etc. but it works and it is fun (if you do not feel challenged, reduce the presentation time)! Submit your files and next time we will ditch the keyboard and learn how to handle the mouse in the Memory game.</p>
+
+
+</section></main>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>More on that and tuples, list’s immutable cousins, later.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is typical for “classic” programming languages but less so for ones that are linear algebra / data science oriented. Both Matlab and R use one-based indexing, so you need to be careful and double-check whether you are using correct indexes.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>There is a simpler way to do this, which you will learn in a little while.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Note, that this is almost but not quite the same thing as just writing <code>my_pretty_numbers</code>, as <code>my_pretty_numbers[:]</code> returns a <em>different</em> list with <em>identical</em> content. The difference is subtle but important and we will return to it later when talking about mutable versus immutable types.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>If you are coming from R, negative indexing is completely different in Python.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>If you are familiar with R and its liberal attitude towards indexes, you will find this very satisfying.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>And we barely scratched the surface!<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Note, this is not a <em>better</em> way but an <em>alternative</em> way to do this.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Style hint: if a variable is an <em>index</em> of something, I tend to call it <code>isomething</code>. E.g., if it holds an index to a current mole, I would call it <code>imole</code>. This is <em>my</em> way of doing it. Others use <code>i_</code> prefix or an <code>_i</code> suffix. But either way, it is a useful naming convention. Remember, the easier it is to understand the meaning of a variable from its name, the easier it is for you to read and modify the code.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><code>itarget</code>? <code>imole</code>?<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>I know it feels redundant but these are little checks that cost little time by themselves but help you avoid wasting lots of time on tracing weird mistakes. Here, you check that your expectations (if the middle target is shown, the index should be 1) match the reality. Once you check this, you do not <em>expect</em> it to be true, you <em>know</em> it to be true!<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Confusingly, if no key was pressed, <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">getKeys()</a> returns an empty list that has length of zero but <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> returns <code>None</code> and <code>None</code> has no length.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Want to know key codes for sure? Write a small program that opens a window and then repeatedly waits for any key press and prints out into console.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>You will get more than one item in that list only if you set <code>clearEvents=False</code>. In this case, you will get the list of keys pressed before the call. However, if you opted for a default <code>clearEvents=True</code>, you will get only one key press in the list (at least I was never able to get more than one).<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./05-psychopy.html" class="pagination-link" aria-label="Gettings started with PsychoPy">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><!-- /content -->
+</body>
+</html>

@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/06-whack-a-mole.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>6  Whack-a-Mole – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./05-psychopy.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-whack-a-mole.de.html"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/06-whack-a-mole.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="whack-a-mole-de" class="quarto-section-identifier"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Heute wirst du dein erstes _Video_spiel Whack-a-Mole erstellen. Das Spiel selbst ist ein echter Reaktionszeit-Test: Marder/Ziele erscheinen nach einer zufälligen Verzögerung an einer der vordefinierten Stellen, die Aufgabe des Spielers besteht darin, den Marder/Ziel zu treffen (die entsprechende Taste zu drücken), bevor er verschwindet. Dein endgültiges Spiel sollte etwa so aussehen wie das im Video: Kreise (Marder) werden weiß, wenn ich die richtige Taste rechtzeitig drücke.</p>
+<div style="text-align:center;">
+<video controls=""><source src="videos/whack-a-mole.m4v" type="video/mp4"></source></video>
+</div>
+<p>Hol’ dir das <a href="notebooks/Whack-a-mole.ipynb">Übungsheft</a>, bevor wir loslegen!</p>
+<section id="kapitelkonzepte" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">6.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>Viele Dinge in <a href="#listen">Listen</a> speichern.</li>
+<li>Über Dinge mit einer <a href="#for-schleife">for-Schleife</a> iterieren.</li>
+<li>Eine Reihe von Zahlen mit <a href="#range">range()</a> erzeugen.</li>
+<li>
+<a href="#uhr-warten">Pause machen</a> und die <a href="#warteTasten-maxwarten">Wartezeit auf eine Taste begrenzen</a>.</li>
+</ul></section><section id="listen" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="listen">
+<span class="header-section-number">6.2</span> Listen</h2>
+<p>Bis jetzt haben wir Variablen verwendet, um einzelne Werte zu speichern: die Wahl des Computers, die Vermutung des Spielers, die Anzahl der Versuche, das PsychoPy-Fenster-Objekt usw. Aber manchmal müssen wir mehr als einen Wert verwalten. Wir hatten dieses Problem bereits im <a href="04-guess-the-number-ai.de.html">Computer-basierten Ratespiel</a>, als wir den verbleibenden Zahlenbereich speichern mussten. Wir kamen damit davon, indem wir zwei Variablen verwendeten, eine für die untere und eine für die obere Grenze. Allerdings skaliert dieser Ansatz nicht gut und manchmal wissen wir nicht einmal, wie viele Werte wir speichern müssen. Python’s <a href="https://docs.python.org/3/library/stdtypes.html#lists">Listen</a> sind die Lösung für dieses Problem.</p>
+<p>Eine Liste ist eine veränderbare<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Abfolge von Elementen, auf die über ihren nullbasierten Index zugegriffen werden kann. Wenn man die Idee von <a href="01-basics.de.html#variablen">Variable-als-Box</a> verlängert, kann man sich Listen als eine Box mit nummerierten Fächern vorstellen. Um ein bestimmtes Stück zu speichern und abzurufen, benötigst du sowohl den <em>Variablennamen</em> als auch den <em>Index des Elements</em>, das du innerhalb dieser Box interessiert. Dann arbeitest du mit einer Variable-plus-Index auf genau dieselbe Weise wie mit einer normalen Variable, indem du über dieselbe Syntax wie zuvor auf ihren Wert zugreifst oder ihn änderst.</p>
+<p>Eine Liste wird über eckige Klammern definiert: <code>&lt;variable&gt; = [&lt;value1&gt;, &lt;value2&gt;,... &lt;valueN&gt;]</code>. Ein einzelner Slot innerhalb einer Liste wird ebenfalls über eckige Klammern erreicht: <code>&lt;variable&gt;[&lt;index&gt;]</code>, wobei der Index wieder <strong>nullbasiert</strong> ist<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Das bedeutet, dass das erste Element <code>variable[0]</code> ist und, wenn es N Elemente in der Liste gibt, das letzte <code>variable[N-1]</code> ist. Du kannst die Gesamtzahl der Elemente in einer Liste herausfinden, indem du ihre Länge über eine spezielle <a href="https://docs.python.org/3/library/functions.html#len">len()</a>-Funktion erhältst. Daher kannst du das letzte Element über <code>variable[len(variable)-1]</code> erreichen<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Beachte das <code>-1</code>: Wenn deine Liste 3 Elemente hat, ist der Index des letzten Elements 2, wenn sie 100 hat, dann 99 usw. Ich verbringe so viel Zeit damit, weil es eine ziemliche häufige Quelle für Verwirrung ist.</p>
+<div class="practice">
+<p>Mach die Übung #1 und schau dir an, wie Listen definiert und indiziert werden.</p>
+</div>
+<p>Listen ermöglichen auch den gleichzeitigen Zugriff auf mehr als einen Slot/Index über [slicing] (https://docs.python.org/3/library/functions.html#slice). Du kannst den Index der Elemente über die <code>&lt;start&gt;:&lt;stop&gt;</code>-Notation angeben. Zum Beispiel gibt <code>x[1:3]</code> dir Zugriff auf die Elemente mit den Indizes 1 und 2. Ja, <em>zwei</em> Elemente: Der Slice-Index geht vom <code>start</code> bis <strong>ohne</strong> das <code>stop</code> mit einzuschließen. Also, um <em>alle</em> Elemente einer Liste zu erhalten, musst du <code>x[0:length(x)]</code> schreiben, und um das letzte Element allein zu erhalten, schreibst du immer noch <code>x[len(x)-1]</code>. Verstehst du? Ich auch nicht so richtig! Ich verstehe die Logik, aber ich finde es immer noch verwirrend, dass das <code>stop</code>-Element nicht mit einbezogen wird, und ich muss mich immer noch bewusst daran erinnern. Leider ist das eine Standardmethode, um Sequenzen von Zahlen in Python zu definieren, also musst du es dir merken.</p>
+<div class="practice">
+<p>Mach Übung #2, um das Gefühl dafür zu kriegen.</p>
+</div>
+<p>Wenn du Slicing verwendest, kannst du entweder <code>start</code> oder <code>stop</code> weglassen. In diesem Fall wird Python annehmen, dass ein fehlendes <code>start</code> <code>0</code> bedeutet (der Index des ersten Elements) und ein fehlendes <code>stop</code> <code>len(&lt;liste&gt;)</code> bedeutet (d.h. das letzte Element ist enthalten). Wenn du <em>beide</em> weglässt, z.B. <code>my_pretty_numbers[:]</code>, wird es alle Werte zurückgeben, da dies äquivalent zu <code>my_pretty_numbers[0:len(my_pretty_numbers)]</code> ist.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="practice">
+<p>Mach Übung #3.</p>
+</div>
+<p>Du kannst auch <em>negative</em> Indizes verwenden, die relativ zur Länge der Liste berechnet werden<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Zum Beispiel, wenn du das <em>letzte</em> Element der Liste abrufen möchtest, kannst du <code>my_pretty_numbers[len(my_pretty_numbers)-1]</code> oder einfach <code>my_pretty_numbers[-1]</code> sagen. Das vorletzte Element wäre <code>my_pretty_numbers[-2]</code>, usw. Du kannst negative Indizes zum Slicing verwenden, aber beachte die <em>einschließlich-Start-aber-ausschließen-Stopp</em>-Falle: <code>my_pretty_numbers[:-1]</code> wird alle Elemente bis auf das letzte der Liste zurückgeben, nicht die gesamte Liste!</p>
+<div class="practice">
+<p>Mach Übung #4.</p>
+</div>
+<p>Slicing kann um eine <code>step</code>-Angabe erweitert werden, indem du <code>start:stop:step</code>-Notation verwendest. <code>step</code> kann negativ sein, wodurch du Indizes in umgekehrter Reihenfolge erstellen kannst:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen[<span class="dv">4</span>:<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[5, 4, 3, 2]</code></pre>
+</div>
+</div>
+<p>Aber pass auf, in welche Richtung der Schritt geht. Wenn er in die falsche Richtung geht, dann kannst du <code>stop</code> nicht erreichen und Python wird eine leere Liste zurückgeben.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen[<span class="dv">4</span>:<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[]</code></pre>
+</div>
+</div>
+<p>Schritte können mit ausgelassenen und negativen Indizes kombiniert werden. Um jedes <em>ungerade</em> Element der Liste zu erhalten, schreibst du <code>meine_nette_zahlen[::2]</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen[::<span class="dv">2</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 3, 5, 7]</code></pre>
+</div>
+</div>
+<div class="practice">
+<p>Mach Übung #5.</p>
+</div>
+<p>Wenn du versuchst, auf Indizes <em>außerhalb</em> des gültigen Bereichs zuzugreifen, wird Python einen <a href="https://docs.python.org/3/library/exceptions.html#IndexError">IndexError</a> auslösen<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Also, wenn du versuchst, das 6. Element (Index 5) einer fünf-elementigen Liste zu erhalten, wird ein einfacher und klarer Fehler generiert. Aber wenn dein <em>Slice</em> größer als der Bereich ist, wird er ohne zusätzliche Warnung oder einen Fehler gekürzt. Also, für eine fünf-elementige Liste <code>my_pretty_numbers[:6]</code> oder <code>my_pretty_numbers[:600]</code> werden beide alle Zahlen zurückgeben (effektiv ist das gleichbedeutend mit <code>my_pretty_numbers[:]</code>). Außerdem, wenn der Slice leer ist (<code>2:2</code>, kann 2 nicht enthalten, obwohl es auch als Startwert verwendet wird) oder der gesamte Slice außerhalb des Bereichs liegt, wird Python eine leere Liste zurückgeben, wieder ohne Warnung oder Fehler.</p>
+<div class="practice">
+<p>Mach Übung #6.</p>
+</div>
+<p>In Python sind Listen dynamisch, also kannst du immer Elemente hinzufügen oder entfernen. Schau dir <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">die Liste der Methoden</a> an. Du kannst ein neues Element am Ende der Liste hinzufügen, indem du die <code>.append(&lt;neuer_wert&gt;)</code> Methode verwendest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>meine_schönen_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>meine_schönen_zahlen.append(<span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>meine_schönen_zahlen</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 10]</code></pre>
+</div>
+</div>
+<p>Oder, du kannst <code>insert(&lt;index&gt;, &lt;new_value&gt;)</code> <em>vor</em> einem Element mit diesem Index einfügen. Leider bedeutet das, dass du einen beliebig großen Index verwenden kannst und es wird einen neuen Wert als <em>letztes</em> Element einfügen, ohne einen Fehler zu generieren.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen.insert(<span class="dv">2</span>, <span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen.insert(<span class="dv">500</span>, <span class="dv">20</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 10, 3, 4, 5, 6, 7, 20]</code></pre>
+</div>
+</div>
+<p>Du kannst ein Element mithilfe von <code>pop(&lt;index&gt;)</code> entfernen, beachte, dass das Element <em>zurückgegeben</em> wird. Wenn du den Index weglässt, entfernt <code>pop()</code> das <em>letzte</em> Element der Liste. Hier kannst du nur gültige Indizes verwenden.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen.pop(<span class="op">-</span><span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen.pop(<span class="dv">3</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>meine_nette_zahlen</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 5, 6]</code></pre>
+</div>
+</div>
+<div class="practice">
+<p>Mach Übung #7.</p>
+</div>
+</section><section id="grundlegendes-spielgerüst" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="grundlegendes-spielgerüst">
+<span class="header-section-number">6.3</span> Grundlegendes Spielgerüst</h2>
+<p>Puh, das war <em>eine Menge</em> über Listen<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Aber <a href="https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy">Arbeit ohne Spiel macht Jack langweilig</a>! Also lass uns mit einem grundlegenden PsychoPy-Gerüst beginnen. Hier der Code-Aufbau:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>importiere Bibliotheken (von psychopy)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>erzeuge das PsychoPy<span class="op">-</span>Fenster (visual.Window())</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>blende das Fenster (.flip())</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>warte darauf, dass ein Spieler die Escape<span class="op">-</span>Taste drückt (event.waitKeys())</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>schließe das Fenster (.close())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Versuch’s mal von vorne. Ich habe dir ein paar Hinweise hinterlassen, die dir dabei helfen sollten, und du kannst jederzeit die <a href="https://psychopy.org/api/index.html">Online-Dokumentation</a> zurate ziehen. Vergiss nicht, die Datei zu dokumentieren und deinen Code in sinnvolle Blöcke mit Kommentaren (wenn nötig) zu unterteilen.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="drei-maulwürfe" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="drei-maulwürfe">
+<span class="header-section-number">6.4</span> Drei Maulwürfe</h2>
+<p>Lass uns drei Maulwürfe erstellen, die durch <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Kreise</a> dargestellt werden. Erstelle eine neue Liste-Variable <code>moles</code> und füge drei Kreise hinein. Einer sollte links sein, einer in der Mitte und einer rechts. Schau dir das Video oben an, um zu sehen, was ich meine. Denke an eine vernünftige Größe (welche <a href="05-psychopy.de.html#psychopy-einheiten">Einheiten</a> erleichtern das Beibehalten des Kreises als Kreis?) und Position. Du kannst auch unterschiedliche Farben für sie verwenden, wie ich es gemacht habe.</p>
+<p>Du kannst entweder eine leere Liste erstellen und dann <code>.append()</code> verwenden, um Kreise nacheinander hinzuzufügen, oder du kannst eckige Klammern verwenden, um alle drei auf einmal in die Liste zu packen. Dann <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle.draw">draw()</a> die Kreise, bevor du das Fenster <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flippt</a> und auf eine Tasteneingabe wartest. Beachte, dass du sie nacheinander zeichnen musst. Daher benötigst du drei Zeilen für dies, aber der nächste Abschnitt zeigt dir eine einfachere Methode.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="for-loop" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="for-loop">
+<span class="header-section-number">6.5</span> For-Schleife</h2>
+<p>In dem obigen Code mussten wir über drei Kreise (Kreise) iterieren, die wir in einer Liste hatten. Python hat genau das richtige Werkzeug dafür: eine <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements">For-Schleife</a>, die über die Elemente in jeder Sequenz iteriert (unsere Liste ist eine Sequenz!). Hier ist ein Beispiel:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">42</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eine_zahl <span class="kw">in</span> zahlen:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Wert der Variable 'eine_zahl' in dieser Iteration ist </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(eine_zahl))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    eine_zahl <span class="op">=</span> eine_zahl <span class="op">+</span> <span class="dv">3</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Wir haben sie jetzt um 3 erhöht: </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(eine_zahl))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': </span><span class="sc">%g</span><span class="st">"</span><span class="op">%</span>(eine_zahl <span class="op">/</span> <span class="dv">10</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wert der Variable 'eine_zahl' in dieser Iteration ist 2
+  Wir haben sie jetzt um 3 erhöht: 5
+  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 0.5
+Wert der Variable 'eine_zahl' in dieser Iteration ist 4
+  Wir haben sie jetzt um 3 erhöht: 7
+  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 0.7
+Wert der Variable 'eine_zahl' in dieser Iteration ist 42
+  Wir haben sie jetzt um 3 erhöht: 45
+  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 4.5</code></pre>
+</div>
+</div>
+<p>Hier wird der Code innerhalb der <code>for</code>-Schleife dreimal wiederholt, da es drei Elemente in der Liste gibt. Bei jeder Iteration wird der nächste Wert aus der Liste einer temporären Variable <code>a_number</code> zugewiesen (siehe Ausgabe). Sobald der Wert einer Variablen zugewiesen ist, kannst du ihn wie jede andere Variable verwenden. Du kannst ihn ausgeben (erster <code>print</code>), ihn ändern (zweite Zeile innerhalb der Schleife), seinen Wert bei Aufrufen anderer Funktionen verwenden usw. Um das besser zu verstehen, kopiere diesen Code in eine temporäre Datei (nenn sie <code>test01.py</code>), setze ein <a href="02-guess-the-number-single-round.de.html#debugging">Breakpoint</a> auf die erste <code>print</code>-Anweisung und verwende dann <strong>F10</strong>, um die Schleife Schritt für Schritt durchzulaufen und zu sehen, wie sich der Wert der <code>a_number</code>-Variablen bei jeder Iteration ändert und dann in der zweiten Zeile innerhalb der Schleife geändert wird.</p>
+<p>Beachte, dass du die gleiche <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#break-and-continue-statements-and-else-clauses-on-loops">break</a> Anweisung wie für die <a href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement">while</a> Schleife verwenden kannst.</p>
+<div class="practice">
+<p>Mach Übung #8.</p>
+</div>
+</section><section id="in-einer-schleife-zeichnen" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="in-einer-schleife-zeichnen">
+<span class="header-section-number">6.6</span> In einer Schleife zeichnen</h2>
+<p>Jetzt, wo du das <a href="#for-loop">for</a> Schleifen-Konzept kennst, ist es easy, die Maulwürfe zu zeichnen. Du musst nur über die Liste iterieren (denke dir einen guten temporären Variablennamen aus) und <code>draw()</code> das <em>aktuelle</em> Element (das in deiner temporären Variable ist).</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code03.py</span>.</p>
+</div>
+</section><section id="range" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="range">
+<span class="header-section-number">6.7</span> range() Funktion: Code N-mal wiederholen</h2>
+<p>Manchmal musst du den Code mehrere Male wiederholen. Stell dir zum Beispiel vor, du hast 40 Versuche in einem Experiment. Dann musst du den versuchsbezogenen Code 40 Mal wiederholen. Natürlich könntest du eine Liste mit 40 Elementen von Hand erstellen und darüber iterieren, aber Python hat eine praktische <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#the-range-function">range()</a>-Funktion dafür. <code>range(N)</code> liefert N ganze Zahlen von 0 bis N-1 (gleiche Regel wie beim Slicing, auch ohne das letzte Element) die du in einer for-Schleife durchlaufen kannst.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Wert von x ist </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(x))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wert von x ist 0
+Wert von x ist 1
+Wert von x ist 2</code></pre>
+</div>
+</div>
+<p>Du kannst das Verhalten der <a href="https://docs.python.org/3/library/stdtypes.html#range">range()</a>-Funktion modifizieren, indem du einen Startwert und eine Schrittgröße angibst. In seiner einfachsten Form <code>range(N)</code> ist jedoch ein nützliches Werkzeug, um den Code so oft zu wiederholen. Beachte, dass du in einer <code>for</code>-Schleife immer eine temporäre Variable benötigst, aber manchmal diese Variable gar nicht verwendest. In solchen Fällen solltest du <code>_</code> (Unterstrich-Symbol) als Variablennamen verwenden, um die Nichtverwendung anzuzeigen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Ich werde zweimal wiederholt!"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ich werde zweimal wiederholt!
+Ich werde zweimal wiederholt!</code></pre>
+</div>
+</div>
+<p>Alternativ kannst du <code>range()</code> verwenden, um durch die Indizes einer Liste zu Schleifen (denk dran, du kannst immer auf ein einzelnes Listenelement über <code>var[index]</code> zugreifen). Mach genau das<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>! Ändere deinen Code, um die <a href="(https://docs.python.org/3/library/stdtypes.html#range)">range()</a>-Funktion in der for-Schleife zu verwenden (wie kannst du die Anzahl der Iterationen berechnen, die du benötigst, aus der Länge der Liste?), verwende eine temporäre Variable als <em>Index</em> für die Liste, um jedes Element abzurufen<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Wenn du unsicher bist, setze einen Breakpoint innerhalb (oder einfach vor) der Schleife und gehe durch deinen Code, um zu verstehen, welche Werte eine temporäre Schleifenvariable bekommt und wie sie verwendet wird.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code04.py</span>.</p>
+</div>
+</section><section id="zufaellig-maulwurf" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="zufaellig-maulwurf">
+<span class="header-section-number">6.8</span> Ein zufälliger Maulwurf</h2>
+<p>Das Zeichnen aller drei Maulwürfe diente als praktische Übung mit Schleifen, aber in einem echten Spiel müssen wir nur ein zufälliges Ziel auf einmal anzeigen. Wir könnten die drei Ziele wie zuvor erstellen und eines davon zeichnen. Allerdings möchten wir später die Farbe des Ziels ändern, um anzuzeigen, dass der Spieler es getroffen hat, daher ist es einfacher (wenn auch etwas verschwendet), jedes Mal, wenn wir einen benötigen, einen einzelnen Maulwurf zu erstellen.</p>
+<p>Für das hier, definierst du eine <a href="#constants">CONSTANT</a> mit einer Liste von drei Farben, die du verwendet hast, und eine weitere mit drei horizontalen Standorten (die vertikale Position ist gleich, also müssen wir uns darüber keine Gedanken machen). Als nächstes wählst du zufällig aus, welches Ziel aus drei du erstellen möchtest, d.h. wir müssen einen <em>Index</em> des Ziels generieren und diesen <em>Index</em> verwenden, um die Position und Farbe des Ziels herauszufinden. Du kannst es entweder über <a href="https://docs.python.org/3/library/random.html#random.randrange">random.randrange()</a> oder über <a href="https://docs.python.org/3/library/random.html#random.choice">random.choice()</a> erledigen, indem du den Bereich selbst mit der Funktion mit dem gleichen Namen aufbaust (denk daran, deine Importe alphabetisch zu organisieren). Speichere den Index in einer Variablen mit einem bedeutungsvollen Namen<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> und verwende ihn mit den Konstanten, um das Ziel der entsprechenden Farbe an einem entsprechenden Standort zu erstellen. Dann musst du dieses einzelne Ziel zeichnen, bevor du auf eine Tasteneingabe wartest.</p>
+<p>Sobald du den Code hast, setze einen Haltepunkt und prüfe, ob der Wert der Indexvariablen mit dem übereinstimmt, was auf dem Bildschirm angezeigt wird<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code05.py</span>.</p>
+</div>
+</section><section id="clock-wait" class="level2" data-number="6.9"><h2 data-number="6.9" class="anchored" data-anchor-id="clock-wait">
+<span class="header-section-number">6.9</span> Zufällige Wartezeit</h2>
+<p>Das, was das Whack-a-Mole Spiel lustig macht, ist nicht nur, dass du nicht weißt, <em>welches</em> Tierchen auftaucht, sondern auch nicht, <em>wann</em> es auftaucht und <em>wie viel Zeit</em> du hast, um es zu treffen. Daher müssen wir unser Präsentationsschema modifizieren. Wir benötigen eine leere Periode mit zufälliger Dauer (ich würde vorschlagen zwischen 0,75 s und 1,5 s) und begrenzte Präsentationsdauer (zwischen 0,5 und 0,75 s). Zunächst musst du diese Bereiche als <a href="#constants">Konstanten</a> definieren. Da du nun Listen kennst, kannst du eine einzelne Variable verwenden, um beide Enden des Bereichs zu speichern. Dann musst du zwei Zahlen generieren (eine für die Leerzeit und eine für die Präsentation), die aus <a href="https://docs.python.org/3/library/random.html#random.uniform">einer gleichförmigen Verteilung</a> innerhalb dieses Bereichs stammen.</p>
+<p>Hier wird eine CONSTANTE Werte für die <em>zwei</em> Parameter der Funktion <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a> speichern und es gibt zwei Möglichkeiten, sie zu verwenden. Erstens kannst du einen Index <code>0</code> verwenden, um den Wert für den ersten Parameter zu erhalten, und <code>1</code> für den zweiten Parameter.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ZEIT_BIS_ZUM_PIEPTON <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.3</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>random.uniform(ZEIT_BIS_ZUM_PIEPTON[<span class="dv">0</span>], ZEIT_BIS_ZUM_PIEPTON[<span class="dv">1</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Aber Python hat einen coolen Trick namens <a href="https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments">Entpacken von Argumentlisten</a>: Du kannst eine Liste von Argumenten voranstellen und Python entpackt die Liste in Argumente in der gleichen Reihenfolge, wie sie in der Liste sind: Der erste Wert geht an den Parameter, der zweite Wert an den zweiten Parameter usw. Also in unserem Fall kann der Code vereinfacht werden zu:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>random.uniform(<span class="op">*</span>TIME_UNTIL_BEEP)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Achte drauf, dass die Anzahl und Reihenfolge der Elemente in der Liste zu den Funktionsparametern passen! Das liegt in deiner Verantwortung!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_parameter_function(x):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Do nothing but require a single paramter</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>TWO_VALUES <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>single_parameter_function(<span class="op">*</span>TWO_VALUES)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TypeError: single_parameter_function() takes 1 positional argument but 2 were given</code></pre>
+</div>
+</div>
+<p>Zurück zum Spiel, nutze die Funktion <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a>, um zufällige Leer- und Präsentationszeiten zu generieren, speichere sie in Variablen deiner Wahl und zeit deine Leer- und Präsentationsphasen mit der Funktion <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a> aus dem <a href="https://psychopy.org/api/clock.html">clock</a>-Modul.</p>
+<p>Jetzt ist es Zeit, deinen Code zu aktualisieren und zu strukturieren. Hier ist eine ungefähre Gliederung (beachte, dass ich auf die Warte auf Tasten verzichtet habe):</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Dokumentiere deine Datei</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> alle benötigten Bibliotheken <span class="kw">in</span> alphabetischer Reihenfolge</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>CONSTANTS definieren</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>Erstelle ein Fenster</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Zufällige Parameter für den Test erzeugen</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>Wähle zufälligen Index für den Maulwurf</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>Erstelle den Maulwurf</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>Erzeuge zufällige Dauern für Leerlauf und Präsentation</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># leerer Zeitabschnitt</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>Fenster klar machen (nur win.flip())</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co">"blank duration"</span> Sekunden warten</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Präsentation</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>Zeichne den Maulwurf</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>Warte <span class="st">"Präsentation Dauer"</span> Sekunden</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>Mach das Fenster zu<span class="op">!</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Achte darauf, dass es im Moment keine Verarbeitung von Antworten gibt und das Fenster direkt nach der Präsentation des Reizes geschlossen werden sollte.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code06.py</span>.</p>
+</div>
+</section><section id="wiederholte-versuche" class="level2" data-number="6.10"><h2 data-number="6.10" class="anchored" data-anchor-id="wiederholte-versuche">
+<span class="header-section-number">6.10</span> Wiederholte Versuche</h2>
+<p>Du weißt bereits, wie man denselben Code <a href="#range">wiederholt</a>: viele Male ausführt. Entscheide dich für eine Anzahl an Versuchen / Runden (definiere dies als eine Konstante) und wiederhole die einzelne Runde so oft. Denke darüber nach, welchen Code du in die Schleife aufnimmst und welchen du außerhalb lässt, damit die Zufallsfunktion ordnungsgemäß funktioniert.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code07.py</span>.</p>
+</div>
+</section><section id="waitKeys-maxwait" class="level2" data-number="6.11"><h2 data-number="6.11" class="anchored" data-anchor-id="waitKeys-maxwait">
+<span class="header-section-number">6.11</span> Exit-Strategie</h2>
+<p>Ich hoffe, du hast nicht zu viele Versuche verwendet, denn (auf meinen Rat hin, ja!) haben wir keine Möglichkeit programmiert, das Spiel über die <strong>Escape</strong>-Taste zu beenden. Um dies hinzuzufügen, werden wir beide <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a>-Aufrufe durch die <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a>-Funktion ersetzen. Diese hat einen <code>maxWait</code>-Parameter, der standardmäßig auf unendlich gesetzt ist, aber auf die von uns erforderliche Dauer eingestellt werden kann. Wenn ein Spieler keine Taste drückt, funktioniert es wie <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a>. Wenn ein Spieler eine Taste drückt (nur <code>"escape"</code> für den Moment erlaubt), bedeutet dies, dass er das Spiel abbrechen möchte (die einzige mögliche Aktion im Moment). Daher weisen wir den zurückgegebenen Wert einer temporären Variablen (<code>keys?</code>) zu und überprüfen, ob sie gleich <code>None</code> ist<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>. Wenn sie nicht gleich <code>None</code> ist, <a href="03-guess-the-number-multi-round.de.html#break">breche</a> aus der Schleife aus!</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="maul-den-maulwurf" class="level2" data-number="6.12"><h2 data-number="6.12" class="anchored" data-anchor-id="maul-den-maulwurf">
+<span class="header-section-number">6.12</span> Maul den Maulwurf</h2>
+<p>Wir haben Maulwürfe, die an einer zufälligen Stelle nach einer zufälligen Verzögerung für eine zufällige Dauer auftauchen. Jetzt müssen wir nur noch die Fähigkeit hinzufügen, sie zu verprügeln! Du verprügelst einen Maulwurf nur, wenn er da ist. Daher müssen wir nur den Aufruf von <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> für das Präsentationsintervall modifizieren und handhaben.</p>
+<p>Erstmal musst du eine neue Konstante mit drei Schlüsseln erstellen, die drei verschiedenen Orten entsprechen. Ich würde vorschlagen, <code>["left", "down", "right"]</code> zu verwenden, das sind die Cursortasten<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. Als nächstes musst du sie für den <code>keyList</code>-Parameter verwenden. Allerdings können wir diese Liste nicht direkt verwenden, da wir auch die <strong>Escape</strong>-Taste benötigen. Die einfachste Lösung ist, “escape” in eine eigene Liste zu packen und die beiden Listen über <code>+</code> zu verketten: <code>["escape"] + DEINE_KONSTANTE_MIT_TASTEN</code>. Führe diese Verknüpfung direkt durch, wenn du einen Wert für <code>keyList</code> im Funktionsaufruf festlegst. Bevor wir weitermachen, führe den Code aus und teste, ob du das Programm während der Präsentation (aber nicht während der Pause) durch Drücken einer dieser drei Tasten abbrechen kannst. Überprüfe auch, ob <strong>Escape</strong> immer noch funktioniert!</p>
+<p>Jetzt, wo wir Tasten drücken können, brauchen wir eine raffiniertere Verarbeitung (es wird eine Menge verschachtelte bedingte Anweisungen geben). Wir müssen immer noch überprüfen, ob <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> <code>None</code> zurückgegeben hat. Wenn nicht, muss es eine Liste der gedrückten Tasten zurückgegeben haben. Tatsächlich wird es eine Liste mit nur einem Element sein<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>, also können wir direkt über <code>keys[0]</code> damit arbeiten. Verwende eine bedingte <a href="#if-Anweisung">if-else-Anweisung</a>, um die Schleife zu verlassen, wenn der Spieler die <strong>Escape</strong>-Taste gedrückt hat. Andernfalls war es eine der drei “whack”-Tasten.</p>
+<p>Unser nächster Schritt besteht darin herauszufinden, welchem Index der Schlüssel entspricht. Python macht das extrem einfach, da Listen die Methode <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">.index(value)</a> haben, die den Index des Wertes innerhalb der Liste zurückgibt. Du hast die (CONSTANT) Liste mit den Schlüsseln und du hast die gedrückte Taste: Finde den Index und überprüfe, ob er mit dem Index des Ziels übereinstimmt (<code>imole</code> Variable in meinem Code). Wenn ja, geben wir eine visuelle Rückmeldung des Erfolgs: ändere die Farbe des Mols (Kreis) <code>fillColor</code> in Weiß, zeichne es und <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">warte</a> 300 ms (richte eine Konstante für die Feedback-Dauer ein). Auf diese Weise färbt sich der Maulwurf weiß und bleibt kurz auf dem Bildschirm, wenn er getroffen wird, verschwindet aber sofort wieder, wenn du nicht getroffen hast.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="du-hast-es-geschafft" class="level2" data-number="6.13"><h2 data-number="6.13" class="anchored" data-anchor-id="du-hast-es-geschafft">
+<span class="header-section-number">6.13</span> Du hast es geschafft!</h2>
+<p>Herzlichen Glückwunsch zu deinem ersten Videospiel! Es könnte ein paar zusätzliche Features wie Punkte, Combos, richtige Maulwurfbilder statt Kreise etc. gebrauchen, aber es funktioniert und es macht Spaß (wenn du keine Herausforderung siehst, reduziere die Präsentationzeit)! Reiche deine Dateien ein und beim nächsten Mal werden wir die Tastatur beiseite legen und lernen, wie man die Maus im Memory-Spiel bedient.</p>
+
+
+</section></main>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Mehr dazu und Tupel, die unveränderlichen Cousins der Listen, später.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Dies ist typisch für „klassische“ Programmiersprachen, aber weniger für solche, die auf lineare Algebra/Datenwissenschaft ausgerichtet sind. Sowohl Matlab als auch R verwenden eine einseitige Indizierung, daher musst du vorsichtig sein und doppelt überprüfen, ob du die richtigen Indizes verwendest.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Es gibt eine einfachere Methode, die du in Kürze lernen wirst.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Anmerkung: Dies ist fast, aber nicht ganz das gleiche wie einfach <code>my_pretty_numbers</code> zu schreiben, da <code>my_pretty_numbers[:]</code> eine <em>andere</em> Liste mit <em>gleichem</em> Inhalt zurückgibt. Der Unterschied ist subtil, aber wichtig und wir werden später darauf zurückkommen, wenn es um veränderliche gegen unveränderliche Typen geht.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Wenn du aus R kommst, ist negatives Indexieren in Python komplett anders.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Wenn du mit R und seiner liberalen Haltung gegenüber Indizes vertraut bist, wird dir das sehr gefallen.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Und wir haben noch nicht einmal an der Oberfläche gekratzt!<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Hinweis: Das ist keine <em>bessere</em> Methode, sondern eine <em>alternative</em> Möglichkeit, dies zu tun.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Stilhinweis: Wenn eine Variable ein <em>Index</em> von etwas ist, nenne ich sie gerne <code>isomething</code>. Zum Beispiel, wenn sie einen Index für ein aktuelles Tier hält, würde ich sie <code>itier</code> nennen. Das ist <em>meine</em> Art, es zu machen. Andere verwenden einen <code>i_</code>-Präfix oder ein <code>_i</code>-Suffix. Aber auf jeden Fall ist es eine nützliche Benennungskonvention. Denk dran, je einfacher es ist, den Zweck einer Variablen aus ihrem Namen zu verstehen, desto einfacher ist es für dich, den Code zu lesen und zu ändern.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><code>itarget</code>? <code>imole?</code><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>I weiß, es fühlt sich redundant an, aber das sind kleine Überprüfungen, die nicht viel Zeit kosten, aber dir helfen, viel Zeit beim Nachverfolgen von seltsamen Fehlern zu sparen. Hier überprüfst du, ob deine Erwartungen (wenn das mittlere Ziel angezeigt wird, sollte der Index 1 sein) der Realität entsprechen. Sobald du das überprüft hast, <em>erwartest</em> du es nicht mehr, du <em>weißt</em> es!<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Verwirrenderweise gibt <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">getKeys()</a> bei keinem gedrückten Tasten eine leere Liste mit einer Länge von null zurück, während <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> <code>None</code> zurückgibt und <code>None</code> keine Länge hat.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Willst du dir sicher sein, welche Tasten es sind? Schreib ein kleines Programm, das ein Fenster öffnet und dann immer wieder auf eine Tasteneingabe wartet und die Taste in der Konsole ausgibt.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>Du bekommst mehr als ein Element in dieser Liste nur, wenn du <code>clearEvents=False</code> festlegst. In diesem Fall bekommst du die Liste der Tasten, die vor dem Aufruf gedrückt wurden. Wenn du jedoch die Standardoption <code>clearEvents=True</code> gewählt hast, bekommst du nur einen Tastendruck in der Liste (zumindest habe ich nie mehr als einen bekommen).<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./05-psychopy.de.html" class="pagination-link" aria-label="Los geht's mit PsychoPy">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><!-- /content -->
+</body>
+</html>

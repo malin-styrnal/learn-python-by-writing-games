@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/04-guess-the-number-ai.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/04-guess-the-number-ai.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4  Errate die Zahl: Der Computer ist dran – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./05-psychopy.de.html" rel="next">
+<link href="./03-guess-the-number-multi-round.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-guess-the-number-ai.de.html"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/04-guess-the-number-ai.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelbegriffe." id="toc-kapitelbegriffe." class="nav-link active" data-scroll-target="#kapitelbegriffe."><span class="header-section-number">4.1</span> Kapitelbegriffe.</a></li>
+  <li><a href="#guess-the-number-players-response" id="toc-guess-the-number-players-response" class="nav-link" data-scroll-target="#guess-the-number-players-response"><span class="header-section-number">4.2</span> Spielerantwort</a></li>
+  <li>
+<a href="#funktion" id="toc-funktion" class="nav-link" data-scroll-target="#funktion"><span class="header-section-number">4.3</span> Funktionen</a>
+  <ul class="collapse">
+<li><a href="#funktion-f%C3%BChrt-eine-einzelne-berechnung-durch" id="toc-funktion-führt-eine-einzelne-berechnung-durch" class="nav-link" data-scroll-target="#funktion-führt-eine-einzelne-berechnung-durch"><span class="header-section-number">4.3.1</span> Funktion führt eine einzelne Berechnung durch</a></li>
+  <li><a href="#funktion-isoliert-code-vom-rest-des-programms" id="toc-funktion-isoliert-code-vom-rest-des-programms" class="nav-link" data-scroll-target="#funktion-isoliert-code-vom-rest-des-programms"><span class="header-section-number">4.3.2</span> Funktion isoliert Code vom Rest des Programms</a></li>
+  <li><a href="#funktionen-erleichtern-das-testen-von-code" id="toc-funktionen-erleichtern-das-testen-von-code" class="nav-link" data-scroll-target="#funktionen-erleichtern-das-testen-von-code"><span class="header-section-number">4.3.3</span> Funktionen erleichtern das Testen von Code</a></li>
+  <li><a href="#funktionen-machen-code-wiederverwendbar" id="toc-funktionen-machen-code-wiederverwendbar" class="nav-link" data-scroll-target="#funktionen-machen-code-wiederverwendbar"><span class="header-section-number">4.3.4</span> Funktionen machen Code wiederverwendbar</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#funktionen-in-python" id="toc-funktionen-in-python" class="nav-link" data-scroll-target="#funktionen-in-python"><span class="header-section-number">4.4</span> Funktionen in Python</a>
+  <ul class="collapse">
+<li><a href="#eine-funktion-in-python-definieren" id="toc-eine-funktion-in-python-definieren" class="nav-link" data-scroll-target="#eine-funktion-in-python-definieren"><span class="header-section-number">4.4.1</span> Eine Funktion in Python definieren</a></li>
+  <li><a href="#funktionsargumente" id="toc-funktionsargumente" class="nav-link" data-scroll-target="#funktionsargumente"><span class="header-section-number">4.4.2</span> Funktionsargumente</a></li>
+  <li><a href="#funktionen-r%C3%BCckgabewert-ausgabe" id="toc-funktionen-rückgabewert-ausgabe" class="nav-link" data-scroll-target="#funktionen-rückgabewert-ausgabe"><span class="header-section-number">4.4.3</span> Funktionen-Rückgabewert (Ausgabe)</a></li>
+  <li><a href="#g%C3%BCltigkeitsbereiche-f%C3%BCr-unver%C3%A4nderliche-werte" id="toc-gültigkeitsbereiche-für-unveränderliche-werte" class="nav-link" data-scroll-target="#gültigkeitsbereiche-für-unveränderliche-werte"><span class="header-section-number">4.4.4</span> Gültigkeitsbereiche (für unveränderliche Werte)</a></li>
+  </ul>
+</li>
+  <li><a href="#spielerantwort-als-funktion" id="toc-spielerantwort-als-funktion" class="nav-link" data-scroll-target="#spielerantwort-als-funktion"><span class="header-section-number">4.5</span> Spielerantwort als Funktion</a></li>
+  <li><a href="#debuggen-einer-funktion" id="toc-debuggen-einer-funktion" class="nav-link" data-scroll-target="#debuggen-einer-funktion"><span class="header-section-number">4.6</span> Debuggen einer Funktion</a></li>
+  <li><a href="#numpy-docstring" id="toc-numpy-docstring" class="nav-link" data-scroll-target="#numpy-docstring"><span class="header-section-number">4.7</span> Deine Funktion dokumentieren</a></li>
+  <li><a href="#prompt-verwenden" id="toc-prompt-verwenden" class="nav-link" data-scroll-target="#prompt-verwenden"><span class="header-section-number">4.8</span> Prompt verwenden</a></li>
+  <li><a href="#interval-in-der-mitte-teilen" id="toc-interval-in-der-mitte-teilen" class="nav-link" data-scroll-target="#interval-in-der-mitte-teilen"><span class="header-section-number">4.9</span> Interval in der Mitte teilen</a></li>
+  <li><a href="#einzige-runde" id="toc-einzige-runde" class="nav-link" data-scroll-target="#einzige-runde"><span class="header-section-number">4.10</span> Einzige Runde</a></li>
+  <li><a href="#mehrere-runden" id="toc-mehrere-runden" class="nav-link" data-scroll-target="#mehrere-runden"><span class="header-section-number">4.11</span> Mehrere Runden</a></li>
+  <li><a href="#nochmal-spielen" id="toc-nochmal-spielen" class="nav-link" data-scroll-target="#nochmal-spielen"><span class="header-section-number">4.12</span> Nochmal spielen</a></li>
+  <li><a href="#bestes-ergebnis" id="toc-bestes-ergebnis" class="nav-link" data-scroll-target="#bestes-ergebnis"><span class="header-section-number">4.13</span> Bestes Ergebnis</a></li>
+  <li><a href="#benutze-deine-eigenen-bibliotheken" id="toc-benutze-deine-eigenen-bibliotheken" class="nav-link" data-scroll-target="#benutze-deine-eigenen-bibliotheken"><span class="header-section-number">4.14</span> Benutze deine eigenen Bibliotheken</a></li>
+  <li><a href="#keep-imports-tidy" id="toc-keep-imports-tidy" class="nav-link" data-scroll-target="#keep-imports-tidy"><span class="header-section-number">4.15</span> Ordnung muss sein!</a></li>
+  <li><a href="#videos-in-videospiele-einbauen" id="toc-videos-in-videospiele-einbauen" class="nav-link" data-scroll-target="#videos-in-videospiele-einbauen"><span class="header-section-number">4.16</span> Videos in Videospiele einbauen</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="guess-the-number-ai" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Lass uns das Spiel “Raten Sie die Zahl” <em>wieder</em> programmieren<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, aber <em>vertauschen</em> wir die Rollen. Diesmal <em>wählst du</em> eine Zahl und der Computer rät. Denk mal darüber nach, welchen Algorithmus ein Computer dafür verwenden könnte, bevor du den nächsten Absatz liest<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Optimal ist es, die Mitte des Intervalls für eine Schätzung zu verwenden. So schließt du <em>halb</em> der Zahlen aus, die entweder größer oder kleiner als dein Tipp sind (oder du triffst die Zahl natürlich). Also, wenn du weißt, dass die Zahl zwischen 1 und 10 ist, solltest du in der Mitte aufteilen, also 5 oder 6 wählen, da du keine 5,5 wählen kannst (wir gehen davon aus, dass du nur ganze Zahlen verwenden kannst). Wenn dein Gegner sagt, dass ihre Zahl größer als dein Tipp ist, weißt du, dass sie irgendwo zwischen deinem Tipp und der ursprünglichen oberen Grenze sein muss, z.B. zwischen 5 und 10. Umgekehrt, wenn der Gegner “kleiner” sagt, ist die Zahl zwischen der unteren Grenze und deinem Tipp, z.B. zwischen 1 und 5. Bei deinem nächsten Versuch teilst du das neue Intervall auf und wiederholst dies, bis du entweder die Zahl richtig errätst oder ein Intervall übrig hast, das nur eine Zahl enthält. Dann musst du nicht mehr raten.</p>
+<p>Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das <a href="notebooks/Guess%20the%20number%20-%20AI.ipynb">Übungsheft</a>!</p>
+<section id="kapitelbegriffe." class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="kapitelbegriffe.">
+<span class="header-section-number">4.1</span> Kapitelbegriffe.</h2>
+<ul>
+<li>Schreibe deine eigenen <a href="#funktion">Funktionen</a>.</li>
+<li>Verstehe die <a href="#g%C3%BCltigkeitsbereiche-f%C3%BCr-unver%C3%A4nderliche-werte">Gültigkeitsbereiche</a> von Variablen.</li>
+<li>Verwende <a href="#numpy-dokumentation">Standardmethoden</a> zur Dokumentation deines Codes.</li>
+<li>Verwende deine eigenen <a href="#nutze-deine-eigenen-bibliotheken">Bibliotheken</a>.</li>
+</ul></section><section id="guess-the-number-players-response" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="guess-the-number-players-response">
+<span class="header-section-number">4.2</span> Spielerantwort</h2>
+<p>Lassen wir uns aufwärmen, indem wir einen Code schreiben, der es einem Spieler ermöglicht, auf die Vermutung des Computers zu reagieren. Denke daran, dass es nur drei Optionen gibt: deine Zahl ist größer, kleiner oder gleich der Vermutung des Computers. Ich würde vorschlagen, die Symbole <code>&gt;</code>, <code>&lt;</code> und <code>=</code> zu verwenden, um dies mitzuteilen. Du musst den Code schreiben, der den Spieler nach seiner Antwort fragt, bis er eines dieser Symbole eingibt. D.h., die Eingabeaufforderung sollte wiederholt werden, wenn er etwas anderes eingibt. Also brauchst du auf jeden Fall die <a href="https://docs.python.org/3/library/functions.html#input">input([prompt])</a>-Funktion und eine <a href="#while-schleife">while</a>-Schleife. Denke dir eine nützliche und informative Promptnachricht dafür aus. Teste, ob es funktioniert. Das Setzen von Breakpoints kann hier sehr nützlich sein.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="funktion" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="funktion">
+<span class="header-section-number">4.3</span> Funktionen</h2>
+<p>Du weißt bereits, wie man Funktionen verwendet, jetzt ist es an der Zeit, mehr darüber zu erfahren, warum du das tun solltest. Der Zweck einer Funktion besteht darin, bestimmten Code zu isolieren, der eine einzelne Berechnung durchführt, damit er getestet und wiederverwendet werden kann. Lass uns den letzten Satz Schritt für Schritt mit Beispielen durchgehen.</p>
+<section id="funktion-führt-eine-einzelne-berechnung-durch" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="funktion-führt-eine-einzelne-berechnung-durch">
+<span class="header-section-number">4.3.1</span> Funktion führt eine einzelne Berechnung durch</h3>
+<p>Ich hab’s dir ja schon <a href="#programmiertipps">gesagt</a>, dass das Lesen von Code einfach ist, weil jede Aktion für Computer auf eine klare und einfache Weise ausgeschrieben werden muss. Aber <em>viele</em> einfache Dinge können trotzdem total überwältigend und verwirrend sein. Stell dir den finalen Code vom letzten Seminar vor: wir hatten zwei Schleifen mit bedingten Anweisungen darin verschachtelt. Füg ein paar mehr davon hinzu und du hast so viele Zweige zu verfolgen, dass du nie sicher sein wirst, was passieren wird. Das liegt daran, dass unsere kognitive Fähigkeit und unser Arbeitsgedächtnis, die du zum Verfolgen all dieser Zweige brauchst, auf etwa vier Dinge beschränkt sind<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Also, eine Funktion sollte <em>eine</em> Berechnung / Aktion durchführen, die konzeptuell klar ist und dieser Zweck sollte direkt aus seinem Namen oder, maximal, aus einem Satz verstanden werden, der ihn beschreibt<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Der Name einer Funktion sollte typischerweise ein <em>Verb</em> sein, weil die Funktion über die Durchführung einer Aktion spricht. Wenn du mehr als einen Satz benötigst, um zu erklären, was die Funktion tut, solltest du den Code weiter aufteilen. Das bedeutet nicht, dass die gesamte Beschreibung / Dokumentation in einen einzigen Satz passen muss. Die vollständige Beschreibung kann lang sein, insbesondere wenn die zugrunde liegende Berechnung komplex ist und viele Parameter berücksichtigt werden müssen. Allerdings sind dies optionale Details, die dem Leser sagen, <em>wie</em> die Funktion ihre Arbeit macht oder wie ihr Verhalten verändert werden kann. Trotzdem sollten sie in der Lage sein, <em>was</em> die Arbeit ist, nur aus dem Namen oder aus einem einzigen Satz zu verstehen. Ich wiederhole mich und betone dies so sehr, weil konzeptuell einfache Funktionen mit einer einzigen Aufgabe die Grundlage eines klaren, robusten und wiederverwendbaren Codes sind. Und die zukünftige Version von dir wird sehr dankbar sein, dass sie mit leicht verständlichem, isoliertem und zuverlässigem Code arbeiten muss, den du geschrieben hast.</p>
+</section><section id="funktion-isoliert-code-vom-rest-des-programms" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="funktion-isoliert-code-vom-rest-des-programms">
+<span class="header-section-number">4.3.2</span> Funktion isoliert Code vom Rest des Programms</h3>
+<p>Isolation bedeutet, dass dein Code in einem separaten Gültigkeitsbereich ausgeführt wird, in dem nur die Funktionargumente (begrenzte Anzahl von Werten, die du von außen mit festem Bedeutung übergibst) und lokale Variablen, die du innerhalb der Funktion definierst, existieren. Du hast keinen Zugriff auf Variablen, die im äußeren Skript definiert sind<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> oder auf Variablen, die innerhalb anderer Funktionen definiert sind. Umgekehrt haben das globale Skript oder andere Funktionen keinen Zugriff auf Variablen und Werte, die du innerhalb verwendest. Das bedeutet, dass du nur den Code <em>innerhalb</em> der Funktion studieren musst, um zu verstehen, wie er funktioniert. Entsprechend sollte der Code, den du schreibst, <em>unabhängig</em> von jedem globalen Kontext sein, in dem die Funktion verwendet werden kann. Die Isolation ist sowohl praktisch (kein Laufzeitzugriff auf Variablen von außen bedeutet weniger Chancen, dass etwas schief geht) als auch konzeptuell (kein weiterer Kontext ist erforderlich, um den Code zu verstehen).</p>
+</section><section id="funktionen-erleichtern-das-testen-von-code" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="funktionen-erleichtern-das-testen-von-code">
+<span class="header-section-number">4.3.3</span> Funktionen erleichtern das Testen von Code</h3>
+<p>Du kannst sogar moderat komplexe Programme nur dann erstellen, wenn du sicherstellen kannst, was einzelne Code-Blöcke unter jeder möglichen Bedingung tun. Produzieren sie die richtigen Ergebnisse? Scheitern sie klar und werfen einen korrekten Fehler, wenn die Eingaben falsch sind? Verwenden sie Standardwerte, wenn erforderlich? Das Testen aller Blöcke zusammen bedeutet jedoch, eine extreme Anzahl von Durchläufen durchzuführen, da du alle möglichen Kombinationen von Bedingungen für einen Block bei allen möglichen Bedingungen für andere Blöcke usw. testen musst. Funktionen erleichtern dein Leben erheblich. Weil sie einen einzigen Eintrittspunkt, eine feste Anzahl von Parametern, einen einzigen Rückgabewert und isoliert sind (siehe oben), kannst du sie unabhängig von anderen Funktionen und dem Rest des Codes einzeln testen. Dies wird <em>Einheitstest</em> genannt und ist ein intensiver Einsatz von <a href="https://docs.python.org/3/library/unittest.html">automatischem Einheitstest</a><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Es gewährleistet zuverlässigen Code für die absolute Mehrheit der Programme und Apps, die du verwendest<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+</section><section id="funktionen-machen-code-wiederverwendbar" class="level3" data-number="4.3.4"><h3 data-number="4.3.4" class="anchored" data-anchor-id="funktionen-machen-code-wiederverwendbar">
+<span class="header-section-number">4.3.4</span> Funktionen machen Code wiederverwendbar</h3>
+<p>Manchmal wird das als Hauptgrund genannt, warum man Funktionen verwenden sollte. Wenn man Code in eine Funktion packt, kann man die Funktion aufrufen, anstatt den Code zu kopieren und einzufügen. Letzteres ist eine schlechte Idee, denn dann muss man denselben Code an vielen Stellen pflegen und weiß vielleicht nicht einmal, an wie vielen Stellen. Das ist selbst bei einem extrem simplen Code ein Problem. Hier definieren wir eine <em>Standard</em>-Methode, um einen Anfangsbuchstaben aus einer Zeichenkette zu berechnen (du wirst später mehr über Indexierung und Slicing lernen). Der Code ist so einfach wie nur möglich.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> <span class="st">"test"</span>[<span class="dv">0</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>initial_for_file <span class="op">=</span> filename[<span class="dv">0</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>initial_for_website <span class="op">=</span> first_name[<span class="dv">0</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Stell dir vor, du entscheidest dich, es zu ändern und die ersten <em>zwei</em> Symbole zu verwenden. Wieder ist die Berechnung nicht kompliziert, man muss nur <code>[0]</code> durch <code>[:2]</code> ersetzen. Aber du musst es für <em>alle</em> Codezeilen tun, die diese Berechnung durchführen. Und du kannst die Option “<em>Alle ersetzen</em>” nicht verwenden, weil du manchmal das erste Element für andere Zwecke verwendest. Und wenn du den Code bearbeitest, vergisst du garantiert einige Stellen (das passiert mir ständig), was die Dinge noch weniger konsistent und verwirrender macht. Wenn man Code in eine Funktion packt, muss man ihn nur an <em>einer</em> Stelle ändern und testen. Hier ist der ursprüngliche Code, der über eine Funktion implementiert wurde.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_initial(full_string):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Erzeuge einen Anfangsbuchstaben aus dem ersten Symbol.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameter</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    full_string : str</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    str</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">        einzelnes Symbol</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> full_string[<span class="dv">0</span>]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> generate_initial(<span class="st">"test"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>initial_for_file <span class="op">=</span> generate_initial(filename)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>initial_for_website <span class="op">=</span> generate_initial(first_name)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Und hier ist die “alternative” initiale Berechnung. Beachte, dass der Code, der die Funktion verwendet, gleich bleibt.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_initial(full_string):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Erstelle einen Anfangsbuchstaben aus den ersten ZWEI Symbolen.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameter</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    full_string : str</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    str</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">        zwei Symbole lang</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> full_string[:<span class="dv">2</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> generate_initial(<span class="st">"test"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>initial_for_file <span class="op">=</span> generate_initial(filename)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>initial_for_website <span class="op">=</span> generate_initial(first_name)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also, es ist besonders nützlich, den Code in eine Funktion zu packen, wenn der wiederverwendete Code komplex ist, aber es lohnt sich sogar, wenn die Berechnung so einfach und trivial ist wie im obigen Beispiel. Mit einer Funktion hast du nur einen Code-Block, um den du dich kümmern musst, und du kannst sicher sein, dass dieselbe Berechnung durchgeführt wird, wann immer du die Funktion aufrufst (und dass dies keine mehreren Kopien des Codes sind, die möglicherweise identisch sind oder auch nicht).</p>
+<p>Beachte, dass ich wiederverwendbaren Code als den letzten und am wenigsten wichtigen Grund für die Verwendung von Funktionen ansehe. Dies liegt daran, dass die anderen drei Gründe deutlich wichtiger sind. Selbst wenn du diese Funktion nur einmal aufrufst, ist es von Vorteil, wenn dein Code konzeptuell klar, isoliert und testbar ist. Dadurch wird der Code einfacher zu verstehen und zu testen, und du kannst seine Komplexität reduzieren, indem du Teile des Codes durch ihren Sinn ersetzst. Schau dir das Beispiel unten an. Der erste Code holt das erste Symbol, aber diese Aktion bedeutet alleine nichts, es ist nur eine mechanische Berechnung. Erst der ursprüngliche Kontext <code>initial_for_file = filename[0]</code> oder zusätzliche Kommentare geben ihm eine Bedeutung. Im Gegensatz dazu sagt der Aufruf einer Funktion namens <em>compute_initial</em>, was passiert, da sie den Zweck klärt. Ich vermute, dass deine zukünftige Version sehr pro-Klarheit und anti-Verwirrung ist.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> filename[<span class="dv">0</span>] <span class="op">==</span> <span class="st">"A"</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> compute_initial(filename) <span class="op">==</span> <span class="st">"A"</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   ...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="funktionen-in-python" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="funktionen-in-python">
+<span class="header-section-number">4.4</span> Funktionen in Python</h2>
+<section id="eine-funktion-in-python-definieren" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="eine-funktion-in-python-definieren">
+<span class="header-section-number">4.4.1</span> Eine Funktion in Python definieren</h3>
+<p>Eine Funktion in Python sieht so aus ( Beachte die Einrückung und das <code>:</code> am Ende der ersten Zeile)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="op">&lt;</span>funktionsname<span class="op">&gt;</span>(param1, param2,...):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    einige interne Berechnungen</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> somecondition:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> some value</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> some other value</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Die Parameter sind optional, genau wie der Rückgabewert. Daher wäre die minimalste Funktion:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> minimal_function():</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span> <span class="co"># pass bedeutet "tu nichts"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Du musst deine Funktion (einmal!) definieren, bevor du sie aufrufst (ein- oder mehrmals). Also solltest du Funktionen <em>vor</em> dem Code erstellen, der sie verwendet.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> do_something():</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Das ist eine Funktion namens "do_something". Sie tut eigentlich nichts.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Sie benötigt keinen Input und gibt keinen Wert zurück.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> another_function():</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wir rufen sie in einer anderen Funktion auf.</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    do_something()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Das ist ein Funktionsaufruf (diese Funktion verwenden wir)</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>do_something()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Und wir verwenden es erneut!</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>do_something()</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Und wieder, aber diesmal über einen anderen_Funktionsaufruf</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>another_function()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #1.</p>
+</div>
+<p>Du solltest auch im Hinterkopf behalten, dass das Über-schreiben einer Funktion (oder das Definieren einer technisch anderen Funktion mit dem gleichen Namen) die ursprüngliche Definition <em>überschreibt</em>, sodass nur die <em>letzte</em> Version davon beibehalten und verwendet werden kann.</p>
+<div class="practice">
+<p>Mach Übung #2.</p>
+</div>
+<p>Obwohl das Beispiel im Übungsblatt das Problem einfach macht, kann es in einem großen Code, der mehrere Dateien umfasst und verschiedene Bibliotheken verwendet, nicht so einfach sein, dasselbe Problem zu lösen!</p>
+</section><section id="funktionsargumente" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="funktionsargumente">
+<span class="header-section-number">4.4.2</span> Funktionsargumente</h3>
+<p>Einige Funktionen benötigen möglicherweise keine Argumente (auch Parameter genannt), da sie eine festgelegte Aktion ausführen:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ping():</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Eine Maschine, die "ping!" sagt</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"ping!"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Allerdings musst du möglicherweise Informationen über Argumente an die Funktion übergeben, um zu beeinflussen, wie die Funktion ihre Aktion ausführt. In Python listest du einfach die Argumente in den runden Klammern nach dem Funktionsnamen auf (es gibt noch weitere Feinheiten, aber wir halten es vorerst einfach). Zum Beispiel könnten wir eine Funktion schreiben, die das Alter einer Person berechnet und ausgibt, basierend auf zwei Parametern: 1) ihrem Geburtsjahr, 2) dem aktuellen Jahr:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_age(birth_year, current_year):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Gibt das Alter basierend auf Geburtsjahr und aktuellem Jahr aus.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameter</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ---------</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">    birth_year : int</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    current_year : int</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(current_year <span class="op">-</span> birth_year)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Es ist eine <strong>sehr gute Idee</strong>, Funktionen, Parameter und Variablen sinnvolle Namen zu geben. Der folgende Code wird genau dasselbe Ergebnis produzieren, aber zu verstehen, <em>warum</em> und <em>wozu</em> er das tut, wäre viel schwerer (also <strong>immer</strong> sinnvolle Namen verwenden!):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> x(a, b):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(b <span class="op">-</span> a)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Wenn du eine Funktion aufrufst, musst du die richtige Anzahl an Parametern übergeben und sie in der <em>richtigen Reihenfolge</em> übergeben, ein weiterer Grund, warum Funktion-Argumente bedeutungsvolle Namen haben sollten<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p>
+<div class="practice">
+<p>Mach Übung #3.</p>
+</div>
+<p>Wenn du eine Funktion aufrufst, werden die Werte, die du <em>übergibst</em>, den Parametern zugeordnet und als <em>lokale</em> Variablen verwendet (mehr dazu später zum <em>lokalen</em> Teil). Aber es spielt keine Rolle, <em>wie</em> du auf diese Werte gekommen bist, ob sie in einer Variablen waren, hartcodiert oder von einer anderen Funktion zurückgegeben wurden. Wenn du numerische, logische oder Zeichenfolgenwerte (<em>unveränderliche</em> Typen) verwendest, kannst du davon ausgehen, dass jeder Link zur ursprünglichen Variablen oder Funktion, die ihn produziert hat, weg ist (wir werden uns später mit <em>veränderlichen</em> Typen wie Listen befassen). Daher kannst du beim Schreiben einer Funktion oder beim Lesen ihres Codes einfach davon ausgehen, dass sie während des Aufrufs auf einen bestimmten Wert gesetzt wurde und du kannst den Kontext, in dem dieser Aufruf erfolgte, ignorieren.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hartcodiert</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>print_age(<span class="dv">1976</span>, <span class="dv">2020</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte aus Variablen verwenden</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>i_was_born <span class="op">=</span> <span class="dv">1976</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>today_is <span class="op">=</span> <span class="dv">2024</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>print_age(i_was_born, today_is)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># den aktuellen Jahrgang von einer Funktion verwenden</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_current_year():</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2024</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>print_age(<span class="dv">1976</span>, get_current_year())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="funktionen-rückgabewert-ausgabe" class="level3" data-number="4.4.3"><h3 data-number="4.4.3" class="anchored" data-anchor-id="funktionen-rückgabewert-ausgabe">
+<span class="header-section-number">4.4.3</span> Funktionen-Rückgabewert (Ausgabe)</h3>
+<p>Deine Funktion kann eine Aktion durchführen, ohne einen Wert an den Aufrufer zurückzugeben (das hat unsere <code>print_age</code>-Funktion gemacht). Aber du könntest den Wert auch zurückgeben müssen. Zum Beispiel könnten wir eine neue Funktion namens <code>compute_age</code> schreiben, die das Alter anstatt es auszudrucken zurückgibt (das können wir immer selbst machen).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_age(geburtsjahr, aktuelles_jahr):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Berechnet das Alter anhand des Geburtsjahrs und des aktuellen Jahres.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Funktionsparameter</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">    birth_year : int</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    current_year : int</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Rückgabe</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">    int</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Alter</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> current_year <span class="op">-</span> birth_year</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Achte darauf, dass selbst wenn eine Funktion einen Wert zurückgibt, dieser nur gespeichert wird, wenn er tatsächlich verwendet wird (in einer Variablen gespeichert, als Wert verwendet, etc.). Also, einfach nur den Aufruf wird den zurückgegebenen Wert nicht automatisch speichern!</p>
+<div class="practice">
+<p>Mach Übung #4.</p>
+</div>
+</section><section id="gültigkeitsbereiche-für-unveränderliche-werte" class="level3" data-number="4.4.4"><h3 data-number="4.4.4" class="anchored" data-anchor-id="gültigkeitsbereiche-für-unveränderliche-werte">
+<span class="header-section-number">4.4.4</span> Gültigkeitsbereiche (für unveränderliche Werte)</h3>
+<p>Okay, wie wir oben besprochen haben, verwandelt das Umwandeln von Code in eine Funktion ihn in eine <em>isolierte</em> Einheit, die in ihrem eigenen <em>Scope</em> läuft. In Python existiert jede Variable in dem <em>Scope</em>, in dem sie definiert wurde. Wenn sie im <em>globalen</em> Skript definiert wurde, existiert sie in diesem <em>globalen</em> Scope als <em>globale</em> Variable. Allerdings ist sie nicht zugänglich (zumindest nicht ohne besonderen Aufwand mit dem <code>global</code>-Operator) von innerhalb einer Funktion aus. Umgekehrt existieren die Parameter einer Funktion und alle innerhalb einer Funktion definierten Variablen nur <strong>innerhalb dieser Funktion</strong>. Sie sind für die Außenwelt unsichtbar und können nicht vom globalen Skript oder von einer anderen Funktion aus erreicht werden. Umgekehrt haben alle Änderungen, die du an dem Funktionsparameter oder der lokalen Variablen vornimmst, keine Auswirkung auf die Außenwelt.</p>
+<p>Der Sinn von Scopes besteht darin, einzelne Codeabschnitte voneinander zu isolieren, damit das Ändern von Variablen innerhalb eines Scopes keine Auswirkungen auf alle anderen Scopes hat. Das bedeutet, dass du beim Schreiben oder Debuggen des Codes keine Sorgen wegen des Codes in anderen Scopes haben musst und dich nur auf den Code konzentrieren kannst, an dem du gerade arbeitest. Da Scopes isoliert sind, können sie <em>identisch benannte Variablen</em> haben, die jedoch keine Beziehung zueinander haben, da sie in ihren eigenen parallelen Universen existieren<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Daher musst du, wenn du wissen möchtest, welchen Wert eine Variable hat, nur innerhalb des Scopes nachsehen und alle anderen Scopes ignorieren (auch wenn die Namen übereinstimmen!).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># das ist die Variable `x` im globalen Gültigkeitsbereich</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x  <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f1():</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Das ist Variable `x` im Gültigkeitsbereich der Funktion f1</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sie hat denselben Namen wie die globale Variable, aber</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># hat keine Beziehung dazu: viele Menschen heißen Sasha,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aber sie sind trotzdem verschiedene Menschen. Was auch immer</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mit `x` in f1 passiert, bleibt im Gültigkeitsbereich von f1.</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f2(x):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Das ist Parameter `x` im Gültigkeitsbereich der Funktion f2.</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wieder keine Beziehung zu anderen globalen oder lokalen Variablen.</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Es ist ein vollständig separates Objekt, es hat nur zufällig</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># denselben Namen (wieder nur Namensvettern)</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(x)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #5.</p>
+</div>
+</section></section><section id="spielerantwort-als-funktion" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="spielerantwort-als-funktion">
+<span class="header-section-number">4.5</span> Spielerantwort als Funktion</h2>
+<p>Jetzt ist es an der Zeit, die Theorie über Funktionen in die Praxis umzusetzen. Nutze den Code, den du erstellt hast, um die <a href="#rate-die-zahl-spielerantwort">Spielerantwort</a> zu erhalten und daraus eine Funktion zu machen. Diese sollte keine Parameter haben (vorerst) und die Spielerantwort zurückgeben. Ich schlage vor, sie <code>input_response</code> (oder etwas Ähnliches) zu nennen. Teste den Code, indem du diese Funktion in deinem Hauptskript aufrufst.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="debuggen-einer-funktion" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="debuggen-einer-funktion">
+<span class="header-section-number">4.6</span> Debuggen einer Funktion</h2>
+<p>Jetzt, wo du deine erste Funktion hast, kannst du die drei Schaltflächen “Schritt zurück/vor/raus” des Debuggers besser verstehen. Kopiere den folgenden Code in eine separate Datei (nenn sie zum Beispiel <code>test01.py</code>).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f1(x, y):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">/</span> y</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f2(x, y):</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> y <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> f1(x, y)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> f2(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(z)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Okay, jetzt pass mal auf. Zuerst legst du einen Breakpoint auf die Zeile im Hauptskript, die die Funktion <code>f2()</code> aufruft. Starte den Debugger mit <strong>F5</strong> und das Programm wird an dieser Stelle pausieren. Wenn du jetzt <strong>F10</strong> (Schritt nach vorne) drückst, springt das Programm zur nächsten Zeile <code>print(z)</code>. Aber wenn du stattdessen <strong>F11</strong> (Schritt rein) drückst, springt das Programm in die Funktion und geht zur Zeile <code>x = x + 5</code>. Wenn du innerhalb der Funktion bist, hast du dieselben beiden Optionen wie zuvor, aber du kannst auch <strong>Shift+F11</strong> drücken, um aus der Funktion herauszuspringen. Hier springt das Programm den gesamten Code aus, bis du die nächste Zeile außerhalb der Funktion erreichst (du solltest wieder bei <code>print(z)</code> landen). Experimentiere damit, Breakpoints an verschiedenen Zeilen zu setzen und über/rein/raus zu schreiten, um den Dreh mit diesen nützlichen Debugging-Tools rauszukriegen.</p>
+<p>Setzt nun den Haltepunkt innerhalb der Funktion „f1()“ und führt den Code mit <strong>F5</strong> aus. Im linken Fensterbereich siehst du eine Registerkarte <em>Call Stack</em>. Während die gelb markierte Zeile im Editor anzeigt, wo du dich gerade befindest (innerhalb der Funktion <code>f1()</code>), zeigt der <em>Call Stack</em> an, wie du dorthin gekommen bist. In diesem Fall sollte er zeigen:</p>
+<table class="caption-top table"><tbody>
+<tr class="odd">
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">test01.py</td>
+<td>2:1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">f2</td>
+<td style="text-align: left;">test01.py</td>
+<td>7:1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><module></module></td>
+<td style="text-align: left;">test01.py</td>
+<td>9:1</td>
+</tr>
+</tbody></table>
+<p>Die Aufrufe werden von unten nach oben gestapelt, also bedeutet das, dass eine Funktion im Hauptmodul in Zeile 9 aufgerufen wurde, du landest in der Funktion <code>f2</code> in Zeile 7 und dann in der Funktion <code>f1</code> und in Zeile 2. Experimentiere damit, in und aus Funktionen zu gehen, während du ein Auge darauf hast. Du brauchst diese Information vielleicht nicht häufig, aber sie könnte in unseren späteren Projekten mit mehreren verschachtelten Funktionsaufrufen nützlich sein.</p>
+</section><section id="numpy-docstring" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="numpy-docstring">
+<span class="header-section-number">4.7</span> Deine Funktion dokumentieren</h2>
+<p>Das Schreiben einer Funktion ist nur die halbe Arbeit. Du musst sie dokumentieren! <a href="#programming-tips">Erinnere dich</a>, dies ist eine gute Gewohnheit, die deinen Code leicht verwendbar und wiederverwendbar macht. Es gibt verschiedene Möglichkeiten, den Code zu dokumentieren, aber wir werden die <a href="https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard">NumPy-Dokstrings</a> verwenden. Hier ist ein Beispiel für eine solche dokumentierte Funktion.</p>
+<p>Hier ist die Übersetzung des Textes über das Programmieren in Python auf Deutsch, mit informeller Sprache und Verwendung von “du” für “you”:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generiere_anfangsvokal(voll_string):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Generiert einen Anfangsbuchstaben aus dem ersten Symbol.</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">    full_string : str</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">    str</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">        einzelnes Symbol</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> voll_string[<span class="dv">0</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="program">
+<p>Aktualisiere deinen Code in <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="prompt-verwenden" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="prompt-verwenden">
+<span class="header-section-number">4.8</span> Prompt verwenden</h2>
+<p>In Zukunft werden wir nach einer bestimmten Zahl fragen, die momentan vom Computer geraten wird, also können wir keine feste Promptnachricht verwenden. Ändere die <code>input_response</code>-Funktion, indem du einen <code>guess</code>-Parameter hinzufügst. Dann ändere den Prompt, den du für die <a href="https://docs.python.org/3/library/functions.html#input">input()</a>-Funktion verwendet hast, um den Wert in diesem Parameter einzubeziehen. Aktualisiere die Dokumentation der Funktionen. Teste es, indem du es mit verschiedenen Werten für den <code>guess</code>-Parameter aufrufst und dabei einen unterschiedlichen Prompt für die Antwort siehst.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code03.py</span>.</p>
+</div>
+</section><section id="interval-in-der-mitte-teilen" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="interval-in-der-mitte-teilen">
+<span class="header-section-number">4.9</span> Interval in der Mitte teilen</h2>
+<p>Lass uns noch ein bisschen an Funktionen schreiben üben. Denk dran, dass der Computer die Mitte des Intervalls als Schätzung verwenden sollte. Schreib eine Funktion (nennen wir sie <code>split_interval()</code> oder so) die zwei Parameter nimmt — <code>lower_limit</code> und <code>upper_limit</code> — und eine <em>ganze Zahl</em> zurückgibt, die der Mitte des Intervalls am nächsten ist. Der einzige knifflige Teil ist, wie du eine eventuell float-Zahl (z.B. wenn du es für das Intervall 1..10 suchst) in eine ganze Zahl umwandelst. Du kannst die Funktion <a href="https://docs.python.org/3/library/functions.html#int">int()</a> dafür verwenden. Beachte jedoch, dass sie <em>keine richtige Rundung</em> durchführt (was macht sie? Lies die Dokumentation!). Daher solltest du die Zahl mit <a href="https://docs.python.org/3/library/functions.html#round">round()</a> auf die nächstgelegene ganze Zahl runden, bevor du sie umwandelst.</p>
+<p>Schreib eine Funktion, dokumentiere sie und teste sie, indem du überprüfst, ob die Zahlen korrekt sind.</p>
+<div class="program">
+<p>Leg deinen <strong>split_interval()</strong> Funktion und den Testcode in <span class="program-filename">code04.py</span> rein.</p>
+</div>
+</section><section id="einzige-runde" class="level2" data-number="4.10"><h2 data-number="4.10" class="anchored" data-anchor-id="einzige-runde">
+<span class="header-section-number">4.10</span> Einzige Runde</h2>
+<p>Du hast beide Funktionen, die du brauchst, also lass uns den Code schreiben, um das Spiel zu initialisieren und eine Runde zu spielen. Die Initialisierung beschränkt sich darauf, zwei Variablen zu erstellen, die den unteren und oberen Grenzwerten des Spielbereichs entsprechen (wir haben bisher 1 bis 10 verwendet, aber du kannst das immer ändern). Als nächstes sollte der Computer eine Vermutung generieren (du hast deine <code>split_interval()</code>-Funktion dafür) und den Spieler nach seiner Vermutung fragen (das ist die <code>input_response()</code>-Funktion). Sobald du die Antwort hast (in einer separaten Variable gespeichert, denk dir einen Namen aus), aktualisiere entweder die obere oder untere Grenze mithilfe einer <a href="#if-statement">if..elif..else</a>-Anweisung basierend auf der Antwort des Spielers (wenn der Spieler sagte, dass seine Zahl höher ist, bedeutet das, dass das neue Intervall von <code>guess</code> bis <code>upper_limit</code> ist, und umgekehrt, wenn es niedriger ist). Drucke eine freudige Nachricht aus, wenn die Vermutung des Computers korrekt war.</p>
+<div class="program">
+<p>Schreibe sowohl die Funktionen als auch den Skript-Code in <span class="program-filename">code05.py</span>.</p>
+</div>
+</section><section id="mehrere-runden" class="level2" data-number="4.11"><h2 data-number="4.11" class="anchored" data-anchor-id="mehrere-runden">
+<span class="header-section-number">4.11</span> Mehrere Runden</h2>
+<p>Erweitere das Spiel, damit der Computer immer weiter rät, bis er schließlich gewinnt. Du weißt bereits, wie man die <a href="03-guess-the-number-multi-round.de.html#while-loop">while-Schleife</a> verwendet, überlege dir nur, wie man die Antwort des Teilnehmers als Bedingungsvariable für die Schleife verwenden kann. Denke auch über den Anfangswert dieser Variablen nach und wie man ihn verwendet, damit man <code>input_response()</code> nur an einer Stelle aufruft.</p>
+<div class="program">
+<p>Schreib den aktualisierten Code in <span class="program-filename">code06.py</span>.</p>
+</div>
+</section><section id="nochmal-spielen" class="level2" data-number="4.12"><h2 data-number="4.12" class="anchored" data-anchor-id="nochmal-spielen">
+<span class="header-section-number">4.12</span> Nochmal spielen</h2>
+<p>Ändere den Code, damit du dieses Spiel mehrere Male spielen kannst. Du weißt bereits, wie man das macht, und musst nur noch darüber nachdenken, wo genau du die Initialisierung vor jedem Spiel durchführen solltest. Da du das beim letzten Spiel bereits implementiert hast, könntest du versucht sein, nachzusehen, wie du es gemacht hast oder sogar den Code zu kopieren und einzufügen. Ich würde jedoch empfehlen, es von Anfang an neu zu schreiben. Denk daran, dein Ziel ist es nicht, ein Programm zu schreiben, sondern zu lernen, wie man das macht, und daher ist die Reise wichtiger als das Ziel.</p>
+<div class="program">
+<p>Schreib den aktualisierten Code in <span class="program-filename">code07.py</span>.</p>
+</div>
+</section><section id="bestes-ergebnis" class="level2" data-number="4.13"><h2 data-number="4.13" class="anchored" data-anchor-id="bestes-ergebnis">
+<span class="header-section-number">4.13</span> Bestes Ergebnis</h2>
+<p>Füge den Code hinzu, um die Anzahl der Versuche zu zählen, die der Computer in jeder Runde benötigt hat, und das beste Ergebnis (wenigstens Anzahl von Versuchen) nach dem Spiel zu melden. Du benötigst eine Variable, um die Anzahl der Versuche zu zählen, und eine, um das beste Ergebnis zu speichern. Versuche erneut, es zu schreiben, ohne auf dein vorheriges Spiel zu schauen.</p>
+<div class="program">
+<p>Schreib den aktualisierten Code in <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="benutze-deine-eigenen-bibliotheken" class="level2" data-number="4.14"><h2 data-number="4.14" class="anchored" data-anchor-id="benutze-deine-eigenen-bibliotheken">
+<span class="header-section-number">4.14</span> Benutze deine eigenen Bibliotheken</h2>
+<p>Du weißt bereits, wie man <a href="#benutze-bibliotheken">existierende Bibliotheken</a> verwendet, aber du kannst auch eigene erstellen und verwenden. Nimm die beiden Funktionen, die du entwickelt hast, und packe sie in eine neue Datei namens <span class="filename">utils.py</span> (vergesse nicht, eine mehrzeilige Kommentarfunktion oben in der Datei zu hinterlassen, um dich daran zu erinnern, was drin ist!). Kopiere den restlichen Code (das globale Skript) in <span class="filename">code09.py</span>. Es wird in seinem aktuellen Zustand nicht funktionieren, da es die beiden Funktionen nicht finden wird (versuche es, um die Fehlermeldung zu sehen), also musst du aus deinem eigenen <span class="filename">utils</span>-Modul importieren. Importieren funktioniert genau gleich wie bei anderen Bibliotheken. Beachte, dass obwohl deine Datei <span class="filename">utils.py</span> heißt, der Modulname <span class="filename">utils</span> (ohne Erweiterung) ist.</p>
+<div class="program">
+<p>Leg die Funktion in <span class="program-filename">utils.py</span> und den restlichen Code in <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="keep-imports-tidy" class="level2" data-number="4.15"><h2 data-number="4.15" class="anchored" data-anchor-id="keep-imports-tidy">
+<span class="header-section-number">4.15</span> Ordnung muss sein!</h2>
+<p>Bisher hast du maximal eine Bibliothek importiert. Doch da Python sehr modular ist, ist es üblich, viele Importe in einer einzigen Datei zu haben. Es gibt einige Regeln, die das Verfolgen der Importe erleichtern. Wenn du Bibliotheken importierst, sollten alle Import-Anweisungen oben in deiner Datei stehen und du solltest sie nicht in willkürlicher Reihenfolge plazieren. Die empfohlene Reihenfolge ist 1) Systembibliotheken, wie <span class="filename">os</span> oder <span class="filename">random</span>; 2) Drittanbieterbibliotheken, wie <span class="filename">psychopy</span>; 3) deine Projektmodule. Und innerhalb jedes Abschnitts solltest du die Bibliotheken <em>alphabetisch</em> anordnen, also</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Das sieht vielleicht nicht besonders nützlich für deinen simplen Code aus, aber wenn deine Projekte wachsen, wirst du immer mehr Bibliotheken einbeziehen müssen. Sie in alphabetischer Reihenfolge zu halten, erleichtert das Verständnis, welche Bibliotheken du verwendest und welche nicht standard sind. Alphabetische Reihenfolge bedeutet auch, dass du schnell überprüfen kannst, ob eine Bibliothek enthalten ist, da du schnell die Position ihres Import-Statements finden kannst.</p>
+</section><section id="videos-in-videospiele-einbauen" class="level2" data-number="4.16"><h2 data-number="4.16" class="anchored" data-anchor-id="videos-in-videospiele-einbauen">
+<span class="header-section-number">4.16</span> Videos in Videospiele einbauen</h2>
+<p>Reiche deine Dateien ein und mach dich bereit für mehr Action, denn wir gehen jetzt zu “echten” Videospielen mit PsychoPy über.</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Das ist das letzte Mal, versprochen!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Stell dir vor, ich bin Dora die Entdeckerin und starre dich an, während du nachdenkst.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Die offizielle magische Zahl ist <a href="https://de.wikipedia.org/wiki/Der_magische_Zahl_sieben,_plus_oder_minus_zwei">7±2</a>, aber das Lesen des Originalpapiers verrät dir, dass das bei den meisten von uns eher vier ist<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Das ist ähnlich wie wissenschaftliches Schreiben, bei dem ein einziger Absatz eine einzelne Idee übermittelt. Für mich hilft es, zuerst die Idee des Absatzes in einem einzigen Satz zu schreiben, bevor ich den Absatz selbst schreibe. Wenn ein Satz nicht ausreicht, muss ich den Text in mehr Absätze aufteilen.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Das ist nicht ganzstrict genommen wahr, aber das wird uns erst beschäftigen, wenn wir auf sogenannte “veränderliche” Objekte wie Listen oder Dictionaries kommen.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Es ist normal, mehr Code für das Testen als für das eigentliche Programm zu haben.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Du benötigst immer noch Tests für das integrierte System, aber das Testen einzelner Funktionen ist ein klarer Voraussetzung.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Dies ist auch nicht unbedingt richtig, aber du wirst warten müssen, bis du etwas über benannte Parameter und Standardwerte gelernt hast.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Es ist wie bei zwei Personen mit demselben Namen, aber immer noch unterschiedliche Menschen.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03-guess-the-number-multi-round.de.html" class="pagination-link" aria-label="Rate das Zahl: die Multi-Runde-Edition">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-psychopy.de.html" class="pagination-link" aria-label="Los geht's mit PsychoPy">
+        <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body>
+</html>

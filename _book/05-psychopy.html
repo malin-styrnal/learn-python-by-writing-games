@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/05-psychopy.html" />
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/05-psychopy.de.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>5  Gettings started with PsychoPy – Learn Python by Writing Games</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./06-whack-a-mole.html" rel="next">
+<link href="./04-guess-the-number-ai.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-psychopy.html"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Learn Python by Writing Games</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/05-psychopy.de.html" id="language-link-de">Deutsch</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming tips and tricks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Guess the Number: a single round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Guess the Number: a multi round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Guess the Number: AI takes a turn</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#chapter-concepts" id="toc-chapter-concepts" class="nav-link active" data-scroll-target="#chapter-concepts"><span class="header-section-number">5.1</span> Chapter concepts</a></li>
+  <li><a href="#minimal-psychopy" id="toc-minimal-psychopy" class="nav-link" data-scroll-target="#minimal-psychopy"><span class="header-section-number">5.2</span> Minimal PsychoPy code</a></li>
+  <li><a href="#classes-and-objects" id="toc-classes-and-objects" class="nav-link" data-scroll-target="#classes-and-objects"><span class="header-section-number">5.3</span> Classes and objects</a></li>
+  <li><a href="#arguments-by-position-or-name" id="toc-arguments-by-position-or-name" class="nav-link" data-scroll-target="#arguments-by-position-or-name"><span class="header-section-number">5.4</span> Function parameters: default values, passing by position or by name</a></li>
+  <li><a href="#adding-main-loop" id="toc-adding-main-loop" class="nav-link" data-scroll-target="#adding-main-loop"><span class="header-section-number">5.5</span> Adding main loop</a></li>
+  <li><a href="#adding-text-message" id="toc-adding-text-message" class="nav-link" data-scroll-target="#adding-text-message"><span class="header-section-number">5.6</span> Adding text message</a></li>
+  <li><a href="#adding-a-square-and-placing-it-not-at-the-center-of-the-window" id="toc-adding-a-square-and-placing-it-not-at-the-center-of-the-window" class="nav-link" data-scroll-target="#adding-a-square-and-placing-it-not-at-the-center-of-the-window"><span class="header-section-number">5.7</span> Adding a square and placing it <em>not</em> at the center of the window</a></li>
+  <li>
+<a href="#psychopy-units" id="toc-psychopy-units" class="nav-link" data-scroll-target="#psychopy-units"><span class="header-section-number">5.8</span> Five unit systems</a>
+  <ul class="collapse">
+<li><a href="#psychopy-units-height" id="toc-psychopy-units-height" class="nav-link" data-scroll-target="#psychopy-units-height"><span class="header-section-number">5.8.1</span> Height units</a></li>
+  <li><a href="#psychopy-units-norm" id="toc-psychopy-units-norm" class="nav-link" data-scroll-target="#psychopy-units-norm"><span class="header-section-number">5.8.2</span> Normalized units</a></li>
+  <li><a href="#pixels-on-screen" id="toc-pixels-on-screen" class="nav-link" data-scroll-target="#pixels-on-screen"><span class="header-section-number">5.8.3</span> Pixels on screen</a></li>
+  <li><a href="#degrees-of-visual-angle" id="toc-degrees-of-visual-angle" class="nav-link" data-scroll-target="#degrees-of-visual-angle"><span class="header-section-number">5.8.4</span> Degrees of visual angle</a></li>
+  <li><a href="#centimeters-on-screen" id="toc-centimeters-on-screen" class="nav-link" data-scroll-target="#centimeters-on-screen"><span class="header-section-number">5.8.5</span> Centimeters on screen</a></li>
+  </ul>
+</li>
+  <li><a href="#make-your-square-jump" id="toc-make-your-square-jump" class="nav-link" data-scroll-target="#make-your-square-jump"><span class="header-section-number">5.9</span> Make your square jump</a></li>
+  <li><a href="#make-the-square-jump-on-your-command" id="toc-make-the-square-jump-on-your-command" class="nav-link" data-scroll-target="#make-the-square-jump-on-your-command"><span class="header-section-number">5.10</span> Make the square jump on your command</a></li>
+  <li><a href="#basics-covered" id="toc-basics-covered" class="nav-link" data-scroll-target="#basics-covered"><span class="header-section-number">5.11</span> Basics covered</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="psychopy-basics" class="quarto-section-identifier"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Before we program our first game using <a href="https://psychopy.org/">PsychoPy</a>, we need to spend some time figuring out its basics. It is not the most suitable library for writing games, for that you might want to use <a href="https://arcade.academy/">Python Arcade</a> or <a href="https://www.pygame.org/">PyGame</a>. However, it is currently the best Python library for developing psychophysical experiments (and this is what we are after).</p>
+<section id="chapter-concepts" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="chapter-concepts">
+<span class="header-section-number">5.1</span> Chapter concepts</h2>
+<ul>
+<li>Understanding how to use <a href="#classes-and-objects">classes and objects</a>.</li>
+<li>Using <a href="#arguments-by-position-or-name">named parameters</a> in functions.</li>
+<li>Understanding PsychoPy <a href="#psychopy-units">units system</a>.</li>
+<li>Using basic Psycho <a href="#adding-text-message">visual stimuli</a> and handling <a href="#make-the-square-jump-on-your-command">user inputs</a>.</li>
+</ul></section><section id="minimal-psychopy" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="minimal-psychopy">
+<span class="header-section-number">5.2</span> Minimal PsychoPy code</h2>
+<p>Copy-paste the following code into <span class="filename">code01.py</span> file (you did remember to create a new folder for the chapter?):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">A minimal PsychoPy code.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># this imports two modules from psychopy</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># visual has all the visual stimuli, including the Window class</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># that we need to create a program window</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># event has function for working with mouse and keyboard</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> psychopy <span class="im">import</span> visual, event</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a 800 x 600 window</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>win <span class="op">=</span> visual.Window(size<span class="op">=</span>(<span class="dv">800</span>, <span class="dv">600</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># waiting for any key press</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>event.waitKeys()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># closing the window</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>win.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run it to check that PsychoPy work. If you get an error saying that <code>psychopy</code> library is not found, check the <a href="001-software.html#install-vs-code">active Python interpreter</a>. You should get a gray window with <em>PsychoPy</em> title. Press any key (click on the window, if you switched to another one, so that it registers a key press) and it should close. Not very exciting but does show that everything works as it should.</p>
+<div class="program">
+<p>Put the code into <span class="program-filename">code01.py</span>.</p>
+</div>
+<p>The code is simple but packs quite a few novel bits. First line is easy, we simply import <a href="https://psychopy.org/api/visual/index.html">visual</a> and <a href="https://psychopy.org/api/event.html">event</a> modules from <em>psychopy</em> library (a library can be itself organized into sublibraries to make things even more modular). Then, we create an <em>object</em> <code>win</code> using a <em>class</em> <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">Window</a> with custom size. Third line uses function <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> from <em>event</em> module to wait for a key press. The last one closes the window by calling its <code>close</code> <em>method</em>. You should have little trouble with lines #1 and #3 but you need to learn about object-oriented programming to understand #2 and #4.</p>
+</section><section id="classes-and-objects" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="classes-and-objects">
+<span class="header-section-number">5.3</span> Classes and objects</h2>
+<p>The PsychoPy library is a collection of <em>classes</em> that you use to create <em>objects</em>, an approach called <em>object-oriented programming</em>. The core idea is in the name: Instead of keeping variables (data) separate from functions (actions), you combine them in an object that has attributes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (its own variables) and methods (its own functions). This approach utilizes our natural tendency to perceive the world as a collection of interacting objects.</p>
+<p>First, you need to understand an important distinction between <em>classes</em> and <em>objects</em>. A <em>class</em> is a “blueprint” that describes properties and behavior of <em>all</em> objects of that class. This “blueprint” is used to create an <em>instance</em> of that class, which is called an <em>object</em>. For example, Homo sapiens is a <em>class</em> that describes species that have certain properties, such as height, and can do certain things, such as running. However, Homo sapiens as a class has only a <em>concept</em> of height but no specific height itself. E.g., you cannot ask “What is height of Homo sapiens?” only what is an average (mean, median, etc.) height of individuals of that class. Similarly, you cannot say “Run, Homo sapiens! Run!” as abstract concepts have trouble performing real actions like that. Instead, it is Alexander Pastukhov who is an <em>instance</em> of Homo sapiens class with a specific (average) height and a specific (below average) ability to run. Other instances of Homo sapiens (other people) have different height and a different (typically better) ability to run. Thus, a class describes all common properties and methods that all <em>instances</em> of the class (all objects) will have. But an individual object will behave differently because of different values of their properties. This means that whenever you meet a Homo sapien, you could be sure that they have height per se but will need to look at an individual <em>instance</em> to figure what height they have.</p>
+<p><code>Window</code> is a class that describes properties that a PsychoPy window must have and actions it can perform (you can see the complete list in <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">the manual</a>). To create an object, we use its class definition and store the result in a variable. In the code above we call <code>Window</code> class<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> while passing custom parameters to it (<code>size=(800, 600)</code>) and store an object that it returns in variable <code>win</code>.</p>
+<p>Attributes are, essentially, variables that belong to the class and, therefore, variables that each object will possess. For example, a <code>Window</code> class has <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.size">size</a> attribute that determines its on-screen size in pixels. It also has (background) <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.color">color</a>, an attribute that determines whether it should be shown in <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.fullscr">full screen mode</a>, etc. Thus, a <code>win</code> object will have all these attributes and they will have specific values.</p>
+<p>To understand both properties and class/object distinction better, put a breakpoint on the third line of code (<code>event.waitKeys()</code>) and fire up the debugger via <strong>F5</strong>. Once the window is created, the execution will pause and you will find a <code>win</code> object in <em>Variables/Locals</em>. Click on it and it will expand to show all attributes and its values, including <code>size</code> (check that it is <code>[800, 600]</code>). Note that you will not see <code>Window</code> itself in the same list. This is because it is a class, an abstract concept, whereas as <code>win</code> is its instance and object of that class.</p>
+<p>Methods, such as <code>Window.close()</code> are, essentially, functions that belong to the class/object and perform certain actions on the object. For example, method <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.close">close()</a> closes the window, <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip()</a> updates it after we finished drawing in it, etc. What is important is to remember is that each method will act only on the object <em>it belongs to</em> and not on other instances of the same class. This means that you can create two windows (<code>win1</code> and <code>win2</code>) and calling <code>win1.close()</code> will close the first but not the second window (try this out!). Same goes for attributes, changing them in one object will not affect any other objects of the same class, just like changing a value in one variable will not affect the other ones.</p>
+<p>Although we barely scratched the surface of object-oriented programming, it will be enough for us to be able to use classes defined for us in PsychoPy library.</p>
+</section><section id="arguments-by-position-or-name" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="arguments-by-position-or-name">
+<span class="header-section-number">5.4</span> Function parameters: default values, passing by position or by name</h2>
+<p>There are a few more curious bits in the <code>visual.Window(size=(800, 600))</code> call above that we need to discuss. These curiosities are related to functions (and, therefore, methods that are functions that belong to a class) not classes per se. First, constructor method of the Window class has <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">a lot of arguments</a> (when we construct an object, we call a constructor <em>method</em> of the class, which is why we are talking about functions). And yet, we only passed one of them. This is because you can specify <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values">default values</a> for individual parameters. In this case, if a parameter is omitted, a default value is used instead</p>
+<div id="3cad0d9f" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divide(x1, x2<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Divides numbers, uses 2 as a second value if a second term is omitted.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">    x1 : float</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    x2 : float, default=2</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    number</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1 <span class="op">/</span> x2</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>)) <span class="co"># we pass only value for x1 and the default value is used for x2</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0
+0.5</code></pre>
+</div>
+</div>
+<p>If you look at <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">documentation</a>, you will see that for the Window class constructor <em>all</em> parameters have a default value. This is a part of PsychoPy’s philosophy of combining rich customization (just look at the sheer number of parameters!) with simplicity of use through sensible defaults (specify nothing and the window will still work).</p>
+<p>Second, we did not just pass the value but specified which parameter this value is for via <code>size=(800, 600)</code>. This notation is called <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">keyword arguments</a>. The advantage is in making it more explicit which parameter you are passing a value through. Plus, it allows you to put parameters any order, if that is more relevant given the context<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. If you do not use names, the values are assigned to individual parameters based on their <em>position</em> (a.k.a. positional parameters). You can even mix the two, but positional parameters must come first, see <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">documentation</a> if you want to know more.</p>
+<div id="51eb2804" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using positional parameters</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5</code></pre>
+</div>
+</div>
+<div id="ce9110d1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using keyword arguments</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(x2<span class="op">=</span><span class="dv">4</span>, x1<span class="op">=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5</code></pre>
+</div>
+</div>
+<div id="888c8c2a" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mixing positional and keyword arguments</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x2<span class="op">=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5</code></pre>
+</div>
+</div>
+<div id="f4c4fb1c" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x1<span class="op">=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">divide</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">2</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">x1</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">4</span><span class="ansi-yellow-bg">)</span>)
+
+<span class="ansi-red-fg ansi-bold">TypeError</span>: divide() got multiple values for argument 'x1'</pre>
+</div>
+</div>
+</div>
+</section><section id="adding-main-loop" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="adding-main-loop">
+<span class="header-section-number">5.5</span> Adding main loop</h2>
+<p>Currently, not much is happening in our program. One thing we need to add is a loop in which we can repeatedly draw in a window (and update it via its <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip()</a> method), check user input, and perform any other necessary actions.</p>
+<p>First, let us add the loop and handling of user inputs (the fun drawing part will be next). The loop goes between opening and closing the window:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>importing libraries</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>opening the window</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">--&gt;</span> our main loop <span class="op">&lt;--</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>closing the window</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The loop should be repeated until the user presses an <em>escape</em> key and, therefore, you will need a variable that signals this. My approach is to create a variable <code>gameover</code> initializing it to <code>False</code> and repeat the loop as long as the game not over. Then, in the loop, use function <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">event.getKeys()</a> to check whether <em>escape</em> button was pressed (for this, you need to pass <code>keyList=['escape']</code>). The function returns a <em>list</em> of keys, if any of them were pressed in the meantime or an empty list, if no keys from the <code>keyList</code> were pressed. Store that returned value in a temporary variable (I tend to call it <code>keys</code>). You will learn about lists only in the <em>next</em> chapter, so for now use a ready-made: <code>len(keys) &gt; 0</code> is a comparison that is <code>True</code> if list is not empty. If the list is indeed not empty, that means that the user pressed <em>escape</em> (as that is the only key that we specified in the function call) and the game should be over. Think how can you do it <em>without</em> an <code>if</code> statement, computing the logical value directly?</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="adding-text-message" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="adding-text-message">
+<span class="header-section-number">5.6</span> Adding text message</h2>
+<p>Although we are now running a nice game loop, we still have only a boring gray window to look at. Let us create a text stimulus, which would say “Press escape to exit” and display it during the loop. For this we will use <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a> class from PsychoPy library.</p>
+<p>First, you need to create the <code>press_escape_text</code> object (instance of the <a href="https://psychopy.org/api/visual/textstim.html%20class">TextStim</a>) before the main loop. There are quite a few parameters that you can play with but minimally, you need to pass the window the text should be displayed in (our <code>win</code> variable) and the actual text you want to display (<code>text="Press escape to exit"</code>). For all other settings PsychoPy will use its <a href="#arguments-by-position-or-name">defaults</a> (default font family, color and size, placed right at the windows’ center).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>press_escape_text <span class="op">=</span> visual.TextStim(win, <span class="st">"Press escape to exit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To show the visuals in PsychoPy, you first <em>draw</em> each element by calling its <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.draw">draw()</a> method and then update the window by <em>flipping</em><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> it. Note that you call <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip()</a> only <em>once</em> after <em>all</em> stimuli are drawn. I typically organize this code into a separate chunk and prepend it with a comment line <code># drawing stimuli</code>.</p>
+<p>The <code># drawing stimuli</code> chunk goes inside the main loop either before or after the keyboard check<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Organize the latter also as a separate code chunk with its own brief comment.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code03.py</span>.</p>
+</div>
+<p>Now, you should have a nice, although static, message positioned at the window’s center that tells you how you can exit the game. Check out the manual page for <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a> and try changing it by passing additional parameters to the class call. For example you can change its <code>color</code>, whether text is <strong>bold</strong> and/or <em>italic</em>, how it is aligned, etc. However, if you want to change <em>where</em> the text is displayed, read on below.</p>
+</section><section id="adding-a-square-and-placing-it-not-at-the-center-of-the-window" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="adding-a-square-and-placing-it-not-at-the-center-of-the-window">
+<span class="header-section-number">5.7</span> Adding a square and placing it <em>not</em> at the center of the window</h2>
+<p>Now, let us figure out how create and move visuals to an arbitrary location on the screen. In principle, this is very straightforward as every visual stimulus (including <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> we just used) has <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos">pos</a> property that specifies (you guessed it!) its position within a window. However, to make your life easier, PsychoPy first complicates it by having <a href="https://psychopy.org/general/units.html"><strong>five</strong> (5!) different position units systems</a>.</p>
+<p>Before we start exploring the units, let us create a simple white square. The visual class we need is <a href="https://psychopy.org/api/visual/rect.html">visual.Rect</a>. Just like the <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> above, it requires <code>win</code> variable (so it knows which window it belongs to), <code>width</code> (defaults to 0.5 of those mysterious units), <code>height</code> (also defaults to 0.5), <code>pos</code> (defaults to (0,0)), <code>lineColor</code> (defaults to <code>white</code>) and <code>fillColor</code> (defaults to <code>None</code>). Thus, to get a “standard” white outline square with size of <code>(0.5, 0.5)</code> units at <code>(0, 0)</code> location you only need pass the <code>win</code> variable: <code>white_square = visual.Rect(win)</code>. However, on <em>some</em> computers a curious bug prevents PsychoPy from drawing the outline correctly. If you end up staring at an empty screen<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, add <code>fillColor="white"</code> to the call and you should see a filled white square.</p>
+<p>You draw the square just like you drew the text stimulus, via its <a href="https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect.draw">draw()</a> method (and, again, you first draw all the stimuli and then flip the window <em>once</em>). Create the code (either keep the text and draw both, or drop the text), run it to see a very white square.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code04.py</span>.</p>
+</div>
+<p>What? Your square is not really a square? Well, I’ve warned you: <a href="https://psychopy.org/general/units.html#units">Five unit systems</a>!</p>
+</section><section id="psychopy-units" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="psychopy-units">
+<span class="header-section-number">5.8</span> Five unit systems</h2>
+<section id="psychopy-units-height" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="psychopy-units-height">
+<span class="header-section-number">5.8.1</span> Height units</h3>
+<p>With <a href="https://psychopy.org/general/units.html#height-units">height units</a> everything is specified in the units of window height. The center of the window is at <code>(0,0)</code> and the window goes vertically from <code>-0.5</code> to <code>0.5</code>. However, horizontal limits depend on the aspect ratio. For our 800×600 window (4:3 aspect ratio), it will go from -0.666 to 0.666 (the window is 1.3333 window heights wide). For a 600×800 window (3:4 aspect ratio) from -0.375 to 0.375 (the window is 0.75 window heights wide), for a square window 600×600 (aspect ratio 1:1) from -0.5 to 0.5 (again, in all these cases it goes from -0.5 to 0.5 vertically). This means that the actual on-screen distance for the units is the same for both axes. So that a square of <code>size=(0.5, 0.5)</code> is actually a square (it spans the same distance vertically and horizontally). Thus, height units make <em>sizing</em> objects easier but <em>placing them on horizontal axis correctly</em> harder (as you need to know the aspect ratio).</p>
+<p>Modify your code by specifying the unit system when you create the window: <code>win = visual.Window(..., units="height")</code>. Play with your code by specifying position of the square when you create it. You just need to pass an extra parameter <code>pos=(&lt;x&gt;, &lt;y&gt;)</code>.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code05.py</span>.</p>
+</div>
+<p>By the way, which way is up when y is below or above zero? Unfortunately, unlike x-axis, the y-axis can go both ways. For PsychoPy y-axis points up (so negative values move the square down and positive up). However, if you would use an Eyelink eye tracker to record where participants looked <em>on the screen</em>, it assumes that y-axis starts at the top of the screen and points down<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+<p>Now, modify the size of the square (and turn it into a non-square rectangle) by passing <code>width=&lt;some-width-value&gt;</code> and <code>height=&lt;some-height-value&gt;</code>.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code06.py</span>.</p>
+</div>
+</section><section id="psychopy-units-norm" class="level3" data-number="5.8.2"><h3 data-number="5.8.2" class="anchored" data-anchor-id="psychopy-units-norm">
+<span class="header-section-number">5.8.2</span> Normalized units</h3>
+<p><a href="https://psychopy.org/general/units.html#normalised-units">Normalized units</a> are default units and assume that the window goes from -1 to 1 both along x- and x-axis. Again, (0,0) is the center of the screen but the bottom-left corner is (-1, -1) whereas the top-right is (1, 1). This makes <em>placing</em> your objects easier but <em>sizing</em> them harder (you need to know the aspect ratio to ensure that a square is a square).</p>
+<p>Modify your code, so that it uses <code>"norm"</code> units when you create the window and size your white square stimulus, so it does look like a square.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code07.py</span>.</p>
+</div>
+</section><section id="pixels-on-screen" class="level3" data-number="5.8.3"><h3 data-number="5.8.3" class="anchored" data-anchor-id="pixels-on-screen">
+<span class="header-section-number">5.8.3</span> Pixels on screen</h3>
+<p>For <a href="https://psychopy.org/general/units.html#pixels-on-screen">pixels on screen</a> units, the window center is still at <code>(0,0)</code> but it goes from <code>-&lt;width-in-pixels&gt;/2</code> to <code>&lt;width-in-pixels&gt;/2</code> horizontally (from -400 to 400 in our case) and <code>-&lt;height-in-pixels&gt;/2</code> to <code>&lt;height-in-pixels&gt;/2</code> vertically (from -300 to 300). These units could be more intuitive when you are working with a fixed sized window, as the span is the same along the both axes (like for the height units). However, they spell trouble if your window size has changed or you are using a full screen window on a monitor with an unknown resolution. In short, you should use them only if they dramatically simplify your code.</p>
+<p>Modify your code to use <code>"pix"</code> units and briefly test sizing and placing your square within the window.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="degrees-of-visual-angle" class="level3" data-number="5.8.4"><h3 data-number="5.8.4" class="anchored" data-anchor-id="degrees-of-visual-angle">
+<span class="header-section-number">5.8.4</span> Degrees of visual angle</h3>
+<p>Unlike the three units above, using <a href="https://psychopy.org/general/units.html#degrees-of-visual-angle">degrees of visual angle</a> requires you knowing a physical size of the screen, its resolution, and viewing distance (how far your eyes are away from the screen). They are <em>the</em> measurement units used in visual psychophysics as they describe stimulus size as it appears on the retina (see <a href="https://en.wikipedia.org/wiki/Visual_angle">Wikipedia</a> for details). Thus, these are the units you want to use when running an actual experiment in the lab.</p>
+</section><section id="centimeters-on-screen" class="level3" data-number="5.8.5"><h3 data-number="5.8.5" class="anchored" data-anchor-id="centimeters-on-screen">
+<span class="header-section-number">5.8.5</span> Centimeters on screen</h3>
+<p>Here, you would need know the physical size of your screen and its resolution. These are fairly exotic units for very specific usage cases<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p>
+</section></section><section id="make-your-square-jump" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="make-your-square-jump">
+<span class="header-section-number">5.9</span> Make your square jump</h2>
+<p>So far, we fixed the location of the square when we created it. However, you can move it at any time by assigning a new <code>(&lt;x&gt;, &lt;y&gt;)</code> coordinates to its <code>pos</code> property. <em>E.g.</em>, <code>white_square.pos = (-0.1, 0.2)</code>. Let us experiment by moving the square to a random location on every iteration of the loop (this could cause a lot of flashing, so if you have a photosensitive epilepsy that can be triggered by flashing lights, you probably should do it just once before the loop). Use the units of your choice and generate a new position using <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform(a, b)</a> function, that generates a random value within <em>a..b</em> range<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Generate two values (one for x, one for y). If you use <code>"norm"</code> units, your range is the same (from -1 to 1) for the two dimensions. However, if you used <code>"height"</code> units, you need to take into account the aspect ratio of your window (4:3 if you are using 800×600 pix window).</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="make-the-square-jump-on-your-command" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="make-the-square-jump-on-your-command">
+<span class="header-section-number">5.10</span> Make the square jump on your command</h2>
+<p>This was very flashy, so let us make the square jump only when you press <strong>space</strong> button. For this, we need to expand the code that processes keyboard input. So far, we restricted it to just <strong>escape</strong> button and checked whether any (hence, <strong>escape</strong>) button was pressed.</p>
+<p>You will learn about lists and indexes in the next chapter, so here is another ready-made. First, add <code>"space"</code> to the <code>keyList</code> parameter. Next, use conditional <a href="#%7B#if-statement">if statement</a> to check whether <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">event.getKeys()</a> returned a key press. If it did (<code>len(keys) &gt; 0</code>), you can now check whether <code>keys[0]</code> is equal to <code>"space"</code> or <code>"escape"</code><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. If it was the latter, the game is over as before. If it was <code>"space"</code> then move the square to a new random position (and do not move it on every frame!)</p>
+<p>Hint, if you are debugging, put you breakpoint inside the <code>if</code> statement, so that the program pauses only once you pressed a key (what happens if you put it on the <code>win.flip()</code> line?)</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code10.py</span>.</p>
+</div>
+</section><section id="basics-covered" class="level2" data-number="5.11"><h2 data-number="5.11" class="anchored" data-anchor-id="basics-covered">
+<span class="header-section-number">5.11</span> Basics covered</h2>
+<p>There is plenty more to learn about PsychoPy but we’ve got the basics covered. Submit your files and get ready to <a href="06-whack-a-mole.html">Whack a Mole</a>!</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Also called properties<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Technically, we call a class constructor method called <code>__init__</code> but this is not important for now.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>However, stick to original order for consistency otherwise.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This is called flipping because a window has two buffers: one that is currently displayed on the screen and the other one in which you can draw your stimuli. Once you are done with drawing, you “flip” the buffers so that they exchange their places. Now the one you drew in gets displayed and you have the other buffer to draw in.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>My personal preference is to draw first but in most cases it makes no difference.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This sometimes was an issue with Intel graphic cards.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>This could be very confusing, if you forget about this when overlaying gaze data on an image you used in the study and wondering what on Earth the participants were doing.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>So specific that I cannot think of one, to be honest.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>You need to import the random library for this, of course.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>You can use <code>if..else</code>, because we only have two options but I would recommend to go for a more general solution <code>if..elif</code> <a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./04-guess-the-number-ai.html" class="pagination-link" aria-label="Guess the Number: AI takes a turn">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>  <span class="chapter-title">Guess the Number: AI takes a turn</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-whack-a-mole.html" class="pagination-link" aria-label="Whack-a-Mole">
+        <span class="nav-page-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body>
+</html>

@@ -90,28 +90,28 @@
     ]
   },
   {
-    "objectID": "00-software.html",
-    "href": "00-software.html",
+    "objectID": "001-software.html",
+    "href": "001-software.html",
     "title": "Software",
     "section": "",
-    "text": "PsychoPy\nIf you are using Windows, download and install Standalone PsychoPy version. Use whatever the latest (and greatest) PsychoPy version is suggested to you (PsychoPy 2023.2.2 using Python 3.8 as of time of writing) and follow instructions.\nIf you are using Mac or Linux, installing PsychoPy via pip or Anaconda are your options. Please follow up-to-date instructions.",
+    "text": "PsychoPy\nIf you are using Windows, download and install Standalone PsychoPy version. Use whatever the latest (and greatest) PsychoPy version is suggested to you (PsychoPy 2024.2.3 using Python 3.10 as of time of writing) and follow instructions.\nIf you are using Mac or Linux, installing PsychoPy via pip or Anaconda are your options. Please follow up-to-date instructions.",
     "crumbs": [
       "Software"
     ]
   },
   {
-    "objectID": "00-software.html#install-vs-code",
-    "href": "00-software.html#install-vs-code",
+    "objectID": "001-software.html#install-vs-code",
+    "href": "001-software.html#install-vs-code",
     "title": "Software",
     "section": "VS Code",
-    "text": "VS Code\nVisual Studio Code is a free lightweight open-source editor with strong support for Python. Download the installer for your platform and follow the instructions.\nNext, follow Getting Started with Python in VS Code tutorial. If you are using Windows and the standalone PsychoPy installation, skip the Install a Python interpreter section, as you already have Python installation bundled with PsychoPy. This is the interpreter that you should use in the Select a Python interpreter section. In my case the path is C:\\Program Files\\PsychoPy3\\python.exe.\nInstall and enable a linter, software that highlights syntactical and stylistic problems in your Python source code. Follow the manual at VS Code website.",
+    "text": "VS Code\nVisual Studio Code is a free lightweight open-source editor with strong support for Python. Download the installer for your platform and follow the instructions.\nNext, follow Getting Started with Python in VS Code tutorial. If you are using Windows and the standalone PsychoPy installation, skip the Install a Python interpreter section, as you already have Python installation bundled with PsychoPy. This is the interpreter that you should use in the Select a Python interpreter section. In my case the path is C:\\Program Files\\PsychoPy\\python.exe.\nInstall and enable a linter, software that highlights syntactical and stylistic problems in your Python source code. Follow the manual at VS Code website.",
     "crumbs": [
       "Software"
     ]
   },
   {
-    "objectID": "00-software.html#jupyter-notebooks",
-    "href": "00-software.html#jupyter-notebooks",
+    "objectID": "001-software.html#jupyter-notebooks",
+    "href": "001-software.html#jupyter-notebooks",
     "title": "Software",
     "section": "Jupyter Notebooks",
     "text": "Jupyter Notebooks\nJupyter Notebooks offer a very convenient way to mix text, figure and code in a single document. They also make it easy to play with various small snippets in parallel without running scripts. We will rely on them for our first chapter and for an occasional exercises or code testing later on. There are two way you can use them: 1) in VS Code using Jupyter extension, 2) in your browser using classical interface.\n\nJupyter Notebooks in VS Code\nFollow the manual on how to install Jupyter package and use notebooks in VS Code.\n\n\nJupyter Notebooks in Anaconda\nThe simplest way to use Jupyter Notebooks along with a lot of other useful data science tools is via Anaconda toolkit. However, note that this will introduce a second Python distribution to your system. This, in turn, could lead to some confusion when working with scripts in VS Code if you accidentally have Anaconda interpreter active instead of the PsychoPy one. Do not panic, follow Select a Python interpreter instructions and make sure that you have PsychoPy interpreter as the active one.\nOtherwise, download and install Anaconda. The website has an excellent Getting started section.",
@@ -120,8 +120,8 @@
     ]
   },
   {
-    "objectID": "00-software.html#files-folder",
-    "href": "00-software.html#files-folder",
+    "objectID": "001-software.html#files-folder",
+    "href": "001-software.html#files-folder",
     "title": "Software",
     "section": "Keeping things tidy",
     "text": "Keeping things tidy\nBefore we start, I suggest that you create a folder called games-with-python (or something along these lines). If you opted to use Jupyter Notebooks via Anaconda, you should create it in your user folder because this is where Anaconda would expects to find them. Then, create a new subfolder for each chapter / game. For the seminar, you would need to zip and upload a folder with all the files.",
@@ -130,13 +130,923 @@
     ]
   },
   {
-    "objectID": "00-software.html#footnotes",
-    "href": "00-software.html#footnotes",
+    "objectID": "001-software.html#footnotes",
+    "href": "001-software.html#footnotes",
     "title": "Software",
     "section": "",
     "text": "If you are part of the seminar, ask me whenever you have problems or are unsure about how to proceeed↩︎",
     "crumbs": [
       "Software"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.html",
+    "href": "002-programming-tips.html",
+    "title": "Programming tips and tricks",
+    "section": "",
+    "text": "Writing the code",
+    "crumbs": [
+      "Programming tips and tricks"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.html#writing-tips",
+    "href": "002-programming-tips.html#writing-tips",
+    "title": "Programming tips and tricks",
+    "section": "",
+    "text": "Use a linter\nLinter is a program that analyses your code style and highlights any issues it finds: spaces where should be none, no spaces where should be some, wrong names, overly long lines, etc. These do not affect how the code runs but following linter’s advice results in a consistent standard if boring-looking2 Python code. Try to address all the problems that the linter raised. However, use your better judgment because sometimes lines that are longer than linter would prefer are more readable than two shorter ones. Similarly, a “bad” variable name by linter standards can be a meaningful name for a psychologist. Remember, your code is for people, not for the linter.\n\n\nDocument your code\nEvery time you create a new file: document it and update the documentation whenever you add/change/delete new functions or classes. Every time your create a new function: document it. New class: document it. New constant: unless it is super clear from the name alone, document it. You will learn a NumPy way of doing this in the book.\nI cannot stress how important documenting your code is. VS Code (an editor that we will use) is smart enough to parse NumPy docstring, so it will show this help to you whenever you use your own functions (helps you to help you!). More importantly, writing documentation forces you to think and formulate (in human language!) what the function or class is doing, what type the arguments / attributes / methods are, what is the range of valid values, what are the defaults, what should a function return, etc. More often than not, you will realize that you have overlooked some important detail that may not be apparent from the code itself.\n\n\nAdd some air\nSeparate chunks of code with some empty lines. Think paragraphs in the normal text. You wouldn’t want your book to be a single paragraph nightmare? Put a comment before each chunk that explains what it does but not how it does it. E.g., in our typical PsychoPy-based game there will be a point when we draw all stimuli and update the window. That is a nice self-contained chunk that can be described as # drawing all stimuli. The code provides details on what exactly is drawn, what is the drawing order, etc. But that single comment will help you to understand what this chunk is about and whether it is relevant for you at the moment. Same goes for # processing key presses or # checking gameover conditions, etc. But be careful and make sure that the comment describes the code correctly. E.g., if the comment says # drawing all stimuli where should be no stimuli-drawing code anywhere else and no code that does something else!\n\n\nWrite your code one teeny-tiny step a time\nYour motto should be “slow but steady”. This is the way I will guide you through the games. Always start with a something extremely simple like a static rectangle or image. Make sure it works. Add a minor functionality: Change in color, position, another rectangle, storing it as an attribute, etc. Make sure it works. Never go to the next step unless you fully understand what your current code is doing and you are 100% certain that it behaves as it should. And I mean 100% seriously! If you have even a shadow of a doubt, check again. Otherwise, that shadow will grow and make you progressively uncertain about your code. This tortoise-speed approach may feel silly and overly slow but it is still faster than writing a large chunk of code and then trying to make it work. It is much easier to solve simple problems one at a time than a lot of them simultaneously.\n\n\nThere is nothing wrong with StackOverflow\nYes, you can always try to find a solution to your problem on StackOverflow3. I do it all the time! However, you should use the provided solution only if you understand it! Do not copy-paste the code that seems to solve a problem like yours. If you do that and you are lucky, it might work. Or, again if you are lucky, it won’t work in an obvious manner. But if you are not so lucky, it will (sometimes) work incorrectly in a subtle way. And, since you did not really know what the code was doing when you pasted it, you will be even more confused. So use StackOverflow as a source of knowledge, not as a source of copy-pastable code!",
+    "crumbs": [
+      "Programming tips and tricks"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.html#reading-tips",
+    "href": "002-programming-tips.html#reading-tips",
+    "title": "Programming tips and tricks",
+    "section": "Reading the code",
+    "text": "Reading the code\nReading code is easy because computers are dumb and you are smart. This means that instructions you give the computer must necessarily be very simple and, therefore, are very easy to understand for a human. Reading code is also hard because computers are dumb and you are smart. You are so smart that you don’t even need to read the entire code to understand what it is doing, you just read the key bits and fill in the gaps. Unfortunately, this means that you will tend to read over mistakes. This is not unique to programming, if you ever proofraed a text, you now how hard it is to find tipos. Your brain corrects them on the fly using the context and you read the word as it should be, not as it is actually written4.\nMy experience with programming in general and on this seminar in particular is that most problems you get stuck with are simple to the point of being dumb and obvious in retrospect5. Do not despair! It is not you, but just a consequence of how wonderfully your brain is wired for pattern-recognition. Below are several suggestions that could help you to make reading code more robust.\n\nThink like a computer\nRead the code line-by-line and “execute” it the way the compute would. Use pen-and-paper to keep the track of variables. Trace which chunks of code can be reached and when. Slow yourself down and make sure you understand each line and are able to keep track of the variables. Once you do that it will be easy to spot a mistake.\n\n\nPretend that you’ve never seen this code in your life\nAssume that you have no idea what the code is doing. As I wrote, quite often you literally do not see a mistake because your brain fills-in details and bends the reality to match your expectations6. You know what this chunk of code should be doing, so instead of reading it you skim through it and, unless it looks obviously terribly wrong, assume that it does what it should. Turning your expectations off is hard but is immensely helpful.\n\n\nDo not search only under the street lamp\nWhenever you are using some new code or need to implement something that feels complicated and your code does not work as it should, you will tend to assume that a problem is with the new fancy code. Simply because it is new, fancy, and complicated. But, in my experience, the error will typically hide in plain sight in the simpler “trivial” code nearby which you never properly look at because it is simple and trivial. Check everything, not just the places where you would expect to have made a mistake.\n\n\nUse the debugger\nIn the book, you will learn how to pause an execution of your game, so you can investigate its state. Use this knowledge! Put breakpoints and execute the code step-by-step. Check values of variables using “Watch” tab. Use debug console to check whether functions return results that they should. For complex conditions or mathematical formulas, split them into small bits, copy and execute these bits in the debug console and check whether numbers add up. Make sure that a code chunk checks out and then proceed to analyze the next one. Debugging is particularly helpful to identify the code that is not reached or reached at the wrong moment.",
+    "crumbs": [
+      "Programming tips and tricks"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.html#zen-of-python",
+    "href": "002-programming-tips.html#zen-of-python",
+    "title": "Programming tips and tricks",
+    "section": "Zen of Python",
+    "text": "Zen of Python\nI found Zen of Python to be good inspiration on how to approach programming.",
+    "crumbs": [
+      "Programming tips and tricks"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.html#footnotes",
+    "href": "002-programming-tips.html#footnotes",
+    "title": "Programming tips and tricks",
+    "section": "",
+    "text": "Happened to me more often than I dare to admit.↩︎\n“Boring is Good!”, see “The Hitman’s Bodyguard” movie.↩︎\nHowever, if you are doing the seminar, ask me first!↩︎\nTip: Read your text one sentence at a time starting from the back or read one random sentence at a time. This breaks the flow of the text and helps you concentrate on words rather than on the meaning and the story.↩︎\nHindsight is always 20/20!↩︎\nRecently, I spent half-an-hour trying to understand why two identical chunks of code give me different results. My son almost instantly found a difference (a missing comma in of the them) because for him it was just bunch of letters and numbers.↩︎",
+    "crumbs": [
+      "Programming tips and tricks"
+    ]
+  },
+  {
+    "objectID": "01-basics.html",
+    "href": "01-basics.html",
+    "title": "1  Python basics",
+    "section": "",
+    "text": "1.1 Chapter concepts",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#chapter-concepts",
+    "href": "01-basics.html#chapter-concepts",
+    "title": "1  Python basics",
+    "section": "",
+    "text": "Variables.\nConstants.\nBasic value types.\nDinge ausdrucken.\nPutting values into strings.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#variables",
+    "href": "01-basics.html#variables",
+    "title": "1  Python basics",
+    "section": "1.2 Variables",
+    "text": "1.2 Variables\nThe first fundamental concept that we need to be acquainted with is variable. Variables are used to store information and you can think of it as a box with a name tag, so that you can put something into it. The name tag on that box is the name of the variable and its value what you store in it. For example, we can create a variable that stores the number of legs that a game character has. We begin with a number typical for a human being.\n\n\n\n\n\n\n\n\n\nIn Python, you would write\n\nnumber_of_legs = 2\n\nThe assignment statement above has very simple structure:\n\n&lt;variable-name&gt; = &lt;value&gt;\n\nVariable name (name tag on the box) should be meaningful, it can start with letters or _ and can contain letters, numbers, and _ symbol but not spaces, tabs, special characters, etc. Python recommends1 that you use snake_case (all lower-case, underscore for spaces) to format your variable names. The &lt;value&gt; on the right side is a more complex story, as it can be hard-coded (as in example above), computed using other variables or the same variable, returned by a function, etc.\nUsing variables means that you can concentrate what corresponding values mean rather than worrying about what these values are. For example, the next time you need to compute something based on number of character’s legs (e.g., how many pairs of shoes does a character need), you can compute it based on current value of number_of_legs variable rather than assume that it is 1.\n# BAD: why 1? Is it because the character has two legs or\n# because we issue one pair of shoes per character irrespective of\n# their actual number of legs?\npairs_of_shoes = 1\n\n# BETTER (but what if our character has only one leg?)\npairs_of_shoes = number_of_legs / 2\nVariables also give you flexibility. Their values can change during the program run: player’s score is increasing, number of lives decreasing, number of spells it can cast grows or falls depending on their use, etc. Yet, you can always use the value in the variable to perform necessary computations. For example, here is a slightly extended number_of_shoes example.\nnumber_of_legs = 2\n\n# ...\n# something happens and our character is turned into an octopus\nnumber_of_legs = 8\n# ...\n\n# the same code still works and we still can compute the correct number of pairs of shoes\npairs_of_shoes = number_of_legs / 2\nAs noted above, you can think about a variable as a labeled box you can store something in. That means that you can always “throw away” the old value and put something new. In case of variables, the “throwing away” part happens automatically, as a new value overwrites the old one. Check yourself, what will be final value of the variable in the code below?\nnumber_of_legs = 2\nnumber_of_legs = 5\nnumber_of_legs = 1\nnumber_of_legs\n\nDo exercise #1.\n\nNote that a variable (“a box with a name tag”) exists only after you assign something to it. So, the following code will generate a NameError, a Python’s way to tell that you it never heard of variable number_of_hands.\n\nnumber_of_legs = 2\nnumber_of_gloves = number_of_hands / 2\n\nNameError: name 'number_of_hands' is not defined\n\n\nHowever, you can create a variable the does not hold any specific value by assigning None to it. None was added to the language specifically to mean no value or nothing.\nnumber_of_hands = None # variable exists now, but holds no particular value.\nAs you have already seen, you can compute a value instead of specifying it. What would be the answer here?\n\nnumber_of_legs = 2 * 2\nnumber_of_legs = 7 - 2\nnumber_of_legs\n\n\nDo exercise #2.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#assignments-are-not-equations",
+    "href": "01-basics.html#assignments-are-not-equations",
+    "title": "1  Python basics",
+    "section": "1.3 Assignments are not equations!",
+    "text": "1.3 Assignments are not equations!\nVery important: although assignments look like mathematical equations, they are not equations! They follow a very important rule that you must keep in mind when understanding assignments: the right side of an expression is evaluated first until the final value is computed, then and only then that final value is assigned to the variable specified on the left side (put into the box). What this means is that you can use the same variable on both sides! Let’s take a look at this code:\n\nx = 2\ny = 5\nx = x + y - 4\n\nWhat happens when computer evaluates the last line? First, it takes current values of all variables (2 for x and 5 for y) and puts them into the expression. After that internal step, the expression looks like\n\nx = 2 + 5 - 4\n\nThen, it computes the expression on the right side and, once the computation is completed, stores that new value in x\n\nx = 3\n\n\nDo exercise #3 to make sure you understand this.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#constants",
+    "href": "01-basics.html#constants",
+    "title": "1  Python basics",
+    "section": "1.4 Constants",
+    "text": "1.4 Constants\nAlthough the real power of variables is that you can change their value, you should use them even if the value remains constant throughout the program. There are no true constants in Python, rather an agreement that their names should be all UPPER_CASE. Accordingly, when you see SUCH_A_VARIABLE you know that you should not change its value. Technically, this is just a recommendation, as no one can stop you from modifying value of a CONSTANT. However, much of Python’s ease-of-use comes from such agreements (such as a snake_case convention above). We will encounter more of such agreements later, for example, when learning about objects.\nTaking all this into account, if number of legs stays constant throughout the game, you should highlight that constancy and write\n\nNUMBER_OF_LEGS = 2\n\nI strongly recommend using constants and avoid hardcoding values. First, if you have several identical values that mean different things (2 legs, 2 eyes, 2 ears, 2 vehicles per character, etc.), seeing a 2 in the code will not tell you what does this 2 mean (the legs? the ears? the score multiplier?). You can, of course, figure it out based on the code that uses this number but you could spare yourself that extra effort and use a properly named constant instead. Then, you just read its name and the meaning of the value becomes apparent and it is the meaning not the actual value that you are mostly interested in. Second, if you decide to permanently change that value (say, our main character is now a tripod), when using a constant means you have only one place to worry about, the rest of the code stays as is. If you hard-coded that number, you are in for an exciting2 and definitely long search-and-replace throughout the entire code.\n\nDo exercise #4.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#value-types",
+    "href": "01-basics.html#value-types",
+    "title": "1  Python basics",
+    "section": "1.5 Value types",
+    "text": "1.5 Value types\nSo far, we only used integer numeric values (1, 2, 5, 1000…). Although, Python supports many different value types, at first we will concentrate on a small subset of them:\n\ninteger numbers, we already used, e.g. -1, 100000, 42.\nfloat numbers that can take any real value, e.g. 42.0, 3.14159265359, 2.71828.\nstrings that can store text. The text is enclosed between either paired quotes \"some text\" or apostrophes 'some text'. This means that you can use quotes or apostrophes inside the string, as long as its is enclosed by the alternative. E.g., \"students' homework\" (enclosed in \", apostrophe ' inside) or '\"All generalizations are false, including this one.\" Mark Twain' (quotation enclosed by apostrophes). There is much much more to strings and we will cover that material throughout the course.\nlogical / Boolean values that are either True or False.\n\nWhen using a variable it is important that you know what type of value it stores and this is mostly on you. In some cases, Python will raise an error, if you try doing a computation using incompatible value types. In other cases, Python will automatically convert values between certain types, e.g. any integer value is also a real value, so conversion from 1 to 1.0 is mostly trivial and automatic. However, in other cases you may need to use explicit conversion. Go to exercise #5 and try guessing which code will run and which will throw an error due to incompatible types?\n\n5 + 2.0\n'5' + 2\n'5' + '2'\n'5' + True\n5 + True\n\n\nDo exercise #5.\n\nSurprised by the last one? This is because internally, True is also 1 and False is 0!\nYou can explicitly convert from one type to another using special functions. For example, to turn a number or a logical value into a string, you simply write str(&lt;value&gt;). In examples below, what would be the result?\n\nstr(10 / 2)\nstr(2.5 + True)\nstr(True)\n\n\nDo exercise #6.\n\nSimilarly, you can convert to a logical/Boolean variable using bool(&lt;value&gt;) function. The rules are simple, for numeric values 0 is False, any other non-zero value is converted to True. For string, an empty string '' is evaluated to False and non-empty string is converted to True. What would be the output in the examples below?\n\nbool(-10)\nbool(0.0)\n\nsecret_message = ''\nbool(secret_message)\n\nbool('False')\n\n\nDo exercise #7.\n\nConverting to integer or float numbers using, respectively, int(&lt;value&gt;) and float(&lt;value&gt;) is trickier. The simplest case is from logical to integer/float, as True gives you int(True) is 1 and float(True) is 1.0 and False gives you 0/0.0. When converting from float to integer, Python simply drops the fractional part (it does not do proper rounding!). When converting a string, it must be a valid number of the corresponding type or the error is generated. E.g., you can convert a string like \"123\" to an integer or a float but this won’t work for \"a123\". Moreover, you can convert \"123.4\" to floating-point number but not to an integer, as it has fractional part in it. Given all this, which cells would work and what output would they produce?\n\nfloat(False)\nint(-3.3)\nfloat(\"67.8\")\nint(\"123+3\")\n\n\nDo exercise #8.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#print",
+    "href": "01-basics.html#print",
+    "title": "1  Python basics",
+    "section": "1.6 Printing output",
+    "text": "1.6 Printing output\nTo print the value, you need to use print() function (we will talk about functions in general later). In the simplest case, you pass the value and it will be printed out.\n\nprint(5)\n\n5\n\n\nor\n\nprint(\"five\")\n\nfive\n\n\nOf course, you already know about the variables, so rather than putting a value directly, you can pass a variable instead and its value will be printed out.\n\nnumber_of_pancakes = 10\nprint(number_of_pancakes)\n\n10\n\n\nor\n\nbreakfast = \"pancakes\"\nprint(breakfast)\n\npancakes\n\n\nYou can also pass more than one value/variable to the print function and all values will be printed one after another. For example, if we want to tell the user what did I had for breakfast, we can do\n\nbreakfast = \"pancakes\"\nnumber_of_items = 10\nprint(breakfast, number_of_items)\n\npancakes 10\n\n\nWhat will be printed by the code below?\n\ndinner = \"steak\"\ncount = 4\ndesert = \"cupcakes\"\n\nprint(count, dinner, count, desert)\n\n\nDo exercise #9.\n\nHowever, you probably would want to be more explicit, when you print out the information. For example, imagine you have these three variables:\n\nmeal = \"breakfast\"\ndish = \"pancakes\"\ncount = 10\n\nYou could, of course do print(meal, dish, count) but it would be nicer to print “I had 10 pancakes for breakfast”, where items in bold would be the inserted variables’ values. For this, we need to use string formatting. Please note that the string formatting is not specific to printing, you can create a new string value via formatting and store it in a variable without printing it out or print it out without storing it.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#string-formatting",
+    "href": "01-basics.html#string-formatting",
+    "title": "1  Python basics",
+    "section": "1.7 String formatting",
+    "text": "1.7 String formatting\nA great resource on string formatting in Python is pyformat.info. As Python constantly evolves, it now has more than one way to format strings. Below, I will introduce the “old” format that is based on classic string formatting used in sprintf function in C, Matlab, R, and many other programming languages. It is somewhat less flexible than newer ones but for simple tasks the difference is negligible. Knowing the old format is useful because of its generality. If you want to learn alternatives, read at the link above.\nThe general call is \"a string with formatting\"%(tuple of values to be used during formatting). You will learn about tuples later. For now, assume that it is just a comma-separated list of values enclosed in round brackets: (1, 2, 3).\nIn \"a string with formatting\", you specify where you want to put the value via % symbol that is followed by an optional formatting info and the required symbol that defines the type of the value. The type symbols are\n\ns for string\nd for an integer\nf for a float value\ng for an “optimally” printed float value, so that scientific notation is used for large values (e.g., 10e5 instead of 100000).\n\nHere is an example of formatting a string using an integer:\n\nprint(\"I had %d pancakes for breakfast\"%(10))\n\nI had 10 pancakes for breakfast\n\n\nYou are not limited to a single value that you can put into a string. You can specify more locations via % but you must make sure that you pass the right number of values in the right order. Before running it, can you figure out which call will actually work (and what will be the output) and which will produce an error?\n\nprint('I had %d pancakes and either %d  or %d steaks for dinner'%(2))\nprint('I had %d pancakes and %d steaks for dinner'%(7, 10))\nprint('I had %d pancakes and %d steaks for dinner'%(1, 7, 10))\n\n\nDo exercise #10.\n\nAs noted above, in case of real values you have two options: %f and %g. The latter uses scientific notation (e.g. 1e10 for 10000000000) to make a representation more compact.\n\nDo exercise #11 to get a better feeling for the difference.\n\nThese is much more to formatting and you can read about it at pyformat.info. However, these basics are sufficient for us to start programming our first game in the next chapter.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.html#footnotes",
+    "href": "01-basics.html#footnotes",
+    "title": "1  Python basics",
+    "section": "",
+    "text": "Well, actually, insists.↩︎\nnot really↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python basics</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html",
+    "href": "02-guess-the-number-single-round.html",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "",
+    "text": "2.1 Chapter concepts",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#chapter-concepts",
+    "href": "02-guess-the-number-single-round.html#chapter-concepts",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "",
+    "text": "Documenting code.\nDebugging code.\nGetting input from a user.\nUsing comparison in conditional statements.\nUsing indentation to group statements together.\nUsing Python libraries.\nGenerating random numbers.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#the-game",
+    "href": "02-guess-the-number-single-round.html#the-game",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.2 The Game",
+    "text": "2.2 The Game\nWe will program a game in which one participant (computer) picks a number within a certain range (say, between 1 and 10) and the other participant (human player) is trying to guess it. After every guess of the human, the computer responds whether the actual number is lower than a guess, higher than a guess, or matches it. The game is over when the player correctly guesses the number or (in the later version of the game) runs out of attempts.\nOur first version will allow just one attempt and the overall game algorithm will look like this:\n\ncomputer generates a random number between 1 and 10\nprints it out for debugging purposes\nprompts user to enter a guess\ncompares two numbers and print outs the outcome: “My number is lower”, “My number is higher”, or “Spot on!”",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#lets-pick-a-number",
+    "href": "02-guess-the-number-single-round.html#lets-pick-a-number",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.3 Let’s pick a number",
+    "text": "2.3 Let’s pick a number\nLet us start by implementing just the first two steps of the program. First, create a variable holding a number that computer “picked”. We will name it number_picked (you can use some other meaningful name as well but it might be easier if we all stick to the same name). To make things simpler at the beginning, we will hard-code an arbitrary number between 1 and 10 (pick the one you like). Then, let us print it out, so that we know the number ourselves3. Use string formatting to make things user-friendly, e.g., print out something like “The number I’ve picked is …”. You should be able to do this using the knowledge from the previous chapter. Your code should be a two-liner:\n# 1. create variable and set its value\n# 2. print out the value\nTry out this two-liner in a Jupyter Notebook (create an empty notebook just for that). Once you are happy with it, copy-paste the code into code01.py and read on to learn how to document and run it.\n\nPut your code into code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#documenting-your-code",
+    "href": "02-guess-the-number-single-round.html#documenting-your-code",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.4 Documenting your code",
+    "text": "2.4 Documenting your code\nNow that you have your first file with Python program, you should document it. Documenting a two-lines long and simple program may feel silly but it should be an automatic thing. Later on you will find yourself using several lines of comments to document a single line function. Again, it is not about the code that works, it is about the code you can understand. In a sense, it is better to have a clean well-documented program that currently does not work correctly than an undocumented spaghetti code that does. You can fix and update the former, but maintaining or updating the latter…\nIn Python, you have two ways to write comments: multiline and single line\n'''A \nmultiline \ncomment\n'''\n\n#  A single line comment.\nUse multiline comments to write documentation for individual files, functions, classes, methods, etc. You will learn how to format this documentation Numpy docstring style, once you learn about functions. In our case, you should start your code01.py file with a multiline comment that briefly describes what program it contains. Minimally, you should write that this is a Guess a Number game. It is probably a good idea to sketch out what the game is about.\nUse single line comments to explain what happens in a particular code block. You do not need to comment every line and you should not replicate the code in human language. A comment should be about what is going on not how. You already have a single chunk of code, so document it with a single sentence.\n\nDocument code01.py file.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#debugging",
+    "href": "02-guess-the-number-single-round.html#debugging",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.5 Running and debugging your game in VS Code",
+    "text": "2.5 Running and debugging your game in VS Code\nNow that we have a two-lines-long program, we can run it and already start learning how to debug it. Yes, our current program is probably to simple to require actual debugging but it is also simple enough to make understanding debugging easier as well. And debugging is a crucial skill that turns a running program from a black box into something transparent and easy4 to understand. Below I will describe how to debug in VS Code but you might want to consult an official manual in case things have changed in the meantime.\nThere are two ways to run a Python program in VS Code. First, you can use the “Run Python File in Terminal” play button on the right. This runs your program without a debugger, so you should use it only for the actual runs of the finalized code. Still, you can try running it and see whether it prints out what it should.\n\n\n\nRunning code without a debugger.\n\n\nThe alternative is the debugging tab, the one with a little bug on top of the run button. If you select it, it will show “Run and Debug”. Click on the button and it will offer various choices for different kinds of Python projects and frameworks. For our intents and purposes, we will only need “Python File: Debug the currently active Python file”. Click on that and it will execute your code (should run exactly the same way as with the other button).\n\n\n\nSelecting debugging configuration.\n\n\nYou probably do not want to click through Debugging tab → Run and Debug button → Pick configuration all the time. A better way is to configure it once and for all and then use F5 key to run your code. First, click on “create a launch.json file” and select the “Python File: Debug the currently active Python file” again. You will see a new launch.json file appearing in the editor that should look like this:\n\n\n\nDebug configuration in launch.json file.\n\n\nThat’s it! VS Code created a configuration for you. Now you can close launch.json file and run your program with a simple press of F5 button. Try it! Again, it should work just like before, so why did we go through all this trouble? Because debugger will pause an execution of your code whenever it encounters a problem, giving you a chance to examine variables, run snippets of code, etc. In contrast, running python file in terminal (the first option) will only print an error message and exit the program. Moreover, you can use breakpoints to pause the program at any line, which gives you an opportunity to examine your code at any location that you need.\nYou enable breakpoints by clicking to the left of the line number that you are interested in. Here, I’ve clicked on line 6 and you can see a red dot that indicates an active breakpoint.\n\n\n\nActive breakpoint.\n\n\nIf I now run the code via F5, the program will stop at that line before executing it.\n\n\n\nProgram paused at the breakpoint.\n\n\nThis gives me a chance to see what value my number_picked variable has. It is already listed in local variables (top left). But I also added it to list of watched variables (Watch, left middle) and I also looked at its value in the Debug Console (bottom tab) that allows me to execute any Python code while my program is paused. Do the same and explore these different ways yourself. For example, see how you can compute number_picked + 1 or number_picked * number_picked in the Watch tab and in Debug Console.\nOnce you are done examining the current state of the program, you have six buttons at the top to decide what to do next (hover over them to see hints). They are, from left to right\n\nContinue (F5): resume the program.\nStep Over (F10): executes the code without going into functions (this and two following options will become clearer once you learn about writing functions).\nStep Into the code (F11)\nStep Out of the code (Shift+F11).\nRestart the program (Ctrl+Shift+F5).\nStop the program (Shift+F5).\n\nTo better understand how this works, stop the program (Shift+F5) and put an additional breakpoint on the first line of your code (line #5 in my program, the other lines are comments or are empty). Run the program again via F5 and it will pause at that very first line. Can you figure out the value of variable number_picked now?\nThe answer is “no” because that variable does not exist yet. Remember, the program pauses before executing the line. Use F10 to step through the code line by line to see how the variable appears and the information gets printed out.\nThis debugging exercise may not have been necessary to solve problems with your current code but it showed how to do that in the future. Do not hesitate to put a breakpoint to pause the program and check that reality (i.e., actual values of variables) matches your expectations. Use the stepping through the code to slow things down to watch and ponder.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#input-function",
+    "href": "02-guess-the-number-single-round.html#input-function",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.6 Asking a player for a guess",
+    "text": "2.6 Asking a player for a guess\nIt takes two to play the Guess the Number game. The computer did its part by picking a number, now we need to ask a player to enter their guess. For this, we will use input() function.\nA function is an isolated code that accepts (optional) inputs, performs an action, and, optionally, returns a value (output). This allows both to split the code into smaller chunks that are easier to maintain and to reuse the same code. You already used print() function to print things out, and str(), bool(), int() and float() functions to convert values. For print() input is an arbitrary number of values (even none, try this in Jupiter Notebook!), its action is to print things out, but it returns nothing (no output). float() function takes (somewhat surprisingly) zero or one value as input (try giving it none or more than one in Jupiter Notebook as see the difference), attempts to convert given value to float (throwing an error, if it cannot do it), and returns a float value as an output.\nSimilar input → action → output scheme holds for the input(prompt). It takes an optional prompt string as input. Then it prints the prompt message and waits for a user to enter a string until they press Enter. It then returns this string value. The latter bit about string is important, because in our game we need a player to enter an integer not a string. For a moment, let us assume that the input is always a valid integer number, so type only valid integers when testing the program! This way we can convert it to an integer without extra checks (will add them in the future) and assign this value to a new variable called guess. Thus, you need to add a single line assignment statement with guess variable on the left side and call to input() function on the right side (think of a nice prompt message) wrapped by (inside of) the type-conversion to integer via int(). Test this code but, again, only enter valid integers, so that the conversion works without an error.\n\nUpdate your code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#if-statement",
+    "href": "02-guess-the-number-single-round.html#if-statement",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.7 Conditional if statement",
+    "text": "2.7 Conditional if statement\nNow we have two numbers: One that computer picked (number_picked) and one that the has player entered (guess). We need to compare them to provide correct output message. For this, we will use conditional if statement:\nif some_condition_is_true:\n    # do something\nelif some_other_condition_is_true:\n    # do something else\nelif yet_another_condition_is_true:\n    # do yet something else\nelse:\n    # do something only if all conditions above are false.\nOnly the if part is required, whereas elif (short for “else, if”) and else are optional. Thus you can do something, only if a condition is true:\nif some_condition_is_true:\n    # do something, but OTHERWISE DO NOT DO ANYTHING \n    # and continue with code execution\n  \n# some code that is executed after the if-statement,\n# irrespective of whether the condition was true or not.\nBefore we can use conditional statements in our game, you need to understand (1) the conditions themselves and (2) use of indentation as a mean of grouping statements together.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#comparisons",
+    "href": "02-guess-the-number-single-round.html#comparisons",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.8 Conditions and comparisons",
+    "text": "2.8 Conditions and comparisons\nCondition is any expression that can be evaluated to see whether it is True or False. A straightforward example of such expression are comparisons expressed in human language as: Is today Thursday? Is the answer (equal to) 42? Is it raining and I have an umbrella? We will concentrate on comparisons like that for a moment but later you will see that in Python any expression is either True or False, even when it does not look like a comparison5.\nFor the comparison, you can use the following operators:\n\n“A is equal B” is written as A == B.\n“A is not equal B” is written as A != B.\n“A is greater than B” and “A is smaller than B” are, respectively, A &gt; B and A &lt; B.\n“A is greater than or equal to B” and “A is smaller than or equal to B” are, respectively, A &gt;= B and A &lt;= B (please note the order of symbols as =&gt; and =&lt; will produce an error).\n\n\nGo to exercise #1 to solve some comparisons.\n\nNote that Python also has an is operator that may look identical to == (e.g., x == 2 looks equivalent to x is 2). Moreover, in some cases it also works the same way. However, there is a subtle difference: == checks whether values are identical, whereas is checks whether objects (that “hold” values) are identical. You need to understand classes and objects before you can appreciate this difference, so for now just keep in mind that you should only use == (I will explicitly mentioned when is is needed).\nYou can invert the logical value using not operator, as not True is False and not False is True. This means that A != B is the same as not A == B and, correspondingly, A == B is not A != B. To see how that works, consider both cases when A is indeed equal B and when it is not.\n\nIf A is equal B then A == B evaluates to True. The A != B is then False, so not A != B → not False → True.\nIf A is not equal B then A == B evaluates to False. The A != B is then True, so not A != B → not True → False.\n\n\nGo to exercise #2 to explore this inversion yourself.\n\nYou can also combine several comparisons using and and/or6 or operators. As in human language, and means that both parts must be true: True and True → True but True and False → False, False and True → False, and False and False → False. Same holds if you have more than two conditions/comparisons linked via and: All of them must be true. In case of or only one of the statements must be true, e.g. True or True → True, True or False → True, False or True → True, but False or False → False. Again, for more than two comparisons/conditions at least one of them should be true for the entire expression to be true.\n\nDo exercises #3 and #4.\n\nSubtle but important point: conditions are evaluated from left to right until the whole expression is resolved one way or another. This means that if the first expression in a and is False, the second one (the rest of them) is never evaluated. I.e., if first and second expressions both need to be True and you know that first expression already is false, the whole expression will be False in any case. This means that in the code below there will be no error, even though evaluating int(\"e123\") alone would raise a ValueError.\n\n2 * 2 == 5 and int(\"e123\") == 123\n\nFalse\n\n\nHowever, reverse the order, so that int(\"e123\") == 123 needs to be evaluated first and you get the error message\n\nint(\"e123\") == 123 and 2 * 2 == 4\n\n\n---------------------------------------------------------------------------\nValueError                                Traceback (most recent call last)\nCell In[2], line 1\n----&gt; 1 int(\"e123\") == 123 and 2 * 2 == 4\n\nValueError: invalid literal for int() with base 10: 'e123'\n\n\n\nSimilarly, if any expression in or is True, you do not need to check the rest.\n\n2 * 2 == 4 or int(\"e123\") == 123\n\nTrue\n\n\nHowever, if the first condition is False, we do need to continue (and stumble into an error):\n\n2 * 2 == 5 or int(\"e123\") == 123\n\n\n---------------------------------------------------------------------------\nValueError                                Traceback (most recent call last)\nCell In[4], line 1\n----&gt; 1 2 * 2 == 5 or int(\"e123\") == 123\n\nValueError: invalid literal for int() with base 10: 'e123'\n\n\n\n\nDo exercise #5.\n\nFinally, like in simple arithmetic, you can use brackets () to group conditions together. Thus a statement “I always eat chocolate but I eat spinach only when I am hungry” can be written as food == \"chocolate\" or (food == \"spinach\" and hungry). Here, the food == \"chocolate\" and food == \"spinach\" and hungry are evaluated independently, their values are substituted in their place and then the and condition is evaluated.\n\nDo exercise #6.\n\nFinal thought on comparisons: Do not hesitate to test them in Jupyter Notebook using various combinations of values or pause the program at the condition via a breakpoint and evaluate a comparison in Watch or Debug Console.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#indentation",
+    "href": "02-guess-the-number-single-round.html#indentation",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.9 Grouping statements via indentation",
+    "text": "2.9 Grouping statements via indentation\nLet us go back to a conditional if-statement. Take a look at following code example (and note an : at the end of the if some_condition_is_true:), in which statement #1 is executed only if some condition is true, whereas statement #2 is executed after that irrespective of the condition.\nif some_condition_is_true:\n    statement #1\nstatement #2 \nBoth statements #1 and #2 appear after the if-statement, so how does Python know that the first one is executed only if condition is true but the other one always runs? The answer is indentation: The 4 (four!) spaces that are automatically added whenever you press Tab in VS Code and removed whenever you press Shift+Tab. The indentation puts statement #1 inside the if-statement. Thus, indentation shows whether statements belong to the same group and must be executed one after another (same indentation level for if and statement #2) or are inside conditional statement, loop, function, class, etc. (statement #1). For more complex code that will have, for example, an if-statement inside an if-statement inside a loop, you will express this by adding more levels of indentation. E.g.\n# some statements outside of the loop (0 indentation)\nwhile game_is_not_over: # (0 indentation)\n    # statements inside of the loop \n    if key_pressed: # (indentation of 4)\n        # inside loop and if-statement \n        if key == \"Space\": # (indentation of 8)\n            # inside the loop, and if-statement, and another if-statement\n            jump() # (indentation of 12)\n        else: # (indentation of 4)\n            # inside the loop, and if-statement, and else part of another if-statement\n            stand() # (indentation of 12)\n    \n    # statements inside of the loop but outside of the outermost if-statement\n    print(key) # (indentation of 4)\n    \n# some statements outside of the loop (0 indentation)\nPay very close attention to the indentation as it determines which statements are executed together! A wrong indentation level is unfortunately a very common mistake.\n\nDo exercise #7.\n\nThe if and ifelse statements are evaluated until one of them turns out to be True. After that any following ifelse and else statements are simply ignored.\n\nDo exercise #8.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#checking-the-answer",
+    "href": "02-guess-the-number-single-round.html#checking-the-answer",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.10 Checking the answer",
+    "text": "2.10 Checking the answer\nNow you have all necessary tools to finish the first version of our game. Add a conditional statements to your code01.py, so that\n\nif the computer pick is smaller than player’s guess, it will print \"My number is lower!\"\nif the computer pick is larger than player’s guess, it will print \"My number is higher!\"\nif two numbers are identical, it will print \"Spot on!\"\n\nFirst, save a copy of your original code into code02.py and then add the comparison and printing.\n\nExtend your program with the comparison in code02.py\n\nTest that your code works. Again, use breakpoints if you need to better understand the control flow and check whether comparisons work the way you expect.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#using-libraries",
+    "href": "02-guess-the-number-single-round.html#using-libraries",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.11 Using libraries",
+    "text": "2.11 Using libraries\nOur game is “feature-complete”: computer picks a number, player makes a guess, computer responds appropriately. However, currently we are playing for both sides. Lets make computer pick a random number itself. For this we need to use randint(a, b) function. It is a part of any Python distribution, so you would have it even if you install a vanilla Python distribution instead of using one from PsychoPy. However, you cannot use it straightaway like you did with print() or input(). Type randint(1, 3) in your Jupyter Notebook and observe NameError: name ‘randint’ is not defined.\nThe reason for this is that Python has an awful lot of functions and loading them all at the same time would clog the memory with things you never intended to use. Instead, they are packaged into libraries, so that you can import only functions (or libraries) that you actually need for your program. You import them via an import statement that should go to the top of your file (but below the comment about the file content). There are several ways you can import libraries. First, you can import an entire library (such as random library that has function randint() that we need) and then use its functions as &lt;library&gt;.&lt;function&gt;. For randint this would be\nimport random\n\ncomputer_pick = random.randint(1, 5)\nI would suggest this as a preferred way of using libraries as it forces you to explicitly mention the name of the library when calling a function, i.e. random.randint() instead of just randint(). This may not look important with just one imported library but even in a modestly-sized project you will import many libraries, so figuring out which library the function belongs to will be tricky. Even more importantly, different libraries may have functions with the same name. In this case, the function you are using will come from the last library you imported. But you may not realize this and this is a sort of mistake that is really hard to track down. Thus, unless you have a very good reason to do otherwise, always import the entire library and use library. notation!\nAnother and less explicit option is to import only some functions and use them without the library. prefix. You can import more than one function by listing them all\nfrom random import randint, randrange\n\ncomputer_pick = randint(1, 5)\nYou can also rename a library or a function while importing it via as. In short, you should not do this as using a different name for a library or a function would make it harder for others (and even for future-you) to understand your code. However, there are some “standard” renaming patterns that are used universally and which you are likely to encounter.\n# this is a standard way to import these two libraries\nimport numpy as np\nimport pandas as pd\n\nnp.abs(-1)\n\n# you can rename individual functions as well, if you really have to (but, please, don't!)\nfrom random import randint as random_integer\n\ncomputer_pick = random_integer(1, 5)\nFinally, there is a very bad way to import functions from a library: from random import *. The asterisk means that you want to import all functions from the library and you want to call them by their names without random. prefix. Never, never, never7 do this! This fills your environment with functions that you may not be aware of, potentially overwriting some other functions, creating conflicts, etc. Never ever! I am showing you this only because you will, at some point, see a code that uses this approach and you might think that this is a good idea. It is a terrible idea! Import the library, not the functions, so you can explicitly show which library you are relying on when calling a function. Always remember the Zen of Python: “Explicit is better than implicit.”",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#picking-a-number-randomly",
+    "href": "02-guess-the-number-single-round.html#picking-a-number-randomly",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.12 Picking a number randomly",
+    "text": "2.12 Picking a number randomly\nNow that you know how to import a library, we can use randint() function. For this, save a copy of your previous code into code03.py. Import the library and use randint() to generate a random number between 1 and 10. Read the documentation on randint() to understand how to use it. Reading manuals is a necessary part of programming, so this is a good point to start practicing.\nOnce you implemented this in code03.py, run it several times to check that computer does pick different random values. Again, use breakpoints if you want to double-check what is going on.\n\nPut your code into code03.py.\n\nCongratulations, you just programmed your first computer game! Yes, it is very simple but it has key ingredients: a random decision by computer, user input, and feedback. Next time, you will learn about loops to allow for multiple attempts and will start writing functions to make your code modular and reliable. In the meantime, let us solidify your knowledge by programming yet another game!",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#one-armed-bandit-a-single-round-edition",
+    "href": "02-guess-the-number-single-round.html#one-armed-bandit-a-single-round-edition",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.13 One-armed bandit (a single round edition)",
+    "text": "2.13 One-armed bandit (a single round edition)\nYou know everything you need to program a simple version of an “one-armed bandit” game. Here is the game logic:\n\nImport random library, so you could use randint function\nGenerate three random integers (say, between 1 and 5) and store them in three variables slot1, slot2, and slot3.\nPrint out the numbers, use string formatting to make it look nice.\nIn addition,\n\nif all three values are the same, print \"Three of a kind!\".\nIf only two numbers match, print \"Pair!\".\nDo not print anything, if all numbers are different.\n\n\nDo not forget to document the new code04.py file and feel free to use breakpoints to debug it.\n\nPut your code into code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#submitting-for-the-seminar",
+    "href": "02-guess-the-number-single-round.html#submitting-for-the-seminar",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "2.14 Submitting for the seminar",
+    "text": "2.14 Submitting for the seminar\nFor the seminar, submit a zipped folder with exercise notebook and all four programs.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.html#footnotes",
+    "href": "02-guess-the-number-single-round.html#footnotes",
+    "title": "2  Guess the Number: a single round edition",
+    "section": "",
+    "text": "You can “Save as…” the previous code to avoid copy-pasting things by hand.↩︎\nI recommend using 01 instead of 1, as it will ensure consistent file sorting in your file manager↩︎\nOf course, we know it because we hard-coded it, but that won’t be the case when computer will generate it randomly, so let us plan for the future↩︎\nOr, at least, easier.↩︎\nThis is because you can convert any value to a logical one via bool() function that you learned about the last time and so any value is (converted to) either True or False.↩︎\npun intended↩︎\nDid I already say never? Never!↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Guess the Number: a single round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html",
+    "href": "03-guess-the-number-multi-round.html",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "",
+    "text": "3.1 Chapter concepts",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#chapter-concepts",
+    "href": "03-guess-the-number-multi-round.html#chapter-concepts",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "",
+    "text": "Repeating code using while loop.\nMaking in emergency exit from a loop.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#while-loop",
+    "href": "03-guess-the-number-multi-round.html#while-loop",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.2 While loop",
+    "text": "3.2 While loop\nIf you want to repeat something, you need to use loops. There are two types of loops: while loop, which is repeated while a condition is true, and for loop that iterates over items (we will use it later).\nThe basic structure of a while loop is\n# statements before the loop\n\nwhile &lt;condition&gt;:\n    # statements inside are executed\n    # repeatedly for as long as\n    # the condition is True\n    \n# statements after the loop\nThe &lt;condition&gt; here is any expression that is evaluated to be either True or False, just like in an if...elif...else conditional statement. Also, the same indentations rules determine which code is inside the loop and which outside.\n\nDo exercise #1.\n\nLet us use while loop to allow the player to keep guessing until they finally get it right. You can copy-paste the code you programmed during the last seminar or could redo it from scratch (I would strongly recommend you doing the latter!). The overall program structure should be the following\n# import random library so you can use randint function\n\n# generated a random number and store in number_picked variable\n# get player input, convert it to an integer, and store in guess variable\n\n# while players guess is not equal to the value the computer picked:\n    # print out \"my number is smaller\" or \"my number is larger\" using if-else statement\n    # get player input, convert it to an integer, and store in guess variable\n    \n# print \"Spot on!\" \n# (because if we got here that means guess is equal to the computer's pick)\n\nPut your code into code01.py.\n\nDo not forget to document the file and use breakpoints and step overs to explore the program flow.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#counting-attempts",
+    "href": "03-guess-the-number-multi-round.html#counting-attempts",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.3 Counting attempts",
+    "text": "3.3 Counting attempts\nNow let us add a variable that will count a total number of attempts by the player. For this, create a new variable (call it attempts or something similar) before the loop and initialize it 1 (because the first attempt is before the player enter the loop). Add 1 to it every time the player enters a guess. After the loop, expand the \"Spot on!\" message by adding information about the number of attempts. Use string formatting to make things look nice, e.g., \"Spot on, and you needed just 5 attempts!\". Check that the number of attempts your required matches the number of attempts reported by the program!\n\nPut your code into code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#break",
+    "href": "03-guess-the-number-multi-round.html#break",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.4 Breaking (and exiting)",
+    "text": "3.4 Breaking (and exiting)\nCode inside the while loop is executed repeatedly while the condition is True and, importantly, all of code inside is executed before the condition is evaluated again. However, sometimes you may need to abort sooner without executing the remaining code. For this, Python has a break statement that causes the program to exit the loop immediately without executing the rest of the code inside the loop, so that the program continues with the code after the loop.\n# this code runs before the loop\n\nwhile &lt;some_condition&gt;:\n  # this code runs on every iteration\n  \n    if &lt;some_other_condition&gt;:\n        break\n  \n  # this code runs on every iteration but not when you break out of the loop\n\n# this code runs after the loop\n\nDo exercise #2 to build your intuition.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#limiting-number-of-attempts-via-break",
+    "href": "03-guess-the-number-multi-round.html#limiting-number-of-attempts-via-break",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.5 Limiting number of attempts via break",
+    "text": "3.5 Limiting number of attempts via break\nLet’s put the player under some pressure! Decide on maximal number of attempts you allow and stores it as a CONSTANT. Pick an appropriate name (e.g. MAX_ATTEMPTS) and REMEMBER, ALL CAPITAL LETTERS for a constant name! Now, use break to quit the while loop, if the current attempt number is greater than MAX_ATTEMPTS. Think about when (within the code inside the loop) you should check this.\n\nPut your code into code03.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#correct-end-of-game-message",
+    "href": "03-guess-the-number-multi-round.html#correct-end-of-game-message",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.6 Correct end-of-game message",
+    "text": "3.6 Correct end-of-game message\nLet us update the final message. Currently it says “Spot on…” because we assumed that program exited the loop only if the player gave a correct answer. With limited attempts that is not necessarily the case. Now there are two reasons why it exited the while loop:\n\nThe player answered correctly\nThe player ran out of attempts.\n\nUse if-else conditional statement to print out an appropriate message. E.g., print \"Better luck next time!\", if the player lost (ran out of attempts).\n\nPut your code into code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#limiting-number-of-attempts-without-a-break",
+    "href": "03-guess-the-number-multi-round.html#limiting-number-of-attempts-without-a-break",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.7 Limiting number of attempts without a break",
+    "text": "3.7 Limiting number of attempts without a break\nAlthough it was my idea to add the break statement, you should use it sparingly. Without break there is a single place in the code that you need to check to understand when the program will exit the loop: the condition. However, if you add a break, you now have two places that need to be examined. And every additional break keeps adding to that. This does not mean that you should avoid them at all costs! You should use them, if this makes the code easier to understand. But always check if a modified condition could also do the trick.\nLet us try exactly that. Modify your code to work without the break statement. You need a more complicated condition for your while loop. so that it repeats while player’s guess is incorrect and the number of attempts is still less than the maximally allowed. Test that your code works both when you win and when you lose.\n\nPut your code into code05.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#show-remaining-attempts",
+    "href": "03-guess-the-number-multi-round.html#show-remaining-attempts",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.8 Show remaining attempts",
+    "text": "3.8 Show remaining attempts\nIt is all about the user interface! Modify the input prompt message to include a number of remaining attempts. E.g. \"Please enter the guess, you have X attempts remaining\".\n\nPut your code into code06.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#guess-the-number-repeat-game",
+    "href": "03-guess-the-number-multi-round.html#guess-the-number-repeat-game",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.9 Repeating the game",
+    "text": "3.9 Repeating the game\nLet us give an option for the player to play again. This means putting all the current code inside of another while loop (this is called nested loops) that is repeated for as long as the player wants to keep playing. The code should look as follows:\n# import random library so you can use randint function\n\n# define MAX_ATTEMPTS\n\n# define a variable called \"want_to_play\" and set to True\n# while the player still wants to play\n  \n  # your current working game code goes here\n  \n  # ask user whether via input function. E.g. \"Want to play again? Y/N\"\n  # want_to_play should be True if user input is equal to \"Y\" or \"y\"\n  \n# very final message, e.g. \"Thank you for playing the game!\"\nPay extra attention to indentations to group the code properly!\n\nPut your code into code07.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#you-do-not-need-a-comparison-if-you-already-have-the-value",
+    "href": "03-guess-the-number-multi-round.html#you-do-not-need-a-comparison-if-you-already-have-the-value",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.10 You do not need a comparison, if you already have the value",
+    "text": "3.10 You do not need a comparison, if you already have the value\nIn your updated code, you have want_to_play variable that is either True or False. It is used in the loop that repeats while its value is True. Sometimes, people write want_to_play == True to express that. While it is technically correct and will certainly work correctly, it is also redundant. Since want_to_play can only be True or False this comparison turns into True == True (which is of course True) or False == True (which is False). So comparing either value to True produces exactly the same value. Thus, you can just write while want_to_play: and use the logical value directly.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#best-score",
+    "href": "03-guess-the-number-multi-round.html#best-score",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.11 Best score",
+    "text": "3.11 Best score\nA “proper” game typically keeps the track of players’ performance. Let us record a fewest number of attempts that the player needed to guess the number. For this, create a new variable fewest_attempts and set it to MAX_ATTEMPTS (this is as bad as the player can be). Think, where do you need to create it. You should update it after each game round. Add the information about “Best so far” into the round-over message.\n\nPut your code into code08.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#counting-game-rounds",
+    "href": "03-guess-the-number-multi-round.html#counting-game-rounds",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.12 Counting game rounds",
+    "text": "3.12 Counting game rounds\nLet us count how many times the player played the game. The idea and implementation is the same as with counting the attempts. Create a new variable, initialize it to 0, increment by 1 whenever a new round starts. Include the total number of games played into the very final message, e.g. “Thank you for playing the game X times!”\n\nPut your code into code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#multi-round-one-armed-bandit",
+    "href": "03-guess-the-number-multi-round.html#multi-round-one-armed-bandit",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.13 Multi round one-armed bandit",
+    "text": "3.13 Multi round one-armed bandit\nAt the end of the previous chapter, you have programmed a single round one-armed bandit game. You already know everything you need to implement a multiple round version and its structure is similar (but simpler) than of the multi-round guess-the-number game that you just implemented.\nLet player start with an initial pot of money, say 10 coins. Playing each round costs 1 coin, getting three of a kind pays off 10 coins, while getting a pair pays off 2 coins (you can change payoffs as you see fit). On each round:\n\nTake one coin from the pot (price for playing the game).\nRoll the dice (you already implemented that).\nTell the player about the outcome (you implemented that as well).\nAdd coins to the pot, if necessary.\nPrint out the amount of coins left in pot.\nAsk the player where they want to continue.\n\nSpecial case, once the player runs out of coins, the game is definitely over.\n\nPut your code into code10.py.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.html#wrap-up",
+    "href": "03-guess-the-number-multi-round.html#wrap-up",
+    "title": "3  Guess the Number: a multi round edition",
+    "section": "3.14 Wrap up",
+    "text": "3.14 Wrap up\nMost excellent, you now have two proper working computer games with game rounds, limited attempts, best score, and what not! Zip the folder and submit.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Guess the Number: a multi round edition</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html",
+    "href": "04-guess-the-number-ai.html",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "",
+    "text": "4.1 Chapter concepts.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#chapter-concepts.",
+    "href": "04-guess-the-number-ai.html#chapter-concepts.",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "",
+    "text": "Writing your own functions.\nUnderstanding variable scopes.\nAdopting standard ways to document your code.\nUsing your own libraries.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#guess-the-number-players-response",
+    "href": "04-guess-the-number-ai.html#guess-the-number-players-response",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.2 Player’s response",
+    "text": "4.2 Player’s response\nLet us warm up by writing a code that will allow a player to respond to computer’s guess. Recall that there are just three options: your number is greater, smaller, or equal to a computer’s guess. I would suggest using &gt;, &lt;, and = symbols to communicate this. You need to write the code that will prompt a player for their response until they enter one of these symbols. I.e., the prompt for input should be repeated if they enter anything else. Thus, you definitely need to use the input([prompt]) and a while loop. Think of a useful and informative prompt message for this. Test that it works. Using breakpoints might be very useful here.\n\nPut your code into code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#function",
+    "href": "04-guess-the-number-ai.html#function",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.3 Functions",
+    "text": "4.3 Functions\nYou already now how to use functions, now it is turn for you to learn more about why you should care. The purpose of a function is to isolate certain code that performs a single computation making it testable and reusable. Let us go through the last sentence bit by bit using examples.\n\n4.3.1 Function performs a single computation\nI already told you that reading code is easy because every action has to be spelled-out for computers in a simple and clear way. However, a lot of simple things can be very overwhelming and confusing. Think about the final code for the previous seminar: we had two loops with conditional statements nested inside. Add a few more of those and you have so many branches to trace, you never be quite sure what will happen. This is because our cognition and working memory, which you use to trace all branches, are limited to just about four items3.\nThus, a function should perform one computation / action that is conceptually clear and those purpose should be understood directly from its name or, at most, from a single sentence that describes it4. The name of a function should typically be a verb because function is about performing an action. If you need more than once sentence to explain what function does, you should consider splitting the code further. This does not mean that entire description / documentation must fit into a single sentence. The full description can be lengthy, particularly if underlying computation is complex and there are many parameters to consider. However, these are optional details that tell the reader how the function is doing its job or how its behavior can be modified. Still, they should be able to understand what the job is just from the name or from a single sentence. I am repeating myself and stressing this so much because conceptually simple single-job functions are a foundation of a clear robust reusable code. And future-you will be very grateful that it has to work with easy-to-understand isolated reliable code you wrote.\n\n\n4.3.2 Function isolates code from the rest of the program\nIsolation means that your code runs in a separate scope where the only things that exist are function arguments (limited number of values you pass to it from outside with fixed meaning) and local variables that you define inside the function. You have no access to variables defined in the outside script5 or to variables defined inside of other functions. Conversely, neither global script nor other functions have access to variables and values that you use inside. This means that you only need to study the code inside the function to understand how it works. Accordingly, when you write the code it should be independent of any global context the function can be used in. The isolation is both practical (no run-time access to variables from outside means fewer chances that things go terribly wrong) and conceptual (no further context is required to understand the code).\n\n\n4.3.3 Function makes code easier to test\nYou can build even moderately complex programs only if you can be certain what individual chunks of code are doing under every possible condition. Do they produce the correct results? Do the fail clearly and raise a correct error, if the inputs are wrong? Do they use defaults when required? However, testing all chunks together means running extreme number of runs as you need to test all possible combinations of conditions for one chunk given all possible conditions for other chunk, etc. Functions make your life much easier. Because they have a single point of entry, fixed number of parameters, a single return value, and are isolated (see above), you can test them one at a time independent of other functions and the rest of the code. This is called unit testing and it is a heavy use of automatic unit testing6 that ensures reliable code for absolute majority of programs and apps that you use7.\n\n\n4.3.4 Function makes code reusable\nSometimes, this is given as a primary reason to use functions. Turning code into a function means that you can call the function instead of copy-pasting the code. The latter approach is a terrible idea as it means that you have to maintain the same code at many places and you might not be even sure in just how many. This is a problem even if a code is extremely simple. Here, we define a standard way to compute an initial by taking the first symbol from a string (you will learn about indexing and slicing later). The code is as simple as it gets.\n...\ninitial = \"test\"[0]\n...\ninitial_for_file = filename[0]\n...\ninitial_for_website = first_name[0]\n...\nImagine that you decided to change it and use first two symbols. Again, the computation is not complicated, use just replace [0] with [:2]. But you have to do it for all the code that does this computation. And you cannot use Replace All option because sometimes you might use the first element for some other purposes. And when you edit the code, you are bound to forget about some locations (I do it all the time) making things even less consistent and more confusing. Turning code into a function means you need to modify and test at just one location. Here is the original code implemented via a function.\ndef generate_initial(full_string):\n    \"\"\"Generate an initial using first symbol.\n    \n    Parameters\n    ----------\n    full_string : str\n    \n    Returns\n    ----------\n    str\n        single symbol\n    \"\"\"\n    return full_string[0]\n\n...\ninitial = generate_initial(\"test\")\n...\ninitial_for_file = generate_initial(filename)\n...\ninitial_for_website = generate_initial(first_name)\n...\nand here is the “alternative” initial computation. Note that the code that uses the function stays the same\ndef generate_initial(full_string):\n    \"\"\"Generate an initial using first TWO symbols.\n    \n    Parameters\n    ----------\n    full_string : str\n    \n    Returns\n    ----------\n    str\n        two symbols long\n    \"\"\"\n    return full_string[:2]\n\n...\ninitial = generate_initial(\"test\")\n...\ninitial_for_file = generate_initial(filename)\n...\ninitial_for_website = generate_initial(first_name)\n...\nThus, turning the code into a function is particularly useful when the reused code is complex but it pays off even if computation is as simple and trivial as in example above. With a function you have a single code chunk to worry about and you can be sure that the same computation is performed whenever you call the function (and that these are not several copies of the code that might or might not be identical).\nNote that I put reusable code as the last and the least reason to use functions. This is because the other three reasons are far more important. Having a conceptually clear isolated and testable code is advantageous even if you call this function only once. It still makes code easier to understand and to test and helps you to reduce its complexity by replacing chunks of code with its meaning. Take a look at the example below. The first code takes the first symbol but this action (taking the first symbol) does not mean anything by itself, it is just a mechanical computation. It is only the original context initial_for_file = filename[0] or additional comments that give it its meaning. In contrast, calling a function called compute_initial tells you what is happening, as it disambiguates the purpose. I suspect that future-you is very pro-disambiguation and anti-confusion.\nif filename[0] == \"A\":\n    ...\n    \nif compute_initial(filename) == \"A\":\n    ...",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#functions-in-python",
+    "href": "04-guess-the-number-ai.html#functions-in-python",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.4 Functions in Python",
+    "text": "4.4 Functions in Python\n\n4.4.1 Defining a function in Python\nA function in Python looks like this (note the indentation and : at the end of the first line)\ndef &lt;function name&gt;(param1, param2, ...):\n    some internal computation\n    if somecondition:\n        return some value\n    return some other value\nThe parameters are optional, so is the return value. Thus, the minimal function would be\ndef minimal_function():\n    pass # pass means \"do nothing\"\nYou must define your function (once!) before calling it (one or more times). Thus, you should create functions before the code that uses it.\ndef do_something():\n    \"\"\"\n    This is a function called \"do_something\". It actually does nothing.\n    It requires no input and returns no value.\n    \"\"\"\n    return\n    \ndef another_function():\n    ...\n    # We call it in another function.\n    do_something()\n    ...\n\n# This is a function call (we use this function)\ndo_something()\n\n# And we use it again!\ndo_something()\n\n# And again but via another_function call\nanother_function()\n\nDo exercise #1.\n\nYou must also keep in mind that redefining a function (or defining a technically different function that has the same name) overwrites the original definition, so that only the latest version of it is retained and can be used.\n\nDo exercise #2.\n\nAlthough example in the exercise makes the problem easy to spot, in a large code that spans multiple files and uses various libraries, solving the same problem may not be so straightforward!\n\n\n4.4.2 Function arguments\nSome functions may not need arguments (also called parameters), as they perform a fixed action:\ndef ping():\n    \"\"\"\n    Machine that goes \"ping!\"\n    \"\"\"\n    print(\"ping!\")\nHowever, you may need to pass information to the function via arguments in order to influence how the function performs its action. In Python, you simply list arguments within the round brackets after the function name (there are more bells and whistles but we will keep it simple for now). For example, we could write a function that computes and prints person’s age given two parameters 1) their birth year, 2) current year:\ndef print_age(birth_year, current_year):\n    \"\"\"\n    Print age given birth year and current year.\n    \n    Parameters\n    ----------\n    birth_year : int\n    current_year : int\n    \"\"\"\n    print(current_year - birth_year)\nIt is a very good idea to give meaningful names to functions, parameters, and variables. The following code will produce exactly the same result but understanding why and what for it is doing what it is doing would be much harder (so always use meaningful names!):\ndef x(a, b):\n    print(b - a)\nWhen calling a function, you must pass the correct number of parameters and pass them in a correct order, another reason for a function arguments to have meaningful names8.\n\nDo exercise #3.\n\nWhen you call a function, values you pass to the function are assigned to the parameters and they are used as local variables (more on local bit later). However, it does not matter how you came up with this values, whether they were in a variable, hard-coded, or returned by another function. If you are using numeric, logical, or string values (immutable types), you can assume that any link to the original variable or function that produced it is gone (we’ll deal with mutable types, like lists, later). Thus, when writing a function or reading its code, you just assume that it has been set to some value during the call and you can ignore the context in which this call was made\n# hardcoded\nprint_age(1976, 2020)\n\n# using values from variables\ni_was_born = 1976\ntoday_is = 2023\nprint_age(i_was_born, today_is)\n\n# using value from a function\ndef get_current_year():\n    return 2023\n\nprint_age(1976, get_current_year())\n\n\n4.4.3 Functions’ returned value (output)\nYour function may perform an action without returning any value to the caller (this is what out print_age function was doing). However, you may need to return the value instead. For example, to make things more general, we might want write a new function called compute_age that returns the age instead of printing it (we can always print it ourselves).\ndef compute_age(birth_year, current_year):\n    \"\"\"\n    Computes age given birth year and current year.\n\n    Parameters\n    ----------\n    birth_year : int\n    current_year : int\n    \n    Returns\n    ----------\n    int\n        age\n    \"\"\"\n    return current_year - birth_year\nNote that even if a function returns the value, it is retained only if it is actually used (stored in a variable, used as a value, etc.). Thus, just calling it will not by itself store the returned value anywhere!\n\nDo exercise #4.\n\n\n\n4.4.4 Scopes (for immutable values)\nAs we have discussed above, turning code into a function isolates it, so makes it run in it own scope. In Python, each variable exists in a scope it has been defined in. If it was defined in the global script, it exists in that global scope as a global variable. However, it is not accessible (at least not without special effort via a global operator) from within a function. Conversely, function’s parameters and any variables defined inside a function, exists and are accessible only inside that function. It is fully invisible for the outside world and cannot be accessed from a global script or from another function. Conversely, any changes you make to the function parameter or local variable have no effect on the outside world.\nThe purpose of scopes is to isolate individual code segments from each other, so that modifying variables within one scope has no effect on all other scopes. This means that when writing or debugging the code, you do not need to worry about code in other scopes and concentrate only on the code you working on. Because scopes are isolated, they may have identically named variables that, however, have no relationship to each other as they exists in their own parallel universes9. Thus, if you want to know which value a variable has, you must look only within the scope and ignore all other scopes (even if the names match!).\n# this is variable `x` in the global scope\nx  = 5 \n\ndef f1():\n  # This is variable `x` in the scope of function f1\n  # It has the same name as the global variable but\n  # has no relation to it: many people are called Sasha \n  # but they are still different people. Whatever\n  # happens to `x` in f1, stays in f1's scope.\n  x = 3\n  \n  \ndef f2(x):\n  # This is parameter `x` in the scope of function f2.\n  # Again, no relation to other global or local variables.\n  # It is a completely separate object, it just happens to \n  # have the same name (again, just namesakes)\n  print(x)\n\nDo exercise #5.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#players-response-as-a-function",
+    "href": "04-guess-the-number-ai.html#players-response-as-a-function",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.5 Player’s response as a function",
+    "text": "4.5 Player’s response as a function\nLet us put all that theory about functions into practice. Use the code that you created to acquire player’s response and turn it into function. It should have no parameters (for now) and should return player’s response. I suggest that you call it input_response (or something along these lines). Test that the code works by calling this function for the main script.\n\nPut your code into code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#debugging-a-function",
+    "href": "04-guess-the-number-ai.html#debugging-a-function",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.6 Debugging a function",
+    "text": "4.6 Debugging a function\nNow that you have your first function, you can make sense of three step over/step in/step out buttons that the debugger offers you. Copy-paste the following code in a separate file (call it test01.py, for example).\ndef f1(x, y):\n  return x / y\n  \ndef f2(x, y):\n  x = x + 5\n  y = y * 2\n  return f1(x, y)\n  \nz = f2(4, 2)\nprint(z)\nFirst, put a break point on the line in the main script that calls function f2(). Run the debugger via F5 and the program will pause at that line. If you now press F10 (step over), the program will go to the next line print(z). However, if you are to press F11 (step into) instead, the program will step into the function and go to x = x + 5 line. When inside the function, you have the same two choices we just looked at but also, you can press Shift+F11 to step out of the function. Here, the program will run all the code until you reach the next line outside of the function (you should end up at print(z) again). Experiment with putting breakpoints at various lines and stepping over/in/out to get a hang of these useful debugging tools.\nNow, put the breakpoint inside of f1() function and run the code via F5. Take a look at the left pane, you will see a Call Stack tab. While yellow highlighted line in the editor shows you where you currently are (should be inside the f1() function), the Call Stack shows you how did you get where. In this case it should show:\n\n\n\nf1\ntest01.py\n2:1\n\n\nf2\ntest01.py\n7:1\n\n\n&lt;module&gt;\ntest01.py\n9:1\n\n\n\nThe calls are stacked from bottom to top, so this means that a function was called in the main module in line 9, you ended up in function f2 in line 7, and then in function f1 and in line 2. Experiment with stepping in and out of functions while keeping an eye on this. You might not need this information frequently but could be useful in our later projects with multiple nested function calls.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#numpy-docstring",
+    "href": "04-guess-the-number-ai.html#numpy-docstring",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.7 Documenting your function",
+    "text": "4.7 Documenting your function\nWriting a function is only half the job. You need to document it! Remember, this is a good habit that makes your code easy to use and reuse. There are different ways to document the code but we will use NumPy docstring convention. Here is an example of such documented function\ndef generate_initial(full_string):\n    \"\"\"Generate an initial using first symbol.\n    \n    Parameters\n    ----------\n    full_string : str\n    \n    Returns\n    ----------\n    str\n        single symbol\n    \"\"\"\n    return full_string[0]\nTake the look at the manual and document the input_response function. You will not need the Parameters section as it currently accepts no inputs.\n\nUpdate your code in code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#using-prompt",
+    "href": "04-guess-the-number-ai.html#using-prompt",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.8 Using prompt",
+    "text": "4.8 Using prompt\nIn the future, we will be asking about a specific number that is a current guess by the computer, thus we cannot use a fixed prompt message. Modify the input_response function by adding a guess parameter. Then, modify the prompt that you used for the input() to include the value in that parameter. Update functions’ documentation. Test it by calling with different values for the guess parameter and seeing a different prompt for response.\n\nPut your code into code03.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#splitting-interval-in-the-middle",
+    "href": "04-guess-the-number-ai.html#splitting-interval-in-the-middle",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.9 Splitting interval in the middle",
+    "text": "4.9 Splitting interval in the middle\nLet us practice writing functions a bit more. Recall that the computer should use the middle of the interval as a guess. Create a function (let us call it split_interval() or something like that) that takes two parameters — lower_limit and upper_limit — and returns an integer that is closest to the middle of the interval. The only tricky part is how you convert a potentially float number (e.g, when you are trying to find it for the interval 1..10) to an integer. You can use function int() for that. However, read the documentation carefully, as it does not perform a proper rounding (what does it do? read the docs!). Thus, you should round() the number to the closest integer before converting it.\nWrite a function, document it, and test it by checking that numbers are correct.\n\nPut you split_interval() function and the testing code into code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#single-round",
+    "href": "04-guess-the-number-ai.html#single-round",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.10 Single round",
+    "text": "4.10 Single round\nYou have both functions that you need, so let us write the code to initialize the game and play a single round. The initialization boils down to creating two variables that correspond to the lower and upper limits of the game range (we used 1 to 10 so far, but you can always change that). Next, the computer should generate a guess (you have your split_interval() function for that) and ask the player about the guess (that is the input_response() function). Once you have the response (stored in a separate variable, think of the name yourself), update either upper or lower limit using an if..elif..else statement based on player’s response (if the player said that their number is higher, that means the new interval is from guess to upper_limit, and vice versa for when it is lower). Print out a joyous message, if computer’s guess was correct.\n\nPut both functions and the script code into code05.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#multiple-rounds",
+    "href": "04-guess-the-number-ai.html#multiple-rounds",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.11 Multiple rounds",
+    "text": "4.11 Multiple rounds\nExtend the game, so that the computer keeps guessing until it finally wins. You already know how to use the while loop, just think how you can use participant’s response as a loop condition variable. Also, think about the initial value of that variable and how to use it so you call input_response() only at one location.\n\nPut the updated code into code06.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#playing-again",
+    "href": "04-guess-the-number-ai.html#playing-again",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.12 Playing again",
+    "text": "4.12 Playing again\nModify the code, so that you can play this game several times. You already know how to do this and the only thing you need to consider is where exactly should you perform initialization before each game. As you already implemented that for the last game, you might be tempted to look how you did it or, even, copy-paste the code. However, I would recommend writing it from scratch. Remember, your aim is not to write a program but to learn how to do this and, therefore, the journey is more important than a destination.\n\nPut the updated code into code07.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#best-score",
+    "href": "04-guess-the-number-ai.html#best-score",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.13 Best score",
+    "text": "4.13 Best score\nAdd the code to count the number of attempts that the computer required in each round and report the best score (fewest number of attempts) after the game is over. You will need one variable to count the number of attempts and one to keep the best score. Again, try writing it without looking at your previous game.\n\nPut the updated code into code08.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#using-you-own-libraries",
+    "href": "04-guess-the-number-ai.html#using-you-own-libraries",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.14 Using you own libraries",
+    "text": "4.14 Using you own libraries\nYou already know how to use existing libraries but you can also create and use your own. Take the two functions that you developed and put them into a new file called utils.py (do not forget to put a multiline comment at the top of the file to remind you what is inside!) . Copy the remaining code (the global script) into code09.py. It will not work in its current state as it won’t find the two functions (try it to see the error message), so you need to import from your own utils module. Importing works exactly the same way as for other libraries. Note that even though your file is utils.py, the module name is utils (without the extension).\n\nPut function into utils.py, the remaining code into code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#keep-imports-tidy",
+    "href": "04-guess-the-number-ai.html#keep-imports-tidy",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.15 Ordnung muss sein!",
+    "text": "4.15 Ordnung muss sein!\nSo far, you only imported one library at most. However, as Python is highly modular, it is very common to have many imports in a single file. There are several rules that make it easier to track the imports. When you import libraries, all import statements should be at the top of your file and you should avoid putting them in random order. The recommended order is 1) system libraries, like os or random; 2) third-party libraries, like ]psychopy]{.filename}; 3) your project modules. And, within each section you should put the libraries alphabetically, so\nimport os\nimport random\nThis may not look particularly useful for our simple code but as your projects will grow, you will need to include more and more libraries. Keeping them in that order makes it easy to understand which libraries you use and which are non-standard. Alphabetic order means that you can quickly check whether a library is included, as you can quickly find the location where its import statement should appear.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#putting-video-into-videogames",
+    "href": "04-guess-the-number-ai.html#putting-video-into-videogames",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "4.16 Putting video into videogames",
+    "text": "4.16 Putting video into videogames\nSubmit your files and be ready for more excitement as we are moving onto “proper” videogames with PsychoPy.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.html#footnotes",
+    "href": "04-guess-the-number-ai.html#footnotes",
+    "title": "4  Guess the Number: AI takes a turn",
+    "section": "",
+    "text": "This is the last time, I promise!↩︎\nYou should imagine me as Dora the Explorer staring at you while you think.↩︎\nThe official magic number is 7±2 but reading the original paper tells you that this is more like four for most of us↩︎\nThis is similar to scientific writing, where a single paragraph conveys a single idea. For me, it helps to first write the idea of the paragraph in a single sentence before writing the paragraph itself. If one sentence is not enough, I need to split the text into more paragraphs.↩︎\nThis is not strictly speaking true but that will concern us only once we get to so-called “mutable” objects like lists or dictionaries.↩︎\nIt is normal to have more code devoted to testing than to the actual program.↩︎\nYou still need tests for the integrated system but testing individual functions is a clear prerequisite.↩︎\nThis is also not strictly true but you will have to wait until you learn about named parameters and default values↩︎\nIt is like two persons with identical names, still different people.↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Guess the Number: AI takes a turn</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html",
+    "href": "05-psychopy.html",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "",
+    "text": "5.1 Chapter concepts",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#chapter-concepts",
+    "href": "05-psychopy.html#chapter-concepts",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "",
+    "text": "Understanding how to use classes and objects.\nUsing named parameters in functions.\nUnderstanding PsychoPy units system.\nUsing basic Psycho visual stimuli and handling user inputs.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#minimal-psychopy",
+    "href": "05-psychopy.html#minimal-psychopy",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.2 Minimal PsychoPy code",
+    "text": "5.2 Minimal PsychoPy code\nCopy-paste the following code into code01.py file (you did remember to create a new folder for the chapter?):\n\"\"\"\nA minimal PsychoPy code.\n\"\"\"\n\n# this imports two modules from psychopy\n# visual has all the visual stimuli, including the Window class\n# that we need to create a program window\n# event has function for working with mouse and keyboard\nfrom psychopy import visual, event\n\n# creating a 800 x 600 window\nwin = visual.Window(size=(800, 600))\n\n# waiting for any key press\nevent.waitKeys()\n\n# closing the window\nwin.close()\nRun it to check that PsychoPy work. If you get an error saying that psychopy library is not found, check the active Python interpreter. You should get a gray window with PsychoPy title. Press any key (click on the window, if you switched to another one, so that it registers a key press) and it should close. Not very exciting but does show that everything works as it should.\n\nPut the code into code01.py.\n\nThe code is simple but packs quite a few novel bits. First line is easy, we simply import visual and event modules from psychopy library (a library can be itself organized into sublibraries to make things even more modular). Then, we create an object win using a class Window with custom size. Third line uses function waitKeys() from event module to wait for a key press. The last one closes the window by calling its close method. You should have little trouble with lines #1 and #3 but you need to learn about object-oriented programming to understand #2 and #4.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#classes-and-objects",
+    "href": "05-psychopy.html#classes-and-objects",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.3 Classes and objects",
+    "text": "5.3 Classes and objects\nThe PsychoPy library is a collection of classes that you use to create objects, an approach called object-oriented programming. The core idea is in the name: Instead of keeping variables (data) separate from functions (actions), you combine them in an object that has attributes1 (its own variables) and methods (its own functions). This approach utilizes our natural tendency to perceive the world as a collection of interacting objects.\nFirst, you need to understand an important distinction between classes and objects. A class is a “blueprint” that describes properties and behavior of all objects of that class. This “blueprint” is used to create an instance of that class, which is called an object. For example, Homo sapiens is a class that describes species that have certain properties, such as height, and can do certain things, such as running. However, Homo sapiens as a class has only a concept of height but no specific height itself. E.g., you cannot ask “What is height of Homo sapiens?” only what is an average (mean, median, etc.) height of individuals of that class. Similarly, you cannot say “Run, Homo sapiens! Run!” as abstract concepts have trouble performing real actions like that. Instead, it is Alexander Pastukhov who is an instance of Homo sapiens class with a specific (average) height and a specific (below average) ability to run. Other instances of Homo sapiens (other people) have different height and a different (typically better) ability to run. Thus, a class describes all common properties and methods that all instances of the class (all objects) will have. But an individual object will behave differently because of different values of their properties. This means that whenever you meet a Homo sapien, you could be sure that they have height per se but will need to look at an individual instance to figure what height they have.\nWindow is a class that describes properties that a PsychoPy window must have and actions it can perform (you can see the complete list in the manual). To create an object, we use its class definition and store the result in a variable. In the code above we call Window class2 while passing custom parameters to it (size=(800, 600)) and store an object that it returns in variable win.\nAttributes are, essentially, variables that belong to the class and, therefore, variables that each object will possess. For example, a Window class has size attribute that determines its on-screen size in pixels. It also has (background) color, an attribute that determines whether it should be shown in full screen mode, etc. Thus, a win object will have all these attributes and they will have specific values.\nTo understand both properties and class/object distinction better, put a breakpoint on the third line of code (event.waitKeys()) and fire up the debugger via F5. Once the window is created, the execution will pause and you will find a win object in Variables/Locals. Click on it and it will expand to show all attributes and its values, including size (check that it is [800, 600]). Note that you will not see Window itself in the same list. This is because it is a class, an abstract concept, whereas as win is its instance and object of that class.\nMethods, such as Window.close() are, essentially, functions that belong to the class/object and perform certain actions on the object. For example, method close() closes the window, flip() updates it after we finished drawing in it, etc. What is important is to remember is that each method will act only on the object it belongs to and not on other instances of the same class. This means that you can create two windows (win1 and win2) and calling win1.close() will close the first but not the second window (try this out!). Same goes for attributes, changing them in one object will not affect any other objects of the same class, just like changing a value in one variable will not affect the other ones.\nAlthough we barely scratched the surface of object-oriented programming, it will be enough for us to be able to use classes defined for us in PsychoPy library.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#arguments-by-position-or-name",
+    "href": "05-psychopy.html#arguments-by-position-or-name",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.4 Function parameters: default values, passing by position or by name",
+    "text": "5.4 Function parameters: default values, passing by position or by name\nThere are a few more curious bits in the visual.Window(size=(800, 600)) call above that we need to discuss. These curiosities are related to functions (and, therefore, methods that are functions that belong to a class) not classes per se. First, constructor method of the Window class has a lot of arguments (when we construct an object, we call a constructor method of the class, which is why we are talking about functions). And yet, we only passed one of them. This is because you can specify default values for individual parameters. In this case, if a parameter is omitted, a default value is used instead\n\ndef divide(x1, x2=2):\n    \"\"\"\n    Divides numbers, uses 2 as a second value if a second term is omitted.\n    \n    Parameters\n    ----------\n    x1 : float\n    x2 : float, default=2\n    \n    Returns\n    ----------\n    number\n    \"\"\"\n    return x1 / x2\n\nprint(divide(2)) # we pass only value for x1 and the default value is used for x2\nprint(divide(2, 4))\n\n1.0\n0.5\n\n\nIf you look at documentation, you will see that for the Window class constructor all parameters have a default value. This is a part of PsychoPy’s philosophy of combining rich customization (just look at the sheer number of parameters!) with simplicity of use through sensible defaults (specify nothing and the window will still work).\nSecond, we did not just pass the value but specified which parameter this value is for via size=(800, 600). This notation is called keyword arguments. The advantage is in making it more explicit which parameter you are passing a value through. Plus, it allows you to put parameters any order, if that is more relevant given the context3. If you do not use names, the values are assigned to individual parameters based on their position (a.k.a. positional parameters). You can even mix the two, but positional parameters must come first, see documentation if you want to know more.\n\n# using positional parameters\nprint(divide(2, 4))\n\n0.5\n\n\n\n# using keyword arguments\nprint(divide(x2=4, x1=2))\n\n0.5\n\n\n\n# mixing positional and keyword arguments\nprint(divide(2, x2=4))\n\n0.5\n\n\n\nprint(divide(2, x1=4))\n\n\n---------------------------------------------------------------------------\nTypeError                                 Traceback (most recent call last)\nCell In[5], line 1\n----&gt; 1 print(divide(2, x1=4))\n\nTypeError: divide() got multiple values for argument 'x1'",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#adding-main-loop",
+    "href": "05-psychopy.html#adding-main-loop",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.5 Adding main loop",
+    "text": "5.5 Adding main loop\nCurrently, not much is happening in our program. One thing we need to add is a loop in which we can repeatedly draw in a window (and update it via its flip() method), check user input, and perform any other necessary actions.\nFirst, let us add the loop and handling of user inputs (the fun drawing part will be next). The loop goes between opening and closing the window:\nimporting libraries\nopening the window\n\n--&gt; our main loop &lt;--\n\nclosing the window\nThe loop should be repeated until the user presses an escape key and, therefore, you will need a variable that signals this. My approach is to create a variable gameover initializing it to False and repeat the loop as long as the game not over. Then, in the loop, use function event.getKeys() to check whether escape button was pressed (for this, you need to pass keyList=['escape']). The function returns a list of keys, if any of them were pressed in the meantime or an empty list, if no keys from the keyList were pressed. Store that returned value in a temporary variable (I tend to call it keys). You will learn about lists only in the next chapter, so for now use a ready-made: len(keys) &gt; 0 is a comparison that is True if list is not empty. If the list is indeed not empty, that means that the user pressed escape (as that is the only key that we specified in the function call) and the game should be over. Think how can you do it without an if statement, computing the logical value directly?\n\nPut your code into code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#adding-text-message",
+    "href": "05-psychopy.html#adding-text-message",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.6 Adding text message",
+    "text": "5.6 Adding text message\nAlthough we are now running a nice game loop, we still have only a boring gray window to look at. Let us create a text stimulus, which would say “Press escape to exit” and display it during the loop. For this we will use visual.TextStim class from PsychoPy library.\nFirst, you need to create the press_escape_text object (instance of the TextStim) before the main loop. There are quite a few parameters that you can play with but minimally, you need to pass the window the text should be displayed in (our win variable) and the actual text you want to display (text=\"Press escape to exit\"). For all other settings PsychoPy will use its defaults (default font family, color and size, placed right at the windows’ center).\npress_escape_text = visual.TextStim(win, \"Press escape to exit\")\nTo show the visuals in PsychoPy, you first draw each element by calling its draw() method and then update the window by flipping4 it. Note that you call flip() only once after all stimuli are drawn. I typically organize this code into a separate chunk and prepend it with a comment line # drawing stimuli.\nThe # drawing stimuli chunk goes inside the main loop either before or after the keyboard check5. Organize the latter also as a separate code chunk with its own brief comment.\n\nPut your code into code03.py.\n\nNow, you should have a nice, although static, message positioned at the window’s center that tells you how you can exit the game. Check out the manual page for visual.TextStim and try changing it by passing additional parameters to the class call. For example you can change its color, whether text is bold and/or italic, how it is aligned, etc. However, if you want to change where the text is displayed, read on below.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#adding-a-square-and-placing-it-not-at-the-center-of-the-window",
+    "href": "05-psychopy.html#adding-a-square-and-placing-it-not-at-the-center-of-the-window",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.7 Adding a square and placing it not at the center of the window",
+    "text": "5.7 Adding a square and placing it not at the center of the window\nNow, let us figure out how create and move visuals to an arbitrary location on the screen. In principle, this is very straightforward as every visual stimulus (including TextStim we just used) has pos property that specifies (you guessed it!) its position within a window. However, to make your life easier, PsychoPy first complicates it by having five (5!) different position units systems.\nBefore we start exploring the units, let us create a simple white square. The visual class we need is visual.Rect. Just like the TextStim above, it requires win variable (so it knows which window it belongs to), width (defaults to 0.5 of those mysterious units), height (also defaults to 0.5), pos (defaults to (0,0)), lineColor (defaults to white) and fillColor (defaults to None). Thus, to get a “standard” white outline square with size of (0.5, 0.5) units at (0, 0) location you only need pass the win variable: white_square = visual.Rect(win). However, on some computers a curious bug prevents PsychoPy from drawing the outline correctly. If you end up staring at an empty screen6, add fillColor=\"white\" to the call and you should see a filled white square.\nYou draw the square just like you drew the text stimulus, via its draw() method (and, again, you first draw all the stimuli and then flip the window once). Create the code (either keep the text and draw both, or drop the text), run it to see a very white square.\n\nPut your code into code04.py.\n\nWhat? Your square is not really a square? Well, I’ve warned you: Five unit systems!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#psychopy-units",
+    "href": "05-psychopy.html#psychopy-units",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.8 Five unit systems",
+    "text": "5.8 Five unit systems\n\n5.8.1 Height units\nWith height units everything is specified in the units of window height. The center of the window is at (0,0) and the window goes vertically from -0.5 to 0.5. However, horizontal limits depend on the aspect ratio. For our 800×600 window (4:3 aspect ratio), it will go from -0.666 to 0.666 (the window is 1.3333 window heights wide). For a 600×800 window (3:4 aspect ratio) from -0.375 to 0.375 (the window is 0.75 window heights wide), for a square window 600×600 (aspect ratio 1:1) from -0.5 to 0.5 (again, in all these cases it goes from -0.5 to 0.5 vertically). This means that the actual on-screen distance for the units is the same for both axes. So that a square of size=(0.5, 0.5) is actually a square (it spans the same distance vertically and horizontally). Thus, height units make sizing objects easier but placing them on horizontal axis correctly harder (as you need to know the aspect ratio).\nModify your code by specifying the unit system when you create the window: win = visual.Window(..., units=\"height\"). Play with your code by specifying position of the square when you create it. You just need to pass an extra parameter pos=(&lt;x&gt;, &lt;y&gt;).\n\nPut your code into code05.py.\n\nBy the way, which way is up when y is below or above zero? Unfortunately, unlike x-axis, the y-axis can go both ways. For PsychoPy y-axis points up (so negative values move the square down and positive up). However, if you would use an Eyelink eye tracker to record where participants looked on the screen, it assumes that y-axis starts at the top of the screen and points down7.\nNow, modify the size of the square (and turn it into a non-square rectangle) by passing width=&lt;some-width-value&gt; and height=&lt;some-height-value&gt;.\n\nPut your code into code06.py.\n\n\n\n5.8.2 Normalized units\nNormalized units are default units and assume that the window goes from -1 to 1 both along x- and x-axis. Again, (0,0) is the center of the screen but the bottom-left corner is (-1, -1) whereas the top-right is (1, 1). This makes placing your objects easier but sizing them harder (you need to know the aspect ratio to ensure that a square is a square).\nModify your code, so that it uses \"norm\" units when you create the window and size your white square stimulus, so it does look like a square.\n\nPut your code into code07.py.\n\n\n\n5.8.3 Pixels on screen\nFor pixels on screen units, the window center is still at (0,0) but it goes from -&lt;width-in-pixels&gt;/2 to &lt;width-in-pixels&gt;/2 horizontally (from -400 to 400 in our case) and -&lt;height-in-pixels&gt;/2 to &lt;height-in-pixels&gt;/2 vertically (from -300 to 300). These units could be more intuitive when you are working with a fixed sized window, as the span is the same along the both axes (like for the height units). However, they spell trouble if your window size has changed or you are using a full screen window on a monitor with an unknown resolution. In short, you should use them only if they dramatically simplify your code.\nModify your code to use \"pix\" units and briefly test sizing and placing your square within the window.\n\nPut your code into code08.py.\n\n\n\n5.8.4 Degrees of visual angle\nUnlike the three units above, using degrees of visual angle requires you knowing a physical size of the screen, its resolution, and viewing distance (how far your eyes are away from the screen). They are the measurement units used in visual psychophysics as they describe stimulus size as it appears on the retina (see Wikipedia for details). Thus, these are the units you want to use when running an actual experiment in the lab.\n\n\n5.8.5 Centimeters on screen\nHere, you would need know the physical size of your screen and its resolution. These are fairly exotic units for very specific usage cases8.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#make-your-square-jump",
+    "href": "05-psychopy.html#make-your-square-jump",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.9 Make your square jump",
+    "text": "5.9 Make your square jump\nSo far, we fixed the location of the square when we created it. However, you can move it at any time by assigning a new (&lt;x&gt;, &lt;y&gt;) coordinates to its pos property. E.g., white_square.pos = (-0.1, 0.2). Let us experiment by moving the square to a random location on every iteration of the loop (this could cause a lot of flashing, so if you have a photosensitive epilepsy that can be triggered by flashing lights, you probably should do it just once before the loop). Use the units of your choice and generate a new position using random.uniform(a, b) function, that generates a random value within a..b range9. Generate two values (one for x, one for y). If you use \"norm\" units, your range is the same (from -1 to 1) for the two dimensions. However, if you used \"height\" units, you need to take into account the aspect ratio of your window (4:3 if you are using 800×600 pix window).\n\nPut your code into code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#make-the-square-jump-on-your-command",
+    "href": "05-psychopy.html#make-the-square-jump-on-your-command",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.10 Make the square jump on your command",
+    "text": "5.10 Make the square jump on your command\nThis was very flashy, so let us make the square jump only when you press space button. For this, we need to expand the code that processes keyboard input. So far, we restricted it to just escape button and checked whether any (hence, escape) button was pressed.\nYou will learn about lists and indexes in the next chapter, so here is another ready-made. First, add \"space\" to the keyList parameter. Next, use conditional if statement to check whether event.getKeys() returned a key press. If it did (len(keys) &gt; 0), you can now check whether keys[0] is equal to \"space\" or \"escape\"10. If it was the latter, the game is over as before. If it was \"space\" then move the square to a new random position (and do not move it on every frame!)\nHint, if you are debugging, put you breakpoint inside the if statement, so that the program pauses only once you pressed a key (what happens if you put it on the win.flip() line?)\n\nPut your code into code10.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#basics-covered",
+    "href": "05-psychopy.html#basics-covered",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "5.11 Basics covered",
+    "text": "5.11 Basics covered\nThere is plenty more to learn about PsychoPy but we’ve got the basics covered. Submit your files and get ready to Whack a Mole!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.html#footnotes",
+    "href": "05-psychopy.html#footnotes",
+    "title": "5  Gettings started with PsychoPy",
+    "section": "",
+    "text": "Also called properties↩︎\nTechnically, we call a class constructor method called __init__ but this is not important for now.↩︎\nHowever, stick to original order for consistency otherwise.↩︎\nThis is called flipping because a window has two buffers: one that is currently displayed on the screen and the other one in which you can draw your stimuli. Once you are done with drawing, you “flip” the buffers so that they exchange their places. Now the one you drew in gets displayed and you have the other buffer to draw in.↩︎\nMy personal preference is to draw first but in most cases it makes no difference.↩︎\nThis sometimes was an issue with Intel graphic cards.↩︎\nThis could be very confusing, if you forget about this when overlaying gaze data on an image you used in the study and wondering what on Earth the participants were doing.↩︎\nSo specific that I cannot think of one, to be honest.↩︎\nYou need to import the random library for this, of course.↩︎\nYou can use if..else, because we only have two options but I would recommend to go for a more general solution if..elif ↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gettings started with PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html",
+    "href": "06-whack-a-mole.html",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "6.1 Chapter concepts",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#chapter-concepts",
+    "href": "06-whack-a-mole.html#chapter-concepts",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "Storing many items in lists.\nIterating over items using for loop.\nGenerating a range of numbers using range().\nMaking a pause and limiting time you wait for a key.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#lists",
+    "href": "06-whack-a-mole.html#lists",
+    "title": "6  Whack-a-Mole",
+    "section": "6.2 Lists",
+    "text": "6.2 Lists\nSo far, we were using variables to store single values: computer’s pick, player’s guess, number of attempts, PsychoPy window object, etc. But sometimes we need to handle more than one value. We already had this problem in the computer-based Guess-the-Number game when we needed to store the remaining number range. We got away by using two variables, one for the lower and one for the upper limit. However, this approach clearly does not scale well and, sometimes, we might not even know how many values we will need to store. Python’s lists are the solution to the problem.\nA list is a mutable1 sequence of items where individual elements can be accessed via their zero-based index. Extending the idea of variable-as-a-box, you can think about lists as a box with numbered slots. To store and retrieve a particular piece you will need to know both the variable name and the index of the item you are interested in within that box. Then, you work with a variable-plus-index in exactly the same way you work with a normal variable, accessing or changing its value via the same syntax as before.\nA list is defined via square brackets &lt;variable&gt; = [&lt;value1&gt;, &lt;value2&gt;, ... &lt;valueN&gt;]. An individual slot within a list is also accessed via square brackets &lt;variable&gt;[&lt;index&gt;] where index is, again, zero-based2. This means that the first item is variable[0] and, if there are N items in the list, the last one is variable[N-1]. You can figure out the total number of items in a list by getting its length via a special len() function. Thus, you can access the last item via variable[len(variable)-1]3. Note the -1: If your list has 3 items, the index of the last one is 2, if it has 100, then 99, etc. I am spending so much time on this because it is a fairly common source of confusion.\n\nDo exercise #1 see how lists are defined and indexed.\n\nLists also allow you access more than one slot/index at a time via slicing. You can specify index of elements via &lt;start&gt;:&lt;stop&gt; notation. For example, x[1:3] will give you access to two items with indexes 1 and 2. Yes, two items: Slicing index goes from the start up to but not including the stop. Thus, if you want to get all the items of a list, you will need to write x[0:length(x)] and, yet, to get the last item alone you still write x[len(x)-1]. Confusing? I think so! I understand the logic but I find this stop-is-not-included to be counterintuitive and I still have to consciously remind myself about this. Unfortunately, this is a standard way to define sequences of numbers in Python, so you need to memorize this.\n\nDo exercise #2 to build the intuition.\n\nWhen slicing, you can omit either start or stop. In this case, Python will assume that a missing start means 0 (the index of the first element) and missing stop means len(&lt;list&gt;) (so, last item is included). If you omit both, e.g., my_pretty_numbers[:] it will return all values, as this is equivalent to my_pretty_numbers[0:len(my_pretty_numbers)].4\n\nDo exercise #3.\n\nYou can also use negative indexes that are computed relative to length of the list5. For example, if you want to get the last element of the list, you can say my_pretty_numbers[len(my_pretty_numbers)-1] or just my_pretty_numbers[-1]. The last-but-one element would be my_pretty_numbers[-2], etc. You can use negative indexes for slicing but keep in mind the including-the-start-but-excluding-the-stop catch: my_pretty_numbers[:-1] will return all but last element of the list not the entire list!\n\nDo exercise #4.\n\nSlicing can be extended by specifying a step via start:stop:step notation. step can be negative, allowing you to build indexes in the reverse order:\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers[4:0:-1]\n\n[5, 4, 3, 2]\n\n\nHowever, you must pay attention to the sign of the step. If it goes in the wrong direction then stop cannot be reached, Python will return an empty list.\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers[4:0:1]\n\n[]\n\n\nSteps can be combined with omitted and negative indexes. To get every odd element of the list, you write my_pretty_numbers[::2]:\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers[::2]\n\n[1, 3, 5, 7]\n\n\n\nDo exercise #5.\n\nIf you try to to access indexes outside of a valid range, Python will raise an IndexError6. Thus, trying to get 6th element (index 5) of a five-element-long list will generate a simple and straightforward error. However, if your slice is larger than the range, it will be truncated without an extra warning or an error. So, for a five-element list my_pretty_numbers[:6] or my_pretty_numbers[:600] will both return all numbers (effectively, this is equivalent to my_pretty_numbers[:]). Moreover, if the slice is empty (2:2, cannot include 2 because it is a stop value, even though it starts from 2 as well) or the entire slice is outside of the range, Python will return an empty list, again, neither warning or error is generated.\n\nDo exercise #6.\n\nIn Python lists are dynamic, so you can always add or remove elements to it, see the list of methods. You can add a new item to the of the end of the list via .append(&lt;new_value&gt;) method\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers.append(10)\nmy_pretty_numbers\n\n[1, 2, 3, 4, 5, 6, 7, 10]\n\n\nOr, you can insert(&lt;index&gt;, &lt;new_value&gt;) before an element with that index. Unfortunately, this means that you can use an arbitrary large index and it will insert a new value as a last element without generating an error.\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers.insert(2, 10)\nmy_pretty_numbers.insert(500, 20)\nmy_pretty_numbers\n\n[1, 2, 10, 3, 4, 5, 6, 7, 20]\n\n\nYou can remove an item using its index via pop(&lt;index&gt;), note that the item is returned as well. If you omit the index, pop() removes the last element of the list. Here, you can only use valid indexes.\n\nmy_pretty_numbers = [1, 2, 3, 4, 5, 6, 7]\nmy_pretty_numbers.pop(-1)\n\n7\n\nmy_pretty_numbers.pop(3)\n\n4\n\nmy_pretty_numbers\n\n[1, 2, 3, 5, 6]\n\n\n\nDo exercise #7.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#basic-game-scaffolding",
+    "href": "06-whack-a-mole.html#basic-game-scaffolding",
+    "title": "6  Whack-a-Mole",
+    "section": "6.3 Basic game scaffolding",
+    "text": "6.3 Basic game scaffolding\nPhew that was a lot about lists7. However, All work and no play makes Jack a dull boy! So let us start with a basic PsychoPy scaffolding. Here the code structure:\nimport libraries (from psychopy)\ncreate the PsychoPy window (visual.Window())\nflip the window (.flip())\nwait for a player to press the escape key (event.waitKeys())\nclose the window (.close())\nTry doing it from scratch. I have left hints to help you with this and you can always consult the online documentation. Do not forget to document the file and to split your code into meaningful chunks with comments (if needed).\n\nPut your code into code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#three-moles",
+    "href": "06-whack-a-mole.html#three-moles",
+    "title": "6  Whack-a-Mole",
+    "section": "6.4 Three moles",
+    "text": "6.4 Three moles\nLet us create three moles that will be represented by circles. Create a new list variable moles and put three circles into it. One should go to the left, one dead center, and one to the right. Watch a video above to see what I mean. Think of a reasonable size (which units make keeping circle a circle easier?) and position. You can also use different colors for them, as I did.\nYou can either create an empty list and then .append() circles one at a time or you can use square brackets to put all three of them into the list in one go. Then draw() circles before you flip the window and wait for a key press. Note that you have to draw them one at a time. Therefore, you will need to add three lines for this but the next section will show you an easier way.\n\nPut your code into code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#for-loop",
+    "href": "06-whack-a-mole.html#for-loop",
+    "title": "6  Whack-a-Mole",
+    "section": "6.5 For loop",
+    "text": "6.5 For loop\nIn the code above, we needed to iterate over three moles (circles) that we had in a list. Python has a tool just for that: a for loop that iterates over the items in any sequence (our list is a sequence!). Here is an example:\n\nnumbers = [2, 4, 42]\nfor a_number in numbers:\n    print(\"Value of a_number variable on this iteration is %d\"%(a_number))\n    a_number = a_number + 3\n    print(\"  Now we incremented it by 3: %d\"%(a_number))\n    print(\"  Now we use in a formula a_number / 10: %g\"%(a_number / 10))\n\nValue of a_number variable on this iteration is 2\n  Now we incremented it by 3: 5\n  Now we use in a formula a_number / 10: 0.5\nValue of a_number variable on this iteration is 4\n  Now we incremented it by 3: 7\n  Now we use in a formula a_number / 10: 0.7\nValue of a_number variable on this iteration is 42\n  Now we incremented it by 3: 45\n  Now we use in a formula a_number / 10: 4.5\n\n\nHere, the code inside the for loop is repeated three times because there are three items in the list. On each iteration, next value from the list gets assigned to a temporary variable a_number (see the output). Once the value is assigned to a variable, you can use it just like any variable. You can print it out (first print), you can modify it (second line within the loop), use its value for when calling other functions, etc. To better appreciate this, copy-paste this code into a temporary file (call it test01.py), put a breakpoint onto the first print statement and then use F10 to step through the loop and see how value of a_number variable changes on each iteration and then it gets modified in the second line within the loop.\nNote that you can use the same break statement as for the while loop.\n\nDo exercise #8.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#drawing-in-a-loop",
+    "href": "06-whack-a-mole.html#drawing-in-a-loop",
+    "title": "6  Whack-a-Mole",
+    "section": "6.6 Drawing in a loop",
+    "text": "6.6 Drawing in a loop\nNow that you have learned about the for loop, it is easy to draw the moles. Just iterate over the list (come up with a good temporary variable name) and draw() a current item (which is in your temporary variable).\n\nPut your code into code03.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#range",
+    "href": "06-whack-a-mole.html#range",
+    "title": "6  Whack-a-Mole",
+    "section": "6.7 range() function: Repeating code N times",
+    "text": "6.7 range() function: Repeating code N times\nSometimes, you might need to repeat the code several times. For example, imagine that you have 40 trials in an experiment. Thus, you need to repeat a trial-related code 40 times. You can, of course, build a list 40 items long by hand and iterate over it but Python has a handy range() function for that. range(N) yields N integers from 0 to N-1 (same up-to-but-not-including rule as for slicing) that you can iterate over in a for loop.\n\nfor x in range(3):\n    print(\"Value of x is %d\"%(x))\n\nValue of x is 0\nValue of x is 1\nValue of x is 2\n\n\nYou can modify range() function behavior by providing a starting value and a step size. But in its simplest form range(N) is a handy tool to repeat the code that many times. Note that while you always need to have a temporary variable in a for loop, sometimes you may not use it at all. In cases like this, you should use _ (underscore symbol) as a variable name to indicate the lack of use.\n\nfor _ in range(2):\n    print(\"I will be repeated twice!\")\n\nI will be repeated twice!\nI will be repeated twice!\n\n\nAlternatively, you can use range() to loop through indexes of a list (remember, you can always access an individual list item via var[index]). Do exactly that8! Modify your code to use range() function in the for loop (how can you compute the number of iterations you need from the length of the list?), use temporary variable as an index for the list to draw each item9. When in doubt, put a breakpoint inside (or just before) the loop and step through your code to understand what values a temporary loop variable gets and how it is used.\n\nPut your modified code into code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#random-mole",
+    "href": "06-whack-a-mole.html#random-mole",
+    "title": "6  Whack-a-Mole",
+    "section": "6.8 A random mole",
+    "text": "6.8 A random mole\nDrawing all three moles served as a practical exercise with loops but in a real game we need to shown only one random target at a time. We could create the three targets as before and draw one of them. However, later on we would like to change the color of the target to indicate that the player did hit it, so it is simpler (if a bit wasteful) to create a single mole every time we need one.\nFor this, define one CONSTANT with a list of three colors that you used and another one with three horizontal locations (the vertical location is the same, so we do not need to worry about it). Next, randomly pick which target out of three you want to create, i.e., we need to generate an index of the target and use that index to figure out target’s location and color. You can do it either via random.randrange() or via random.choice() building the range yourself via the function with the same name you have just learned about (remember to organize your imports alphabetically). Store the index in a variable with a meaningful name10 and use it with constants to create the target of the corresponding color at a corresponding location. Then, you need to draw that single target before waiting for a key press.\nOnce you have the code, put a breakpoint and check that the value of the index variable matches what is shown on a screen11.\n\nPut your modified code into code05.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#clock-wait",
+    "href": "06-whack-a-mole.html#clock-wait",
+    "title": "6  Whack-a-Mole",
+    "section": "6.9 Random time",
+    "text": "6.9 Random time\nWhat makes Whack-a-Mole game fun is not only that you do not know which mole will appear but you also do not know when it will appear and how much time you have to whack it. Thus, we need to modify our presentation schedule. We need a blank period of a random duration (I would suggest between 0.75 s to 1.5 s) and limited presentation duration (between 0.5 to 0.75 s). First, you need to define these ranges as constants. Now that you know lists you can use a single variable to hold both ends of the range. Then, you need to generate two numbers (one for the blank another for the presentation) coming from a uniform distrubition within that range.\nHere, a CONSTANT will hold values for two parameters of random.uniform() function and there are two ways of using them. First, you can use an index 0 to get the value for the first parameter and 1 for the second parameter:\nimport random\n\nTIME_UNTIL_BEEP = [0.1, 0.3]\nrandom.uniform(TIME_UNTIL_BEEP[0], TIME_UNTIL_BEEP[1])\nHowever, Python has a nifty trick called Unpacking Argument Lists: You can pass a list of arguments prepended by an asterisk and Python will unpack the list into arguments in the same order they are in the list: first value goes to the parameter, second value to the second parameter, etc. So, in our case, the code can be simplified to\nrandom.uniform(*TIME_UNTIL_BEEP)\nNote that it is on you to make sure that the number and the order of elements in the list match function parameters!\n\ndef single_parameter_function(x):\n  \"\"\"Do nothing but require a single paramter\n  \"\"\"\n  pass\n\nTWO_VALUES = [1, 3]\n\nsingle_parameter_function(*TWO_VALUES)\n\nTypeError: single_parameter_function() takes 1 positional argument but 2 were given\n\n\nBack to the game, use random.uniform() function to generate random blank and presentation times, store them into variables of your choice, and time your blank and presentation using the wait() function from the clock module.\nNow is time to update and structure you code. Here is a approximate outline (note that I have dropped the wait for keys):\n\"\"\"Document your file\n\"\"\"\nimport all libaries you need in an alphabetical order\n\ndefine CONSTANTS\n\ncreate window\n\n# generating random parameters for the trial\npick random index for the mole\ncreate the mole\ngenerate random durations for blank and presentation interval\n\n# blank\nclear window (win.flip() alone)\nwait for \"blank duration\" seconds\n\n# presentation\ndraw the mole\nwait for \"presentation duration\" seconds\n\nclose the window\nNote that it has no response processing at the moment and that window should close right after the stimulus is presented.\n\nPut your code into code06.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#repeating-trials",
+    "href": "06-whack-a-mole.html#repeating-trials",
+    "title": "6  Whack-a-Mole",
+    "section": "6.10 Repeating trials",
+    "text": "6.10 Repeating trials\nYou already know how to repeat the same code many times. Decide on number of trials / rounds (define this as a CONSTANT) and repeat the single round that many times. Think about what code goes inside the loop and what should stay outside for the randomization to work properly.\n\nPut your code into code07.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#waitKeys-maxwait",
+    "href": "06-whack-a-mole.html#waitKeys-maxwait",
+    "title": "6  Whack-a-Mole",
+    "section": "6.11 Exit strategy",
+    "text": "6.11 Exit strategy\nI hope that you used a small number of trials because (on my advice, yes!) we did not program a possibility to exit the game via the escape key. To put it in, we will replace both wait() calls with waitKeys() function. It has maxWait parameter that by default is set to infinity but can be set to the duration we require. If a player does not press a key, it will work just like wait() did. If a player presses a key (allow only \"escape\" for now), it means that they want to abort the game (the only possible action at the moment). Thus, assign the returned value to a temporary variable (keys?) and check whether it is equal to None12. If it is not equal to None, break out of the loop!\n\nPut your code into code08.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#whacking-that-mole",
+    "href": "06-whack-a-mole.html#whacking-that-mole",
+    "title": "6  Whack-a-Mole",
+    "section": "6.12 Whacking that mole",
+    "text": "6.12 Whacking that mole\nWe have moles that appear at a random location after a random delay for a random period of time. Now we just need to add an ability to whack ’em! You whack a mole only when it is present. Thus, we only need to modify and handle the waitKeys() call for the presentation interval.\nFirst, create a new constant with three keys that correspond to three locations. I would suggest using [\"left\", \"down\", \"right\"], which are cursor keys13. Next, you need to use them for the keyList parameter. However, we cannot use this list directly, as we also need the escape key. The simplest way is to put “escape” into its own list and concatenate the two lists via +: [\"escape\"] + YOUR_CONSTANT_WITH_KEYS. Do this concatenation directly when you set a value to the keyList in the function call. Before we continue, run the code and test that you can abort the program during the presentation (but not during the blank interval) by pressing any of these three keys. Also check that escape still works!\nNow that we have keys to press, we need more sophisticated processing (we gonna have quite a few nested conditional statements). We still need to check whether waitKeys() returned None first. If it did not, it must have returned a list of pressed keys. Actually, it will be a list with just a single item14, so we can work with it directly via keys[0]. Use conditional if-else statement to break out of the loop if the player pressed escape. Otherwise, it was one of the three “whack” keys.\nOur next step is to establish which index the key corresponds to. Python makes it extremely easy as lists have .index(value) method that returns the index of the value within the list. You have the (CONSTANT) list with the keys and you have the pressed key: Figure out the index and check whether it matches the index of the target (imole variable in my code). If it does, let us provide a visual feedback of success: change mole (circle) fillColor to white, draw it, and wait for 300 ms (setup a constant for feedback duration). This way, the mole will turn white and remain briefly on the screen when hit but will disappear immediately, if you missed.\n\nPut your code into code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#you-did-it",
+    "href": "06-whack-a-mole.html#you-did-it",
+    "title": "6  Whack-a-Mole",
+    "section": "6.13 You did it!",
+    "text": "6.13 You did it!\nCongratulations on your first video game! It could use some bells-and-whistles like having a score, combos would be cool, proper mole images instead of a circle, etc. but it works and it is fun (if you do not feel challenged, reduce the presentation time)! Submit your files and next time we will ditch the keyboard and learn how to handle the mouse in the Memory game.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.html#footnotes",
+    "href": "06-whack-a-mole.html#footnotes",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "More on that and tuples, list’s immutable cousins, later.↩︎\nThis is typical for “classic” programming languages but less so for ones that are linear algebra / data science oriented. Both Matlab and R use one-based indexing, so you need to be careful and double-check whether you are using correct indexes.↩︎\nThere is a simpler way to do this, which you will learn in a little while.↩︎\nNote, that this is almost but not quite the same thing as just writing my_pretty_numbers, as my_pretty_numbers[:] returns a different list with identical content. The difference is subtle but important and we will return to it later when talking about mutable versus immutable types.↩︎\nIf you are coming from R, negative indexing is completely different in Python.↩︎\nIf you are familiar with R and its liberal attitude towards indexes, you will find this very satisfying.↩︎\nAnd we barely scratched the surface!↩︎\nNote, this is not a better way but an alternative way to do this.↩︎\nStyle hint: if a variable is an index of something, I tend to call it isomething. E.g., if it holds an index to a current mole, I would call it imole. This is my way of doing it. Others use i_ prefix or an _i suffix. But either way, it is a useful naming convention. Remember, the easier it is to understand the meaning of a variable from its name, the easier it is for you to read and modify the code.↩︎\nitarget? imole?↩︎\nI know it feels redundant but these are little checks that cost little time by themselves but help you avoid wasting lots of time on tracing weird mistakes. Here, you check that your expectations (if the middle target is shown, the index should be 1) match the reality. Once you check this, you do not expect it to be true, you know it to be true!↩︎\nConfusingly, if no key was pressed, getKeys() returns an empty list that has length of zero but waitKeys() returns None and None has no length.↩︎\nWant to know key codes for sure? Write a small program that opens a window and then repeatedly waits for any key press and prints out into console.↩︎\nYou will get more than one item in that list only if you set clearEvents=False. In this case, you will get the list of keys pressed before the call. However, if you opted for a default clearEvents=True, you will get only one key press in the list (at least I was never able to get more than one).↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
     ]
   }
 ]

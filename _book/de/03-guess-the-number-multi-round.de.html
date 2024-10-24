@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/03-guess-the-number-multi-round.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/03-guess-the-number-multi-round.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>3  Rate das Zahl: die Multi-Runde-Edition – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./04-guess-the-number-ai.de.html" rel="next">
+<link href="./02-guess-the-number-single-round.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-guess-the-number-multi-round.de.html"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/03-guess-the-number-multi-round.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">3.1</span> Kapitelkonzepte</a></li>
+  <li><a href="#while-loop" id="toc-while-loop" class="nav-link" data-scroll-target="#while-loop"><span class="header-section-number">3.2</span> While-Schleife</a></li>
+  <li><a href="#versuche-z%C3%A4hlen" id="toc-versuche-zählen" class="nav-link" data-scroll-target="#versuche-zählen"><span class="header-section-number">3.3</span> Versuche zählen</a></li>
+  <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break"><span class="header-section-number">3.4</span> Abbrechen (und Beenden)</a></li>
+  <li><a href="#anzahl-der-versuche-begrenzen-via-break" id="toc-anzahl-der-versuche-begrenzen-via-break" class="nav-link" data-scroll-target="#anzahl-der-versuche-begrenzen-via-break"><span class="header-section-number">3.5</span> Anzahl der Versuche begrenzen via break</a></li>
+  <li><a href="#richtige-endnachricht" id="toc-richtige-endnachricht" class="nav-link" data-scroll-target="#richtige-endnachricht"><span class="header-section-number">3.6</span> Richtige Endnachricht</a></li>
+  <li><a href="#anzahl-der-versuche-begrenzen-ohne-break" id="toc-anzahl-der-versuche-begrenzen-ohne-break" class="nav-link" data-scroll-target="#anzahl-der-versuche-begrenzen-ohne-break"><span class="header-section-number">3.7</span> Anzahl der Versuche begrenzen ohne Break</a></li>
+  <li><a href="#verbliebene-versuche-anzeigen" id="toc-verbliebene-versuche-anzeigen" class="nav-link" data-scroll-target="#verbliebene-versuche-anzeigen"><span class="header-section-number">3.8</span> Verbliebene Versuche anzeigen</a></li>
+  <li><a href="#rate-zahlen-repeat-game" id="toc-rate-zahlen-repeat-game" class="nav-link" data-scroll-target="#rate-zahlen-repeat-game"><span class="header-section-number">3.9</span> Das Spiel wiederholen</a></li>
+  <li><a href="#du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast" id="toc-du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast" class="nav-link" data-scroll-target="#du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast"><span class="header-section-number">3.10</span> Du brauchst keinen Vergleich, wenn du bereits den Wert hast</a></li>
+  <li><a href="#best-score" id="toc-best-score" class="nav-link" data-scroll-target="#best-score"><span class="header-section-number">3.11</span> Best score</a></li>
+  <li><a href="#spielrunden-z%C3%A4hlen" id="toc-spielrunden-zählen" class="nav-link" data-scroll-target="#spielrunden-zählen"><span class="header-section-number">3.12</span> Spielrunden zählen</a></li>
+  <li><a href="#mehrrunde-einarmiger-bandit" id="toc-mehrrunde-einarmiger-bandit" class="nav-link" data-scroll-target="#mehrrunde-einarmiger-bandit"><span class="header-section-number">3.13</span> Mehrrunde Einarmiger Bandit</a></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung"><span class="header-section-number">3.14</span> Zusammenfassung</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="rate-das-zahl-multi-runde" class="quarto-section-identifier"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>In der vorherigen Kapitel hast du ein “Raten Sie die Zahl”-Spiel programmiert, bei dem nur ein Versuch möglich war. Jetzt werden wir das System erweitern, um mehrere Versuche zuzulassen, und wir werden weitere Funktionen hinzufügen, damit es mehr Spaß macht. Erstelle einen neuen Unterordner und lade das <a href="notebooks/Guess%20the%20number%20-%20multi%20round.ipynb">Übungsheft</a> herunter, bevor wir loslegen!</p>
+<section id="kapitelkonzepte" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">3.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>Wiederholenden Code mit einer <a href="#while-schleife">while-Schleife</a>.</li>
+<li>Machen eines <a href="#break">Notausstiegs</a> aus einer Schleife.</li>
+</ul></section><section id="while-loop" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="while-loop">
+<span class="header-section-number">3.2</span> While-Schleife</h2>
+<p>Wenn du etwas wiederholen möchtest, musst du Schleifen verwenden. Es gibt zwei Arten von Schleifen: die <a href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement">while</a>-Schleife, die <em>solange</em> eine Bedingung wahr ist, wiederholt wird, und die <a href="https://docs.python.org/3/reference/compound_stmts.html#the-for-statement">for</a>-Schleife, die über Elemente iteriert (dazu kommen wir später).</p>
+<p>Die Grundstruktur einer <em>while</em>-Schleife ist</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anweisungen vor der Schleife</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">&lt;</span>Bedingung<span class="op">&gt;</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Anweisungen innerhalb werden ausgeführt</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># wiederholt ausgeführt, so lange wie</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># die Bedingung wahr ist</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Anweisungen nach der Schleife</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Du kannst eine Schleife mit <code>while</code> erstellen, indem du eine Bedingung angibst, die entweder <code>True</code> oder <code>False</code> ist. Das ist genau wie in einer <code>if...elif...else</code>-Anweisung. Und die gleichen Einrückungsregeln gelten auch hier, um zu bestimmen, welcher Code in der Schleife und welcher außerhalb ist.</p>
+<div class="practice">
+<p>Mach Übung #1</p>
+</div>
+<p>Lass uns eine <em>while</em>-Schleife verwenden, damit der Spieler immer weiter raten kann, bis er es endlich richtig hat. Du kannst den Code, den du beim letzten Seminar programmiert hast, kopieren und einfügen oder ihn von Neuem schreiben (ich würde dir empfehlen, Letzteres zu tun!). Die allgemeine Programmstruktur sollte wie folgt aussehen:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># eine zufällige Zahl generieren und in der Variable</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># number_picked speichern die Eingabe des Spielers holen, sie in eine Ganzzahl umwandeln und in der Variable guess speichern</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Solange deine Vermutung nicht gleich dem Wert ist, den der Computer gewählt hat:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Drucke "Meine Zahl ist kleiner" oder "Meine Zahl ist größer" mithilfe eines if-else-Statements</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hol dir die Eingabe des Spielers, konvertiere sie in eine Ganzzahl und speichere sie in der Variable "Vermutung"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Drucke "Treffer!" (weil wir hier sind, bedeutet das, dass "Vermutung" gleich der Wahl des Computers ist)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+<p>vergiss nicht, die Datei zu dokumentieren und nutze Breakpoints und Step-overs, um den Programmablauf zu erkunden.</p>
+</section><section id="versuche-zählen" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="versuche-zählen">
+<span class="header-section-number">3.3</span> Versuche zählen</h2>
+<p>Jetzt fügen wir eine Variable hinzu, die die Gesamtzahl der Versuche des Spielers zählt. Dazu erstellst du eine neue Variable (nenn sie <code>versuche</code> oder ähnlich) <em>vor der Schleife</em> und initialisierst sie mit <code>1</code> (denn der erste Versuch findet vor dem Eintritt in die Schleife statt). Addiere <code>1</code> zu ihr jedes Mal, wenn der Spieler eine Vermutung eingibt. Nach der Schleife erweiterst du die Meldung <code>"Treffer!"</code> um Informationen über die Anzahl der Versuche. Verwende <a href="##string-formatierung">String-Formatierung</a>, um es nett aussehen zu lassen, z.B. <code>"Richtig, und du hast nur 5 Versuche gebraucht!"</code>. Stelle sicher, dass die Anzahl der Versuche, die du benötigst, <em>übereinstimmt</em> mit der Anzahl der Versuche, die das Programm meldet!</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code02.py</span> ein.</p>
+</div>
+</section><section id="break" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="break">
+<span class="header-section-number">3.4</span> Abbrechen (und Beenden)</h2>
+<p>Der Code innerhalb der <em>while</em>-Schleife wird so lange ausgeführt, wie die Bedingung <code>True</code> ist, und wichtig ist, dass der gesamte Code innerhalb ausgeführt wird, bevor die Bedingung erneut ausgewertet wird. Manchmal möchtest du jedoch früher abbrechen, ohne den restlichen Code auszuführen. Dafür hat Python einen <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">break</a>-Befehl, der das Programm dazu veranlasst, die Schleife sofort zu verlassen, ohne den restlichen Code innerhalb der Schleife auszuführen, damit das Programm mit dem Code <em>nach</em> der Schleife fortfährt.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dieser Code wird vor der Schleife ausgeführt.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">&lt;</span>Einige_Bedingung<span class="op">&gt;</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dieser Code wird bei jeder Iteration ausgeführt</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">&lt;</span>eine_andere_Bedingung<span class="op">&gt;</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Dieser Code wird bei jeder Iteration ausgeführt,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># aber nicht, wenn man die Schleife verlässt.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Dieser Code wird nach der Schleife ausgeführt.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #2, um dein Verständnis zu vertiefen.</p>
+</div>
+</section><section id="anzahl-der-versuche-begrenzen-via-break" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="anzahl-der-versuche-begrenzen-via-break">
+<span class="header-section-number">3.5</span> Anzahl der Versuche begrenzen via break</h2>
+<p>Mach mal Druck auf den Spieler! Entscheide, wie viele Versuche du maximal erlaubst und speichere es als eine <a href="#constants">CONSTANT</a>. Wähle einen passenden Namen (z.B. <code>MAX_VERSUCHE</code>) und denke dran, dass für eine Konstante alle Buchstaben großgeschrieben werden müssen! Verwende jetzt <code>break</code>, um die <code>while</code>-Schleife zu verlassen, wenn die aktuelle Versuchsnummer größer als <code>MAX_VERSUCHE</code> ist. Überlege, wann (innerhalb des Codes in der Schleife) du das überprüfen solltest.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code03.py</span> ein.</p>
+</div>
+</section><section id="richtige-endnachricht" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="richtige-endnachricht">
+<span class="header-section-number">3.6</span> Richtige Endnachricht</h2>
+<p>Lassen wir die finale Nachricht aktualisieren. Aktuell sagt sie “Treffer…” weil wir annahmen, dass das Programm den Loop nur verlässt, wenn der Spieler die richtige Antwort gibt. Bei begrenzten Versuchen ist das jedoch nicht unbedingt der Fall. Jetzt gibt es zwei Gründe, warum es den while-Loop verlassen hat:</p>
+<ol type="1">
+<li>Du hast richtig geantwortet!</li>
+<li>Du bist aus Versuchen ausgegangen.</li>
+</ol>
+<p>Verwende eine <code>if-else</code>-Bedingung, um eine passende Nachricht auszugeben. Zum Beispiel: <code>"Pech gehabt, beim nächsten Mal mehr Glück!"</code>, wenn der Spieler verloren hat (keine Versuche mehr übrig).</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code04.py</span> ein.</p>
+</div>
+</section><section id="anzahl-der-versuche-begrenzen-ohne-break" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="anzahl-der-versuche-begrenzen-ohne-break">
+<span class="header-section-number">3.7</span> Anzahl der Versuche begrenzen ohne Break</h2>
+<p>Obwohl ich es vorgeschlagen habe, das <code>break</code>-Statement hinzuzufügen, solltest du es sparsam verwenden. Ohne <code>break</code> gibt es nur <em>einen</em> Ort im Code, den du überprüfen musst, um zu verstehen, wann das Programm die Schleife verlässt: die Bedingung. Aber wenn du ein <code>break</code> hinzufügst, musst du jetzt <em>zwei</em> Orte untersuchen. Und jeder zusätzliche <code>break</code> fügt immer weiter hinzu. Das bedeutet aber nicht, dass du sie um jeden Preis vermeiden solltest! Du <em>solltest</em> sie verwenden, wenn es den Code einfacher verständlich macht. Aber überprüfe immer, ob eine geänderte Bedingung auch funktionieren könnte.</p>
+<p>Lass uns genau das machen. Ändere deinen Code, damit er <em>ohne</em> die <code>break</code>-Anweisung funktioniert. Du brauchst eine kompliziertere Bedingung für deine <code>while</code>-Schleife, damit sie sich wiederholt, solange der Spieler rate falsch liegt und die Anzahl der Versuche noch kleiner als das maximal erlaubte ist. Teste, ob dein Code sowohl im Gewinn- als auch im Verlustfall funktioniert.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code05.py</span> ein.</p>
+</div>
+</section><section id="verbliebene-versuche-anzeigen" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="verbliebene-versuche-anzeigen">
+<span class="header-section-number">3.8</span> Verbliebene Versuche anzeigen</h2>
+<p>Es geht ums User-Interface! Ändere die <code>input</code>-Prompts-Nachricht, um die Anzahl der <em>verbliebenen</em> Versuche einzubeziehen. Zum Beispiel: <code>"Bitte gib deine Vermutung ein, du hast noch X Versuche übrig."</code></p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code06.py</span> ein.</p>
+</div>
+</section><section id="rate-zahlen-repeat-game" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="rate-zahlen-repeat-game">
+<span class="header-section-number">3.9</span> Das Spiel wiederholen</h2>
+<p>Lass uns dem Spieler die Möglichkeit geben, das Spiel erneut zu spielen. Das bedeutet, <em>alle</em> aktuellen Code in eine andere <code>while</code>-Schleife (das nennt man <em>verschachtelte Schleifen</em>) zu packen, die so lange wiederholt wird, wie der Spieler weiterspielen möchte. Der Code sollte folgendermaßen aussehen:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definiere MAX_ATTEMPTS = 5</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Variablen "willst_du_weiterspielen" definieren und auf True setzen</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Solange der Spieler weiter spielen möchte</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Dein aktueller Spielcode geht hier rein</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Frage den Benutzer mit der input-Funktion. z.B. "Willst du nochmal spielen? J/N"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># willst_du_weiterspielen sollte True sein, wenn die Benutzereingabe "J" oder "j" ist</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Letzte Botschaft, z.B. "Danke fürs Spielen!"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Achte besonders auf die Einrückungen, um den Code ordentlich zu gruppieren!</strong></p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code07.py</span> ein.</p>
+</div>
+</section><section id="du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast">
+<span class="header-section-number">3.10</span> Du brauchst keinen Vergleich, wenn du bereits den Wert hast</h2>
+<p>In deinem aktualisierten Code hast du die <code>want_to_play</code>-Variable, die entweder <code>True</code> oder <code>False</code> ist. Sie wird in der Schleife verwendet, die sich solange wiederholt, wie ihr Wert <code>True</code> ist. Manchmal schreiben Leute <code>want_to_play == True</code>, um das auszudrücken. Während es technisch korrekt ist und sicherlich korrekt funktionieren wird, ist es auch redundant. Da <code>want_to_play</code> nur <code>True</code> oder <code>False</code> sein kann, wird dieser Vergleich zu <code>True == True</code> (was natürlich <code>True</code> ist) oder <code>False == True</code> (was <code>False</code> ist). Daher produziert der Vergleich beider Werte mit <code>True</code> genau denselben Wert. Du kannst also einfach <code>while want_to_play:</code> schreiben und den logischen Wert direkt verwenden.</p>
+</section><section id="best-score" class="level2" data-number="3.11"><h2 data-number="3.11" class="anchored" data-anchor-id="best-score">
+<span class="header-section-number">3.11</span> Best score</h2>
+<p>Ein “richtiges” Spiel führt normalerweise die Leistung der Spieler mit. Lass uns die geringste Anzahl von Versuchen aufzeichnen, die der Spieler benötigte, um die Zahl zu erraten. Dazu erstellst du eine neue Variable <code>fewest_attempts</code> und setzt sie auf <code>MAX_ATTEMPTS</code> (das ist so schlecht wie es nur geht). Überlege, wo du sie erstellen musst. Du solltest sie nach jeder Spielrunde aktualisieren. Füge Informationen über “Bisheriger Rekord” in die Runden-Endnachricht ein.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code08.py</span> ein.</p>
+</div>
+</section><section id="spielrunden-zählen" class="level2" data-number="3.12"><h2 data-number="3.12" class="anchored" data-anchor-id="spielrunden-zählen">
+<span class="header-section-number">3.12</span> Spielrunden zählen</h2>
+<p>Lass uns zählen, wie oft der Spieler das Spiel gespielt hat. Die Idee und die Umsetzung sind dieselben wie beim Zählen der Versuche. Erstelle eine neue Variable, initialisiere sie auf 0 und erhöhe sie um 1, wenn eine neue Runde beginnt. Füge die Gesamtzahl der gespielten Spiele in die allerletzte Nachricht ein, z.B. “Danke für das Spielen des Spiels <em>X</em> Mal!”</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code09.py</span> ein.</p>
+</div>
+</section><section id="mehrrunde-einarmiger-bandit" class="level2" data-number="3.13"><h2 data-number="3.13" class="anchored" data-anchor-id="mehrrunde-einarmiger-bandit">
+<span class="header-section-number">3.13</span> Mehrrunde Einarmiger Bandit</h2>
+<p>Am Ende des vorherigen Kapitels hast du ein Spiel mit einem Einarmigen Banditen für eine Runde programmiert. Du weißt bereits alles, was du brauchst, um eine Version mit mehreren Runden zu implementieren, und ihre Struktur ist ähnlich (aber einfacher) als die des Multi-Round-Game-Of-Guess-Number-Spiels, das du gerade implementiert hast.</p>
+<p>Lass den Spieler mit einem Anfangsguthaben von 10 Münzen starten. Jede Runde kostet 1 Münze, drei gleiche Karten bringen 10 Münzen ein, während ein Paar 2 Münzen einbringt (du kannst die Auszahlungen nach Belieben ändern). In jeder Runde:</p>
+<ul>
+<li>Nimm eine Münze aus dem Topf (Gebühr fürs Spielen).</li>
+<li>Wirf den Würfel (das hast du schon implementiert).</li>
+<li>Sag dem Spieler, wie’s gelaufen ist (das hast du auch schon gemacht).</li>
+<li>Füge Münzen dem Topf hinzu, falls nötig.</li>
+<li>Gib die verbleibende Münzen im Topf aus.</li>
+<li>Frag den Spieler, wo’s weitergeht.</li>
+</ul>
+<p>Sonderfall: Wenn dem Spieler die Münzen ausgehen, ist das Spiel definitiv vorbei.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="progam-filename">code10.py</span> ein.</p>
+</div>
+</section><section id="zusammenfassung" class="level2" data-number="3.14"><h2 data-number="3.14" class="anchored" data-anchor-id="zusammenfassung">
+<span class="header-section-number">3.14</span> Zusammenfassung</h2>
+<p>Super gemacht, jetzt hast du zwei funktionierende Computerspiele mit Spielrunden, begrenzten Versuchen und Bestenpunkten! Pack die Ordner zusammen und abgeben.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./02-guess-the-number-single-round.de.html" class="pagination-link" aria-label="Rate die Zahl: die Ein-Runden-Edition">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-guess-the-number-ai.de.html" class="pagination-link" aria-label="Errate die Zahl: Der Computer ist dran">
+        <span class="nav-page-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body>
+</html>

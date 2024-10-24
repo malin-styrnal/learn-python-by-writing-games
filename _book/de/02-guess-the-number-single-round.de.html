@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/02-guess-the-number-single-round.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/02-guess-the-number-single-round.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>2  Rate die Zahl: die Ein-Runden-Edition – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./03-guess-the-number-multi-round.de.html" rel="next">
+<link href="./01-basics.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-guess-the-number-single-round.de.html"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/02-guess-the-number-single-round.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">2.1</span> Kapitelkonzepte</a></li>
+  <li><a href="#das-spiel" id="toc-das-spiel" class="nav-link" data-scroll-target="#das-spiel"><span class="header-section-number">2.2</span> Das Spiel</a></li>
+  <li><a href="#lass-uns-eine-zahl-w%C3%A4hlen" id="toc-lass-uns-eine-zahl-wählen" class="nav-link" data-scroll-target="#lass-uns-eine-zahl-wählen"><span class="header-section-number">2.3</span> Lass uns eine Zahl wählen</a></li>
+  <li><a href="#dein-code-dokumentieren" id="toc-dein-code-dokumentieren" class="nav-link" data-scroll-target="#dein-code-dokumentieren"><span class="header-section-number">2.4</span> Dein Code dokumentieren</a></li>
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging"><span class="header-section-number">2.5</span> Dein Spiel in VS Code ausführen und debuggen</a></li>
+  <li><a href="#input-function" id="toc-input-function" class="nav-link" data-scroll-target="#input-function"><span class="header-section-number">2.6</span> Rate einen Spieler nach seinem Tipp</a></li>
+  <li><a href="#if-anweisung" id="toc-if-anweisung" class="nav-link" data-scroll-target="#if-anweisung"><span class="header-section-number">2.7</span> Bedingte <em>if</em>-Anweisung</a></li>
+  <li><a href="#vergleiche" id="toc-vergleiche" class="nav-link" data-scroll-target="#vergleiche"><span class="header-section-number">2.8</span> Bedingungen und Vergleiche</a></li>
+  <li><a href="#einrueckung" id="toc-einrueckung" class="nav-link" data-scroll-target="#einrueckung"><span class="header-section-number">2.9</span> Statements gruppieren über Einrückung</a></li>
+  <li><a href="#antwort-%C3%BCberpr%C3%BCfen" id="toc-antwort-überprüfen" class="nav-link" data-scroll-target="#antwort-überprüfen"><span class="header-section-number">2.10</span> Antwort überprüfen</a></li>
+  <li><a href="#bibliotheken-verwenden" id="toc-bibliotheken-verwenden" class="nav-link" data-scroll-target="#bibliotheken-verwenden"><span class="header-section-number">2.11</span> Bibliotheken verwenden</a></li>
+  <li><a href="#eine-zahl-zuf%C3%A4llig-ausw%C3%A4hlen" id="toc-eine-zahl-zufällig-auswählen" class="nav-link" data-scroll-target="#eine-zahl-zufällig-auswählen"><span class="header-section-number">2.12</span> Eine Zahl zufällig auswählen</a></li>
+  <li><a href="#einarmiger-bandit-ein-runden-edition" id="toc-einarmiger-bandit-ein-runden-edition" class="nav-link" data-scroll-target="#einarmiger-bandit-ein-runden-edition"><span class="header-section-number">2.13</span> Einarmiger Bandit (Ein-Runden-Edition)</a></li>
+  <li><a href="#abgabe-f%C3%BCr-das-seminar" id="toc-abgabe-für-das-seminar" class="nav-link" data-scroll-target="#abgabe-für-das-seminar"><span class="header-section-number">2.14</span> Abgabe für das Seminar</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="rate-die-zahl-ein-runden-edition" class="quarto-section-identifier"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Im vorherigen Kapitel haben wir die Grundlagen von Python behandelt, also bist du jetzt bereit, dein erstes Spiel zu entwickeln! Wir werden es Schritt für Schritt aufbauen, da es viel zu lernen gibt über Eingaben, Bibliotheken, bedingte Anweisungen und Einrückungen.</p>
+<p>Bevor du anfängst, erstelle einen neuen Ordner (innerhalb deines <a href="001-software.de.html#files-folder">Kursordners</a>) namens “guess-the-number” zum Beispiel, lade das <a href="notebooks/Guess%20the%20number%20-%20single%20round.ipynb">Übungsheft</a> herunter, kopiere es in den neu erstellten Ordner und öffne es in <a href="001-software.de.html#jupyter-notebooks">Jupyter Notebook</a>. Wie im Kapitel zuvor wird es Übungen zum Lesen und Verständnis des Codes enthalten.</p>
+<p>Wir werden jedoch <a href="001-software.de.html#install-vs-code">VS Code</a> verwenden, um Skripte für das eigentliche Spiel zu programmieren. Du musst für jede Code-Übung eine separate Datei erstellen<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (z.B. <span class="filename">code01.py</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, <span class="filename">code02.py</span>, usw.). Das ist nicht die effizienteste Implementierung einer Versionskontrolle und es wird der Ordner sicherlich überladen. Aber es ermöglicht mir, deine Lösungen für jeden Schritt zu sehen, was das Geben von Feedback einfacher macht. Zum Einreichen der Aufgabe musst du einfach den Ordner zippen und die zip-Datei einreichen.</p>
+<section id="kapitelkonzepte" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">2.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>
+<a href="002-programming-tips.de.html#dokumentiere-deinen-code">Code dokumentieren</a>.</li>
+<li>
+<a href="#debuggen">Code debuggen</a>.</li>
+<li>
+<a href="#eingabe-funktion">Eingabe</a> von einem Benutzer erhalten.</li>
+<li>
+<a href="#vergleiche">Vergleiche</a> in <a href="#if-anweisung">bedingten Anweisungen</a> verwenden.</li>
+<li>
+<a href="#einr%C3%BCckung">Einrückung</a> zum Zusammenfassen von Anweisungen verwenden.</li>
+<li>Python <a href="#nutze-bibliotheken">Bibliotheken</a> verwenden.</li>
+<li>
+<a href="#w%C3%A4hle-eine-zahl-zuf%C3%A4llig">Zufallszahlen</a> generieren.</li>
+</ul></section><section id="das-spiel" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="das-spiel">
+<span class="header-section-number">2.2</span> Das Spiel</h2>
+<p>Wir werden ein Spiel programmieren, bei dem ein Teilnehmer (Computer) eine Zahl innerhalb eines bestimmten Bereichs (z.B. zwischen 1 und 10) auswählt und der andere Teilnehmer (menschlicher Spieler) versucht, sie zu erraten. Nach jedem Versuch des Menschen antwortet der Computer, ob die tatsächliche Zahl niedriger als der Versuch, höher oder gleich ist. Das Spiel ist vorbei, wenn der Spieler die Zahl richtig errät oder (in der späteren Version des Spiels) die Versuche aufgebraucht hat.</p>
+<p>Unsere erste Version wird nur einen Versuch ermöglichen und der Gesamtspiel-Algorithmus wird folgendermaßen aussehen:</p>
+<ol type="1">
+<li>Der Computer generiert eine zufällige Zahl zwischen 1 und 10.</li>
+<li>Er gibt sie aus, um beim Debuggen zu helfen.</li>
+<li>Er bittet dich, eine Vermutung einzugeben.</li>
+<li>Er vergleicht die beiden Zahlen und gibt das Ergebnis aus: “Meine Zahl ist niedriger”, “Meine Zahl ist höher” oder “Treffer!”.</li>
+</ol></section><section id="lass-uns-eine-zahl-wählen" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="lass-uns-eine-zahl-wählen">
+<span class="header-section-number">2.3</span> Lass uns eine Zahl wählen</h2>
+<p>Beginnen wir damit, die ersten beiden Schritte des Programms zu implementieren. Erstelle eine Variable, die eine Zahl enthält, die der Computer “gewählt” hat. Wir werden sie <code>number_picked</code> nennen (du kannst auch einen anderen sinnvollen Namen verwenden, aber es könnte einfacher sein, wenn wir alle denselben Namen verwenden). Um es zu Beginn einfacher zu gestalten, werden wir eine beliebige Zahl zwischen 1 und 10 hartcodieren (wähle die, die du magst). Dann lass uns sie ausgeben, damit wir die Zahl selbst kennen<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Verwende String-Formatierung, um es benutzerfreundlich zu gestalten, z.B. gib etwas wie “Die Zahl, die ich gewählt habe, ist…” aus. Du solltest in der Lage sein, dies mithilfe der Kenntnisse aus dem <a href="01-basics.de.html#string-formatting">vorherigen Kapitel</a> zu tun. Dein Code sollte aus zwei Zeilen bestehen:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. erstelle Variable und setze ihren Wert</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. gib den Wert aus</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Probier doch mal diesen Zweizeiler in einem Jupyter Notebook aus (erstell einfach ein leeres Notebook dafür). Wenn du damit zufrieden bist, kopier den Code in <span class="filename">code01.py</span> und lies weiter, um zu lernen, wie man ihn dokumentiert und ausführt.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="dein-code-dokumentieren" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="dein-code-dokumentieren">
+<span class="header-section-number">2.4</span> Dein Code dokumentieren</h2>
+<p>Jetzt, wo du deine erste Datei mit Python-Programm hast, solltest du sie dokumentieren. Das Dokumentieren eines zweizeiligen und simplen Programms mag albern vorkommen, aber es sollte eine automatische Sache sein. Später wirst du dich dabei erwischen, mehrere Zeilen Kommentare zu verwenden, um eine einzelne Funktionszeile zu dokumentieren. Wiederum geht es nicht darum, dass der Code funktioniert, sondern darum, dass du ihn verstehen kannst. Im Grunde ist es besser, einen sauberen, gut dokumentierten Code zu haben, der aktuell nicht korrekt funktioniert, als einen undokumentierten Spaghetticode, der funktioniert. Du kannst den Ersteren reparieren und aktualisieren, aber das Pflegen oder Aktualisieren des Letzteren…</p>
+<p>In Python, du hast zwei Möglichkeiten, Kommentare zu schreiben: mehrzeilig und einzeilig</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''Ein</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">mehrzeiliger</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">Kommentar</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Ein einzeiliger Kommentar.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Verwende mehrzeilige Kommentare, um Dokumentation für einzelne Dateien, Funktionen, Klassen, Methoden usw. zu schreiben. Du wirst lernen, wie man diese Dokumentation im Numpy-Dokumentationsstil formatiert, sobald du mehr über Funktionen gelernt hast. In unserem Fall solltest du deine <code>code01.py</code>-Datei mit einem mehrzeiligen Kommentar beginnen, der kurz beschreibt, welches Programm sie enthält. Mindestens solltest du schreiben, dass es sich um ein <em>Rate die Zahl</em>-Spiel handelt. Es ist wahrscheinlich eine gute Idee, kurz zu skizzieren, worum es bei dem Spiel geht.</p>
+<p>Verwende Einzeiler-Kommentare, um zu erklären, was in einem bestimmten Code-Block passiert. Du musst nicht jede Zeile kommentieren und solltest den Code nicht in Menschensprache wiederholen. Ein Kommentar sollte darüber sprechen, <em>was</em> passiert, nicht <em>wie</em>. Du hast bereits einen einzelnen Code-Block, also dokumentiere ihn mit einem Satz.</p>
+<div class="program">
+<p>Dokumentiere <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="debugging" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="debugging">
+<span class="header-section-number">2.5</span> Dein Spiel in VS Code ausführen und debuggen</h2>
+<p>Jetzt, wo wir ein zweizeiliges Programm haben, können wir es ausführen und schon damit beginnen, es zu debuggen. Klar, unser aktuelles Programm ist wahrscheinlich zu einfach, um tatsächliches Debugging zu erfordern, aber es ist auch einfach genug, um das Verständnis von Debugging zu erleichtern. Und Debugging ist eine wichtige Fähigkeit, die ein laufendes Programm von einem Blackbox in etwas Transparentes und leichter<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> zu verstehen verwandelt. Unten beschreibe ich, wie man in VS Code debuggt, aber du solltest eventuell die <a href="https://code.visualstudio.com/docs/python/debugging">offizielle Anleitung</a> zurate ziehen, falls sich in der Zwischenzeit etwas geändert hat.</p>
+<p>Es gibt zwei Möglichkeiten, ein Python-Programm in VS Code auszuführen. Erstens kannst du das <em>“Python-Datei im Terminal ausführen”</em> -Play-Button auf der rechten Seite verwenden. Das führt dein Programm <em>ohne</em> einen Debugger aus, also solltest du es nur für die tatsächlichen Ausführungen des finalisierten Codes verwenden. Trotzdem kannst du es ausprobieren und sehen, ob es das ausgibt, was es sollte.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/debug-vs-run.png" class="img-fluid figure-img"></p>
+<figcaption>Code ohne Debugger ausführen.</figcaption></figure>
+</div>
+<p>Die Alternative ist die Debugging-Registerkarte, die mit einem kleinen Käfer oben auf dem Ausführen-Button. Wenn du sie auswählst, wird <em>“Ausführen und Debuggen”</em> angezeigt. Klicke auf den Button und es werden verschiedene Optionen für verschiedene Arten von Python-Projekten und -Frameworks angeboten. Für unsere Zwecke werden wir nur <em>“Python-Datei: Debugge die aktuell aktive Python-Datei”</em> benötigen. Klicke darauf und es wird deinen Code ausführen (sollte auf die gleiche Weise wie mit dem anderen Button laufen).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/debug-select-debug-configuration.png" class="img-fluid figure-img"></p>
+<figcaption>Debug-Konfiguration auswählen.</figcaption></figure>
+</div>
+<p>Du willst sicherlich nicht jedes Mal auf Debugging → Ausführen und Debuggen → Wähle Konfiguration klicken. Eine bessere Möglichkeit ist, es einmal einzurichten und dann die <strong>F5</strong>-Taste zu verwenden, um deinen Code auszuführen. Zunächst klickst du auf <em>“erzeuge eine launch.json-Datei”</em> und wählst <em>“Python-Datei: Debuggiere die aktuell aktive Python-Datei”</em>. Du solltest nun eine neue <em>launch.json</em>-Datei im Editor sehen, die folgendermaßen aussehen sollte:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/debug-launch-json.png" class="img-fluid figure-img"></p>
+<figcaption>Debug-Konfiguration in der launch.json-Datei.</figcaption></figure>
+</div>
+<p>Das war’s! VS Code hat eine Konfiguration für dich erstellt. Jetzt kannst du die Datei <em>launch.json</em> schließen und dein Programm mit einem einfachen Druck auf die Taste <strong>F5</strong> starten. Versuche es! Wie gehabt sollte es funktionieren, aber warum haben wir das alles gemacht? Weil der Debugger die Ausführung deines Codes unterbricht, sobald er ein Problem entdeckt, und dir so die Möglichkeit gibt, Variablen zu untersuchen, Codeausschnitte auszuführen usw. Im Gegensatz dazu zeigt das Ausführen einer Python-Datei im Terminal (die erste Option) nur eine Fehlermeldung an und beendet das Programm. Außerdem kannst du <em>Breakpoints</em> verwenden, um das Programm an jeder beliebigen Zeile anzuhalten und so deine Codeüberprüfung an jedem gewünschten Ort durchzuführen.</p>
+<p>Du setzt Breakpoints, indem du auf die linke Seite der Zeilennummer klickst, die dich interessiert. Hier habe ich auf Zeile 6 geklickt und du kannst einen roten Punkt sehen, der einen aktiven Breakpoint anzeigt.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/debug-breakpoint.png" class="img-fluid figure-img"></p>
+<figcaption>Aktiver Breakpoint.</figcaption></figure>
+</div>
+<p>Wenn ich jetzt den Code über <strong>F5</strong> ausführe, wird das Programm an dieser Zeile anhalten, <em>vor</em> der Ausführung.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/debug-pause.png" class="img-fluid figure-img"></p>
+<figcaption>Programm pausiert an der breakpoint.</figcaption></figure>
+</div>
+<p>Das gibt mir die Möglichkeit zu sehen, welchen Wert meine Variable <code>number_picked</code> hat. Sie ist bereits in den lokalen Variablen (oben links) aufgeführt. Aber ich habe sie auch der Liste der überwachten Variablen (<em>Watch</em>, Mitte links) hinzugefügt und auch in der <em>Debug-Konsole</em> (unterer Tab) nach ihrem Wert geschaut, die es mir ermöglicht, jeden Python-Code auszuführen, während mein Programm pausiert ist. Mach das gleiche und probiere diese verschiedenen Möglichkeiten selbst aus. Zum Beispiel, siehst du, wie du <code>number_picked + 1</code> oder <code>number_picked * number_picked</code> in der <em>Watch</em>-Registerkarte und in der <em>Debug-Konsole</em> berechnen kannst.</p>
+<p>Okay, nachdem du den aktuellen Zustand des Programms überprüft hast, hast du sechs Knöpfe oben, um zu entscheiden, was als nächstes zu tun ist (bewege den Mauszeiger darüber, um Hinweise zu sehen). Von links nach rechts sind sie:</p>
+<ul>
+<li>Fortsetzen (<strong>F5</strong>): setz das Programm fort.</li>
+<li>Überspringen (<strong>F10</strong>): führt den Code ohne in Funktionen zu gehen aus (dies und die nächsten beiden Optionen werden klarer, sobald du das Schreiben von Funktionen gelernt hast).</li>
+<li>In den Code eintreten (<strong>F11</strong>)</li>
+<li>Aus dem Code austreten (<strong>Shift+F11</strong>).</li>
+<li>Das Programm neu starten (<strong>Ctrl+Shift+F5</strong>).</li>
+<li>Das Programm stoppen (<strong>Shift+F5</strong>).</li>
+</ul>
+<p>Um besser zu verstehen, wie das funktioniert, stoppe das Programm (<strong>Shift+F5</strong>) und setze einen zusätzlichen Breakpoint an der ersten Zeile deines Codes (Zeile #5 in meinem Programm, die anderen Zeilen sind Kommentare oder leer). Starte das Programm erneut über <strong>F5</strong> und es wird an dieser ersten Zeile pausieren. Kannst du jetzt den Wert der Variablen <code>number_picked</code> herausfinden?</p>
+<p>Die Antwort ist “nein”, weil diese Variable noch nicht existiert. Denk dran, das Programm pausiert <em>vor</em> der Ausführung der Zeile. Verwende <strong>F10</strong>, um die Codezeile für Zeile durchzugehen und zu sehen, wie die Variable erscheint und die Informationen ausgegeben werden.</p>
+<p>Dieses Debugging-Übungsproblem war vielleicht nicht notwendig, um Probleme mit deinem aktuellen Code zu lösen, aber es hat gezeigt, wie man das in Zukunft machen kann. Zögere nicht, eine Pause im Programm einzufügen, um zu überprüfen, ob die Realität (d.h. die tatsächlichen Werte der Variablen) deinen Erwartungen entspricht. Verwende das Durchlaufen des Codes, um die Dinge zu verlangsamen und zuzuschauen und nachzudenken.</p>
+</section><section id="input-function" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="input-function">
+<span class="header-section-number">2.6</span> Rate einen Spieler nach seinem Tipp</h2>
+<p>Um das <em>Rate die Zahl</em> Spiel zu spielen, braucht es zwei. Der Computer hat seinen Teil erledigt, indem er eine Zahl ausgewählt hat, jetzt müssen wir den Spieler bitten, seinen Tipp einzugeben. Dafür werden wir die <a href="https://docs.python.org/3/library/functions.html#input">input()</a> <em>Funktion</em> verwenden.</p>
+<p>Eine Funktion ist ein isolierter Code, der (optional) <em>Eingaben</em> annimmt, eine <em>Aktion</em> durchführt und optional einen Wert (<em>Ausgabe</em>) zurückgibt. Das ermöglicht es, den Code in kleinere Teile zu unterteilen, die leichter gepflegt werden können, und denselben Code wiederzuverwenden. Du hast bereits die <a href="https://docs.python.org/3/library/functions.html#print">print()</a>-Funktion verwendet, um Dinge auszugeben, und die <a href="https://docs.python.org/3/library/functions.html#func-str">str()</a>, <a href="https://docs.python.org/3/library/functions.html#bool">bool()</a>, <a href="https://docs.python.org/3/library/functions.html#int">int()</a> und <a href="https://docs.python.org/3/library/functions.html#float">float()</a>-Funktionen, um Werte zu konvertieren. Bei <a href="https://docs.python.org/3/library/functions.html#print">print()</a> ist die <em>Eingabe</em> eine beliebige Anzahl von Werten (sogar keine, probiere es im Jupiter Notebook aus!), die <em>Aktion</em> besteht darin, Dinge auszugeben, aber es gibt keine <em>Ausgabe</em>. Die <a href="https://docs.python.org/3/library/functions.html#float">float()</a>-Funktion nimmt (etwas überraschend) null oder einen Wert als <em>Eingabe</em> an (versuche, ihr keine oder mehr als einen Wert im Jupiter Notebook zu geben und sieh den Unterschied), versucht, den gegebenen Wert in einen Float zu konvertieren (wirft einen Fehler, wenn sie es nicht kann) und gibt einen Float-Wert als <em>Ausgabe</em> zurück.</p>
+<p>Gleiche <em>Eingabe</em> → <em>Aktion</em> → <em>Ausgabe</em> Regel gilt für die <a href="https://docs.python.org/3/library/functions.html#input">input(prompt)</a>. Es nimmt eine optionale „Eingabeaufforderung“ als Eingabe. Dann gibt es die „Prompt“-Nachricht aus und wartet darauf, dass der Benutzer eine „Zeichenkette“ eingibt, bis er „Enter“ drückt. Dann gibt es diesen <em>String</em>-Wert zurück. Der letzte Teil über <em>String</em> ist wichtig, weil wir in unserem Spiel einen Spieler brauchen, der eine <em>Ganzzahl</em> und keinen String eingibt. Lassen wir uns einen Moment lang von der Annahme leiten, dass die Eingabe immer eine gültige Ganzzahl ist, also gib beim Testen des Programms nur gültige Ganzzahlen ein! Auf diese Weise können wir den Wert ohne zusätzliche Prüfungen in eine Ganzzahl umwandeln (wir werden sie in Zukunft hinzufügen) und diesen Wert einer neuen Variablen namens <code>guess</code> zuweisen. Du musst also eine einzeilige Zuweisungsanweisung mit der Variable <code>guess</code> auf der linken Seite und dem Aufruf der Funktion <a href="https://docs.python.org/3/library/functions.html#input">input()</a> auf der rechten Seite hinzufügen (denke an eine nette Eingabeaufforderung), die von der Typumwandlung in eine Ganzzahl über <a href="https://docs.python.org/3/library/functions.html#int">int()</a> umschlossen wird. Teste diesen Code, aber gib wieder nur gültige Ganzzahlen ein, damit die Umwandlung ohne Fehler funktioniert.</p>
+<div class="program">
+<p>Aktualisiere deine <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="if-anweisung" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="if-anweisung">
+<span class="header-section-number">2.7</span> Bedingte <em>if</em>-Anweisung</h2>
+<p>Jetzt haben wir zwei Zahlen: Eine, die der Computer ausgewählt hat (<code>number_picked</code>) und eine, die der Spieler eingegeben hat (<code>guess</code>). Wir müssen sie vergleichen, um eine korrekte Ausgabenachricht bereitzustellen. Dafür werden wir eine bedingte <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">if-Anweisung</a> verwenden:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> some_condition_is_true:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tu etwas</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> some_other_condition_is_true:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tu etwas anderes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> yet_another_condition_is_true:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tu etwas ganz anderes</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tu etwas nur, wenn alle Bedingungen oben falsch sind.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Python, nur der <code>if</code>-Teil ist Pflicht, während <code>elif</code> (kurz für “else, if”) und <code>else</code> optional sind. Also kannst du etwas nur machen, wenn eine Bedingung wahr ist:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> some_condition_is_true:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tu etwas, aber ansonsten tu gar nichts</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># und fahre mit dem Codeausführen fort</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># einige Code, der nach der if-Anweisung ausgeführt wird,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># unabhängig davon, ob die Bedingung wahr oder falsch war.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Bevor wir bedingte Anweisungen in unserem Spiel verwenden können, musst du (1) die Bedingungen selbst und (2) die Verwendung von Einrückungen als Mittel zur Gruppierung von Anweisungen verstehen.</p>
+</section><section id="vergleiche" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="vergleiche">
+<span class="header-section-number">2.8</span> Bedingungen und Vergleiche</h2>
+<p>Bedingung ist jeder Ausdruck, der bewertet werden kann, um festzustellen, ob er <code>True</code> oder <code>False</code> ist. Ein einfaches Beispiel für einen solchen Ausdruck sind Vergleiche, die in der Menschensprache ausgedrückt werden: <em>Ist heute Donnerstag?</em> <em>Ist die Antwort (gleich) 42?</em> <em>Regnet es und ich habe einen Schirm?</em> Wir werden uns für einen Moment auf Vergleiche wie diese konzentrieren, aber später wirst du sehen, dass in Python <em>jeder</em> Ausdruck entweder <code>True</code> oder <code>False</code> ist, sogar wenn er nicht wie ein Vergleich aussieht<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Für den Vergleich kannst du folgende Operatoren verwenden:</p>
+<ul>
+<li>
+<em>“A ist gleich B”</em> wird als <code>A == B</code> geschrieben.</li>
+<li>
+<em>“A ist ungleich B”</em> wird als <code>A!= B</code> geschrieben.</li>
+<li>
+<em>“A ist größer als B”</em> und <em>“A ist kleiner als B”</em> sind entsprechend <code>A &gt; B</code> und <code>A &lt; B</code>.</li>
+<li>
+<em>“A ist größer gleich B”</em> und <em>“A ist kleiner gleich B”</em> sind entsprechend <code>A &gt;= B</code> und <code>A &lt;= B</code> (bitte beachte die Reihenfolge der Symbole, da <code>=&gt;</code> und <code>=&lt;</code> einen Fehler erzeugen werden).</li>
+</ul>
+<div class="practice">
+<p>Gehe zu Übung #1, um einige Vergleiche zu lösen.</p>
+</div>
+<p>Beachte, dass Python auch einen <a href="https://docs.python.org/3/library/operator.html#operator.is_">is</a> Operator hat, der identisch zu <code>==</code> aussehen kann (z.B. sieht <code>x == 2</code> gleich aus wie <code>x is 2</code>). In <em>einigen</em> Fällen funktioniert er auch auf die gleiche Weise. Allerdings gibt es einen feinen Unterschied: <code>==</code> überprüft, ob <em>Werte</em> identisch sind, während <code>is</code> überprüft, ob <em>Objekte</em> (die “Werte” halten) identisch sind. Du musst Klassen und Objekte verstehen, um diesen Unterschied zu schätzen, also behalte einfach im Hinterkopf, dass du <code>==</code> verwenden solltest (ich werde explizit erwähnen, wann <code>is</code> benötigt wird).</p>
+<p>Du kannst den logischen Wert mit dem <code>not</code>-Operator <em>umkehren</em>, denn <code>not True</code> ist <code>False</code> und <code>not False</code> ist <code>True</code>. Das bedeutet, dass <code>A!= B</code> dasselbe ist wie <code>not A == B</code> und entsprechend <code>A == B</code>   <code>not A!= B</code> ist. Um zu sehen, wie das funktioniert, betrachte beide Fälle, wenn <code>A</code> tatsächlich gleich <code>B</code> ist und wenn nicht.</p>
+<ul>
+<li>Wenn A gleich B ist, dann bewertet <code>A == B</code> als <code>True</code>. Dann ist <code>A!= B</code> <code>False</code>, also <code>not A!= B</code> → <code>not False</code> → <code>True</code>.</li>
+<li>Wenn A nicht gleich B ist, dann bewertet <code>A == B</code> als <code>False</code>. Dann ist <code>A!= B</code> <code>True</code>, also <code>not A!= B</code> → <code>not True</code> → <code>False</code>.</li>
+</ul>
+<div class="practice">
+<p>Mach dich auf den Weg zu Übung #2, um diese Inversion selbst zu erkunden.</p>
+</div>
+<p>Du kannst auch mehrere Vergleiche mit den <code>and</code> und/oder <code>or</code>-Operatoren kombinieren. Wie in der Menschensprache bedeutet <code>and</code>, dass beide Teile wahr sein müssen: <code>True and True</code> → <code>True</code>, aber <code>True and False</code> → <code>False</code>, <code>False and True</code> → <code>False</code> und <code>False and False</code> → <code>False</code>. Das gilt auch, wenn du mehr als zwei Bedingungen/Vergleiche über <code>and</code> verknüpfst: <strong>Alle</strong> müssen wahr sein. Im Fall von <code>or</code> muss nur eine der Aussagen wahr sein, z.B. <code>True or True</code> → <code>True</code>, <code>True or False</code> → <code>True</code>, <code>False or True</code> → <code>True</code>, aber <code>False or False</code> → <code>False</code>. Again, für mehr als zwei Vergleiche/Bedingungen sollte mindestens eine von ihnen wahr sein, damit der gesamte Ausdruck wahr ist.</p>
+<div class="practice">
+<p>Mach die Übungen #3 und #4.</p>
+</div>
+<p>Kleiner aber wichtiger Punkt: Bedingungen werden von links nach rechts ausgewertet, bis der gesamte Ausdruck auf eine Weise oder andere aufgelöst ist. Das bedeutet, wenn der erste Ausdruck in einem <code>and</code> <code>False</code> ist, wird der zweite (und alle folgenden) <strong>niemals ausgewertet</strong>. Also, wenn <code>first and second</code> Ausdrücke beide <code>True</code> sein müssen und du weißt, dass der <code>first</code> Ausdruck bereits <code>False</code> ist, wird der gesamte Ausdruck in jedem Fall <code>False</code> sein. Das bedeutet, dass im folgenden Code kein Fehler auftreten wird, obwohl das Auswerten von <code>int("e123")</code> alleine einen <code>ValueError</code> auslösen würde.</p>
+<div id="168fd7bb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">5</span> <span class="kw">and</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>False</code></pre>
+</div>
+</div>
+<p>Kehrt man jedoch die Reihenfolge um, so dass <code>int(„e123“) == 123</code> zuerst ausgewertet werden muss, erhält man die Fehlermeldung</p>
+<div id="a39d483a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span> <span class="kw">and</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[2], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">int</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">e123</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span> <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">123</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> <span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">4</span>
+
+<span class="ansi-red-fg ansi-bold">ValueError</span>: invalid literal for int() with base 10: 'e123'</pre>
+</div>
+</div>
+</div>
+<p>Gleiches gilt, wenn <em>irgendein</em> Ausdruck in <code>or</code> <code>True</code> ist, musst du den Rest nicht überprüfen.</p>
+<div id="7115a17b" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">4</span> <span class="kw">or</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>True</code></pre>
+</div>
+</div>
+<p>Aber wenn die erste Bedingung <code>False</code> ist, müssen wir weiter machen (und landen in einem Fehler):</p>
+<div id="f9af8d58" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">5</span> <span class="kw">or</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[4], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> <span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">5</span> <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">int</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">e123</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span> <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">123</span>
+
+<span class="ansi-red-fg ansi-bold">ValueError</span>: invalid literal for int() with base 10: 'e123'</pre>
+</div>
+</div>
+</div>
+<div class="practice">
+<p>Mach Übung #5.</p>
+</div>
+<p>Endlich, genau wie in der einfachen Arithmetik, kannst du Klammern <code>()</code> verwenden, um Bedingungen zusammenzufassen. Also kannst du den Satz “Ich esse immer Schokolade, aber Spinat esse ich nur, wenn ich hungrig bin” als <code>food == "chocolate" or (food == "spinach" and hungry)</code> schreiben. Hier werden <code>food == "chocolate"</code> und <code>food == "spinach" and hungry</code> unabhängig ausgewertet, ihre Werte werden an ihrer Stelle eingesetzt und dann wird die <code>and</code>-Bedingung ausgewertet.</p>
+<div class="practice">
+<p>Mach Übung #6.</p>
+</div>
+<p>Endgedanke zu Vergleichen: Zögere nicht, sie in Jupyter Notebook mit verschiedenen Kombinationen von Werten zu testen oder das Programm an der Bedingung via einem Breakpoint anzuhalten und einen Vergleich in <em>Watch</em> oder <em>Debug Console</em> auszuwerten.</p>
+</section><section id="einrueckung" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="einrueckung">
+<span class="header-section-number">2.9</span> Statements gruppieren über Einrückung</h2>
+<p>Gehen wir zurück zu einer bedingten if-Anweisung. Schau dir das folgende Code-Beispiel an (und beachte das <code>:</code> am Ende von <code>if some_condition_is_true:</code>), bei dem <em>Statement #1</em> nur ausgeführt wird, wenn <em>some condition</em> wahr ist, während <em>Statement #2</em> danach ausgeführt wird, <em>unabhängig</em> von der Bedingung.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> some_condition_is_true:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    statement <span class="co">#1</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>statement <span class="co">#2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Beide Statements #1 und #2 erscheinen nach der if-Anweisung, also wie weiß Python, dass das erste nur ausgeführt wird, wenn die Bedingung wahr ist, aber das andere immer läuft? Die Antwort ist die Einrückung: Die <strong>4 (vier!) Leerzeichen</strong>, die automatisch hinzugefügt werden, wenn du die <strong>Tab</strong>-Taste in VS Code drückst, und entfernt werden, wenn du <strong>Shift+Tab</strong> drückst. Die Einrückung setzt Statement #1 <em>innerhalb</em> der if-Anweisung. So zeigt die Einrückung an, ob Anweisungen zur gleichen Gruppe gehören und nacheinander ausgeführt werden müssen (gleiche Einrückungsebene für <code>if</code> und <code>statement #2</code>) oder ob sie sich innerhalb einer bedingten Anweisung, Schleife, Funktion, Klasse usw. befinden (<code>statement #1</code>). Bei komplexerem Code, der z. B. eine if-Anweisung innerhalb einer if-Anweisung innerhalb einer Schleife enthält, wird dies durch Hinzufügen weiterer Einrückungsebenen ausgedrückt.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># einige Anweisungen außerhalb der Schleife (0 Einrückung)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> game_is_not_over: <span class="co"># (0 Einrückung)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Anweisungen innerhalb der Schleife</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> key_pressed: <span class="co"># (Einrückung von 4)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># innerhalb der Schleife und der if-Anweisung</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> key <span class="op">==</span> <span class="st">"Space"</span>: <span class="co"># (Einrückung von 8)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="co"># innerhalb der Schleife, der if-Anweisung und einer weiteren if-Anweisung</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            jump() <span class="co"># (Einrückung von 12)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># (Einrückung von 4)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># innerhalb der Schleife, der if-Anweisung und dem else-Teil einer weiteren if-Anweisung</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            stand() <span class="co"># (Einrückung von 12)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Anweisungen innerhalb der Schleife, aber außerhalb der äußersten if-Anweisung</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(key) <span class="co"># (Einrückung von 4)</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># einige Anweisungen außerhalb der Schleife (0 Einrückung)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Achte sehr genau auf die Einrückung, da sie bestimmt, welche Anweisungen zusammen ausgeführt werden! Ein falscher Einrückungsgrad ist leider ein sehr häufiger Fehler.</p>
+<div class="practice">
+<p>Mach Übung #7.</p>
+</div>
+<p>In Python, die <code>if</code>- und <code>ifelse</code>-Anweisungen werden ausgewertet, bis eine davon <code>True</code> ist. Danach werden alle folgenden <code>ifelse</code>- und <code>else</code>-Anweisungen einfach ignoriert.</p>
+<div class="practice">
+<p>Mach Übung #8.</p>
+</div>
+</section><section id="antwort-überprüfen" class="level2" data-number="2.10"><h2 data-number="2.10" class="anchored" data-anchor-id="antwort-überprüfen">
+<span class="header-section-number">2.10</span> Antwort überprüfen</h2>
+<p>Jetzt hast du alle notwendigen Werkzeuge, um die erste Version unseres Spiels fertigzustellen. Füge deinem <span class="filename">code01.py</span> bedingte Anweisungen hinzu, damit</p>
+<ul>
+<li>Wenn der Computer eine kleinere Zahl als deine Vermutung wählt, wird er <code>"Meine Zahl ist niedriger!"</code> ausgeben</li>
+<li>Wenn der Computer eine größere Zahl als deine Vermutung wählt, wird er <code>"Meine Zahl ist höher!"</code> ausgeben</li>
+<li>Wenn die beiden Zahlen identisch sind, wird er <code>"Treffer!"</code> ausgeben</li>
+</ul>
+<p>Erstmal speicher eine Kopie deines Original-Codes in <span class="filename">code02.py</span> und füge dann den Vergleich und das Drucken hinzu.</p>
+<div class="program">
+<p>Erweitere dein Programm um den Vergleich in <span class="filename">code02.py</span></p>
+</div>
+<p>Teste, ob dein Code funktioniert. Verwende wieder Breakpoints, wenn du den Kontrollfluss besser verstehen möchtest und überprüfe, ob Vergleiche so funktionieren, wie du es erwartest.</p>
+</section><section id="bibliotheken-verwenden" class="level2" data-number="2.11"><h2 data-number="2.11" class="anchored" data-anchor-id="bibliotheken-verwenden">
+<span class="header-section-number">2.11</span> Bibliotheken verwenden</h2>
+<p>Unser Spiel ist “funktionsvollendet”: Der Computer wählt eine Zahl, der Spieler rät, der Computer reagiert entsprechend. Allerdings spielen wir momentan auf beiden Seiten. Lassen wir den Computer selbst eine zufällige Zahl wählen. Dafür benötigen wir die Funktion <a href="https://docs.python.org/3/library/random.html#random.randint">randint(a, b)</a>. Es ist Teil jeder Python-Distribution, so dass du es auch hast, wenn du eine Vanilla-Python-Distribution installierst, anstatt eine von PsychoPy zu verwenden. Allerdings kannst du sie nicht direkt wie <code>print()</code> oder <code>input()</code> verwenden. Gib <code>randint(1, 3)</code> in deinem Jupyter Notebook ein und beobachte <em>NameError: name ‘randint’ is not defined</em>.</p>
+<p>Das liegt daran, dass Python eine Menge Funktionen hat und das Laden all dieser Funktionen auf einmal den Speicher mit Dingen verstopfen würde, die du nie verwenden wolltest. Stattdessen sind sie in <em>Bibliotheken</em> gepackt, damit du nur die Funktionen (oder Bibliotheken) importieren kannst, die du tatsächlich für dein Programm benötigst. Du importierst sie über eine <code>import</code>-Anweisung, die oben in deine Datei gehören sollte (aber unter dem Kommentar zum Dateiinhalt). Es gibt mehrere Möglichkeiten, Bibliotheken zu importieren. Zunächst kannst du eine <em>gesamte</em> Bibliothek importieren (wie die <em>random</em>-Bibliothek, die die Funktion <code>randint()</code> enthält, die wir benötigen) und dann ihre Funktionen als <code>&lt;Bibliothek&gt;.&lt;Funktion&gt;</code> verwenden. Für <code>randint</code> würde dies wie folgt aussehen:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>computer_pick <span class="op">=</span> random.randint(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ich würde vorschlagen, dass du auf diese Weise Bibliotheken verwendest, da sie dich zwingt, den Namen der Bibliothek explizit zu erwähnen, wenn du eine Funktion aufrufst, z.B. <code>random.randint()</code> anstelle von einfach <code>randint()</code>. Das mag auf den ersten Blick nicht wichtig aussehen, aber selbst in einem bescheidenen Projekt wirst du viele Bibliotheken importieren, sodass es schwierig sein wird herauszufinden, zu welcher Bibliothek die Funktion gehört. Noch wichtiger ist, dass verschiedene Bibliotheken Funktionen mit demselben Namen haben können. In diesem Fall stammt die Funktion, die du verwendest, von der letzten Bibliothek, die du importiert hast. Aber du könntest das nicht merken, und das ist ein Fehler, der wirklich schwer zu finden ist. Daher solltest du es immer tun, es sei denn, du hast einen sehr guten Grund, etwas anderes zu tun: Importiere die gesamte Bibliothek und verwende die Notation <code>bibliothek.</code>.</p>
+<p>Eine andere und weniger offensichtliche Option ist, nur <em>einige</em> Funktionen zu importieren und sie <em>ohne</em> das <code>library.</code> Präfix zu verwenden. Du kannst mehr als eine Funktion importieren, indem du sie alle auflistest</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randint, randrange</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>computer_pick <span class="op">=</span> randint(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Du kannst auch eine Bibliothek oder eine Funktion beim Importieren über <code>as</code> umbenennen. Kurz gesagt, du solltest das nicht tun, da das Verwenden eines anderen Namens für eine Bibliothek oder eine Funktion es für andere (und sogar für deine zukünftige Version) schwieriger machen würde, deinen Code zu verstehen. Es gibt jedoch einige “Standard”-Umbenennungsmuster, die universell verwendet werden und auf die du wahrscheinlich stoßen wirst.</p>
+<div id="efd3bd69" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># das ist eine Standardmethode, um diese beiden Bibliotheken zu importieren</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">abs</span>(<span class="op">-</span><span class="dv">1</span>) <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Du kannst auch einzelne Funktionen umbenennen,</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># wenn du wirklich musst (aber bitte nicht!)</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randint <span class="im">as</span> random_integer</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>computer_pick <span class="op">=</span> random_integer(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Endlich gibt es eine <strong>sehr schlechte Art</strong>, Funktionen aus einer Bibliothek zu importieren: <code>from random import *</code>. Das Sternchen bedeutet, dass du alle Funktionen aus der Bibliothek importieren möchtest und sie ohne <code>random.</code> Präfix aufrufen möchtest. Nie, nie, nie<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> solltest du das tun! Das füllt deine Umgebung mit Funktionen, von denen du vielleicht nichts weißt, überschreibt möglicherweise andere Funktionen und verursacht Konflikte usw. Niemals! Ich zeige dir das nur, weil du irgendwann einmal einen Code sehen wirst, der diese Methode verwendet, und du könntest denken, dass das eine gute Idee ist. Das ist eine furchtbare Idee! Importiere die Bibliothek, nicht die Funktionen, damit du explizit zeigen kannst, auf welche Bibliothek du dich beim Aufrufen einer Funktion verlässt. Denke immer an das <a href="https://www.python.org/dev/peps/pep-0020/">Zen of Python</a>: “Explizit ist besser als implizit.”</p>
+</section><section id="eine-zahl-zufällig-auswählen" class="level2" data-number="2.12"><h2 data-number="2.12" class="anchored" data-anchor-id="eine-zahl-zufällig-auswählen">
+<span class="header-section-number">2.12</span> Eine Zahl zufällig auswählen</h2>
+<p>Jetzt, wo du weißt, wie man eine Bibliothek importiert, können wir die Funktion <a href="https://docs.python.org/3/library/random.html#random.randint">randint()</a> verwenden. Dazu speicherst du eine Kopie deines vorherigen Codes in <span class="filename">code03.py</span>. Importiere die Bibliothek und verwende <a href="https://docs.python.org/3/library/random.html#random.randint">randint()</a>, um eine zufällige Zahl zwischen 1 und 10 zu erzeugen. Lies die Dokumentation zu <a href="https://docs.python.org/3/library/random.html#random.randint">randint()</a>, um zu verstehen, wie man sie verwendet. Das Lesen von Handbüchern ist ein notwendiger Teil des Programmierens, also ist das ein guter Punkt, um damit anzufangen zu üben.</p>
+<p>Okay, nachdem du das in <span class="filename">code03.py</span> umgesetzt hast, führ es ein paar Mal aus, um sicherzustellen, dass der Computer tatsächlich verschiedene zufällige Werte auswählt. Wie immer, du kannst Breakpoints verwenden, wenn du nochmal nachprüfen möchtest, was da abläuft.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="program-filename">code03.py</span> ein.</p>
+</div>
+<p>Herzlichen Glückwunsch, du hast gerade dein erstes Computerspiel programmiert! Ja, es ist sehr einfach, aber es hat wichtige Zutaten: eine zufällige Entscheidung des Computers, Benutzereingabe und Feedback. Beim nächsten Mal lernst du Schleifen kennen, um mehrere Versuche zu ermöglichen, und wirst Funktionen schreiben, um deinen Code modular und zuverlässig zu gestalten. In der Zwischenzeit stärken wir dein Wissen, indem wir ein weiteres Spiel programmieren!</p>
+</section><section id="einarmiger-bandit-ein-runden-edition" class="level2" data-number="2.13"><h2 data-number="2.13" class="anchored" data-anchor-id="einarmiger-bandit-ein-runden-edition">
+<span class="header-section-number">2.13</span> Einarmiger Bandit (Ein-Runden-Edition)</h2>
+<p>Du weißt bereits alles, was du brauchst, um eine einfache Version des “Einarmigen Banditen”-Spiels zu programmieren. Hier ist die Spiel-Logik:</p>
+<ol type="1">
+<li>Importiere die <code>random</code>-Bibliothek, damit du die <code>randint</code>-Funktion verwenden kannst.</li>
+<li>Erzeuge drei zufällige Ganzzahlen (sagen wir, zwischen 1 und 5) und speichere sie in den Variablen <code>slot1</code>, <code>slot2</code> und <code>slot3</code>.</li>
+<li>Gib die Zahlen aus, verwende String-Formatierung, um sie ansprechend darzustellen.</li>
+<li>Außerdem:
+<ul>
+<li>Wenn alle drei Werte gleich sind, gib <code>"Drei gleiche!"</code> aus.</li>
+<li>Wenn nur zwei Zahlen übereinstimmen, gib <code>"Paar!"</code> aus.</li>
+<li>Gib nichts aus, wenn alle Zahlen unterschiedlich sind.</li>
+</ul>
+</li>
+</ol>
+<p>Mach weiter so und vergiss nicht, die neue Datei <span class="filename">code04.py</span> zu dokumentieren. Du kannst gerne Breakpoints verwenden, um sie zu debuggen.</p>
+<div class="program">
+<p>Schreibe deinen Code in <span class="program-filename">code04.py</span>.</p>
+</div>
+</section><section id="abgabe-für-das-seminar" class="level2" data-number="2.14"><h2 data-number="2.14" class="anchored" data-anchor-id="abgabe-für-das-seminar">
+<span class="header-section-number">2.14</span> Abgabe für das Seminar</h2>
+<p>Für das Seminar musst du einen gepackten Ordner mit Übungsheft und allen vier Programmen abgeben.</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Du kannst den vorherigen Code “Speichern unter…”, um zu vermeiden, dass du Dinge von Hand kopierst und einfügst.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Ich empfehle die Verwendung von <code>01</code> statt <code>1</code>, damit die Dateien in deinem Dateimanager sortiert sind<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Natürlich wissen wir es, weil wir es hartcodiert haben, aber das wird nicht der Fall sein, wenn der Computer sie zufällig generiert, also planen wir für die Zukunft<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Oder zumindest einfacher.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Dies liegt daran, dass du jeden Wert mit der <a href="https://docs.python.org/3/library/functions.html#bool">bool()</a>-Funktion, die du beim letzten Mal kennengelernt hast, in einen logischen Wert umwandeln kannst und daher jeder Wert entweder <code>True</code> oder <code>False</code> ist.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Habe ich schon erwähnt, dass du das nie tun sollst? Nie!<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./01-basics.de.html" class="pagination-link" aria-label="Python Grundlagen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-guess-the-number-multi-round.de.html" class="pagination-link" aria-label="Rate das Zahl: die Multi-Runde-Edition">
+        <span class="nav-page-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body>
+</html>

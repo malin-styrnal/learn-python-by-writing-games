@@ -90,28 +90,28 @@
     ]
   },
   {
-    "objectID": "00-software.de.html",
-    "href": "00-software.de.html",
+    "objectID": "001-software.de.html",
+    "href": "001-software.de.html",
     "title": "Software",
     "section": "",
-    "text": "PsychoPy\nWenn du Windows nutzt, lade und installiere die Standalone PsychoPy Version herunter. Nimm einfach die neueste (und beste) PsychoPy Version, die dir empfohlen wird (Stand PsychoPy 2023.2.2 mit Python 3.8) und folge den Anweisungen.\nWenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den aktualen Anweisungen.",
+    "text": "PsychoPy\nWenn du Windows nutzt, lade und installiere die Standalone PsychoPy Version herunter. Nimm einfach die neueste (und beste) PsychoPy Version, die dir empfohlen wird (Stand PsychoPy 2024.2.3 mit Python 3.10) und folge den Anweisungen.\nWenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den aktualen Anweisungen.",
     "crumbs": [
       "Software"
     ]
   },
   {
-    "objectID": "00-software.de.html#install-vs-code",
-    "href": "00-software.de.html#install-vs-code",
+    "objectID": "001-software.de.html#install-vs-code",
+    "href": "001-software.de.html#install-vs-code",
     "title": "Software",
     "section": "VS Code",
-    "text": "VS Code\nVisual Studio Code ist ein kostenloser, leichter und offener Quellcode-Editor mit starker Unterstützung für Python. Lade den Installer für deine Plattform herunter und folge den Anweisungen.\nNächster Schritt: Folge dem Tutorial Erste Schritte mit Python in VS Code. Wenn du Windows und die standalone PsychoPy-Installation verwendest, überspringe den Abschnitt Installiere einen Python-Interpreter, da du bereits eine Python-Installation mit PsychoPy hast. Dies ist der Interpreter, den du im Abschnitt Wähle einen Python-Interpreter verwenden solltest. In meinem Fall ist der Pfad C:\\Program Files\\PsychoPy3\\python.exe.\nInstalliere und aktiviere einen Linter, eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode hervorhebt. Folge der Anleitung auf der VS Code-Website.",
+    "text": "VS Code\nVisual Studio Code ist ein kostenloser, leichter und offener Quellcode-Editor mit starker Unterstützung für Python. Lade den Installer für deine Plattform herunter und folge den Anweisungen.\nNächster Schritt: Folge dem Tutorial Erste Schritte mit Python in VS Code. Wenn du Windows und die standalone PsychoPy-Installation verwendest, überspringe den Abschnitt Installiere einen Python-Interpreter, da du bereits eine Python-Installation mit PsychoPy hast. Dies ist der Interpreter, den du im Abschnitt Wähle einen Python-Interpreter verwenden solltest. In meinem Fall ist der Pfad C:\\Program Files\\PsychoPy\\python.exe.\nInstalliere und aktiviere einen Linter, eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode hervorhebt. Folge der Anleitung auf der VS Code-Website.",
     "crumbs": [
       "Software"
     ]
   },
   {
-    "objectID": "00-software.de.html#jupyter-notebooks",
-    "href": "00-software.de.html#jupyter-notebooks",
+    "objectID": "001-software.de.html#jupyter-notebooks",
+    "href": "001-software.de.html#jupyter-notebooks",
     "title": "Software",
     "section": "Jupyter Notebooks",
     "text": "Jupyter Notebooks\nJupyter Notebooks bieten eine super bequeme Möglichkeit, Text, Abbildungen und Code in einem einzigen Dokument zu vermischen. Sie erleichtern es auch, verschiedene kleine Snippets parallel auszuprobieren, ohne Skripte auszuführen. Wir werden sie für unser erstes Kapitel und gelegentliche Übungen oder Code-Tests später verwenden. Du kannst sie auf zwei Arten nutzen: 1) in VS Code unter Verwendung der Jupyter-Erweiterung, 2) im Browser unter Verwendung der klassischen Schnittstelle.\n\nJupyter Notebooks in VS Code\nLies die Anleitung darüber, wie du das Jupyter-Paket installierst und Notebooks in VS Code verwendest.\n\n\nJupyter Notebooks in Anaconda\nDie einfachste Möglichkeit, Jupyter Notebooks zusammen mit vielen anderen nützlichen Datenwissenschaft-Tools zu verwenden, ist das Anaconda-Toolkit. Beachte jedoch, dass dies eine zweite Python-Verteilung auf deinem System einführt. Dies kann zu Verwirrung führen, wenn du mit Skripten in VS Code arbeitest, wenn zufällig der Anaconda-Interpreter aktiv ist, anstatt der PsychoPy-Interpreter. Keine Panik, folge den Anweisungen unter Wähle einen Python-Interpreter und stelle sicher, dass der PsychoPy-Interpreter aktiv ist.\nOkay, dann lade und installiere Anaconda herunter. Die Website hat einen super Einstieg Abschnitt.",
@@ -120,8 +120,8 @@
     ]
   },
   {
-    "objectID": "00-software.de.html#files-folder",
-    "href": "00-software.de.html#files-folder",
+    "objectID": "001-software.de.html#files-folder",
+    "href": "001-software.de.html#files-folder",
     "title": "Software",
     "section": "Mach’s sauber",
     "text": "Mach’s sauber\nBevor wir loslegen, schlage ich vor, dass du einen Ordner namens games-with-python (oder so ähnlich) erstellst. Wenn du Jupyter Notebooks über Anaconda verwendest, solltest du ihn in deinem Benutzerordner erstellen, da Anaconda ihn dort erwartet. Dann erstellst du für jedes Kapitel / Spiel einen neuen Unterordner. Für das Seminar musst du einen Ordner mit allen Dateien zippen und hochladen.",
@@ -130,13 +130,923 @@
     ]
   },
   {
-    "objectID": "00-software.de.html#footnotes",
-    "href": "00-software.de.html#footnotes",
+    "objectID": "001-software.de.html#footnotes",
+    "href": "001-software.de.html#footnotes",
     "title": "Software",
     "section": "",
     "text": "Wenn du Teil des Seminars bist, frag mich einfach, wenn du Probleme hast oder unsicher bist, wie du fortfahren sollst.↩︎",
     "crumbs": [
       "Software"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.de.html",
+    "href": "002-programming-tips.de.html",
+    "title": "Tipps und Tricks fürs Programmieren",
+    "section": "",
+    "text": "Schreib den Code",
+    "crumbs": [
+      "Tipps und Tricks fürs Programmieren"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.de.html#schreibtipps",
+    "href": "002-programming-tips.de.html#schreibtipps",
+    "title": "Tipps und Tricks fürs Programmieren",
+    "section": "",
+    "text": "Nutze einen Linter\nEin Linter ist ein Programm, das deinen Code-Stil analysiert und alle Probleme hervorhebt, die er findet: Leerzeichen, wo keine sein sollten, keine Leerzeichen, wo welche sein sollten, falsche Namen, zu lange Zeilen usw. Das beeinflusst nicht, wie der Code ausgeführt wird, aber wenn du auf die Ratschläge des Linters hörst, ergibt sich ein konsistenter Standard, auch wenn er langweilig aussieht. [“Langweilig ist gut!”, siehe den Film “The Hitman’s Bodyguard”.] Versuche, alle Probleme zu beheben, die der Linter aufdeckt. Aber verwende deinen eigenen Verstand, denn manchmal sind Zeilen länger als der Linter es bevorzugt, aber dafür besser lesbar als zwei kürzere. Und ein “schlechter” Variablenname nach Linter-Standards kann für einen Psychologen ein bedeutungsvoller Name sein. Denk dran, dein Code ist für Menschen, nicht für den Linter.\n\n\nDokumentiere deinen Code\nJedes Mal, wenn du eine neue Datei erstellst: dokumentiere sie und aktualisiere die Dokumentation, wenn du neue Funktionen oder Klassen hinzufügst/änderst/löschst. Jedes Mal, wenn du eine neue Funktion erstellst: dokumentiere sie. Neue Klasse: dokumentiere sie. Neue Konstante: es sei denn, sie ist allein aus dem Namen klar, dokumentiere sie. Du wirst eine NumPy-Art, dies zu tun, im Buch lernen.\nIch kann gar nicht genug betonen, wie wichtig es ist, deinen Code zu dokumentieren. VS Code (ein Editor, den wir verwenden werden) ist clever genug, um NumPy-Dokstrings zu analysieren, also wird es dir immer dann diese Hilfe anzeigen, wenn du deine eigenen Funktionen verwendest (hilft dir, dir zu helfen!). Aber viel wichtiger ist, dass das Schreiben von Dokumentation dazu zwingt, nachzudenken und zu formulieren (in Menschensprache!), was die Funktion oder Klasse tut, welche Art die Argumente / Attribute / Methoden sind, welchen Bereich von gültigen Werten es gibt, welche Standardwerte es gibt, was eine Funktion zurückgeben sollte, usw. Meistens wirst du feststellen, dass du wichtige Details übersehen hast, die aus dem Code selbst nicht offensichtlich sind.\n\n\nLuft rein machen\nTrenne Code-Blöcke mit einigen leeren Zeilen. Stell dir vor, es sind Absätze im normalen Text. Du willst doch nicht, dass dein Buch ein einziger Absatz-Albtraum wird? Setze vor jedem Block einen Kommentar, der erklärt, was er tut, aber nicht wie er es tut. Zum Beispiel gibt es in unserem typischen PsychoPy-basierten Spiel einen Punkt, an dem wir alle Stimuli zeichnen und das Fenster aktualisieren. Das ist ein netter, in sich geschlossener Block, der als # alle Stimuli zeichnen beschrieben werden kann. Der Code liefert Details darüber, was genau gezeichnet wird, in welcher Reihenfolge gezeichnet wird, usw. Aber dieser einzelne Kommentar hilft dir zu verstehen, worum es in diesem Block geht und ob er für dich im Moment relevant ist. Gleiches gilt für # Tastendruck verarbeiten oder # Spielende Bedingungen überprüfen, usw. Aber sei vorsichtig und stelle sicher, dass der Kommentar den Code korrekt beschreibt. Zum Beispiel sollte, wenn der Kommentar # alle Stimuli zeichnen sagt, nirgendwo Stimuli-Zeichen-Code vorhanden sein und kein Code, der etwas anderes tut!\n\n\nSchreib deinen Code einen winzigen Schritt nach dem anderen\nDein Motto sollte “langsam aber sicher” sein. So werde ich dich durch die Spiele führen. Fang immer mit etwas extrem Einfachem an, wie z.B. einem statischen Rechteck oder Bild. Stelle sicher, dass es funktioniert. Füge eine kleine Funktionalität hinzu: Ändere die Farbe, Position, füge ein weiteres Rechteck hinzu, speichere es als Attribut, usw. Stelle sicher, dass es funktioniert. Gehe nie zum nächsten Schritt über, solange du nicht genau verstehst, was dein aktueller Code tut und zu 100% sicher bist, dass er wie erwartet funktioniert. Und ich meine das ernst! Wenn du auch nur den Hauch eines Zweifels hast, überprüfe es nochmal. Sonst wird dieser Zweifel wachsen und dich allmählich unsicher über deinen Code machen. Diese Schnecken-Geschwindigkeit-Methode mag vielleicht albern und zu langsam erscheinen, aber es ist immer noch schneller, als eine große Code-Portion zu schreiben und dann zu versuchen, sie zum Laufen zu bringen. Es ist viel einfacher, einfache Probleme nacheinander zu lösen, als viele gleichzeitig.\n\n\nEs ist nichts falsch an StackOverflow\nJa, du kannst immer versuchen, eine Lösung für dein Problem auf StackOverflow zu finden2. Ich mache das die ganze Zeit! Aber du solltest die bereitgestellte Lösung nur verwenden, wenn du sie verstehst! Kopiere und füge den Code nicht ein, der scheint, ein Problem wie deines zu lösen. Wenn du das tust und Glück hast, funktioniert es vielleicht. Oder, wieder wenn du Glück hast, funktioniert es nicht auf offensichtliche Weise. Aber wenn du nicht so viel Glück hast, funktioniert es (manchmal) auf subtile Weise falsch. Und da du nicht wusstest, was der Code tat, als du ihn eingefügt hast, bist du noch verwirrter. Also verwende StackOverflow als Wissensquelle, nicht als Quelle für kopierbaren Code!",
+    "crumbs": [
+      "Tipps und Tricks fürs Programmieren"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.de.html#lesetipps",
+    "href": "002-programming-tips.de.html#lesetipps",
+    "title": "Tipps und Tricks fürs Programmieren",
+    "section": "Code lesen",
+    "text": "Code lesen\nCode zu lesen ist einfach, weil Computer dumm sind und du schlau bist. Das bedeutet, dass die Anweisungen, die du dem Computer gibst, notwendigerweise sehr einfach sein müssen und daher sehr einfach für einen Menschen zu verstehen sind. Code zu lesen ist auch schwer, weil Computer dumm sind und du schlau bist. Du bist so schlau, dass du den entire Code nicht lesen musst, um zu verstehen, was er tut, du liest einfach die wichtigsten Teile und füllst die Lücken auf. Leider bedeutet das, dass du dazu neigst, Fehler zu überlesen. Das ist nicht einzigartig für das Programmieren, wenn du jemals einen Text korrigiert hast, weißt du, wie schwer es ist, Fehler zu finden. Dein Gehirn korrigiert sie auf der Stelle mithilfe des Kontexts und du liest das Wort so, wie es sein sollte, nicht so, wie es tatsächlich geschrieben ist3.\nMeine Erfahrung mit Programmieren im Allgemeinen und auf diesem Seminar im Besonderen ist, dass die meisten Probleme, mit denen du stecken bleibst, simpel sind und im Nachhinhin offensichtlich4. Mach dir keine Sorgen! Es liegt nicht an dir, sondern einfach daran, wie wunderbar dein Gehirn für die Mustererkennung verdrahtet ist. Hier sind einige Vorschläge, die dir helfen können, das Lesen von Code robuster zu gestalten.\n\nDenk wie ein Computer\nLies den Code Zeile für Zeile und “führe” ihn aus, wie der Computer es tun würde. Verwende Stift und Papier, um die Variablen im Auge zu behalten. Verfolge, welche Code-Blöcke erreicht werden können und wann. Mach langsamer und stell sicher, dass du jede Zeile verstehst und in der Lage bist, die Variablen im Auge zu behalten. Sobald du das gemacht hast, wird es einfach sein, einen Fehler zu erkennen.\n\n\nStell dir vor, du hast diesen Code noch nie gesehen\nGeht davon aus, dass du keine Ahnung hast, was der Code macht. Wie ich schon schrieb, sieht man oft buchstäblich einen Fehler nicht, weil das Gehirn Details einfügt und die Realität so zurechtbiegt, dass sie den eigenen Erwartungen entspricht5. Du weißt, was dieser Code tun sollte, also liest du ihn nicht, sondern überfliegst ihn und gehst davon aus, dass er das tut, was er tun sollte, es sei denn, er sieht offensichtlich furchtbar falsch aus. Es ist schwer, Ihre Erwartungen auszuschalten, aber es hilft ungemein.\n\n\nSuche nicht nur unter der Straßenlaterne\nWann immer du einen neuen Code verwendest oder etwas implementieren musst, das sich kompliziert anfühlt, und dein Code nicht so funktioniert, wie er sollte, wirst du dazu neigen, anzunehmen, dass ein Problem mit dem neuen, ausgefallenen Code vorliegt. Einfach weil er neu, ausgefallen und kompliziert ist. Meiner Erfahrung nach verbirgt sich der Fehler jedoch in der Regel im einfacheren, „trivialen“ Code, den man sich nie richtig ansieht, weil er einfach und trivial ist. Überprüfe alles, nicht nur die Stellen, an denen du einen Fehler erwarten würdest.\n\n\nVerwende den Debugger\nIn diesem Buch lernst du, wie du die Ausführung deines Spiels unterbrechen kannst, um den Zustand des Spiels zu untersuchen. Nutze dieses Wissen! Setz Haltepunkte und führe den Code Schritt für Schritt aus. Überprüfe die Werte von Variablen mit der Registerkarte “Beobachten”. Verwende die Debug-Konsole, um zu überprüfen, ob die Funktionen die gewünschten Ergebnisse liefern. Teile komplexe Bedingungen oder mathematische Formeln in kleine Teile auf, kopiere diese Teile und führe sie in der Debug-Konsole aus, um zu prüfen, ob die Zahlen zusammenpassen. Überprüfe, ob ein Code-Stück in Ordnung ist, und fahre dann mit der Analyse des nächsten fort. Das Debugging ist besonders hilfreich, um den Code zu identifizieren, der nicht oder zum falschen Zeitpunkt erreicht wird.",
+    "crumbs": [
+      "Tipps und Tricks fürs Programmieren"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.de.html#zen-of-python",
+    "href": "002-programming-tips.de.html#zen-of-python",
+    "title": "Tipps und Tricks fürs Programmieren",
+    "section": "Zen of Python",
+    "text": "Zen of Python\nIch finde Zen of Python als gute Inspiration dafür, wie man Programmieren angehen sollte.",
+    "crumbs": [
+      "Tipps und Tricks fürs Programmieren"
+    ]
+  },
+  {
+    "objectID": "002-programming-tips.de.html#footnotes",
+    "href": "002-programming-tips.de.html#footnotes",
+    "title": "Tipps und Tricks fürs Programmieren",
+    "section": "",
+    "text": "Ist mir öfter passiert, als ich zugeben möchte.↩︎\nAllerdings, wenn du das Seminar machst, frag mich erst!↩︎\nTipp: Lies deinen Text einen Satz nach dem anderen von hinten oder lies einen zufälligen Satz. Das unterbricht den Fluss des Textes und hilft dir, dich auf Wörter statt auf die Bedeutung und die Geschichte zu konzentrieren.↩︎\nHinterher ist man immer schlauer!↩︎\nKürzlich habe ich eine halbe Stunde damit verbracht, herauszufinden, warum zwei identische Code-Blöcke unterschiedliche Ergebnisse liefern. Mein Sohn hat fast sofort einen Unterschied gefunden (ein fehlendes Komma in einem von ihnen), weil für ihn das alles nur Buchstaben und Zahlen waren.↩︎",
+    "crumbs": [
+      "Tipps und Tricks fürs Programmieren"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html",
+    "href": "01-basics.de.html",
+    "title": "1  Python Grundlagen",
+    "section": "",
+    "text": "1.1 Kapitelkonzepte",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#kapitelkonzepte",
+    "href": "01-basics.de.html#kapitelkonzepte",
+    "title": "1  Python Grundlagen",
+    "section": "",
+    "text": "Variablen.\nKonstanten.\nGrundlegende Werttypen.\nDinge ausgeben.\nWerte in Strings einfügen.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#variablen",
+    "href": "01-basics.de.html#variablen",
+    "title": "1  Python Grundlagen",
+    "section": "1.2 Variablen",
+    "text": "1.2 Variablen\nDer erste grundlegende Begriff, den wir uns aneignen müssen, ist die Variable. Variablen werden verwendet, um Informationen zu speichern, und man kann sie sich als Kiste mit einem Namensschild vorstellen, damit man etwas darin unterbringen kann. Das Namensschild auf dieser Kiste ist der Name der Variablen und ihr Wert ist das, was man darin speichert. Zum Beispiel können wir eine Variable erstellen, die die Anzahl der Beine eines Spielcharakters speichert. Wir beginnen mit einer für einen Menschen typischen Zahl.\n\n\n\n\n\n\n\n\n\nIn Python, du würdest schreiben:\nnumber_of_legs = 2\nDas Zuweisungsstatement oben hat eine sehr einfache Struktur:\n&lt;variablenname&gt; = &lt;wert&gt;\nDer Variablenname (Name-Tag auf der Box) sollte sinnvoll sein, er kann mit Buchstaben oder _ beginnen und Buchstaben, Zahlen und das _-Zeichen enthalten, aber keine Leerzeichen, Tabulatoren, Sonderzeichen usw. Python empfiehlt1, dass du snake_case (alles Kleinbuchstaben, Unterstrich für Leerzeichen) für die Formatierung deiner Variablennamen verwendest. Der &lt;wert&gt; auf der rechten Seite ist eine komplexere Geschichte, da er hartcodiert sein kann (wie im obigen Beispiel), unter Verwendung anderer Variablen oder der gleichen Variable berechnet werden kann, von einer Funktion zurückgegeben werden kann, usw.\nVerwende Variablen, damit du dich auf das konzentrieren kannst, was die entsprechenden Werte bedeuten, anstatt darüber nachzudenken, was diese Werte sind. Zum Beispiel: Nächstes Mal, wenn du etwas basierend auf der Anzahl der Beine eines Charakters berechnen musst (z.B. wie viele Schuhpaare braucht ein Charakter), kannst du es basierend auf dem aktuellen Wert der number_of_legs-Variablen berechnen, anstatt davon auszugehen, dass es 1 ist.\n\n# SCHLECHT: warum 1? Ist es, weil der Charakter zwei Beine hat oder\n# weil wir unabhängig von der tatsächlichen Anzahl der Beine\n# pro Charakter ein Schuhpaar ausgeben?\npairs_of_shoes = 1\n\n# BESSER (aber was, wenn unser Charakter nur ein Bein hat?)\npairs_of_shoes = number_of_legs / 2\n\nDie Variablen bieten dir auch Flexibilität. Ihre Werte können sich während der Programmausführung ändern: Der Punktestand des Spielers steigt, die Anzahl der Leben sinkt, die Anzahl der Zauber, die er wirken kann, wächst oder fällt je nach Verwendung usw. Aber du kannst immer den Wert in der Variablen verwenden, um notwendige Berechnungen durchzuführen. Zum Beispiel hier ein etwas erweitertes number_of_shoes-Beispiel.\n\nnumber_of_legs = 2\n\n#...\n# und plötzlich passiert was und unser Charakter wird zu einem Oktopus\nnumber_of_legs = 8\n#...\n\n# der gleiche Code funktioniert immer noch und wir können immer noch\n# die korrekte Anzahl an Schuhpaaren berechnen\npairs_of_shoes = number_of_legs / 2\n\nOkay, also hier oben erwähnt, kannst du dir eine Variable wie eine beschriftete Kiste vorstellen, in der du etwas aufbewahren kannst. Das bedeutet, dass du immer das alte Wert “wegwerfen” und einen neuen reinsetzen kannst. Bei Variablen passiert das “wegwerfen” automatisch, weil ein neuer Wert den alten überschreibt. Überprüfe doch mal, welchen Wert die Variable am Ende im folgenden Code hat:\n\nnumber_of_legs = 2\nnumber_of_legs = 5\nnumber_of_legs = 1\nnumber_of_legs\n\n\nMach Übung #1.\n\nAchtung, eine Variable (“ein Kasten mit einem Namensschild”) existiert erst, wenn du ihr etwas zuweist. Also wird der folgende Code einen NameError erzeugen, eine Art von Python, um dir mitzuteilen, dass es die Variable number_of_hands nicht kennt.\n\nnumber_of_legs = 2\nnumber_of_gloves = number_of_hands / 2\n\nNameError: name 'number_of_hands' is not defined\n\n\nAber du kannst auch eine Variable erstellen, die keinen bestimmten Wert enthält, indem du ihr None zuweist. None wurde speziell hinzugefügt, um keinen Wert oder nichts zu bedeuten.\nanzahl_der_hände = None # Variable existiert jetzt, enthält aber keinen bestimmten Wert.\nAls du das schon gesehen hast, kannst du einen Wert berechnen anstatt ihn festzulegen. Was wäre hier die Antwort?\nanzahl_der_beine = 2 * 2\nanzahl_der_beine = 7 - 2\nanzahl_der_beine\n\nMach Übung #2.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#du-solltest-assignments-nicht-mit-gleichungen-verwechseln",
+    "href": "01-basics.de.html#du-solltest-assignments-nicht-mit-gleichungen-verwechseln",
+    "title": "1  Python Grundlagen",
+    "section": "1.3 Du solltest Assignments nicht mit Gleichungen verwechseln!",
+    "text": "1.3 Du solltest Assignments nicht mit Gleichungen verwechseln!\nSehr wichtig: obwohl Zuweisungen ähnlich wie mathematische Gleichungen aussehen, sind sie keine Gleichungen! Sie befolgen eine sehr wichtige Regel, die du im Kopf behalten musst, wenn du Zuweisungen verstehst: Die rechte Seite eines Ausdrucks wird erst ausgewertet, bis der endgültige Wert berechnet wurde, erst dann wird dieser endgültige Wert der Variable zugewiesen, die auf der linken Seite angegeben ist (in die Kiste gelegt). Das bedeutet, dass du dieselbe Variable auf beiden Seiten verwenden kannst! Schauen wir uns diesen Code an:\nx = 2\ny = 5\nx = x + y - 4\nWas passiert, wenn der Computer die letzte Zeile auswertet? Zuerst nimmt er die aktuellen Werte aller Variablen (also 2 für x und 5 für y) und setzt sie in den Ausdruck ein. Danach sieht der Ausdruck so aus:\nx = 2 + 5 - 4\nDann berechnet es den Ausdruck auf der rechten Seite und speichert, sobald die Berechnung abgeschlossen ist, diesen neuen Wert in x\nx = 3\n\nMach Übung #3, um sicherzustellen, dass du das verstanden hast.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#konstanten",
+    "href": "01-basics.de.html#konstanten",
+    "title": "1  Python Grundlagen",
+    "section": "1.4 Konstanten",
+    "text": "1.4 Konstanten\nObwohl die wahre Kraft von Variablen darin besteht, dass du ihren Wert ändern kannst, solltest du sie auch verwenden, wenn der Wert während des entire Programms konstant bleibt. Es gibt keine echten Konstanten in Python, sondern eine Übereinkunft, dass ihre Namen vollständig in GROSSBUCHSTABEN geschrieben werden sollten. Entsprechend weißt du, dass du den Wert nicht ändern solltest, wenn du EINE_DERSELBE_VARIABLE siehst. Technisch gesehen ist dies nur eine Empfehlung, da niemand dich daran hindern kann, den Wert einer KONSTANTE zu ändern. Allerdings stammt ein großer Teil der Leichtigkeit von Python aus solchen Übereinkünften (wie die schreibweise_mit_unterstrichen oben). Wir werden später auf mehr solcher Übereinkünfte stoßen, zum Beispiel beim Erlernen von Objekten.\nOkay, wenn die Anzahl der Beine während des Spiels konstant bleibt, solltest du diese Konstanz hervorheben und folgendes in Python schreiben:\nANZAHL_DER_BEINE = 2\nIch empfehle dir dringend, Konstanten zu verwenden und Hardcoden von Werten zu vermeiden. Erstens, wenn du mehrere identische Werte hast, die unterschiedliche Dinge bedeuten (2 Beine, 2 Augen, 2 Ohren, 2 Fahrzeuge pro Charakter usw.), wird ein 2 im Code nicht verraten, was dieses 2 bedeutet (die Beine? die Ohren? der Punktemultiplikator?). Natürlich kannst du das basierend auf dem Code, der diese Zahl verwendet, herausfinden, aber du könntest dir diese zusätzliche Arbeit sparen und stattdessen eine entsprechend benannte Konstante verwenden. Dann musst du nur noch ihren Namen lesen und der Sinn des Wertes wird offensichtlich, und es ist der Sinn, nicht der tatsächliche Wert, an dem du am meisten interessiert bist. Zweitens, wenn du entscheidest, diesen Wert dauerhaft zu ändern (sagen wir, unser Hauptcharakter ist jetzt ein Tripod), bedeutet das Verwenden einer Konstante, dass du dich nur um eine Stelle sorgen musst, der Rest des Codes bleibt unverändert. Wenn du diesen Wert hartcodiert hast, steht dir ein aufregender2 und auf jeden Fall langer Suchen- und Ersetzen-Vorgang durch den gesamten Code bevor.\n\nMach Übung #4.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#werttypen",
+    "href": "01-basics.de.html#werttypen",
+    "title": "1  Python Grundlagen",
+    "section": "1.5 Werttypen",
+    "text": "1.5 Werttypen\nBisher haben wir nur ganze numerische Werte verwendet (1, 2, 5, 1000…). Obwohl Python viele verschiedene Werttypen unterstützt, werden wir uns zunächst auf eine kleine Teilmenge davon konzentrieren:\n\nGanze Zahlen, die wir bereits verwendet haben, z.B. -1, 100000, 42.\nFließkommazahlen, die jeden realen Wert annehmen können, z.B. 42.0, 3.14159265359, 2.71828.\nZeichenketten, die Text speichern können. Der Text wird zwischen entweder doppelten Anführungszeichen \"irgendein Text\" oder einfachen Anführungszeichen 'irgendein Text' eingeschlossen. Das bedeutet, dass du Anführungszeichen oder einfache Anführungszeichen innerhalb der Zeichenkette verwenden kannst, solange sie von der Alternative eingeschlossen sind. z.B., \"wie's\" (von \" eingeschlossen, einfache Anführungszeichen ' innerhalb) oder '\"Alle Verallgemeinerungen sind falsch, einschließlich dieser.\" Mark Twain' (Anführungszeichen von einfachen Anführungszeichen eingeschlossen). Es gibt noch viel mehr zu Zeichenketten und wir werden dieses Material im Laufe des Kurses abdecken.\nLogische / boolesche Werte, die entweder True oder False sind.\n\nWenn du eine Variable verwendest, ist es wichtig, dass du weißt, welchen Wertstyp sie speichert. Das liegt meist an dir. In manchen Fällen wird Python einen Fehler auswerfen, wenn du eine Berechnung mit inkompatiblen Wertstypen versuchst. In anderen Fällen konvertiert Python automatisch Werte zwischen bestimmten Typen, z.B. ist jeder Integer-Wert auch ein Realwert, so dass die Konvertierung von 1 in 1.0 meist trivial und automatisch ist. Allerdings musst du in anderen Fällen eine explizite Konvertierung verwenden. Geh zu Übung #5 und versuche zu erraten, welcher Code ausgeführt wird und welcher aufgrund von inkompatiblen Typen einen Fehler wirft.\n5 + 2.0\n'5' + 2\n'5' + '2'\n'5' + True\n5 + True\n\nMach Übung #5.\n\nErstaunt über den letzten? Das liegt daran, dass True intern auch 1 ist und False 0!\nDu kannst explizit von einem Typ in einen anderen konvertieren, indem du spezielle Funktionen verwendest. Zum Beispiel kannst du eine Zahl oder einen logischen Wert in einen String umwandeln, indem du einfach str() schreibst. Was wäre das Ergebnis in den folgenden Beispielen?\nstr(10 / 2)\nstr(2.5 + True)\nstr(True)\n\nMach Übung #6.\n\nGleiches gilt für die Umwandlung in eine logische/Boolesche Variable mit der Funktion bool(). Die Regeln sind einfach: Für numerische Werte ist 0 False, jeder andere Wert ungleich Null wird zu True umgewandelt. Für Strings wird ein leerer String '' als False ausgewertet und ein nicht leerer String zu True umgewandelt. Was wäre das Ergebnis in den folgenden Beispielen?\nbool(-10)\nbool(0.0)\n\nsecret_message = ''\nbool(secret_message)\n\nbool('False')\n\nMach Übung #7.\n\nDie Umwandlung in Ganzzahl- oder Fließkommazahlen mit int(&lt;Wert&gt;) bzw. float(&lt;Wert&gt;) ist schwieriger. Der einfachste Fall ist von logisch zu ganzzahlig/Gleitkomma, da True dir int(True) als 1 und float(True) als 1.0 gibt und False dir 0/0.0 gibt. Beim Umwandeln von Gleitkommazahl zu Ganzzahl lässt Python einfach den Bruchteil weg (es macht keine richtige Rundung!). Beim Umwandeln eines Strings muss es eine gültige Zahl des entsprechenden Typs sein, andernfalls wird ein Fehler generiert. Also, du kannst einen String wie \"123\" in eine Ganzzahl oder eine Gleitkommazahl umwandeln, aber das funktioniert nicht für \"a123\". Außerdem kannst du \"123.4\" in eine Gleitkommazahl umwandeln, aber nicht in eine Ganzzahl, da sie einen Bruchteil enthält. Angesichts all dessen, welche Zellen würden funktionieren und welches Ergebnis würden sie produzieren?\n\nfloat(False)\nint(-3.3)\nfloat(\"67.8\")\nint(\"123+3\")\n\n\nMach Übung #8.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#print",
+    "href": "01-basics.de.html#print",
+    "title": "1  Python Grundlagen",
+    "section": "1.6 Ausgabe drucken",
+    "text": "1.6 Ausgabe drucken\nUm den Wert auszugeben, musst du die print()-Funktion verwenden (wir werden später über Funktionen im Allgemeinen sprechen). Im einfachsten Fall gibst du den Wert an und er wird ausgegeben.\n\nprint(5)\n\n5\n\n\noder\n\nprint(\"fünf\")\n\nfünf\n\n\nKlar, du weißt ja schon über Variablen Bescheid, also musst du den Wert nicht direkt einfügen. Du kannst stattdessen eine Variable übergeben und ihr Wert wird ausgegeben.\n\nanzahl_der_pfannkuchen = 10\nprint(anzahl_der_pfannkuchen)\n\n10\n\n\n\nfrühstück = \"Pfannkuchen\"\nprint(frühstück)\n\nPfannkuchen\n\n\nDu kannst auch mehr als einen Wert/Variable an die print-Funktion übergeben und alle Werte werden nacheinander gedruckt. Zum Beispiel, wenn wir dem Benutzer sagen wollen, was ich zum Frühstück hatte, können wir das so machen:\n\nfrühstück = \"Pfannkuchen\"\nanzahl_der_artikeln = 10\nprint(frühstück, anzahl_der_artikeln)\n\nPfannkuchen 10\n\n\nWas wird von folgendem Code ausgegeben?\nabendessen = \"steak\"\nanzahl_der_artikeln = 4\nnachtisch = \"cupcakes\"\n\nprint(anzahl_der_artikeln, abendessen, anzahl_der_artikeln, nachtisch)\n\nMach Übung #9.\n\nAber du möchtest wahrscheinlich expliziter sein, wenn du die Informationen ausgibst. Stell dir zum Beispiel vor, du hast diese drei Variablen:\n\nmeal = \"Frühstück\"\ndish = \"Pfannkuchen\"\ncount = 10\n\nDu könntest natürlich print(meal, dish, count) machen, aber es wäre netter, “Ich hatte 10 Pfannkuchen zum Frühstück” auszugeben, wobei die fett gedruckten Elemente die Werte der eingefügten Variablen sind. Dafür müssen wir String-Formatierung verwenden. Bitte beachte, dass die String-Formatierung nicht spezifisch für das Ausgeben ist, du kannst einen neuen String-Wert über die Formatierung erstellen und ihn in einer Variablen speichern, ohne ihn auszugeben oder ihn ausgeben, ohne ihn zu speichern.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#string-formatting",
+    "href": "01-basics.de.html#string-formatting",
+    "title": "1  Python Grundlagen",
+    "section": "1.7 Zeichenkettenformatierung",
+    "text": "1.7 Zeichenkettenformatierung\nEine super Ressource zum Thema Zeichenkettenformatierung in Python ist pyformat.info. Da sich Python ständig weiterentwickelt, gibt es jetzt mehr als eine Möglichkeit, Zeichenketten zu formatieren. Im Folgenden werde ich das „alte“ Format vorstellen, das auf der klassischen String-Formatierung basiert, die in der Funktion sprintf in C, Matlab, R und vielen anderen Programmiersprachen verwendet wird. Es ist etwas weniger flexibel als die neueren Formate, aber für einfache Aufgaben ist der Unterschied vernachlässigbar. Die Kenntnis des alten Formats ist wegen seiner Allgemeingültigkeit nützlich. Wenn du Alternativen kennenlernen willst, lies den Link oben.\nDer allgemeine Aufruf lautet: „eine Zeichenkette mit Formatierung“%(Tupel von Werten, die bei der Formatierung verwendet werden sollen). Du wirst später etwas über Tupel lernen. Für den Moment nehmen wir an, dass es sich nur um eine kommagetrennte Liste von Werten handelt, die in runden Klammern eingeschlossen sind: (1, 2, 3).\nIn “eine Zeichenkette mit Formatierung”` gibst du an, wo du den Wert über das “%”-Symbol einfügen willst, gefolgt von einer optionalen Formatierungsinformation und dem erforderlichen Symbol, das den Typ des Wertes definiert. Die Typsymbole sind\n\ns für Zeichenkette\nd für eine ganze Zahl\nf für einen Float-Wert\ng für einen “optimal” gedruckten Float-Wert, damit wissenschaftliche Schreibweise für große Werte verwendet wird (z.B. 10e5 statt 100000).\n\nHier ist ein Beispiel für das Formatieren einer Zeichenkette unter Verwendung einer Ganzzahl:\n\nprint(\"Ich hatte %d Pfannkuchen zum Frühstück\"%(10))\n\nIch hatte 10 Pfannkuchen zum Frühstück\n\n\nDu bist nicht auf einen einzelnen Wert beschränkt, den du in einen String packen kannst. Du kannst mehr Orte über % angeben, aber du musst sicherstellen, dass du die richtige Anzahl an Werten in der richtigen Reihenfolge übergibst. Kannst du herausfinden, welcher Aufruf tatsächlich funktionieren wird (und welches die Ausgabe sein wird) und welcher einen Fehler produzieren wird, bevor du ihn ausführst?\nprint('Ich hatte %d Pfannkuchen und entweder %d oder %d Steaks zum Abendessen'%(2))\nprint('Ich hatte %d Pfannkuchen und %d Steaks zum Abendessen'%(7, 10))\nprint('Ich hatte %d Pfannkuchen und %d Steaks zum Abendessen'%(1, 7, 10))\n\nMach Übung #10.\n\nAlso, wie oben erwähnt, hast du bei echten Werten zwei Optionen: %f und %g. Letzterer verwendet die wissenschaftliche Schreibweise (z.B. 1e10 für 10000000000), um die Darstellung kompakter zu gestalten.\n\nMach Übung #11, um ein besseres Gefühl für den Unterschied zu kriegen.\n\nDa gibt’s noch viel mehr zum Formatieren und du kannst mehr darüber auf pyformat.info lesen. Aber das hier reicht erstmal, um in Kapitel 3 mit der Programmierung unseres ersten Spiels zu beginnen.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "01-basics.de.html#footnotes",
+    "href": "01-basics.de.html#footnotes",
+    "title": "1  Python Grundlagen",
+    "section": "",
+    "text": "Na ja, eigentlich fordert.↩︎\neigentlich nicht↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Python Grundlagen</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html",
+    "href": "02-guess-the-number-single-round.de.html",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "",
+    "text": "2.1 Kapitelkonzepte",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#kapitelkonzepte",
+    "href": "02-guess-the-number-single-round.de.html#kapitelkonzepte",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "",
+    "text": "Code dokumentieren.\nCode debuggen.\nEingabe von einem Benutzer erhalten.\nVergleiche in bedingten Anweisungen verwenden.\nEinrückung zum Zusammenfassen von Anweisungen verwenden.\nPython Bibliotheken verwenden.\nZufallszahlen generieren.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#das-spiel",
+    "href": "02-guess-the-number-single-round.de.html#das-spiel",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.2 Das Spiel",
+    "text": "2.2 Das Spiel\nWir werden ein Spiel programmieren, bei dem ein Teilnehmer (Computer) eine Zahl innerhalb eines bestimmten Bereichs (z.B. zwischen 1 und 10) auswählt und der andere Teilnehmer (menschlicher Spieler) versucht, sie zu erraten. Nach jedem Versuch des Menschen antwortet der Computer, ob die tatsächliche Zahl niedriger als der Versuch, höher oder gleich ist. Das Spiel ist vorbei, wenn der Spieler die Zahl richtig errät oder (in der späteren Version des Spiels) die Versuche aufgebraucht hat.\nUnsere erste Version wird nur einen Versuch ermöglichen und der Gesamtspiel-Algorithmus wird folgendermaßen aussehen:\n\nDer Computer generiert eine zufällige Zahl zwischen 1 und 10.\nEr gibt sie aus, um beim Debuggen zu helfen.\nEr bittet dich, eine Vermutung einzugeben.\nEr vergleicht die beiden Zahlen und gibt das Ergebnis aus: “Meine Zahl ist niedriger”, “Meine Zahl ist höher” oder “Treffer!”.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#lass-uns-eine-zahl-wählen",
+    "href": "02-guess-the-number-single-round.de.html#lass-uns-eine-zahl-wählen",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.3 Lass uns eine Zahl wählen",
+    "text": "2.3 Lass uns eine Zahl wählen\nBeginnen wir damit, die ersten beiden Schritte des Programms zu implementieren. Erstelle eine Variable, die eine Zahl enthält, die der Computer “gewählt” hat. Wir werden sie number_picked nennen (du kannst auch einen anderen sinnvollen Namen verwenden, aber es könnte einfacher sein, wenn wir alle denselben Namen verwenden). Um es zu Beginn einfacher zu gestalten, werden wir eine beliebige Zahl zwischen 1 und 10 hartcodieren (wähle die, die du magst). Dann lass uns sie ausgeben, damit wir die Zahl selbst kennen3. Verwende String-Formatierung, um es benutzerfreundlich zu gestalten, z.B. gib etwas wie “Die Zahl, die ich gewählt habe, ist…” aus. Du solltest in der Lage sein, dies mithilfe der Kenntnisse aus dem vorherigen Kapitel zu tun. Dein Code sollte aus zwei Zeilen bestehen:\n# 1. erstelle Variable und setze ihren Wert\n# 2. gib den Wert aus\nProbier doch mal diesen Zweizeiler in einem Jupyter Notebook aus (erstell einfach ein leeres Notebook dafür). Wenn du damit zufrieden bist, kopier den Code in code01.py und lies weiter, um zu lernen, wie man ihn dokumentiert und ausführt.\n\nSchreib deinen Code in code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#dein-code-dokumentieren",
+    "href": "02-guess-the-number-single-round.de.html#dein-code-dokumentieren",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.4 Dein Code dokumentieren",
+    "text": "2.4 Dein Code dokumentieren\nJetzt, wo du deine erste Datei mit Python-Programm hast, solltest du sie dokumentieren. Das Dokumentieren eines zweizeiligen und simplen Programms mag albern vorkommen, aber es sollte eine automatische Sache sein. Später wirst du dich dabei erwischen, mehrere Zeilen Kommentare zu verwenden, um eine einzelne Funktionszeile zu dokumentieren. Wiederum geht es nicht darum, dass der Code funktioniert, sondern darum, dass du ihn verstehen kannst. Im Grunde ist es besser, einen sauberen, gut dokumentierten Code zu haben, der aktuell nicht korrekt funktioniert, als einen undokumentierten Spaghetticode, der funktioniert. Du kannst den Ersteren reparieren und aktualisieren, aber das Pflegen oder Aktualisieren des Letzteren…\nIn Python, du hast zwei Möglichkeiten, Kommentare zu schreiben: mehrzeilig und einzeilig\n'''Ein\nmehrzeiliger\nKommentar\n\n# Ein einzeiliger Kommentar.\nVerwende mehrzeilige Kommentare, um Dokumentation für einzelne Dateien, Funktionen, Klassen, Methoden usw. zu schreiben. Du wirst lernen, wie man diese Dokumentation im Numpy-Dokumentationsstil formatiert, sobald du mehr über Funktionen gelernt hast. In unserem Fall solltest du deine code01.py-Datei mit einem mehrzeiligen Kommentar beginnen, der kurz beschreibt, welches Programm sie enthält. Mindestens solltest du schreiben, dass es sich um ein Rate die Zahl-Spiel handelt. Es ist wahrscheinlich eine gute Idee, kurz zu skizzieren, worum es bei dem Spiel geht.\nVerwende Einzeiler-Kommentare, um zu erklären, was in einem bestimmten Code-Block passiert. Du musst nicht jede Zeile kommentieren und solltest den Code nicht in Menschensprache wiederholen. Ein Kommentar sollte darüber sprechen, was passiert, nicht wie. Du hast bereits einen einzelnen Code-Block, also dokumentiere ihn mit einem Satz.\n\nDokumentiere code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#debugging",
+    "href": "02-guess-the-number-single-round.de.html#debugging",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.5 Dein Spiel in VS Code ausführen und debuggen",
+    "text": "2.5 Dein Spiel in VS Code ausführen und debuggen\nJetzt, wo wir ein zweizeiliges Programm haben, können wir es ausführen und schon damit beginnen, es zu debuggen. Klar, unser aktuelles Programm ist wahrscheinlich zu einfach, um tatsächliches Debugging zu erfordern, aber es ist auch einfach genug, um das Verständnis von Debugging zu erleichtern. Und Debugging ist eine wichtige Fähigkeit, die ein laufendes Programm von einem Blackbox in etwas Transparentes und leichter4 zu verstehen verwandelt. Unten beschreibe ich, wie man in VS Code debuggt, aber du solltest eventuell die offizielle Anleitung zurate ziehen, falls sich in der Zwischenzeit etwas geändert hat.\nEs gibt zwei Möglichkeiten, ein Python-Programm in VS Code auszuführen. Erstens kannst du das “Python-Datei im Terminal ausführen” -Play-Button auf der rechten Seite verwenden. Das führt dein Programm ohne einen Debugger aus, also solltest du es nur für die tatsächlichen Ausführungen des finalisierten Codes verwenden. Trotzdem kannst du es ausprobieren und sehen, ob es das ausgibt, was es sollte.\n\n\n\nCode ohne Debugger ausführen.\n\n\nDie Alternative ist die Debugging-Registerkarte, die mit einem kleinen Käfer oben auf dem Ausführen-Button. Wenn du sie auswählst, wird “Ausführen und Debuggen” angezeigt. Klicke auf den Button und es werden verschiedene Optionen für verschiedene Arten von Python-Projekten und -Frameworks angeboten. Für unsere Zwecke werden wir nur “Python-Datei: Debugge die aktuell aktive Python-Datei” benötigen. Klicke darauf und es wird deinen Code ausführen (sollte auf die gleiche Weise wie mit dem anderen Button laufen).\n\n\n\nDebug-Konfiguration auswählen.\n\n\nDu willst sicherlich nicht jedes Mal auf Debugging → Ausführen und Debuggen → Wähle Konfiguration klicken. Eine bessere Möglichkeit ist, es einmal einzurichten und dann die F5-Taste zu verwenden, um deinen Code auszuführen. Zunächst klickst du auf “erzeuge eine launch.json-Datei” und wählst “Python-Datei: Debuggiere die aktuell aktive Python-Datei”. Du solltest nun eine neue launch.json-Datei im Editor sehen, die folgendermaßen aussehen sollte:\n\n\n\nDebug-Konfiguration in der launch.json-Datei.\n\n\nDas war’s! VS Code hat eine Konfiguration für dich erstellt. Jetzt kannst du die Datei launch.json schließen und dein Programm mit einem einfachen Druck auf die Taste F5 starten. Versuche es! Wie gehabt sollte es funktionieren, aber warum haben wir das alles gemacht? Weil der Debugger die Ausführung deines Codes unterbricht, sobald er ein Problem entdeckt, und dir so die Möglichkeit gibt, Variablen zu untersuchen, Codeausschnitte auszuführen usw. Im Gegensatz dazu zeigt das Ausführen einer Python-Datei im Terminal (die erste Option) nur eine Fehlermeldung an und beendet das Programm. Außerdem kannst du Breakpoints verwenden, um das Programm an jeder beliebigen Zeile anzuhalten und so deine Codeüberprüfung an jedem gewünschten Ort durchzuführen.\nDu setzt Breakpoints, indem du auf die linke Seite der Zeilennummer klickst, die dich interessiert. Hier habe ich auf Zeile 6 geklickt und du kannst einen roten Punkt sehen, der einen aktiven Breakpoint anzeigt.\n\n\n\nAktiver Breakpoint.\n\n\nWenn ich jetzt den Code über F5 ausführe, wird das Programm an dieser Zeile anhalten, vor der Ausführung.\n\n\n\nProgramm pausiert an der breakpoint.\n\n\nDas gibt mir die Möglichkeit zu sehen, welchen Wert meine Variable number_picked hat. Sie ist bereits in den lokalen Variablen (oben links) aufgeführt. Aber ich habe sie auch der Liste der überwachten Variablen (Watch, Mitte links) hinzugefügt und auch in der Debug-Konsole (unterer Tab) nach ihrem Wert geschaut, die es mir ermöglicht, jeden Python-Code auszuführen, während mein Programm pausiert ist. Mach das gleiche und probiere diese verschiedenen Möglichkeiten selbst aus. Zum Beispiel, siehst du, wie du number_picked + 1 oder number_picked * number_picked in der Watch-Registerkarte und in der Debug-Konsole berechnen kannst.\nOkay, nachdem du den aktuellen Zustand des Programms überprüft hast, hast du sechs Knöpfe oben, um zu entscheiden, was als nächstes zu tun ist (bewege den Mauszeiger darüber, um Hinweise zu sehen). Von links nach rechts sind sie:\n\nFortsetzen (F5): setz das Programm fort.\nÜberspringen (F10): führt den Code ohne in Funktionen zu gehen aus (dies und die nächsten beiden Optionen werden klarer, sobald du das Schreiben von Funktionen gelernt hast).\nIn den Code eintreten (F11)\nAus dem Code austreten (Shift+F11).\nDas Programm neu starten (Ctrl+Shift+F5).\nDas Programm stoppen (Shift+F5).\n\nUm besser zu verstehen, wie das funktioniert, stoppe das Programm (Shift+F5) und setze einen zusätzlichen Breakpoint an der ersten Zeile deines Codes (Zeile #5 in meinem Programm, die anderen Zeilen sind Kommentare oder leer). Starte das Programm erneut über F5 und es wird an dieser ersten Zeile pausieren. Kannst du jetzt den Wert der Variablen number_picked herausfinden?\nDie Antwort ist “nein”, weil diese Variable noch nicht existiert. Denk dran, das Programm pausiert vor der Ausführung der Zeile. Verwende F10, um die Codezeile für Zeile durchzugehen und zu sehen, wie die Variable erscheint und die Informationen ausgegeben werden.\nDieses Debugging-Übungsproblem war vielleicht nicht notwendig, um Probleme mit deinem aktuellen Code zu lösen, aber es hat gezeigt, wie man das in Zukunft machen kann. Zögere nicht, eine Pause im Programm einzufügen, um zu überprüfen, ob die Realität (d.h. die tatsächlichen Werte der Variablen) deinen Erwartungen entspricht. Verwende das Durchlaufen des Codes, um die Dinge zu verlangsamen und zuzuschauen und nachzudenken.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#input-function",
+    "href": "02-guess-the-number-single-round.de.html#input-function",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.6 Rate einen Spieler nach seinem Tipp",
+    "text": "2.6 Rate einen Spieler nach seinem Tipp\nUm das Rate die Zahl Spiel zu spielen, braucht es zwei. Der Computer hat seinen Teil erledigt, indem er eine Zahl ausgewählt hat, jetzt müssen wir den Spieler bitten, seinen Tipp einzugeben. Dafür werden wir die input() Funktion verwenden.\nEine Funktion ist ein isolierter Code, der (optional) Eingaben annimmt, eine Aktion durchführt und optional einen Wert (Ausgabe) zurückgibt. Das ermöglicht es, den Code in kleinere Teile zu unterteilen, die leichter gepflegt werden können, und denselben Code wiederzuverwenden. Du hast bereits die print()-Funktion verwendet, um Dinge auszugeben, und die str(), bool(), int() und float()-Funktionen, um Werte zu konvertieren. Bei print() ist die Eingabe eine beliebige Anzahl von Werten (sogar keine, probiere es im Jupiter Notebook aus!), die Aktion besteht darin, Dinge auszugeben, aber es gibt keine Ausgabe. Die float()-Funktion nimmt (etwas überraschend) null oder einen Wert als Eingabe an (versuche, ihr keine oder mehr als einen Wert im Jupiter Notebook zu geben und sieh den Unterschied), versucht, den gegebenen Wert in einen Float zu konvertieren (wirft einen Fehler, wenn sie es nicht kann) und gibt einen Float-Wert als Ausgabe zurück.\nGleiche Eingabe → Aktion → Ausgabe Regel gilt für die input(prompt). Es nimmt eine optionale „Eingabeaufforderung“ als Eingabe. Dann gibt es die „Prompt“-Nachricht aus und wartet darauf, dass der Benutzer eine „Zeichenkette“ eingibt, bis er „Enter“ drückt. Dann gibt es diesen String-Wert zurück. Der letzte Teil über String ist wichtig, weil wir in unserem Spiel einen Spieler brauchen, der eine Ganzzahl und keinen String eingibt. Lassen wir uns einen Moment lang von der Annahme leiten, dass die Eingabe immer eine gültige Ganzzahl ist, also gib beim Testen des Programms nur gültige Ganzzahlen ein! Auf diese Weise können wir den Wert ohne zusätzliche Prüfungen in eine Ganzzahl umwandeln (wir werden sie in Zukunft hinzufügen) und diesen Wert einer neuen Variablen namens guess zuweisen. Du musst also eine einzeilige Zuweisungsanweisung mit der Variable guess auf der linken Seite und dem Aufruf der Funktion input() auf der rechten Seite hinzufügen (denke an eine nette Eingabeaufforderung), die von der Typumwandlung in eine Ganzzahl über int() umschlossen wird. Teste diesen Code, aber gib wieder nur gültige Ganzzahlen ein, damit die Umwandlung ohne Fehler funktioniert.\n\nAktualisiere deine code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#if-anweisung",
+    "href": "02-guess-the-number-single-round.de.html#if-anweisung",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.7 Bedingte if-Anweisung",
+    "text": "2.7 Bedingte if-Anweisung\nJetzt haben wir zwei Zahlen: Eine, die der Computer ausgewählt hat (number_picked) und eine, die der Spieler eingegeben hat (guess). Wir müssen sie vergleichen, um eine korrekte Ausgabenachricht bereitzustellen. Dafür werden wir eine bedingte if-Anweisung verwenden:\nif some_condition_is_true:\n    # tu etwas\nelif some_other_condition_is_true:\n    # tu etwas anderes\nelif yet_another_condition_is_true:\n    # tu etwas ganz anderes\nelse:\n    # tu etwas nur, wenn alle Bedingungen oben falsch sind.\nIn Python, nur der if-Teil ist Pflicht, während elif (kurz für “else, if”) und else optional sind. Also kannst du etwas nur machen, wenn eine Bedingung wahr ist:\nif some_condition_is_true:\n    # tu etwas, aber ansonsten tu gar nichts\n    # und fahre mit dem Codeausführen fort\n\n# einige Code, der nach der if-Anweisung ausgeführt wird,\n# unabhängig davon, ob die Bedingung wahr oder falsch war.\nBevor wir bedingte Anweisungen in unserem Spiel verwenden können, musst du (1) die Bedingungen selbst und (2) die Verwendung von Einrückungen als Mittel zur Gruppierung von Anweisungen verstehen.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#vergleiche",
+    "href": "02-guess-the-number-single-round.de.html#vergleiche",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.8 Bedingungen und Vergleiche",
+    "text": "2.8 Bedingungen und Vergleiche\nBedingung ist jeder Ausdruck, der bewertet werden kann, um festzustellen, ob er True oder False ist. Ein einfaches Beispiel für einen solchen Ausdruck sind Vergleiche, die in der Menschensprache ausgedrückt werden: Ist heute Donnerstag? Ist die Antwort (gleich) 42? Regnet es und ich habe einen Schirm? Wir werden uns für einen Moment auf Vergleiche wie diese konzentrieren, aber später wirst du sehen, dass in Python jeder Ausdruck entweder True oder False ist, sogar wenn er nicht wie ein Vergleich aussieht5.\nFür den Vergleich kannst du folgende Operatoren verwenden:\n\n“A ist gleich B” wird als A == B geschrieben.\n“A ist ungleich B” wird als A!= B geschrieben.\n“A ist größer als B” und “A ist kleiner als B” sind entsprechend A &gt; B und A &lt; B.\n“A ist größer gleich B” und “A ist kleiner gleich B” sind entsprechend A &gt;= B und A &lt;= B (bitte beachte die Reihenfolge der Symbole, da =&gt; und =&lt; einen Fehler erzeugen werden).\n\n\nGehe zu Übung #1, um einige Vergleiche zu lösen.\n\nBeachte, dass Python auch einen is Operator hat, der identisch zu == aussehen kann (z.B. sieht x == 2 gleich aus wie x is 2). In einigen Fällen funktioniert er auch auf die gleiche Weise. Allerdings gibt es einen feinen Unterschied: == überprüft, ob Werte identisch sind, während is überprüft, ob Objekte (die “Werte” halten) identisch sind. Du musst Klassen und Objekte verstehen, um diesen Unterschied zu schätzen, also behalte einfach im Hinterkopf, dass du == verwenden solltest (ich werde explizit erwähnen, wann is benötigt wird).\nDu kannst den logischen Wert mit dem not-Operator umkehren, denn not True ist False und not False ist True. Das bedeutet, dass A!= B dasselbe ist wie not A == B und entsprechend A == B   not A!= B ist. Um zu sehen, wie das funktioniert, betrachte beide Fälle, wenn A tatsächlich gleich B ist und wenn nicht.\n\nWenn A gleich B ist, dann bewertet A == B als True. Dann ist A!= B False, also not A!= B → not False → True.\nWenn A nicht gleich B ist, dann bewertet A == B als False. Dann ist A!= B True, also not A!= B → not True → False.\n\n\nMach dich auf den Weg zu Übung #2, um diese Inversion selbst zu erkunden.\n\nDu kannst auch mehrere Vergleiche mit den and und/oder or-Operatoren kombinieren. Wie in der Menschensprache bedeutet and, dass beide Teile wahr sein müssen: True and True → True, aber True and False → False, False and True → False und False and False → False. Das gilt auch, wenn du mehr als zwei Bedingungen/Vergleiche über and verknüpfst: Alle müssen wahr sein. Im Fall von or muss nur eine der Aussagen wahr sein, z.B. True or True → True, True or False → True, False or True → True, aber False or False → False. Again, für mehr als zwei Vergleiche/Bedingungen sollte mindestens eine von ihnen wahr sein, damit der gesamte Ausdruck wahr ist.\n\nMach die Übungen #3 und #4.\n\nKleiner aber wichtiger Punkt: Bedingungen werden von links nach rechts ausgewertet, bis der gesamte Ausdruck auf eine Weise oder andere aufgelöst ist. Das bedeutet, wenn der erste Ausdruck in einem and False ist, wird der zweite (und alle folgenden) niemals ausgewertet. Also, wenn first and second Ausdrücke beide True sein müssen und du weißt, dass der first Ausdruck bereits False ist, wird der gesamte Ausdruck in jedem Fall False sein. Das bedeutet, dass im folgenden Code kein Fehler auftreten wird, obwohl das Auswerten von int(\"e123\") alleine einen ValueError auslösen würde.\n\n2 * 2 == 5 and int(\"e123\") == 123\n\nFalse\n\n\nKehrt man jedoch die Reihenfolge um, so dass int(„e123“) == 123 zuerst ausgewertet werden muss, erhält man die Fehlermeldung\n\nint(\"e123\") == 123 and 2 * 2 == 4\n\n\n---------------------------------------------------------------------------\nValueError                                Traceback (most recent call last)\nCell In[2], line 1\n----&gt; 1 int(\"e123\") == 123 and 2 * 2 == 4\n\nValueError: invalid literal for int() with base 10: 'e123'\n\n\n\nGleiches gilt, wenn irgendein Ausdruck in or True ist, musst du den Rest nicht überprüfen.\n\n2 * 2 == 4 or int(\"e123\") == 123\n\nTrue\n\n\nAber wenn die erste Bedingung False ist, müssen wir weiter machen (und landen in einem Fehler):\n\n2 * 2 == 5 or int(\"e123\") == 123\n\n\n---------------------------------------------------------------------------\nValueError                                Traceback (most recent call last)\nCell In[4], line 1\n----&gt; 1 2 * 2 == 5 or int(\"e123\") == 123\n\nValueError: invalid literal for int() with base 10: 'e123'\n\n\n\n\nMach Übung #5.\n\nEndlich, genau wie in der einfachen Arithmetik, kannst du Klammern () verwenden, um Bedingungen zusammenzufassen. Also kannst du den Satz “Ich esse immer Schokolade, aber Spinat esse ich nur, wenn ich hungrig bin” als food == \"chocolate\" or (food == \"spinach\" and hungry) schreiben. Hier werden food == \"chocolate\" und food == \"spinach\" and hungry unabhängig ausgewertet, ihre Werte werden an ihrer Stelle eingesetzt und dann wird die and-Bedingung ausgewertet.\n\nMach Übung #6.\n\nEndgedanke zu Vergleichen: Zögere nicht, sie in Jupyter Notebook mit verschiedenen Kombinationen von Werten zu testen oder das Programm an der Bedingung via einem Breakpoint anzuhalten und einen Vergleich in Watch oder Debug Console auszuwerten.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#einrueckung",
+    "href": "02-guess-the-number-single-round.de.html#einrueckung",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.9 Statements gruppieren über Einrückung",
+    "text": "2.9 Statements gruppieren über Einrückung\nGehen wir zurück zu einer bedingten if-Anweisung. Schau dir das folgende Code-Beispiel an (und beachte das : am Ende von if some_condition_is_true:), bei dem Statement #1 nur ausgeführt wird, wenn some condition wahr ist, während Statement #2 danach ausgeführt wird, unabhängig von der Bedingung.\nif some_condition_is_true:\n    statement #1\nstatement #2\nBeide Statements #1 und #2 erscheinen nach der if-Anweisung, also wie weiß Python, dass das erste nur ausgeführt wird, wenn die Bedingung wahr ist, aber das andere immer läuft? Die Antwort ist die Einrückung: Die 4 (vier!) Leerzeichen, die automatisch hinzugefügt werden, wenn du die Tab-Taste in VS Code drückst, und entfernt werden, wenn du Shift+Tab drückst. Die Einrückung setzt Statement #1 innerhalb der if-Anweisung. So zeigt die Einrückung an, ob Anweisungen zur gleichen Gruppe gehören und nacheinander ausgeführt werden müssen (gleiche Einrückungsebene für if und statement #2) oder ob sie sich innerhalb einer bedingten Anweisung, Schleife, Funktion, Klasse usw. befinden (statement #1). Bei komplexerem Code, der z. B. eine if-Anweisung innerhalb einer if-Anweisung innerhalb einer Schleife enthält, wird dies durch Hinzufügen weiterer Einrückungsebenen ausgedrückt.\n# einige Anweisungen außerhalb der Schleife (0 Einrückung)\nwhile game_is_not_over: # (0 Einrückung)\n    # Anweisungen innerhalb der Schleife\n    if key_pressed: # (Einrückung von 4)\n        # innerhalb der Schleife und der if-Anweisung\n        if key == \"Space\": # (Einrückung von 8)\n            # innerhalb der Schleife, der if-Anweisung und einer weiteren if-Anweisung\n            jump() # (Einrückung von 12)\n        else: # (Einrückung von 4)\n            # innerhalb der Schleife, der if-Anweisung und dem else-Teil einer weiteren if-Anweisung\n            stand() # (Einrückung von 12)\n\n    # Anweisungen innerhalb der Schleife, aber außerhalb der äußersten if-Anweisung\n    print(key) # (Einrückung von 4)\n\n# einige Anweisungen außerhalb der Schleife (0 Einrückung)\nAchte sehr genau auf die Einrückung, da sie bestimmt, welche Anweisungen zusammen ausgeführt werden! Ein falscher Einrückungsgrad ist leider ein sehr häufiger Fehler.\n\nMach Übung #7.\n\nIn Python, die if- und ifelse-Anweisungen werden ausgewertet, bis eine davon True ist. Danach werden alle folgenden ifelse- und else-Anweisungen einfach ignoriert.\n\nMach Übung #8.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#antwort-überprüfen",
+    "href": "02-guess-the-number-single-round.de.html#antwort-überprüfen",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.10 Antwort überprüfen",
+    "text": "2.10 Antwort überprüfen\nJetzt hast du alle notwendigen Werkzeuge, um die erste Version unseres Spiels fertigzustellen. Füge deinem code01.py bedingte Anweisungen hinzu, damit\n\nWenn der Computer eine kleinere Zahl als deine Vermutung wählt, wird er \"Meine Zahl ist niedriger!\" ausgeben\nWenn der Computer eine größere Zahl als deine Vermutung wählt, wird er \"Meine Zahl ist höher!\" ausgeben\nWenn die beiden Zahlen identisch sind, wird er \"Treffer!\" ausgeben\n\nErstmal speicher eine Kopie deines Original-Codes in code02.py und füge dann den Vergleich und das Drucken hinzu.\n\nErweitere dein Programm um den Vergleich in code02.py\n\nTeste, ob dein Code funktioniert. Verwende wieder Breakpoints, wenn du den Kontrollfluss besser verstehen möchtest und überprüfe, ob Vergleiche so funktionieren, wie du es erwartest.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#bibliotheken-verwenden",
+    "href": "02-guess-the-number-single-round.de.html#bibliotheken-verwenden",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.11 Bibliotheken verwenden",
+    "text": "2.11 Bibliotheken verwenden\nUnser Spiel ist “funktionsvollendet”: Der Computer wählt eine Zahl, der Spieler rät, der Computer reagiert entsprechend. Allerdings spielen wir momentan auf beiden Seiten. Lassen wir den Computer selbst eine zufällige Zahl wählen. Dafür benötigen wir die Funktion randint(a, b). Es ist Teil jeder Python-Distribution, so dass du es auch hast, wenn du eine Vanilla-Python-Distribution installierst, anstatt eine von PsychoPy zu verwenden. Allerdings kannst du sie nicht direkt wie print() oder input() verwenden. Gib randint(1, 3) in deinem Jupyter Notebook ein und beobachte NameError: name ‘randint’ is not defined.\nDas liegt daran, dass Python eine Menge Funktionen hat und das Laden all dieser Funktionen auf einmal den Speicher mit Dingen verstopfen würde, die du nie verwenden wolltest. Stattdessen sind sie in Bibliotheken gepackt, damit du nur die Funktionen (oder Bibliotheken) importieren kannst, die du tatsächlich für dein Programm benötigst. Du importierst sie über eine import-Anweisung, die oben in deine Datei gehören sollte (aber unter dem Kommentar zum Dateiinhalt). Es gibt mehrere Möglichkeiten, Bibliotheken zu importieren. Zunächst kannst du eine gesamte Bibliothek importieren (wie die random-Bibliothek, die die Funktion randint() enthält, die wir benötigen) und dann ihre Funktionen als &lt;Bibliothek&gt;.&lt;Funktion&gt; verwenden. Für randint würde dies wie folgt aussehen:\nimport random\n\ncomputer_pick = random.randint(1, 5)\nIch würde vorschlagen, dass du auf diese Weise Bibliotheken verwendest, da sie dich zwingt, den Namen der Bibliothek explizit zu erwähnen, wenn du eine Funktion aufrufst, z.B. random.randint() anstelle von einfach randint(). Das mag auf den ersten Blick nicht wichtig aussehen, aber selbst in einem bescheidenen Projekt wirst du viele Bibliotheken importieren, sodass es schwierig sein wird herauszufinden, zu welcher Bibliothek die Funktion gehört. Noch wichtiger ist, dass verschiedene Bibliotheken Funktionen mit demselben Namen haben können. In diesem Fall stammt die Funktion, die du verwendest, von der letzten Bibliothek, die du importiert hast. Aber du könntest das nicht merken, und das ist ein Fehler, der wirklich schwer zu finden ist. Daher solltest du es immer tun, es sei denn, du hast einen sehr guten Grund, etwas anderes zu tun: Importiere die gesamte Bibliothek und verwende die Notation bibliothek..\nEine andere und weniger offensichtliche Option ist, nur einige Funktionen zu importieren und sie ohne das library. Präfix zu verwenden. Du kannst mehr als eine Funktion importieren, indem du sie alle auflistest\nfrom random import randint, randrange\n\ncomputer_pick = randint(1, 5)\nDu kannst auch eine Bibliothek oder eine Funktion beim Importieren über as umbenennen. Kurz gesagt, du solltest das nicht tun, da das Verwenden eines anderen Namens für eine Bibliothek oder eine Funktion es für andere (und sogar für deine zukünftige Version) schwieriger machen würde, deinen Code zu verstehen. Es gibt jedoch einige “Standard”-Umbenennungsmuster, die universell verwendet werden und auf die du wahrscheinlich stoßen wirst.\n\n# das ist eine Standardmethode, um diese beiden Bibliotheken zu importieren\nimport numpy as np\nimport pandas as pd\n\nnp.abs(-1) = 1\n\n# Du kannst auch einzelne Funktionen umbenennen,\n# wenn du wirklich musst (aber bitte nicht!)\nfrom random import randint as random_integer\n\ncomputer_pick = random_integer(1, 5)\n\nEndlich gibt es eine sehr schlechte Art, Funktionen aus einer Bibliothek zu importieren: from random import *. Das Sternchen bedeutet, dass du alle Funktionen aus der Bibliothek importieren möchtest und sie ohne random. Präfix aufrufen möchtest. Nie, nie, nie6 solltest du das tun! Das füllt deine Umgebung mit Funktionen, von denen du vielleicht nichts weißt, überschreibt möglicherweise andere Funktionen und verursacht Konflikte usw. Niemals! Ich zeige dir das nur, weil du irgendwann einmal einen Code sehen wirst, der diese Methode verwendet, und du könntest denken, dass das eine gute Idee ist. Das ist eine furchtbare Idee! Importiere die Bibliothek, nicht die Funktionen, damit du explizit zeigen kannst, auf welche Bibliothek du dich beim Aufrufen einer Funktion verlässt. Denke immer an das Zen of Python: “Explizit ist besser als implizit.”",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#eine-zahl-zufällig-auswählen",
+    "href": "02-guess-the-number-single-round.de.html#eine-zahl-zufällig-auswählen",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.12 Eine Zahl zufällig auswählen",
+    "text": "2.12 Eine Zahl zufällig auswählen\nJetzt, wo du weißt, wie man eine Bibliothek importiert, können wir die Funktion randint() verwenden. Dazu speicherst du eine Kopie deines vorherigen Codes in code03.py. Importiere die Bibliothek und verwende randint(), um eine zufällige Zahl zwischen 1 und 10 zu erzeugen. Lies die Dokumentation zu randint(), um zu verstehen, wie man sie verwendet. Das Lesen von Handbüchern ist ein notwendiger Teil des Programmierens, also ist das ein guter Punkt, um damit anzufangen zu üben.\nOkay, nachdem du das in code03.py umgesetzt hast, führ es ein paar Mal aus, um sicherzustellen, dass der Computer tatsächlich verschiedene zufällige Werte auswählt. Wie immer, du kannst Breakpoints verwenden, wenn du nochmal nachprüfen möchtest, was da abläuft.\n\nFüge deinen Code in code03.py ein.\n\nHerzlichen Glückwunsch, du hast gerade dein erstes Computerspiel programmiert! Ja, es ist sehr einfach, aber es hat wichtige Zutaten: eine zufällige Entscheidung des Computers, Benutzereingabe und Feedback. Beim nächsten Mal lernst du Schleifen kennen, um mehrere Versuche zu ermöglichen, und wirst Funktionen schreiben, um deinen Code modular und zuverlässig zu gestalten. In der Zwischenzeit stärken wir dein Wissen, indem wir ein weiteres Spiel programmieren!",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#einarmiger-bandit-ein-runden-edition",
+    "href": "02-guess-the-number-single-round.de.html#einarmiger-bandit-ein-runden-edition",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.13 Einarmiger Bandit (Ein-Runden-Edition)",
+    "text": "2.13 Einarmiger Bandit (Ein-Runden-Edition)\nDu weißt bereits alles, was du brauchst, um eine einfache Version des “Einarmigen Banditen”-Spiels zu programmieren. Hier ist die Spiel-Logik:\n\nImportiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst.\nErzeuge drei zufällige Ganzzahlen (sagen wir, zwischen 1 und 5) und speichere sie in den Variablen slot1, slot2 und slot3.\nGib die Zahlen aus, verwende String-Formatierung, um sie ansprechend darzustellen.\nAußerdem:\n\nWenn alle drei Werte gleich sind, gib \"Drei gleiche!\" aus.\nWenn nur zwei Zahlen übereinstimmen, gib \"Paar!\" aus.\nGib nichts aus, wenn alle Zahlen unterschiedlich sind.\n\n\nMach weiter so und vergiss nicht, die neue Datei code04.py zu dokumentieren. Du kannst gerne Breakpoints verwenden, um sie zu debuggen.\n\nSchreibe deinen Code in code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#abgabe-für-das-seminar",
+    "href": "02-guess-the-number-single-round.de.html#abgabe-für-das-seminar",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "2.14 Abgabe für das Seminar",
+    "text": "2.14 Abgabe für das Seminar\nFür das Seminar musst du einen gepackten Ordner mit Übungsheft und allen vier Programmen abgeben.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "02-guess-the-number-single-round.de.html#footnotes",
+    "href": "02-guess-the-number-single-round.de.html#footnotes",
+    "title": "2  Rate die Zahl: die Ein-Runden-Edition",
+    "section": "",
+    "text": "Du kannst den vorherigen Code “Speichern unter…”, um zu vermeiden, dass du Dinge von Hand kopierst und einfügst.↩︎\nIch empfehle die Verwendung von 01 statt 1, damit die Dateien in deinem Dateimanager sortiert sind↩︎\nNatürlich wissen wir es, weil wir es hartcodiert haben, aber das wird nicht der Fall sein, wenn der Computer sie zufällig generiert, also planen wir für die Zukunft↩︎\nOder zumindest einfacher.↩︎\nDies liegt daran, dass du jeden Wert mit der bool()-Funktion, die du beim letzten Mal kennengelernt hast, in einen logischen Wert umwandeln kannst und daher jeder Wert entweder True oder False ist.↩︎\nHabe ich schon erwähnt, dass du das nie tun sollst? Nie!↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rate die Zahl: die Ein-Runden-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html",
+    "href": "03-guess-the-number-multi-round.de.html",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "",
+    "text": "3.1 Kapitelkonzepte",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#kapitelkonzepte",
+    "href": "03-guess-the-number-multi-round.de.html#kapitelkonzepte",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "",
+    "text": "Wiederholenden Code mit einer while-Schleife.\nMachen eines Notausstiegs aus einer Schleife.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#while-loop",
+    "href": "03-guess-the-number-multi-round.de.html#while-loop",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.2 While-Schleife",
+    "text": "3.2 While-Schleife\nWenn du etwas wiederholen möchtest, musst du Schleifen verwenden. Es gibt zwei Arten von Schleifen: die while-Schleife, die solange eine Bedingung wahr ist, wiederholt wird, und die for-Schleife, die über Elemente iteriert (dazu kommen wir später).\nDie Grundstruktur einer while-Schleife ist\n# Anweisungen vor der Schleife\n\nwhile &lt;Bedingung&gt;:\n    # Anweisungen innerhalb werden ausgeführt\n    # wiederholt ausgeführt, so lange wie\n    # die Bedingung wahr ist\n\n# Anweisungen nach der Schleife\nDu kannst eine Schleife mit while erstellen, indem du eine Bedingung angibst, die entweder True oder False ist. Das ist genau wie in einer if...elif...else-Anweisung. Und die gleichen Einrückungsregeln gelten auch hier, um zu bestimmen, welcher Code in der Schleife und welcher außerhalb ist.\n\nMach Übung #1\n\nLass uns eine while-Schleife verwenden, damit der Spieler immer weiter raten kann, bis er es endlich richtig hat. Du kannst den Code, den du beim letzten Seminar programmiert hast, kopieren und einfügen oder ihn von Neuem schreiben (ich würde dir empfehlen, Letzteres zu tun!). Die allgemeine Programmstruktur sollte wie folgt aussehen:\n# importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst\n\n# eine zufällige Zahl generieren und in der Variable\n# number_picked speichern die Eingabe des Spielers holen, sie in eine Ganzzahl umwandeln und in der Variable guess speichern\n\n# Solange deine Vermutung nicht gleich dem Wert ist, den der Computer gewählt hat:\n    # Drucke \"Meine Zahl ist kleiner\" oder \"Meine Zahl ist größer\" mithilfe eines if-else-Statements\n    # Hol dir die Eingabe des Spielers, konvertiere sie in eine Ganzzahl und speichere sie in der Variable \"Vermutung\"\n\n# Drucke \"Treffer!\" (weil wir hier sind, bedeutet das, dass \"Vermutung\" gleich der Wahl des Computers ist)\n\nSchreib deinen Code in code01.py.\n\nvergiss nicht, die Datei zu dokumentieren und nutze Breakpoints und Step-overs, um den Programmablauf zu erkunden.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#versuche-zählen",
+    "href": "03-guess-the-number-multi-round.de.html#versuche-zählen",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.3 Versuche zählen",
+    "text": "3.3 Versuche zählen\nJetzt fügen wir eine Variable hinzu, die die Gesamtzahl der Versuche des Spielers zählt. Dazu erstellst du eine neue Variable (nenn sie versuche oder ähnlich) vor der Schleife und initialisierst sie mit 1 (denn der erste Versuch findet vor dem Eintritt in die Schleife statt). Addiere 1 zu ihr jedes Mal, wenn der Spieler eine Vermutung eingibt. Nach der Schleife erweiterst du die Meldung \"Treffer!\" um Informationen über die Anzahl der Versuche. Verwende String-Formatierung, um es nett aussehen zu lassen, z.B. \"Richtig, und du hast nur 5 Versuche gebraucht!\". Stelle sicher, dass die Anzahl der Versuche, die du benötigst, übereinstimmt mit der Anzahl der Versuche, die das Programm meldet!\n\nFüge deinen Code in code02.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#break",
+    "href": "03-guess-the-number-multi-round.de.html#break",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.4 Abbrechen (und Beenden)",
+    "text": "3.4 Abbrechen (und Beenden)\nDer Code innerhalb der while-Schleife wird so lange ausgeführt, wie die Bedingung True ist, und wichtig ist, dass der gesamte Code innerhalb ausgeführt wird, bevor die Bedingung erneut ausgewertet wird. Manchmal möchtest du jedoch früher abbrechen, ohne den restlichen Code auszuführen. Dafür hat Python einen break-Befehl, der das Programm dazu veranlasst, die Schleife sofort zu verlassen, ohne den restlichen Code innerhalb der Schleife auszuführen, damit das Programm mit dem Code nach der Schleife fortfährt.\n# Dieser Code wird vor der Schleife ausgeführt.\n\nwhile &lt;Einige_Bedingung&gt;:\n    # dieser Code wird bei jeder Iteration ausgeführt\n\n    if &lt;eine_andere_Bedingung&gt;:\n        break\n\n    # Dieser Code wird bei jeder Iteration ausgeführt,\n    # aber nicht, wenn man die Schleife verlässt.\n\n# Dieser Code wird nach der Schleife ausgeführt.\n\nMach Übung #2, um dein Verständnis zu vertiefen.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#anzahl-der-versuche-begrenzen-via-break",
+    "href": "03-guess-the-number-multi-round.de.html#anzahl-der-versuche-begrenzen-via-break",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.5 Anzahl der Versuche begrenzen via break",
+    "text": "3.5 Anzahl der Versuche begrenzen via break\nMach mal Druck auf den Spieler! Entscheide, wie viele Versuche du maximal erlaubst und speichere es als eine CONSTANT. Wähle einen passenden Namen (z.B. MAX_VERSUCHE) und denke dran, dass für eine Konstante alle Buchstaben großgeschrieben werden müssen! Verwende jetzt break, um die while-Schleife zu verlassen, wenn die aktuelle Versuchsnummer größer als MAX_VERSUCHE ist. Überlege, wann (innerhalb des Codes in der Schleife) du das überprüfen solltest.\n\nFüge deinen Code in code03.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#richtige-endnachricht",
+    "href": "03-guess-the-number-multi-round.de.html#richtige-endnachricht",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.6 Richtige Endnachricht",
+    "text": "3.6 Richtige Endnachricht\nLassen wir die finale Nachricht aktualisieren. Aktuell sagt sie “Treffer…” weil wir annahmen, dass das Programm den Loop nur verlässt, wenn der Spieler die richtige Antwort gibt. Bei begrenzten Versuchen ist das jedoch nicht unbedingt der Fall. Jetzt gibt es zwei Gründe, warum es den while-Loop verlassen hat:\n\nDu hast richtig geantwortet!\nDu bist aus Versuchen ausgegangen.\n\nVerwende eine if-else-Bedingung, um eine passende Nachricht auszugeben. Zum Beispiel: \"Pech gehabt, beim nächsten Mal mehr Glück!\", wenn der Spieler verloren hat (keine Versuche mehr übrig).\n\nFüge deinen Code in code04.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#anzahl-der-versuche-begrenzen-ohne-break",
+    "href": "03-guess-the-number-multi-round.de.html#anzahl-der-versuche-begrenzen-ohne-break",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.7 Anzahl der Versuche begrenzen ohne Break",
+    "text": "3.7 Anzahl der Versuche begrenzen ohne Break\nObwohl ich es vorgeschlagen habe, das break-Statement hinzuzufügen, solltest du es sparsam verwenden. Ohne break gibt es nur einen Ort im Code, den du überprüfen musst, um zu verstehen, wann das Programm die Schleife verlässt: die Bedingung. Aber wenn du ein break hinzufügst, musst du jetzt zwei Orte untersuchen. Und jeder zusätzliche break fügt immer weiter hinzu. Das bedeutet aber nicht, dass du sie um jeden Preis vermeiden solltest! Du solltest sie verwenden, wenn es den Code einfacher verständlich macht. Aber überprüfe immer, ob eine geänderte Bedingung auch funktionieren könnte.\nLass uns genau das machen. Ändere deinen Code, damit er ohne die break-Anweisung funktioniert. Du brauchst eine kompliziertere Bedingung für deine while-Schleife, damit sie sich wiederholt, solange der Spieler rate falsch liegt und die Anzahl der Versuche noch kleiner als das maximal erlaubte ist. Teste, ob dein Code sowohl im Gewinn- als auch im Verlustfall funktioniert.\n\nFüge deinen Code in code05.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#verbliebene-versuche-anzeigen",
+    "href": "03-guess-the-number-multi-round.de.html#verbliebene-versuche-anzeigen",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.8 Verbliebene Versuche anzeigen",
+    "text": "3.8 Verbliebene Versuche anzeigen\nEs geht ums User-Interface! Ändere die input-Prompts-Nachricht, um die Anzahl der verbliebenen Versuche einzubeziehen. Zum Beispiel: \"Bitte gib deine Vermutung ein, du hast noch X Versuche übrig.\"\n\nFüge deinen Code in code06.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#rate-zahlen-repeat-game",
+    "href": "03-guess-the-number-multi-round.de.html#rate-zahlen-repeat-game",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.9 Das Spiel wiederholen",
+    "text": "3.9 Das Spiel wiederholen\nLass uns dem Spieler die Möglichkeit geben, das Spiel erneut zu spielen. Das bedeutet, alle aktuellen Code in eine andere while-Schleife (das nennt man verschachtelte Schleifen) zu packen, die so lange wiederholt wird, wie der Spieler weiterspielen möchte. Der Code sollte folgendermaßen aussehen:\n# importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst\n\n# Definiere MAX_ATTEMPTS = 5\n\n\n# Variablen \"willst_du_weiterspielen\" definieren und auf True setzen\n# Solange der Spieler weiter spielen möchte\n\n  # Dein aktueller Spielcode geht hier rein\n\n  # Frage den Benutzer mit der input-Funktion. z.B. \"Willst du nochmal spielen? J/N\"\n  # willst_du_weiterspielen sollte True sein, wenn die Benutzereingabe \"J\" oder \"j\" ist\n\n# Letzte Botschaft, z.B. \"Danke fürs Spielen!\"\nAchte besonders auf die Einrückungen, um den Code ordentlich zu gruppieren!\n\nFüge deinen Code in code07.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast",
+    "href": "03-guess-the-number-multi-round.de.html#du-brauchst-keinen-vergleich-wenn-du-bereits-den-wert-hast",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.10 Du brauchst keinen Vergleich, wenn du bereits den Wert hast",
+    "text": "3.10 Du brauchst keinen Vergleich, wenn du bereits den Wert hast\nIn deinem aktualisierten Code hast du die want_to_play-Variable, die entweder True oder False ist. Sie wird in der Schleife verwendet, die sich solange wiederholt, wie ihr Wert True ist. Manchmal schreiben Leute want_to_play == True, um das auszudrücken. Während es technisch korrekt ist und sicherlich korrekt funktionieren wird, ist es auch redundant. Da want_to_play nur True oder False sein kann, wird dieser Vergleich zu True == True (was natürlich True ist) oder False == True (was False ist). Daher produziert der Vergleich beider Werte mit True genau denselben Wert. Du kannst also einfach while want_to_play: schreiben und den logischen Wert direkt verwenden.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#best-score",
+    "href": "03-guess-the-number-multi-round.de.html#best-score",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.11 Best score",
+    "text": "3.11 Best score\nEin “richtiges” Spiel führt normalerweise die Leistung der Spieler mit. Lass uns die geringste Anzahl von Versuchen aufzeichnen, die der Spieler benötigte, um die Zahl zu erraten. Dazu erstellst du eine neue Variable fewest_attempts und setzt sie auf MAX_ATTEMPTS (das ist so schlecht wie es nur geht). Überlege, wo du sie erstellen musst. Du solltest sie nach jeder Spielrunde aktualisieren. Füge Informationen über “Bisheriger Rekord” in die Runden-Endnachricht ein.\n\nFüge deinen Code in code08.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#spielrunden-zählen",
+    "href": "03-guess-the-number-multi-round.de.html#spielrunden-zählen",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.12 Spielrunden zählen",
+    "text": "3.12 Spielrunden zählen\nLass uns zählen, wie oft der Spieler das Spiel gespielt hat. Die Idee und die Umsetzung sind dieselben wie beim Zählen der Versuche. Erstelle eine neue Variable, initialisiere sie auf 0 und erhöhe sie um 1, wenn eine neue Runde beginnt. Füge die Gesamtzahl der gespielten Spiele in die allerletzte Nachricht ein, z.B. “Danke für das Spielen des Spiels X Mal!”\n\nFüge deinen Code in code09.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#mehrrunde-einarmiger-bandit",
+    "href": "03-guess-the-number-multi-round.de.html#mehrrunde-einarmiger-bandit",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.13 Mehrrunde Einarmiger Bandit",
+    "text": "3.13 Mehrrunde Einarmiger Bandit\nAm Ende des vorherigen Kapitels hast du ein Spiel mit einem Einarmigen Banditen für eine Runde programmiert. Du weißt bereits alles, was du brauchst, um eine Version mit mehreren Runden zu implementieren, und ihre Struktur ist ähnlich (aber einfacher) als die des Multi-Round-Game-Of-Guess-Number-Spiels, das du gerade implementiert hast.\nLass den Spieler mit einem Anfangsguthaben von 10 Münzen starten. Jede Runde kostet 1 Münze, drei gleiche Karten bringen 10 Münzen ein, während ein Paar 2 Münzen einbringt (du kannst die Auszahlungen nach Belieben ändern). In jeder Runde:\n\nNimm eine Münze aus dem Topf (Gebühr fürs Spielen).\nWirf den Würfel (das hast du schon implementiert).\nSag dem Spieler, wie’s gelaufen ist (das hast du auch schon gemacht).\nFüge Münzen dem Topf hinzu, falls nötig.\nGib die verbleibende Münzen im Topf aus.\nFrag den Spieler, wo’s weitergeht.\n\nSonderfall: Wenn dem Spieler die Münzen ausgehen, ist das Spiel definitiv vorbei.\n\nFüge deinen Code in code10.py ein.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "03-guess-the-number-multi-round.de.html#zusammenfassung",
+    "href": "03-guess-the-number-multi-round.de.html#zusammenfassung",
+    "title": "3  Rate das Zahl: die Multi-Runde-Edition",
+    "section": "3.14 Zusammenfassung",
+    "text": "3.14 Zusammenfassung\nSuper gemacht, jetzt hast du zwei funktionierende Computerspiele mit Spielrunden, begrenzten Versuchen und Bestenpunkten! Pack die Ordner zusammen und abgeben.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Rate das Zahl: die Multi-Runde-Edition</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html",
+    "href": "04-guess-the-number-ai.de.html",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "",
+    "text": "4.1 Kapitelbegriffe.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#kapitelbegriffe.",
+    "href": "04-guess-the-number-ai.de.html#kapitelbegriffe.",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "",
+    "text": "Schreibe deine eigenen Funktionen.\nVerstehe die Gültigkeitsbereiche von Variablen.\nVerwende Standardmethoden zur Dokumentation deines Codes.\nVerwende deine eigenen Bibliotheken.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#guess-the-number-players-response",
+    "href": "04-guess-the-number-ai.de.html#guess-the-number-players-response",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.2 Spielerantwort",
+    "text": "4.2 Spielerantwort\nLassen wir uns aufwärmen, indem wir einen Code schreiben, der es einem Spieler ermöglicht, auf die Vermutung des Computers zu reagieren. Denke daran, dass es nur drei Optionen gibt: deine Zahl ist größer, kleiner oder gleich der Vermutung des Computers. Ich würde vorschlagen, die Symbole &gt;, &lt; und = zu verwenden, um dies mitzuteilen. Du musst den Code schreiben, der den Spieler nach seiner Antwort fragt, bis er eines dieser Symbole eingibt. D.h., die Eingabeaufforderung sollte wiederholt werden, wenn er etwas anderes eingibt. Also brauchst du auf jeden Fall die input([prompt])-Funktion und eine while-Schleife. Denke dir eine nützliche und informative Promptnachricht dafür aus. Teste, ob es funktioniert. Das Setzen von Breakpoints kann hier sehr nützlich sein.\n\nSchreib deinen Code in code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#funktion",
+    "href": "04-guess-the-number-ai.de.html#funktion",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.3 Funktionen",
+    "text": "4.3 Funktionen\nDu weißt bereits, wie man Funktionen verwendet, jetzt ist es an der Zeit, mehr darüber zu erfahren, warum du das tun solltest. Der Zweck einer Funktion besteht darin, bestimmten Code zu isolieren, der eine einzelne Berechnung durchführt, damit er getestet und wiederverwendet werden kann. Lass uns den letzten Satz Schritt für Schritt mit Beispielen durchgehen.\n\n4.3.1 Funktion führt eine einzelne Berechnung durch\nIch hab’s dir ja schon gesagt, dass das Lesen von Code einfach ist, weil jede Aktion für Computer auf eine klare und einfache Weise ausgeschrieben werden muss. Aber viele einfache Dinge können trotzdem total überwältigend und verwirrend sein. Stell dir den finalen Code vom letzten Seminar vor: wir hatten zwei Schleifen mit bedingten Anweisungen darin verschachtelt. Füg ein paar mehr davon hinzu und du hast so viele Zweige zu verfolgen, dass du nie sicher sein wirst, was passieren wird. Das liegt daran, dass unsere kognitive Fähigkeit und unser Arbeitsgedächtnis, die du zum Verfolgen all dieser Zweige brauchst, auf etwa vier Dinge beschränkt sind3.\nAlso, eine Funktion sollte eine Berechnung / Aktion durchführen, die konzeptuell klar ist und dieser Zweck sollte direkt aus seinem Namen oder, maximal, aus einem Satz verstanden werden, der ihn beschreibt4. Der Name einer Funktion sollte typischerweise ein Verb sein, weil die Funktion über die Durchführung einer Aktion spricht. Wenn du mehr als einen Satz benötigst, um zu erklären, was die Funktion tut, solltest du den Code weiter aufteilen. Das bedeutet nicht, dass die gesamte Beschreibung / Dokumentation in einen einzigen Satz passen muss. Die vollständige Beschreibung kann lang sein, insbesondere wenn die zugrunde liegende Berechnung komplex ist und viele Parameter berücksichtigt werden müssen. Allerdings sind dies optionale Details, die dem Leser sagen, wie die Funktion ihre Arbeit macht oder wie ihr Verhalten verändert werden kann. Trotzdem sollten sie in der Lage sein, was die Arbeit ist, nur aus dem Namen oder aus einem einzigen Satz zu verstehen. Ich wiederhole mich und betone dies so sehr, weil konzeptuell einfache Funktionen mit einer einzigen Aufgabe die Grundlage eines klaren, robusten und wiederverwendbaren Codes sind. Und die zukünftige Version von dir wird sehr dankbar sein, dass sie mit leicht verständlichem, isoliertem und zuverlässigem Code arbeiten muss, den du geschrieben hast.\n\n\n4.3.2 Funktion isoliert Code vom Rest des Programms\nIsolation bedeutet, dass dein Code in einem separaten Gültigkeitsbereich ausgeführt wird, in dem nur die Funktionargumente (begrenzte Anzahl von Werten, die du von außen mit festem Bedeutung übergibst) und lokale Variablen, die du innerhalb der Funktion definierst, existieren. Du hast keinen Zugriff auf Variablen, die im äußeren Skript definiert sind5 oder auf Variablen, die innerhalb anderer Funktionen definiert sind. Umgekehrt haben das globale Skript oder andere Funktionen keinen Zugriff auf Variablen und Werte, die du innerhalb verwendest. Das bedeutet, dass du nur den Code innerhalb der Funktion studieren musst, um zu verstehen, wie er funktioniert. Entsprechend sollte der Code, den du schreibst, unabhängig von jedem globalen Kontext sein, in dem die Funktion verwendet werden kann. Die Isolation ist sowohl praktisch (kein Laufzeitzugriff auf Variablen von außen bedeutet weniger Chancen, dass etwas schief geht) als auch konzeptuell (kein weiterer Kontext ist erforderlich, um den Code zu verstehen).\n\n\n4.3.3 Funktionen erleichtern das Testen von Code\nDu kannst sogar moderat komplexe Programme nur dann erstellen, wenn du sicherstellen kannst, was einzelne Code-Blöcke unter jeder möglichen Bedingung tun. Produzieren sie die richtigen Ergebnisse? Scheitern sie klar und werfen einen korrekten Fehler, wenn die Eingaben falsch sind? Verwenden sie Standardwerte, wenn erforderlich? Das Testen aller Blöcke zusammen bedeutet jedoch, eine extreme Anzahl von Durchläufen durchzuführen, da du alle möglichen Kombinationen von Bedingungen für einen Block bei allen möglichen Bedingungen für andere Blöcke usw. testen musst. Funktionen erleichtern dein Leben erheblich. Weil sie einen einzigen Eintrittspunkt, eine feste Anzahl von Parametern, einen einzigen Rückgabewert und isoliert sind (siehe oben), kannst du sie unabhängig von anderen Funktionen und dem Rest des Codes einzeln testen. Dies wird Einheitstest genannt und ist ein intensiver Einsatz von automatischem Einheitstest6. Es gewährleistet zuverlässigen Code für die absolute Mehrheit der Programme und Apps, die du verwendest7.\n\n\n4.3.4 Funktionen machen Code wiederverwendbar\nManchmal wird das als Hauptgrund genannt, warum man Funktionen verwenden sollte. Wenn man Code in eine Funktion packt, kann man die Funktion aufrufen, anstatt den Code zu kopieren und einzufügen. Letzteres ist eine schlechte Idee, denn dann muss man denselben Code an vielen Stellen pflegen und weiß vielleicht nicht einmal, an wie vielen Stellen. Das ist selbst bei einem extrem simplen Code ein Problem. Hier definieren wir eine Standard-Methode, um einen Anfangsbuchstaben aus einer Zeichenkette zu berechnen (du wirst später mehr über Indexierung und Slicing lernen). Der Code ist so einfach wie nur möglich.\n...\ninitial = \"test\"[0]\n...\ninitial_for_file = filename[0]\n...\ninitial_for_website = first_name[0]\n...\nStell dir vor, du entscheidest dich, es zu ändern und die ersten zwei Symbole zu verwenden. Wieder ist die Berechnung nicht kompliziert, man muss nur [0] durch [:2] ersetzen. Aber du musst es für alle Codezeilen tun, die diese Berechnung durchführen. Und du kannst die Option “Alle ersetzen” nicht verwenden, weil du manchmal das erste Element für andere Zwecke verwendest. Und wenn du den Code bearbeitest, vergisst du garantiert einige Stellen (das passiert mir ständig), was die Dinge noch weniger konsistent und verwirrender macht. Wenn man Code in eine Funktion packt, muss man ihn nur an einer Stelle ändern und testen. Hier ist der ursprüngliche Code, der über eine Funktion implementiert wurde.\ndef generate_initial(full_string):\n    \"\"\"Erzeuge einen Anfangsbuchstaben aus dem ersten Symbol.\n\n    Parameter\n    ----------\n    full_string : str\n\n    Returns\n    ----------\n    str\n        einzelnes Symbol\n    \"\"\"\n    return full_string[0]\n...\ninitial = generate_initial(\"test\")\n...\ninitial_for_file = generate_initial(filename)\n...\ninitial_for_website = generate_initial(first_name)\n...\nUnd hier ist die “alternative” initiale Berechnung. Beachte, dass der Code, der die Funktion verwendet, gleich bleibt.\ndef generate_initial(full_string):\n    \"\"\"Erstelle einen Anfangsbuchstaben aus den ersten ZWEI Symbolen.\n\n    Parameter\n    ----------\n    full_string : str\n\n    Returns\n    ----------\n    str\n        zwei Symbole lang\n    \"\"\"\n    return full_string[:2]\n\ninitial = generate_initial(\"test\")\n...\ninitial_for_file = generate_initial(filename)\n...\ninitial_for_website = generate_initial(first_name)\n...\nAlso, es ist besonders nützlich, den Code in eine Funktion zu packen, wenn der wiederverwendete Code komplex ist, aber es lohnt sich sogar, wenn die Berechnung so einfach und trivial ist wie im obigen Beispiel. Mit einer Funktion hast du nur einen Code-Block, um den du dich kümmern musst, und du kannst sicher sein, dass dieselbe Berechnung durchgeführt wird, wann immer du die Funktion aufrufst (und dass dies keine mehreren Kopien des Codes sind, die möglicherweise identisch sind oder auch nicht).\nBeachte, dass ich wiederverwendbaren Code als den letzten und am wenigsten wichtigen Grund für die Verwendung von Funktionen ansehe. Dies liegt daran, dass die anderen drei Gründe deutlich wichtiger sind. Selbst wenn du diese Funktion nur einmal aufrufst, ist es von Vorteil, wenn dein Code konzeptuell klar, isoliert und testbar ist. Dadurch wird der Code einfacher zu verstehen und zu testen, und du kannst seine Komplexität reduzieren, indem du Teile des Codes durch ihren Sinn ersetzst. Schau dir das Beispiel unten an. Der erste Code holt das erste Symbol, aber diese Aktion bedeutet alleine nichts, es ist nur eine mechanische Berechnung. Erst der ursprüngliche Kontext initial_for_file = filename[0] oder zusätzliche Kommentare geben ihm eine Bedeutung. Im Gegensatz dazu sagt der Aufruf einer Funktion namens compute_initial, was passiert, da sie den Zweck klärt. Ich vermute, dass deine zukünftige Version sehr pro-Klarheit und anti-Verwirrung ist.\nif filename[0] == \"A\":\n   ...\n\nif compute_initial(filename) == \"A\":\n   ...",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#funktionen-in-python",
+    "href": "04-guess-the-number-ai.de.html#funktionen-in-python",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.4 Funktionen in Python",
+    "text": "4.4 Funktionen in Python\n\n4.4.1 Eine Funktion in Python definieren\nEine Funktion in Python sieht so aus ( Beachte die Einrückung und das : am Ende der ersten Zeile)\ndef &lt;funktionsname&gt;(param1, param2,...):\n    einige interne Berechnungen\n    if somecondition:\n        return some value\n    return some other value\nDie Parameter sind optional, genau wie der Rückgabewert. Daher wäre die minimalste Funktion:\ndef minimal_function():\n    pass # pass bedeutet \"tu nichts\"\nDu musst deine Funktion (einmal!) definieren, bevor du sie aufrufst (ein- oder mehrmals). Also solltest du Funktionen vor dem Code erstellen, der sie verwendet.\ndef do_something():\n    \"\"\"\n    Das ist eine Funktion namens \"do_something\". Sie tut eigentlich nichts.\n    Sie benötigt keinen Input und gibt keinen Wert zurück.\n    \"\"\"\n    return\n\ndef another_function():\n   ...\n    # Wir rufen sie in einer anderen Funktion auf.\n    do_something()\n   ...\n\n# Das ist ein Funktionsaufruf (diese Funktion verwenden wir)\ndo_something()\n\n# Und wir verwenden es erneut!\ndo_something()\n\n# Und wieder, aber diesmal über einen anderen_Funktionsaufruf\nanother_function()\n\nMach Übung #1.\n\nDu solltest auch im Hinterkopf behalten, dass das Über-schreiben einer Funktion (oder das Definieren einer technisch anderen Funktion mit dem gleichen Namen) die ursprüngliche Definition überschreibt, sodass nur die letzte Version davon beibehalten und verwendet werden kann.\n\nMach Übung #2.\n\nObwohl das Beispiel im Übungsblatt das Problem einfach macht, kann es in einem großen Code, der mehrere Dateien umfasst und verschiedene Bibliotheken verwendet, nicht so einfach sein, dasselbe Problem zu lösen!\n\n\n4.4.2 Funktionsargumente\nEinige Funktionen benötigen möglicherweise keine Argumente (auch Parameter genannt), da sie eine festgelegte Aktion ausführen:\ndef ping():\n    \"\"\"\n    Eine Maschine, die \"ping!\" sagt\n    \"\"\"\n    print(\"ping!\")\nAllerdings musst du möglicherweise Informationen über Argumente an die Funktion übergeben, um zu beeinflussen, wie die Funktion ihre Aktion ausführt. In Python listest du einfach die Argumente in den runden Klammern nach dem Funktionsnamen auf (es gibt noch weitere Feinheiten, aber wir halten es vorerst einfach). Zum Beispiel könnten wir eine Funktion schreiben, die das Alter einer Person berechnet und ausgibt, basierend auf zwei Parametern: 1) ihrem Geburtsjahr, 2) dem aktuellen Jahr:\ndef print_age(birth_year, current_year):\n    \"\"\"\n    Gibt das Alter basierend auf Geburtsjahr und aktuellem Jahr aus.\n\n    Parameter\n    ---------\n    birth_year : int\n    current_year : int\n    \"\"\"\n    print(current_year - birth_year)\nEs ist eine sehr gute Idee, Funktionen, Parameter und Variablen sinnvolle Namen zu geben. Der folgende Code wird genau dasselbe Ergebnis produzieren, aber zu verstehen, warum und wozu er das tut, wäre viel schwerer (also immer sinnvolle Namen verwenden!):\ndef x(a, b):\n    print(b - a)\nWenn du eine Funktion aufrufst, musst du die richtige Anzahl an Parametern übergeben und sie in der richtigen Reihenfolge übergeben, ein weiterer Grund, warum Funktion-Argumente bedeutungsvolle Namen haben sollten8.\n\nMach Übung #3.\n\nWenn du eine Funktion aufrufst, werden die Werte, die du übergibst, den Parametern zugeordnet und als lokale Variablen verwendet (mehr dazu später zum lokalen Teil). Aber es spielt keine Rolle, wie du auf diese Werte gekommen bist, ob sie in einer Variablen waren, hartcodiert oder von einer anderen Funktion zurückgegeben wurden. Wenn du numerische, logische oder Zeichenfolgenwerte (unveränderliche Typen) verwendest, kannst du davon ausgehen, dass jeder Link zur ursprünglichen Variablen oder Funktion, die ihn produziert hat, weg ist (wir werden uns später mit veränderlichen Typen wie Listen befassen). Daher kannst du beim Schreiben einer Funktion oder beim Lesen ihres Codes einfach davon ausgehen, dass sie während des Aufrufs auf einen bestimmten Wert gesetzt wurde und du kannst den Kontext, in dem dieser Aufruf erfolgte, ignorieren.\n# hartcodiert\nprint_age(1976, 2020)\n\n# Werte aus Variablen verwenden\ni_was_born = 1976\ntoday_is = 2024\nprint_age(i_was_born, today_is)\n\n# den aktuellen Jahrgang von einer Funktion verwenden\ndef get_current_year():\n    return 2024\n\nprint_age(1976, get_current_year())\n\n\n4.4.3 Funktionen-Rückgabewert (Ausgabe)\nDeine Funktion kann eine Aktion durchführen, ohne einen Wert an den Aufrufer zurückzugeben (das hat unsere print_age-Funktion gemacht). Aber du könntest den Wert auch zurückgeben müssen. Zum Beispiel könnten wir eine neue Funktion namens compute_age schreiben, die das Alter anstatt es auszudrucken zurückgibt (das können wir immer selbst machen).\ndef compute_age(geburtsjahr, aktuelles_jahr):\n    \"\"\"\n    Berechnet das Alter anhand des Geburtsjahrs und des aktuellen Jahres.\n\n    Funktionsparameter\n    ----------\n    birth_year : int\n    current_year : int\n    \n    Rückgabe\n    ----------\n    int\n        Alter\n\n    \"\"\"\n    return current_year - birth_year\nAchte darauf, dass selbst wenn eine Funktion einen Wert zurückgibt, dieser nur gespeichert wird, wenn er tatsächlich verwendet wird (in einer Variablen gespeichert, als Wert verwendet, etc.). Also, einfach nur den Aufruf wird den zurückgegebenen Wert nicht automatisch speichern!\n\nMach Übung #4.\n\n\n\n4.4.4 Gültigkeitsbereiche (für unveränderliche Werte)\nOkay, wie wir oben besprochen haben, verwandelt das Umwandeln von Code in eine Funktion ihn in eine isolierte Einheit, die in ihrem eigenen Scope läuft. In Python existiert jede Variable in dem Scope, in dem sie definiert wurde. Wenn sie im globalen Skript definiert wurde, existiert sie in diesem globalen Scope als globale Variable. Allerdings ist sie nicht zugänglich (zumindest nicht ohne besonderen Aufwand mit dem global-Operator) von innerhalb einer Funktion aus. Umgekehrt existieren die Parameter einer Funktion und alle innerhalb einer Funktion definierten Variablen nur innerhalb dieser Funktion. Sie sind für die Außenwelt unsichtbar und können nicht vom globalen Skript oder von einer anderen Funktion aus erreicht werden. Umgekehrt haben alle Änderungen, die du an dem Funktionsparameter oder der lokalen Variablen vornimmst, keine Auswirkung auf die Außenwelt.\nDer Sinn von Scopes besteht darin, einzelne Codeabschnitte voneinander zu isolieren, damit das Ändern von Variablen innerhalb eines Scopes keine Auswirkungen auf alle anderen Scopes hat. Das bedeutet, dass du beim Schreiben oder Debuggen des Codes keine Sorgen wegen des Codes in anderen Scopes haben musst und dich nur auf den Code konzentrieren kannst, an dem du gerade arbeitest. Da Scopes isoliert sind, können sie identisch benannte Variablen haben, die jedoch keine Beziehung zueinander haben, da sie in ihren eigenen parallelen Universen existieren9. Daher musst du, wenn du wissen möchtest, welchen Wert eine Variable hat, nur innerhalb des Scopes nachsehen und alle anderen Scopes ignorieren (auch wenn die Namen übereinstimmen!).\n# das ist die Variable `x` im globalen Gültigkeitsbereich\nx  = 5\n\ndef f1():\n  # Das ist Variable `x` im Gültigkeitsbereich der Funktion f1\n  # Sie hat denselben Namen wie die globale Variable, aber\n  # hat keine Beziehung dazu: viele Menschen heißen Sasha,\n  # aber sie sind trotzdem verschiedene Menschen. Was auch immer\n  # mit `x` in f1 passiert, bleibt im Gültigkeitsbereich von f1.\n  x = 3\n\ndef f2(x):\n  # Das ist Parameter `x` im Gültigkeitsbereich der Funktion f2.\n  # Wieder keine Beziehung zu anderen globalen oder lokalen Variablen.\n  # Es ist ein vollständig separates Objekt, es hat nur zufällig\n  # denselben Namen (wieder nur Namensvettern)\n  print(x)\n\nMach Übung #5.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#spielerantwort-als-funktion",
+    "href": "04-guess-the-number-ai.de.html#spielerantwort-als-funktion",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.5 Spielerantwort als Funktion",
+    "text": "4.5 Spielerantwort als Funktion\nJetzt ist es an der Zeit, die Theorie über Funktionen in die Praxis umzusetzen. Nutze den Code, den du erstellt hast, um die Spielerantwort zu erhalten und daraus eine Funktion zu machen. Diese sollte keine Parameter haben (vorerst) und die Spielerantwort zurückgeben. Ich schlage vor, sie input_response (oder etwas Ähnliches) zu nennen. Teste den Code, indem du diese Funktion in deinem Hauptskript aufrufst.\n\nMach weiter mit code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#debuggen-einer-funktion",
+    "href": "04-guess-the-number-ai.de.html#debuggen-einer-funktion",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.6 Debuggen einer Funktion",
+    "text": "4.6 Debuggen einer Funktion\nJetzt, wo du deine erste Funktion hast, kannst du die drei Schaltflächen “Schritt zurück/vor/raus” des Debuggers besser verstehen. Kopiere den folgenden Code in eine separate Datei (nenn sie zum Beispiel test01.py).\ndef f1(x, y):\n  return x / y\n\ndef f2(x, y):\n  x = x + 5\n  y = y * 2\n  return f1(x, y)\n\nz = f2(4, 2)\nprint(z)\nOkay, jetzt pass mal auf. Zuerst legst du einen Breakpoint auf die Zeile im Hauptskript, die die Funktion f2() aufruft. Starte den Debugger mit F5 und das Programm wird an dieser Stelle pausieren. Wenn du jetzt F10 (Schritt nach vorne) drückst, springt das Programm zur nächsten Zeile print(z). Aber wenn du stattdessen F11 (Schritt rein) drückst, springt das Programm in die Funktion und geht zur Zeile x = x + 5. Wenn du innerhalb der Funktion bist, hast du dieselben beiden Optionen wie zuvor, aber du kannst auch Shift+F11 drücken, um aus der Funktion herauszuspringen. Hier springt das Programm den gesamten Code aus, bis du die nächste Zeile außerhalb der Funktion erreichst (du solltest wieder bei print(z) landen). Experimentiere damit, Breakpoints an verschiedenen Zeilen zu setzen und über/rein/raus zu schreiten, um den Dreh mit diesen nützlichen Debugging-Tools rauszukriegen.\nSetzt nun den Haltepunkt innerhalb der Funktion „f1()“ und führt den Code mit F5 aus. Im linken Fensterbereich siehst du eine Registerkarte Call Stack. Während die gelb markierte Zeile im Editor anzeigt, wo du dich gerade befindest (innerhalb der Funktion f1()), zeigt der Call Stack an, wie du dorthin gekommen bist. In diesem Fall sollte er zeigen:\n\n\n\nf1\ntest01.py\n2:1\n\n\nf2\ntest01.py\n7:1\n\n\n\ntest01.py\n9:1\n\n\n\nDie Aufrufe werden von unten nach oben gestapelt, also bedeutet das, dass eine Funktion im Hauptmodul in Zeile 9 aufgerufen wurde, du landest in der Funktion f2 in Zeile 7 und dann in der Funktion f1 und in Zeile 2. Experimentiere damit, in und aus Funktionen zu gehen, während du ein Auge darauf hast. Du brauchst diese Information vielleicht nicht häufig, aber sie könnte in unseren späteren Projekten mit mehreren verschachtelten Funktionsaufrufen nützlich sein.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#numpy-docstring",
+    "href": "04-guess-the-number-ai.de.html#numpy-docstring",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.7 Deine Funktion dokumentieren",
+    "text": "4.7 Deine Funktion dokumentieren\nDas Schreiben einer Funktion ist nur die halbe Arbeit. Du musst sie dokumentieren! Erinnere dich, dies ist eine gute Gewohnheit, die deinen Code leicht verwendbar und wiederverwendbar macht. Es gibt verschiedene Möglichkeiten, den Code zu dokumentieren, aber wir werden die NumPy-Dokstrings verwenden. Hier ist ein Beispiel für eine solche dokumentierte Funktion.\nHier ist die Übersetzung des Textes über das Programmieren in Python auf Deutsch, mit informeller Sprache und Verwendung von “du” für “you”:\ndef generiere_anfangsvokal(voll_string):\n    \"\"\"\n    Generiert einen Anfangsbuchstaben aus dem ersten Symbol.\n    \n    Parameters\n    ----------\n    full_string : str\n\n    Returns\n    ----------\n    str\n        einzelnes Symbol\n    \"\"\"\n    return voll_string[0]\n\nAktualisiere deinen Code in code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#prompt-verwenden",
+    "href": "04-guess-the-number-ai.de.html#prompt-verwenden",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.8 Prompt verwenden",
+    "text": "4.8 Prompt verwenden\nIn Zukunft werden wir nach einer bestimmten Zahl fragen, die momentan vom Computer geraten wird, also können wir keine feste Promptnachricht verwenden. Ändere die input_response-Funktion, indem du einen guess-Parameter hinzufügst. Dann ändere den Prompt, den du für die input()-Funktion verwendet hast, um den Wert in diesem Parameter einzubeziehen. Aktualisiere die Dokumentation der Funktionen. Teste es, indem du es mit verschiedenen Werten für den guess-Parameter aufrufst und dabei einen unterschiedlichen Prompt für die Antwort siehst.\n\nMach weiter mit code03.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#interval-in-der-mitte-teilen",
+    "href": "04-guess-the-number-ai.de.html#interval-in-der-mitte-teilen",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.9 Interval in der Mitte teilen",
+    "text": "4.9 Interval in der Mitte teilen\nLass uns noch ein bisschen an Funktionen schreiben üben. Denk dran, dass der Computer die Mitte des Intervalls als Schätzung verwenden sollte. Schreib eine Funktion (nennen wir sie split_interval() oder so) die zwei Parameter nimmt — lower_limit und upper_limit — und eine ganze Zahl zurückgibt, die der Mitte des Intervalls am nächsten ist. Der einzige knifflige Teil ist, wie du eine eventuell float-Zahl (z.B. wenn du es für das Intervall 1..10 suchst) in eine ganze Zahl umwandelst. Du kannst die Funktion int() dafür verwenden. Beachte jedoch, dass sie keine richtige Rundung durchführt (was macht sie? Lies die Dokumentation!). Daher solltest du die Zahl mit round() auf die nächstgelegene ganze Zahl runden, bevor du sie umwandelst.\nSchreib eine Funktion, dokumentiere sie und teste sie, indem du überprüfst, ob die Zahlen korrekt sind.\n\nLeg deinen split_interval() Funktion und den Testcode in code04.py rein.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#einzige-runde",
+    "href": "04-guess-the-number-ai.de.html#einzige-runde",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.10 Einzige Runde",
+    "text": "4.10 Einzige Runde\nDu hast beide Funktionen, die du brauchst, also lass uns den Code schreiben, um das Spiel zu initialisieren und eine Runde zu spielen. Die Initialisierung beschränkt sich darauf, zwei Variablen zu erstellen, die den unteren und oberen Grenzwerten des Spielbereichs entsprechen (wir haben bisher 1 bis 10 verwendet, aber du kannst das immer ändern). Als nächstes sollte der Computer eine Vermutung generieren (du hast deine split_interval()-Funktion dafür) und den Spieler nach seiner Vermutung fragen (das ist die input_response()-Funktion). Sobald du die Antwort hast (in einer separaten Variable gespeichert, denk dir einen Namen aus), aktualisiere entweder die obere oder untere Grenze mithilfe einer if..elif..else-Anweisung basierend auf der Antwort des Spielers (wenn der Spieler sagte, dass seine Zahl höher ist, bedeutet das, dass das neue Intervall von guess bis upper_limit ist, und umgekehrt, wenn es niedriger ist). Drucke eine freudige Nachricht aus, wenn die Vermutung des Computers korrekt war.\n\nSchreibe sowohl die Funktionen als auch den Skript-Code in code05.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#mehrere-runden",
+    "href": "04-guess-the-number-ai.de.html#mehrere-runden",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.11 Mehrere Runden",
+    "text": "4.11 Mehrere Runden\nErweitere das Spiel, damit der Computer immer weiter rät, bis er schließlich gewinnt. Du weißt bereits, wie man die while-Schleife verwendet, überlege dir nur, wie man die Antwort des Teilnehmers als Bedingungsvariable für die Schleife verwenden kann. Denke auch über den Anfangswert dieser Variablen nach und wie man ihn verwendet, damit man input_response() nur an einer Stelle aufruft.\n\nSchreib den aktualisierten Code in code06.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#nochmal-spielen",
+    "href": "04-guess-the-number-ai.de.html#nochmal-spielen",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.12 Nochmal spielen",
+    "text": "4.12 Nochmal spielen\nÄndere den Code, damit du dieses Spiel mehrere Male spielen kannst. Du weißt bereits, wie man das macht, und musst nur noch darüber nachdenken, wo genau du die Initialisierung vor jedem Spiel durchführen solltest. Da du das beim letzten Spiel bereits implementiert hast, könntest du versucht sein, nachzusehen, wie du es gemacht hast oder sogar den Code zu kopieren und einzufügen. Ich würde jedoch empfehlen, es von Anfang an neu zu schreiben. Denk daran, dein Ziel ist es nicht, ein Programm zu schreiben, sondern zu lernen, wie man das macht, und daher ist die Reise wichtiger als das Ziel.\n\nSchreib den aktualisierten Code in code07.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#bestes-ergebnis",
+    "href": "04-guess-the-number-ai.de.html#bestes-ergebnis",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.13 Bestes Ergebnis",
+    "text": "4.13 Bestes Ergebnis\nFüge den Code hinzu, um die Anzahl der Versuche zu zählen, die der Computer in jeder Runde benötigt hat, und das beste Ergebnis (wenigstens Anzahl von Versuchen) nach dem Spiel zu melden. Du benötigst eine Variable, um die Anzahl der Versuche zu zählen, und eine, um das beste Ergebnis zu speichern. Versuche erneut, es zu schreiben, ohne auf dein vorheriges Spiel zu schauen.\n\nSchreib den aktualisierten Code in code08.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#benutze-deine-eigenen-bibliotheken",
+    "href": "04-guess-the-number-ai.de.html#benutze-deine-eigenen-bibliotheken",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.14 Benutze deine eigenen Bibliotheken",
+    "text": "4.14 Benutze deine eigenen Bibliotheken\nDu weißt bereits, wie man existierende Bibliotheken verwendet, aber du kannst auch eigene erstellen und verwenden. Nimm die beiden Funktionen, die du entwickelt hast, und packe sie in eine neue Datei namens utils.py (vergesse nicht, eine mehrzeilige Kommentarfunktion oben in der Datei zu hinterlassen, um dich daran zu erinnern, was drin ist!). Kopiere den restlichen Code (das globale Skript) in code09.py. Es wird in seinem aktuellen Zustand nicht funktionieren, da es die beiden Funktionen nicht finden wird (versuche es, um die Fehlermeldung zu sehen), also musst du aus deinem eigenen utils-Modul importieren. Importieren funktioniert genau gleich wie bei anderen Bibliotheken. Beachte, dass obwohl deine Datei utils.py heißt, der Modulname utils (ohne Erweiterung) ist.\n\nLeg die Funktion in utils.py und den restlichen Code in code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#keep-imports-tidy",
+    "href": "04-guess-the-number-ai.de.html#keep-imports-tidy",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.15 Ordnung muss sein!",
+    "text": "4.15 Ordnung muss sein!\nBisher hast du maximal eine Bibliothek importiert. Doch da Python sehr modular ist, ist es üblich, viele Importe in einer einzigen Datei zu haben. Es gibt einige Regeln, die das Verfolgen der Importe erleichtern. Wenn du Bibliotheken importierst, sollten alle Import-Anweisungen oben in deiner Datei stehen und du solltest sie nicht in willkürlicher Reihenfolge plazieren. Die empfohlene Reihenfolge ist 1) Systembibliotheken, wie os oder random; 2) Drittanbieterbibliotheken, wie psychopy; 3) deine Projektmodule. Und innerhalb jedes Abschnitts solltest du die Bibliotheken alphabetisch anordnen, also\nimport os\nimport random\nDas sieht vielleicht nicht besonders nützlich für deinen simplen Code aus, aber wenn deine Projekte wachsen, wirst du immer mehr Bibliotheken einbeziehen müssen. Sie in alphabetischer Reihenfolge zu halten, erleichtert das Verständnis, welche Bibliotheken du verwendest und welche nicht standard sind. Alphabetische Reihenfolge bedeutet auch, dass du schnell überprüfen kannst, ob eine Bibliothek enthalten ist, da du schnell die Position ihres Import-Statements finden kannst.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#videos-in-videospiele-einbauen",
+    "href": "04-guess-the-number-ai.de.html#videos-in-videospiele-einbauen",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "4.16 Videos in Videospiele einbauen",
+    "text": "4.16 Videos in Videospiele einbauen\nReiche deine Dateien ein und mach dich bereit für mehr Action, denn wir gehen jetzt zu “echten” Videospielen mit PsychoPy über.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "04-guess-the-number-ai.de.html#footnotes",
+    "href": "04-guess-the-number-ai.de.html#footnotes",
+    "title": "4  Errate die Zahl: Der Computer ist dran",
+    "section": "",
+    "text": "Das ist das letzte Mal, versprochen!↩︎\nStell dir vor, ich bin Dora die Entdeckerin und starre dich an, während du nachdenkst.↩︎\nDie offizielle magische Zahl ist 7±2, aber das Lesen des Originalpapiers verrät dir, dass das bei den meisten von uns eher vier ist↩︎\nDas ist ähnlich wie wissenschaftliches Schreiben, bei dem ein einziger Absatz eine einzelne Idee übermittelt. Für mich hilft es, zuerst die Idee des Absatzes in einem einzigen Satz zu schreiben, bevor ich den Absatz selbst schreibe. Wenn ein Satz nicht ausreicht, muss ich den Text in mehr Absätze aufteilen.↩︎\nDas ist nicht ganzstrict genommen wahr, aber das wird uns erst beschäftigen, wenn wir auf sogenannte “veränderliche” Objekte wie Listen oder Dictionaries kommen.↩︎\nEs ist normal, mehr Code für das Testen als für das eigentliche Programm zu haben.↩︎\nDu benötigst immer noch Tests für das integrierte System, aber das Testen einzelner Funktionen ist ein klarer Voraussetzung.↩︎\nDies ist auch nicht unbedingt richtig, aber du wirst warten müssen, bis du etwas über benannte Parameter und Standardwerte gelernt hast.↩︎\nEs ist wie bei zwei Personen mit demselben Namen, aber immer noch unterschiedliche Menschen.↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Errate die Zahl: Der Computer ist dran</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html",
+    "href": "05-psychopy.de.html",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "",
+    "text": "5.1 Kapitelkonzepte",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#kapitelkonzepte",
+    "href": "05-psychopy.de.html#kapitelkonzepte",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "",
+    "text": "Verstehen, wie man Klassen und Objekte verwendet.\nVerwenden von benannten Parametern in Funktionen.\nVerstehen des PsychoPy Einheitensystems.\nVerwenden grundlegender Psycho visueller Reize und Verwalten von Benutzereingaben.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#minimal-psychopy",
+    "href": "05-psychopy.de.html#minimal-psychopy",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.2 Minimal PsychoPy-Code",
+    "text": "5.2 Minimal PsychoPy-Code\nKopier den folgenden Code in die Datei code01.py (du hast doch eine neue Mappe für das Kapitel erstellt, oder?):\n\"\"\"\nEin minimaler PsychoPy-Code.\n\"\"\"\n\n# das importiert zwei Module aus psychopy\n# visual hat alle visuellen Reize, einschließlich der Window-Klasse\n# die wir benötigen, um ein Programmfenster zu erstellen\n# event hat Funktionen für die Arbeit mit Maus und Tastatur\nfrom psychopy import visual, event\n\n# ein 800 x 600 Fenster erstellen\nwin = visual.Window(size=(800, 600))\n\n# auf Tastendruck warten\nevent.waitKeys()\n\n# das Fenster schließen\nwin.close()\nLauf es, um zu prüfen, ob PsychoPy funktioniert. Wenn du einen Fehler bekommst, der besagt, dass die psychopy-Bibliothek nicht gefunden wurde, überprüfe den aktiven Python-Interpreter. Du solltest ein graues Fenster mit der Überschrift PsychoPy erhalten. Drücke eine beliebige Taste (klicke auf das Fenster, falls du zu einem anderen gewechselt hast, damit es die Tasteneingabe registriert) und es sollte sich schließen. Nicht sehr aufregend, aber es zeigt, dass alles wie erwartet funktioniert.\n\nFüge den Code in code01.py\n\nDer Code ist einfach, aber packt einige neue Sachen. Die erste Zeile ist easy, wir importieren einfach visual und event Module aus der psychopy Bibliothek (eine Bibliothek kann selbst in Unterbibliotheken organisiert sein, um Dinge noch modularer zu gestalten). Dann erstellen wir ein Objekt win using eine Klasse Window mit einer benutzerdefinierten Größe. Die dritte Zeile verwendet die Funktion waitKeys() aus dem event Modul, um auf eine Tasteneingabe zu warten. Die letzte schließt das Fenster, indem sie seine close Methode aufruft. Du solltest keine Probleme mit Zeile #1 und #3 haben, aber du musst etwas über objektorientierte Programmierung lernen, um Zeile #2 und #4 zu verstehen.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#klassen-und-objekte",
+    "href": "05-psychopy.de.html#klassen-und-objekte",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.3 Klassen und Objekte",
+    "text": "5.3 Klassen und Objekte\nDie PsychoPy-Bibliothek ist eine Sammlung von Klassen, die du verwendest, um Objekte zu erstellen, eine Methode, die als objektorientierte Programmierung bekannt ist. Die Kernidee steckt im Namen: Statt Variablen (Daten) und Funktionen (Aktionen) getrennt zu halten, kombinierst du sie in einem Objekt, das eigene Attribute (Variablen) und Methoden (Funktionen) hat. Diese Methode nutzt unsere natürliche Neigung, die Welt als Sammlung von interagierenden Objekten wahrzunehmen.\nErstmal musst du den Unterschied zwischen Klassen und Objekten verstehen. Eine Klasse ist sozusagen eine “Bauplan”, das die Eigenschaften und das Verhalten aller Objekte dieser Klasse beschreibt. Dieser “Bauplan” wird verwendet, um ein Exemplar dieser Klasse zu erstellen, das ein Objekt genannt wird. Zum Beispiel ist Homo sapiens eine Klasse, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine Idee von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen “Wie groß ist Homo sapiens?”, sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten, solche realen Handlungen auszuführen. Stattdessen ist Alexander Pastuchow eine Instanz der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Eine Klasse beschreibt also alle gemeinsamen Eigenschaften und Methoden, die alle Instanzen der Klasse (alle Objekte) haben werden. Aber ein einzelnes Objekt wird sich aufgrund der unterschiedlichen Werte seiner Eigenschaften unterschiedlich verhalten. Wenn Sie also einen Homo sapiens treffen, können Sie sicher sein, dass er per se groß ist, aber Sie müssen sich eine individuelle Instanz ansehen, um herauszufinden, welche Größe er hat.\nWindow ist eine Klasse, die Eigenschaften beschreibt, die ein PsychoPy-Fenster haben muss, und Aktionen, die es ausführen kann (du kannst die vollständige Liste in der Dokumentation sehen). Um ein Objekt zu erstellen, verwenden wir seine Klassendefinition und speichern das Ergebnis in einer Variablen. Im obigen Code rufen wir die Window-Klasse1 auf, während wir ihr personalisierte Parameter übergeben (size=(800, 600)) und speichern ein Objekt, das sie zurückgibt, in der Variablen win.\nAttributes sind im Grunde genommen Variablen, die zur Klasse gehören und somit Variablen, die jedes Objekt besitzen wird. Zum Beispiel hat eine Window-Klasse ein size-Attribut, das seine Bildschirmgröße in Pixeln bestimmt. Es hat auch (Hintergrund-) color, ein Attribut, das bestimmt, ob es im Vollbildmodus angezeigt werden soll, usw. Also wird ein win-Objekt alle diese Attribute haben und sie werden spezifische Werte haben.\nUm die Eigenschaften und die Unterscheidung zwischen Klasse/Objekt besser zu verstehen, setze einen Breakpoint auf der dritten Codezeile (event.waitKeys()) und starte den Debugger über F5. Sobald das Fenster erstellt wurde, wird die Ausführung pausieren und du wirst ein win-Objekt in Variables/Locals finden. Klicke darauf und es wird sich erweitern, um alle Attribute und ihre Werte anzuzeigen, einschließlich size (stelle sicher, dass es [800, 600] ist). Beachte, dass du Window selbst nicht in der gleichen Liste sehen wirst. Dies liegt daran, dass es eine Klasse ist, ein abstraktes Konzept, während win ihr Instanz und Objekt dieser Klasse ist.\nMethode wie Window.close() sind im Grunde genommen Funktionen, die zur Klasse/Objekt gehören und bestimmte Aktionen am Objekt durchführen. Zum Beispiel schließt die Methode close() das Fenster, flip() aktualisiert es, nachdem wir darin gezeichnet haben, usw. Wichtig ist zu beachten, dass jede Methode nur auf dem Objekt zu dem sie gehört wirkt und nicht auf anderen Instanzen der gleichen Klasse. Das bedeutet, dass du zwei Fenster (win1 und win2) erstellen kannst und win1.close() nur das erste, aber nicht das zweite Fenster schließt (versuche es aus!). Gleiches gilt für Attribute, ihre Änderung in einem Objekt beeinflusst keine anderen Objekte der gleichen Klasse, genau wie die Änderung eines Wertes in einer Variablen keine anderen beeinflusst.\nOkay, du hast ja nur einen kleinen Einblick in die objektorientierte Programmierung bekommen, aber das sollte reichen, um die von PsychoPy definierten Klassen verwenden zu können.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#arguments-by-position-or-name-de",
+    "href": "05-psychopy.de.html#arguments-by-position-or-name-de",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.4 Funktionsparameter: Standardwerte, Position oder Name",
+    "text": "5.4 Funktionsparameter: Standardwerte, Position oder Name\nIn der visual.Window(size=(800, 600))-Aufrufzeile gibt es noch ein paar interessante Dinge, über die wir sprechen müssen. Diese Merkwürdigkeiten beziehen sich auf Funktionen (und damit auf Methoden, die Funktionen sind, die zu einer Klasse gehören) und nicht auf Klassen an sich. Erstens hat die Konstruktor-Methode der Window-Klasse viele Argumente (wenn wir ein Objekt konstruieren, rufen wir eine Konstruktor-Methode der Klasse auf, deshalb sprechen wir über Funktionen). Und doch haben wir nur eines davon übergeben. Das liegt daran, dass du für einzelne Parameter Standardwerte festlegen kannst. In diesem Fall wird, wenn ein Parameter weggelassen wird, ein Standardwert verwendet.\n\ndef divide(x1, x2=2):\n    \"\"\"\n    Teilt Zahlen, verwendet 2 als zweiten Wert, wenn ein zweiter Term weggelassen wird.\n  \n    Parameters\n    ----------\n    x1 : float\n    x2 : float, default=2\n  \n    Returns\n    ----------\n    float\n    \"\"\"\n    return x1 / x2\n\nprint(divide(2)) # wir übergeben nur den Wert für x1 und der Standardwert wird für x2 verwendet\nprint(divide(2, 4))\n\n1.0\n0.5\n\n\nWenn du die Dokumentation ansiehst, wirst du sehen, dass für den Window-Klassen-Konstruktor alle Parameter einen Standardwert haben. Das ist ein Teil der PsychoPy-Philosophie, die reichhaltige Anpassungsfähigkeit (schau dir nur die Anzahl der Parameter an!) mit Einfachheit der Benutzung durch sinnvolle Standardwerte verbindet (spezifiziere nichts und das Fenster funktioniert trotzdem).\nZweitens, wir haben den Wert nicht nur übergeben, sondern auch angegeben, für welchen Parameter dieser Wert bestimmt ist, und zwar über size=(800, 600). Diese Schreibweise nennt sich Schlüsselwortargumente. Der Vorteil besteht darin, dass es eindeutiger macht, welchen Parameter du einem Wert zuweist. Außerdem kannst du die Parameter in beliebiger Reihenfolge angeben, solange es im Kontext sinnvoll ist2. Wenn du keine Namen verwendest, werden die Werte den einzelnen Parametern basierend auf ihrer Position (auch bekannt als Positionsparameter) zugewiesen. Du kannst sogar beides mischen, aber Positionsparameter müssen zuerst kommen, siehe Dokumentation, wenn du mehr erfahren möchtest.\n\n# Verwendung von Positionsparametern\nprint(divide(2, 4))\n\n0.5\n\n\n\n# mit Keyword-Argumenten\nprint(divide(x2=4, x1=2))\n\n0.5\n\n\n\n# Mixen von Positions- und Keyword-Argumenten\nprint(divide(2, x2=4))\n\n0.5\n\n\n\nprint(divide(2, x1=4))\n\n\n---------------------------------------------------------------------------\nTypeError                                 Traceback (most recent call last)\nCell In[5], line 1\n----&gt; 1 print(divide(2, x1=4))\n\nTypeError: divide() got multiple values for argument 'x1'",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#hauptschleife-hinzufügen",
+    "href": "05-psychopy.de.html#hauptschleife-hinzufügen",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.5 Hauptschleife hinzufügen",
+    "text": "5.5 Hauptschleife hinzufügen\nMomentan passiert in unserem Programm nicht viel. Eine Sache, die wir hinzufügen müssen, ist eine Schleife, in der wir wiederholt in ein Fenster zeichnen (und es über seine flip()-Methode aktualisieren) können, die Benutzereingabe überprüfen und andere notwendige Aktionen durchführen.\nOkay, dann fangen wir mal damit an, die Schleife und die Verarbeitung von Benutzereingaben hinzuzufügen (das lustige Zeichenteil kommt als nächstes). Die Schleife befindet sich zwischen dem Öffnen und Schließen des Fensters:\nimportiere Bibliotheken\nöffne das Fenster\n\n--&gt; unsere Hauptschleife &lt;--\n\nSchließen des Fensters\nDie Schleife sollte wiederholt werden, bis der Benutzer die Escape-Taste drückt, und daher benötigst du eine Variable, die dies signalisiert. Mein Ansatz ist, eine Variable gameover zu erstellen und sie auf False zu initialisieren und die Schleife solange zu wiederholen, bis das Spiel vorbei ist. Dann, innerhalb der Schleife, verwende die Funktion event.getKeys(), um zu überprüfen, ob die Escape-Taste gedrückt wurde (dazu musst du keyList=['escape'] übergeben). Die Funktion gibt eine Liste von Tasten zurück, wenn eine davon in der Zwischenzeit gedrückt wurde, oder eine leere Liste, wenn keine Tasten aus der keyList gedrückt wurden. Speichere diesen zurückgegebenen Wert in einer temporären Variable (ich tendiere dazu, sie keys zu nennen). Du wirst erst im nächsten Kapitel etwas über Listen lernen, also verwende für den Moment eine fertige: len(keys) &gt; 0 ist ein Vergleich, der True ist, wenn die Liste nicht leer ist. Wenn die Liste tatsächlich nicht leer ist, bedeutet das, dass der Benutzer die Escape-Taste gedrückt hat (da dies die einzige Taste ist, die wir in dem Funktionsaufruf angegeben haben) und das Spiel sollte vorbei sein. Überlege dir, wie du es ohne eine if-Anweisung machen kannst, indem du den logischen Wert direkt berechnest.\n\nSchreib deinen Code in code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#textnachricht-hinzufügen",
+    "href": "05-psychopy.de.html#textnachricht-hinzufügen",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.6 Textnachricht hinzufügen",
+    "text": "5.6 Textnachricht hinzufügen\nObwohl wir jetzt eine nette Game-Loop laufen haben, haben wir immer noch nur ein langweiliges graues Fenster, auf das wir schauen können. Lass uns eine Textstimulanz erstellen, die “Escape drücken zum Beenden” sagt und sie während der Schleife anzeigt. Dafür werden wir die visual.TextStim-Klasse aus der PsychoPy-Bibliothek verwenden.\nErstmal musst du das press_escape_text-Objekt (Instanz der TextStim) vor der Hauptschleife erstellen. Es gibt einige Parameter, mit denen du herumspielen kannst, aber mindestens musst du das Fenster, in dem der Text angezeigt werden soll (unsere win-Variable), und den tatsächlichen Text, den du anzeigen möchtest (text=\"Escape drücken, um zu beenden\"), übergeben. PsychoPy wird für alle anderen Einstellungen seine Voreinstellungen verwenden (Standard-Schriftfamilie, -farbe und -größe, mittig im Fenster platziert).\npress_escape_text = visual.TextStim(win, \"Escape drücken, um zu beenden\")\nUm die Visualisierungen in PsychoPy anzuzeigen, musst du zuerst jedes Element zeichnen, indem du seine draw() Methode aufrufst, und dann das Fenster aktualisieren, indem du es umblätterst3 Sobald du fertig bist, mit flip() “umblätterst” du die Puffer, damit sie ihre Plätze tauschen. Jetzt wird der gezeichnete Puffer angezeigt und du hast den anderen Puffer zum Zeichnen. Beachte, dass du flip() nur einmal aufrufst, nachdem alle Stimuli gezeichnet wurden. Ich organisiere diesen Code normalerweise in einen separaten Block und füge eine Kommentarlinie # zeichne Stimuli davor ein.\nDer # zeichne Stimuli-Block gehört in die Hauptschleife, entweder vor oder nach der Tastaturprüfung.4 Organisiere auch den letzteren als separaten Code-Block mit eigenem kurzem Kommentar.\n\nSchreib deinen Code in code03.py.\n\nJetzt solltest du eine nette, wenn auch statische, Nachricht in der Mitte des Fensters haben, die dir zeigt, wie du das Spiel beenden kannst. Schau dir die Handbuchseite für visual.TextStim an und versuche, es zu ändern, indem du zusätzliche Parameter an den Klassenaufruf übergibst. Zum Beispiel kannst du seine Farbe, ob der Text fett und/oder kursiv ist, wie er ausgerichtet ist, usw. ändern. Aber wenn du ändern möchtest, wo der Text angezeigt wird, lies weiter unten.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen",
+    "href": "05-psychopy.de.html#ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.7 Ein Quadrat hinzufügen und es nicht in die Mitte des Fensters setzen",
+    "text": "5.7 Ein Quadrat hinzufügen und es nicht in die Mitte des Fensters setzen\nJetzt müssen wir rausfinden, wie man visuelle Elemente an eine beliebige Stelle auf dem Bildschirm bewegt. Im Grunde ist das sehr einfach, denn jeder visuelle Stimulus (inklusive TextStim, das wir gerade verwendet haben) hat eine pos-Eigenschaft, die seine Position innerhalb eines Fensters angibt. Aber PsychoPy macht es erstmal komplizierter, indem es fünf (5!) verschiedene Positionseinheiten-Systeme hat.\nBevor wir mit den Einheiten loslegen, lass uns ein einfaches weißes Quadrat erstellen. Die Klasse, die wir dafür brauchen, ist visual.Rect. Genau wie TextStim benötigt es die win-Variable (damit es weiß, zu welchem Fenster es gehört), width (standardmäßig 0,5 dieser mysteriösen Einheiten), height (auch standardmäßig 0,5), pos (standardmäßig (0,0)), lineColor (standardmäßig white) und fillColor (standardmäßig None). Also, um ein “standardmäßiges” weißes Quadrat mit der Größe (0,5, 0,5) Einheiten an der Position (0, 0) zu erhalten, musst du nur die win-Variable übergeben: white_square = visual.Rect(win). Allerdings kann es auf einigen Computern zu einem seltsamen Fehler kommen, der PsychoPy daran hindert, den Rahmen korrekt zu zeichnen. Wenn du also auf einen leeren Bildschirm starrst5, füge fillColor=\"white\" zum Aufruf hinzu und du solltest ein ausgefülltes weißes Quadrat sehen.\nDu zeichnest das Quadrat genau wie du den Textreiz gezeichnet hast, über seine draw() Methode (und wieder, du zeichnest erst alle Reize und dann drehst du das Fenster einmal um). Schreibe den Code (entweder behalte den Text und zeichne beide, oder lasse den Text weg), führe ihn aus, um ein sehr weißes Quadrat zu sehen.\n\nSchreib deinen Code in code04.py.\n\nNa, dein Quadrat ist kein richtiges Quadrat? Ich hab’s dir ja gesagt: Fünf Einheitensysteme!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#psychopy-einheiten",
+    "href": "05-psychopy.de.html#psychopy-einheiten",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.8 Fünf Einheitensysteme",
+    "text": "5.8 Fünf Einheitensysteme\n\n5.8.1 Height units\nMit height units wird alles in den Einheiten der Fensterhöhe angegeben. Die Mitte des Fensters befindet sich bei (0,0) und das Fenster verläuft vertikal von -0.5 bis 0.5. Die horizontalen Grenzen hängen jedoch vom Seitenverhältnis ab. Für unser 800×600-Fenster (Seitenverhältnis 4:3) verläuft es von -0.666 bis 0.666 (das Fenster ist 1.3333 Fensterhöhen breit). Für ein 600×800-Fenster (Seitenverhältnis 3:4) von -0.375 bis 0.375 (das Fenster ist 0.75 Fensterhöhen breit), für ein quadratisches Fenster 600×600 (Seitenverhältnis 1:1) von -0.5 bis 0.5 (in allen diesen Fällen verläuft es von -0.5 bis 0.5 vertikal). Das bedeutet, dass der tatsächliche Bildschirmabstand für die Einheiten auf beiden Achsen gleich ist. Daher ist ein Quadrat mit size=(0.5, 0.5) tatsächlich ein Quadrat (es spannt den gleichen Abstand vertikal und horizontal). Dadurch erleichtern height units das Größenfestlegen von Objekten, machen das korrekte Platzieren auf der horizontalen Achse jedoch schwieriger (da du das Seitenverhältnis kennen musst).\nMach dein Code besser, indem du das Einheitensystem beim Erstellen des Fensters festlegst: win = visual.Window(..., units=\"height\"). Spiele mit deinem Code, indem du die Position des Quadrats beim Erstellen festlegst. Du musst nur einen zusätzlichen Parameter pos=(&lt;x&gt;, &lt;y&gt;) übergeben.\n\nSchreib deinen Code in code05.py.\n\nÜbrigens: Wo ist oben, wenn y unter oder über Null liegt? Leider, im Gegensatz zur x-Achse, kann die y-Achse in beide Richtungen gehen. In PsychoPy zeigt die y-Achse nach oben (d.h. negative Werte bewegen den Quadrat nach unten und positive nach oben). Aber wenn du einen Eyelink Eye-Tracker verwenden würdest, um aufzuzeichnen, wohin die Teilnehmer geschaut haben auf dem Bildschirm, geht die y-Achse von der Spitze des Bildschirms aus und zeigt nach unten6.\nJetzt ändere die Größe des Quadrats (und mache es zu einem nicht-quadratischen Rechteck), indem du width=&lt;some-width-value&gt; und height=&lt;some-height-value&gt; übergibst.\n\nSchreib deinen Code in code06.py.\n\n\n\n5.8.2 Normale Einheiten\nNormale Einheiten sind die Standard-Einheiten und gehen davon aus, dass das Fenster von -1 bis 1 sowohl entlang der x- als auch der y-Achse reicht. Wiederum ist (0,0) die Mitte des Bildschirms, aber die linke untere Ecke ist (-1, -1) und die rechte obere Ecke ist (1, 1). Das erleichtert das Positionieren deiner Objekte, macht das Größenfestlegen jedoch schwieriger (du musst das Seitenverhältnis kennen, um sicherzustellen, dass ein Quadrat tatsächlich ein Quadrat ist).\nMach dein Code so um, dass er \"norm\"-Einheiten verwendet, wenn du das Fenster erstellst und deinen weißen quadratischen Reiz größenanpasst, damit es wie ein Quadrat aussieht.\n\nSchreib deinen Code in code07.py.\n\n\n\n5.8.3 Bildschirmpixel\nFür Bildschirmpixel Einheiten liegt das Fensterzentrum immer noch bei (0,0), geht jedoch horizontal von -&lt;Breite-in-Pixeln&gt;/2 bis &lt;Breite-in-Pixeln&gt;/2 (in unserem Fall von -400 bis 400) und vertikal von -&lt;Höhe-in-Pixeln&gt;/2 bis &lt;Höhe-in-Pixeln&gt;/2 (von -300 bis 300). Diese Einheiten können intuitiver sein, wenn du mit einem Fenster fester Größe arbeitest, da der Bereich auf beiden Achsen gleich ist (wie bei den Höheneinheiten). Sie können jedoch Probleme bereiten, wenn die Fenstergröße verändert wurde oder du ein Vollbildfenster auf einem Monitor mit unbekannter Auflösung verwendest. Kurz gesagt, du solltest sie nur verwenden, wenn sie deinen Code dramatisch vereinfachen.\nMach dein Code so, dass er \"pix\"-Einheiten verwendet und test kurz die Größe und Position deines Quadrats innerhalb des Fensters.\n\nSchreib deinen Code in code08.py.\n\n\n\n5.8.4 Visuelle Winkelgrade\nIm Gegensatz zu den drei Einheiten darüber, das Verwenden von visuellen Winkelgraden erfordert das Wissen über die physikalische Größe des Bildschirms, seine Auflösung und die Betrachtungsdistanz (wie weit deine Augen vom Bildschirm entfernt sind). Sie sind die Maßeinheiten, die in der visuellen Psychophysik verwendet werden, da sie die Stimulusgröße beschreiben, wie sie auf der Netzhaut erscheint (siehe Wikipedia für Details). Daher sind dies die Einheiten, die du verwenden möchtest, wenn du ein echtes Experiment im Labor durchführst.\n\n\n5.8.5 Zentimeter auf dem Bildschirm\nHier musst du die physikalische Größe deines Bildschirms und seine Auflösung kennen. Das sind relativ exotische Einheiten für sehr spezifische Anwendungsfälle7.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#lass-deinen-quadrat-springen",
+    "href": "05-psychopy.de.html#lass-deinen-quadrat-springen",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.9 Lass deinen Quadrat springen",
+    "text": "5.9 Lass deinen Quadrat springen\nBis jetzt haben wir die Position des Quadrats festgelegt, als wir es erstellt haben. Aber du kannst es jederzeit bewegen, indem du neue (&lt;x&gt;, &lt;y&gt;) Koordinaten seinem pos-Eigenschaft zuweist. Zum Beispiel white_square.pos = (-0.1, 0.2). Lass uns experimentieren, indem wir das Quadrat bei jeder Schleifeniteration an eine zufällige Position bewegen (das kann viel blinken verursachen, also wenn du eine lichtempfindliche Epilepsie hast, die durch Blinken ausgelöst werden kann, solltest du es wahrscheinlich nur einmal vor der Schleife machen). Verwende die Einheiten deiner Wahl und erzeuge eine neue Position mithilfe der Funktion random.uniform(a, b), die einen zufälligen Wert innerhalb des Bereichs a..b generiert8. Erzeuge zwei Werte (einen für x, einen für y). Wenn du \"norm\"-Einheiten verwendest, ist der Bereich für die beiden Dimensionen gleich (von -1 bis 1). Wenn du jedoch \"height\"-Einheiten verwendet hast, musst du das Seitenverhältnis deines Fensters berücksichtigen (4:3, wenn du ein 800×600-Pix-Fenster verwendest).\n\nSchreib deinen Code in code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#lass-den-quadrat-springen-wenn-du-es-sagst",
+    "href": "05-psychopy.de.html#lass-den-quadrat-springen-wenn-du-es-sagst",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.10 Lass den Quadrat springen, wenn du es sagst",
+    "text": "5.10 Lass den Quadrat springen, wenn du es sagst\nDas war sehr beeindruckend, also lass uns den Quadrat nur springen, wenn du die Leertaste drückst. Dafür müssen wir den Code erweitern, der die Tastatureingabe verarbeitet. Bisher haben wir ihn nur auf die Esc-Taste beschränkt und geprüft, ob eine (also Esc) Taste gedrückt wurde.\nIn der nächsten Kapitel lernst du über Listen und Indizes, also hier ist noch ein vorgefertigtes. Zuerst füge \"space\" zur keyList-Parameter hinzu. Als nächstes verwende eine bedingte if-Anweisung, um zu prüfen, ob event.getKeys() eine Tasteneingabe zurückgegeben hat. Wenn ja (len(keys) &gt; 0), kannst du nun prüfen, ob keys[0] gleich \"space\" oder \"escape\" ist9. Wenn es letztere war, ist das Spiel vorbei, wie zuvor. Wenn es \"space\" war, dann bewege das Quadrat an eine neue zufällige Position (und bewege es nicht bei jedem Frame!).\nTipp, wenn du debuggst, setz deinen Breakpoint innerhalb des if-Statements, damit das Programm erst anhält, wenn du eine Taste gedrückt hast (was passiert, wenn du ihn auf der win.flip()-Zeile setzt?)\n\nSchreib deinen Code in code10.py.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#grundlagen-abgedeckt",
+    "href": "05-psychopy.de.html#grundlagen-abgedeckt",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "5.11 Grundlagen abgedeckt",
+    "text": "5.11 Grundlagen abgedeckt\nEs gibt noch viel mehr zu lernen über PsychoPy, aber wir haben die Grundlagen abgedeckt. Schick deine Dateien ab und mach dich bereit für ein Mole schlagen!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "05-psychopy.de.html#footnotes",
+    "href": "05-psychopy.de.html#footnotes",
+    "title": "5  Los geht’s mit PsychoPy",
+    "section": "",
+    "text": "Technisch rufen wir eine Klassenkonstruktor-Methode namens __init__ auf, aber das ist jetzt nicht wichtig.↩︎\nAllerdings solltest du zur Konsistenz bei der ursprünglichen Reihenfolge bleiben.↩︎\nDies wird Umblättern genannt, weil ein Fenster zwei Puffer hat: einen, der aktuell auf dem Bildschirm angezeigt wird, und einen anderen, in dem du deine Stimuli zeichnen kannst.↩︎\nIch persönlich ziehe es vor, zuerst zu zeichnen, aber in den meisten Fällen macht es keinen Unterschied.↩︎\nDies war manchmal ein Problem bei Intel-Grafikkarten.↩︎\nDas könnte sehr verwirrend sein, wenn du das vergisst, wenn du die Blickdaten auf ein Bild überlagerst, das du in der Studie verwendet hast, und dich fragst, was die Teilnehmer denn gemacht haben.↩︎\nSo spezifisch, dass ich ehrlich gesagt keins einfallen will.↩︎\nDu musst natürlich das random-Modul dafür importieren.↩︎\nDu kannst if..else verwenden, da wir nur zwei Optionen haben, aber ich würde empfehlen, auf eine allgemeinere Lösung if..elif zu gehen↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Los geht's mit PsychoPy</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html",
+    "href": "06-whack-a-mole.de.html",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "6.1 Kapitelkonzepte",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#kapitelkonzepte",
+    "href": "06-whack-a-mole.de.html#kapitelkonzepte",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "Viele Dinge in Listen speichern.\nÜber Dinge mit einer for-Schleife iterieren.\nEine Reihe von Zahlen mit range() erzeugen.\nPause machen und die Wartezeit auf eine Taste begrenzen.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#listen",
+    "href": "06-whack-a-mole.de.html#listen",
+    "title": "6  Whack-a-Mole",
+    "section": "6.2 Listen",
+    "text": "6.2 Listen\nBis jetzt haben wir Variablen verwendet, um einzelne Werte zu speichern: die Wahl des Computers, die Vermutung des Spielers, die Anzahl der Versuche, das PsychoPy-Fenster-Objekt usw. Aber manchmal müssen wir mehr als einen Wert verwalten. Wir hatten dieses Problem bereits im Computer-basierten Ratespiel, als wir den verbleibenden Zahlenbereich speichern mussten. Wir kamen damit davon, indem wir zwei Variablen verwendeten, eine für die untere und eine für die obere Grenze. Allerdings skaliert dieser Ansatz nicht gut und manchmal wissen wir nicht einmal, wie viele Werte wir speichern müssen. Python’s Listen sind die Lösung für dieses Problem.\nEine Liste ist eine veränderbare1 Abfolge von Elementen, auf die über ihren nullbasierten Index zugegriffen werden kann. Wenn man die Idee von Variable-als-Box verlängert, kann man sich Listen als eine Box mit nummerierten Fächern vorstellen. Um ein bestimmtes Stück zu speichern und abzurufen, benötigst du sowohl den Variablennamen als auch den Index des Elements, das du innerhalb dieser Box interessiert. Dann arbeitest du mit einer Variable-plus-Index auf genau dieselbe Weise wie mit einer normalen Variable, indem du über dieselbe Syntax wie zuvor auf ihren Wert zugreifst oder ihn änderst.\nEine Liste wird über eckige Klammern definiert: &lt;variable&gt; = [&lt;value1&gt;, &lt;value2&gt;,... &lt;valueN&gt;]. Ein einzelner Slot innerhalb einer Liste wird ebenfalls über eckige Klammern erreicht: &lt;variable&gt;[&lt;index&gt;], wobei der Index wieder nullbasiert ist2. Das bedeutet, dass das erste Element variable[0] ist und, wenn es N Elemente in der Liste gibt, das letzte variable[N-1] ist. Du kannst die Gesamtzahl der Elemente in einer Liste herausfinden, indem du ihre Länge über eine spezielle len()-Funktion erhältst. Daher kannst du das letzte Element über variable[len(variable)-1] erreichen3. Beachte das -1: Wenn deine Liste 3 Elemente hat, ist der Index des letzten Elements 2, wenn sie 100 hat, dann 99 usw. Ich verbringe so viel Zeit damit, weil es eine ziemliche häufige Quelle für Verwirrung ist.\n\nMach die Übung #1 und schau dir an, wie Listen definiert und indiziert werden.\n\nListen ermöglichen auch den gleichzeitigen Zugriff auf mehr als einen Slot/Index über [slicing] (https://docs.python.org/3/library/functions.html#slice). Du kannst den Index der Elemente über die &lt;start&gt;:&lt;stop&gt;-Notation angeben. Zum Beispiel gibt x[1:3] dir Zugriff auf die Elemente mit den Indizes 1 und 2. Ja, zwei Elemente: Der Slice-Index geht vom start bis ohne das stop mit einzuschließen. Also, um alle Elemente einer Liste zu erhalten, musst du x[0:length(x)] schreiben, und um das letzte Element allein zu erhalten, schreibst du immer noch x[len(x)-1]. Verstehst du? Ich auch nicht so richtig! Ich verstehe die Logik, aber ich finde es immer noch verwirrend, dass das stop-Element nicht mit einbezogen wird, und ich muss mich immer noch bewusst daran erinnern. Leider ist das eine Standardmethode, um Sequenzen von Zahlen in Python zu definieren, also musst du es dir merken.\n\nMach Übung #2, um das Gefühl dafür zu kriegen.\n\nWenn du Slicing verwendest, kannst du entweder start oder stop weglassen. In diesem Fall wird Python annehmen, dass ein fehlendes start 0 bedeutet (der Index des ersten Elements) und ein fehlendes stop len(&lt;liste&gt;) bedeutet (d.h. das letzte Element ist enthalten). Wenn du beide weglässt, z.B. my_pretty_numbers[:], wird es alle Werte zurückgeben, da dies äquivalent zu my_pretty_numbers[0:len(my_pretty_numbers)] ist.4\n\nMach Übung #3.\n\nDu kannst auch negative Indizes verwenden, die relativ zur Länge der Liste berechnet werden5. Zum Beispiel, wenn du das letzte Element der Liste abrufen möchtest, kannst du my_pretty_numbers[len(my_pretty_numbers)-1] oder einfach my_pretty_numbers[-1] sagen. Das vorletzte Element wäre my_pretty_numbers[-2], usw. Du kannst negative Indizes zum Slicing verwenden, aber beachte die einschließlich-Start-aber-ausschließen-Stopp-Falle: my_pretty_numbers[:-1] wird alle Elemente bis auf das letzte der Liste zurückgeben, nicht die gesamte Liste!\n\nMach Übung #4.\n\nSlicing kann um eine step-Angabe erweitert werden, indem du start:stop:step-Notation verwendest. step kann negativ sein, wodurch du Indizes in umgekehrter Reihenfolge erstellen kannst:\n\nmeine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_nette_zahlen[4:0:-1]\n\n[5, 4, 3, 2]\n\n\nAber pass auf, in welche Richtung der Schritt geht. Wenn er in die falsche Richtung geht, dann kannst du stop nicht erreichen und Python wird eine leere Liste zurückgeben.\n\nmeine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_nette_zahlen[4:0:1]\n\n[]\n\n\nSchritte können mit ausgelassenen und negativen Indizes kombiniert werden. Um jedes ungerade Element der Liste zu erhalten, schreibst du meine_nette_zahlen[::2]:\n\nmeine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_nette_zahlen[::2]\n\n[1, 3, 5, 7]\n\n\n\nMach Übung #5.\n\nWenn du versuchst, auf Indizes außerhalb des gültigen Bereichs zuzugreifen, wird Python einen IndexError auslösen6. Also, wenn du versuchst, das 6. Element (Index 5) einer fünf-elementigen Liste zu erhalten, wird ein einfacher und klarer Fehler generiert. Aber wenn dein Slice größer als der Bereich ist, wird er ohne zusätzliche Warnung oder einen Fehler gekürzt. Also, für eine fünf-elementige Liste my_pretty_numbers[:6] oder my_pretty_numbers[:600] werden beide alle Zahlen zurückgeben (effektiv ist das gleichbedeutend mit my_pretty_numbers[:]). Außerdem, wenn der Slice leer ist (2:2, kann 2 nicht enthalten, obwohl es auch als Startwert verwendet wird) oder der gesamte Slice außerhalb des Bereichs liegt, wird Python eine leere Liste zurückgeben, wieder ohne Warnung oder Fehler.\n\nMach Übung #6.\n\nIn Python sind Listen dynamisch, also kannst du immer Elemente hinzufügen oder entfernen. Schau dir die Liste der Methoden an. Du kannst ein neues Element am Ende der Liste hinzufügen, indem du die .append(&lt;neuer_wert&gt;) Methode verwendest.\n\nmeine_schönen_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_schönen_zahlen.append(10)\nmeine_schönen_zahlen\n\n[1, 2, 3, 4, 5, 6, 7, 10]\n\n\nOder, du kannst insert(&lt;index&gt;, &lt;new_value&gt;) vor einem Element mit diesem Index einfügen. Leider bedeutet das, dass du einen beliebig großen Index verwenden kannst und es wird einen neuen Wert als letztes Element einfügen, ohne einen Fehler zu generieren.\n\nmeine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_nette_zahlen.insert(2, 10)\nmeine_nette_zahlen.insert(500, 20)\nmeine_nette_zahlen\n\n[1, 2, 10, 3, 4, 5, 6, 7, 20]\n\n\nDu kannst ein Element mithilfe von pop(&lt;index&gt;) entfernen, beachte, dass das Element zurückgegeben wird. Wenn du den Index weglässt, entfernt pop() das letzte Element der Liste. Hier kannst du nur gültige Indizes verwenden.\n\nmeine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]\nmeine_nette_zahlen.pop(-1)\n\n7\n\nmeine_nette_zahlen.pop(3)\n\n4\n\nmeine_nette_zahlen\n\n[1, 2, 3, 5, 6]\n\n\n\nMach Übung #7.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#grundlegendes-spielgerüst",
+    "href": "06-whack-a-mole.de.html#grundlegendes-spielgerüst",
+    "title": "6  Whack-a-Mole",
+    "section": "6.3 Grundlegendes Spielgerüst",
+    "text": "6.3 Grundlegendes Spielgerüst\nPuh, das war eine Menge über Listen7. Aber Arbeit ohne Spiel macht Jack langweilig! Also lass uns mit einem grundlegenden PsychoPy-Gerüst beginnen. Hier der Code-Aufbau:\nimportiere Bibliotheken (von psychopy)\nerzeuge das PsychoPy-Fenster (visual.Window())\nblende das Fenster (.flip())\nwarte darauf, dass ein Spieler die Escape-Taste drückt (event.waitKeys())\nschließe das Fenster (.close())\nVersuch’s mal von vorne. Ich habe dir ein paar Hinweise hinterlassen, die dir dabei helfen sollten, und du kannst jederzeit die Online-Dokumentation zurate ziehen. Vergiss nicht, die Datei zu dokumentieren und deinen Code in sinnvolle Blöcke mit Kommentaren (wenn nötig) zu unterteilen.\n\nSchreib deinen Code in code01.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#drei-maulwürfe",
+    "href": "06-whack-a-mole.de.html#drei-maulwürfe",
+    "title": "6  Whack-a-Mole",
+    "section": "6.4 Drei Maulwürfe",
+    "text": "6.4 Drei Maulwürfe\nLass uns drei Maulwürfe erstellen, die durch Kreise dargestellt werden. Erstelle eine neue Liste-Variable moles und füge drei Kreise hinein. Einer sollte links sein, einer in der Mitte und einer rechts. Schau dir das Video oben an, um zu sehen, was ich meine. Denke an eine vernünftige Größe (welche Einheiten erleichtern das Beibehalten des Kreises als Kreis?) und Position. Du kannst auch unterschiedliche Farben für sie verwenden, wie ich es gemacht habe.\nDu kannst entweder eine leere Liste erstellen und dann .append() verwenden, um Kreise nacheinander hinzuzufügen, oder du kannst eckige Klammern verwenden, um alle drei auf einmal in die Liste zu packen. Dann draw() die Kreise, bevor du das Fenster flippt und auf eine Tasteneingabe wartest. Beachte, dass du sie nacheinander zeichnen musst. Daher benötigst du drei Zeilen für dies, aber der nächste Abschnitt zeigt dir eine einfachere Methode.\n\nSchreib deinen Code in code02.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#for-loop",
+    "href": "06-whack-a-mole.de.html#for-loop",
+    "title": "6  Whack-a-Mole",
+    "section": "6.5 For-Schleife",
+    "text": "6.5 For-Schleife\nIn dem obigen Code mussten wir über drei Kreise (Kreise) iterieren, die wir in einer Liste hatten. Python hat genau das richtige Werkzeug dafür: eine For-Schleife, die über die Elemente in jeder Sequenz iteriert (unsere Liste ist eine Sequenz!). Hier ist ein Beispiel:\n\nzahlen = [2, 4, 42]\nfor eine_zahl in zahlen:\n    print(\"Wert der Variable 'eine_zahl' in dieser Iteration ist %d\"%(eine_zahl))\n    eine_zahl = eine_zahl + 3\n    print(\"  Wir haben sie jetzt um 3 erhöht: %d\"%(eine_zahl))\n    print(\"  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': %g\"%(eine_zahl / 10))\n\nWert der Variable 'eine_zahl' in dieser Iteration ist 2\n  Wir haben sie jetzt um 3 erhöht: 5\n  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 0.5\nWert der Variable 'eine_zahl' in dieser Iteration ist 4\n  Wir haben sie jetzt um 3 erhöht: 7\n  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 0.7\nWert der Variable 'eine_zahl' in dieser Iteration ist 42\n  Wir haben sie jetzt um 3 erhöht: 45\n  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': 4.5\n\n\nHier wird der Code innerhalb der for-Schleife dreimal wiederholt, da es drei Elemente in der Liste gibt. Bei jeder Iteration wird der nächste Wert aus der Liste einer temporären Variable a_number zugewiesen (siehe Ausgabe). Sobald der Wert einer Variablen zugewiesen ist, kannst du ihn wie jede andere Variable verwenden. Du kannst ihn ausgeben (erster print), ihn ändern (zweite Zeile innerhalb der Schleife), seinen Wert bei Aufrufen anderer Funktionen verwenden usw. Um das besser zu verstehen, kopiere diesen Code in eine temporäre Datei (nenn sie test01.py), setze ein Breakpoint auf die erste print-Anweisung und verwende dann F10, um die Schleife Schritt für Schritt durchzulaufen und zu sehen, wie sich der Wert der a_number-Variablen bei jeder Iteration ändert und dann in der zweiten Zeile innerhalb der Schleife geändert wird.\nBeachte, dass du die gleiche break Anweisung wie für die while Schleife verwenden kannst.\n\nMach Übung #8.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#in-einer-schleife-zeichnen",
+    "href": "06-whack-a-mole.de.html#in-einer-schleife-zeichnen",
+    "title": "6  Whack-a-Mole",
+    "section": "6.6 In einer Schleife zeichnen",
+    "text": "6.6 In einer Schleife zeichnen\nJetzt, wo du das for Schleifen-Konzept kennst, ist es easy, die Maulwürfe zu zeichnen. Du musst nur über die Liste iterieren (denke dir einen guten temporären Variablennamen aus) und draw() das aktuelle Element (das in deiner temporären Variable ist).\n\nSchreib deinen Code in code03.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#range",
+    "href": "06-whack-a-mole.de.html#range",
+    "title": "6  Whack-a-Mole",
+    "section": "6.7 range() Funktion: Code N-mal wiederholen",
+    "text": "6.7 range() Funktion: Code N-mal wiederholen\nManchmal musst du den Code mehrere Male wiederholen. Stell dir zum Beispiel vor, du hast 40 Versuche in einem Experiment. Dann musst du den versuchsbezogenen Code 40 Mal wiederholen. Natürlich könntest du eine Liste mit 40 Elementen von Hand erstellen und darüber iterieren, aber Python hat eine praktische range()-Funktion dafür. range(N) liefert N ganze Zahlen von 0 bis N-1 (gleiche Regel wie beim Slicing, auch ohne das letzte Element) die du in einer for-Schleife durchlaufen kannst.\n\nfor x in range(3):\n    print(\"Wert von x ist %d\"%(x))\n\nWert von x ist 0\nWert von x ist 1\nWert von x ist 2\n\n\nDu kannst das Verhalten der range()-Funktion modifizieren, indem du einen Startwert und eine Schrittgröße angibst. In seiner einfachsten Form range(N) ist jedoch ein nützliches Werkzeug, um den Code so oft zu wiederholen. Beachte, dass du in einer for-Schleife immer eine temporäre Variable benötigst, aber manchmal diese Variable gar nicht verwendest. In solchen Fällen solltest du _ (Unterstrich-Symbol) als Variablennamen verwenden, um die Nichtverwendung anzuzeigen.\n\nfor _ in range(2):\n    print(\"Ich werde zweimal wiederholt!\")\n\nIch werde zweimal wiederholt!\nIch werde zweimal wiederholt!\n\n\nAlternativ kannst du range() verwenden, um durch die Indizes einer Liste zu Schleifen (denk dran, du kannst immer auf ein einzelnes Listenelement über var[index] zugreifen). Mach genau das8! Ändere deinen Code, um die range()-Funktion in der for-Schleife zu verwenden (wie kannst du die Anzahl der Iterationen berechnen, die du benötigst, aus der Länge der Liste?), verwende eine temporäre Variable als Index für die Liste, um jedes Element abzurufen9. Wenn du unsicher bist, setze einen Breakpoint innerhalb (oder einfach vor) der Schleife und gehe durch deinen Code, um zu verstehen, welche Werte eine temporäre Schleifenvariable bekommt und wie sie verwendet wird.\n\nSchreib deinen Code in code04.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#zufaellig-maulwurf",
+    "href": "06-whack-a-mole.de.html#zufaellig-maulwurf",
+    "title": "6  Whack-a-Mole",
+    "section": "6.8 Ein zufälliger Maulwurf",
+    "text": "6.8 Ein zufälliger Maulwurf\nDas Zeichnen aller drei Maulwürfe diente als praktische Übung mit Schleifen, aber in einem echten Spiel müssen wir nur ein zufälliges Ziel auf einmal anzeigen. Wir könnten die drei Ziele wie zuvor erstellen und eines davon zeichnen. Allerdings möchten wir später die Farbe des Ziels ändern, um anzuzeigen, dass der Spieler es getroffen hat, daher ist es einfacher (wenn auch etwas verschwendet), jedes Mal, wenn wir einen benötigen, einen einzelnen Maulwurf zu erstellen.\nFür das hier, definierst du eine CONSTANT mit einer Liste von drei Farben, die du verwendet hast, und eine weitere mit drei horizontalen Standorten (die vertikale Position ist gleich, also müssen wir uns darüber keine Gedanken machen). Als nächstes wählst du zufällig aus, welches Ziel aus drei du erstellen möchtest, d.h. wir müssen einen Index des Ziels generieren und diesen Index verwenden, um die Position und Farbe des Ziels herauszufinden. Du kannst es entweder über random.randrange() oder über random.choice() erledigen, indem du den Bereich selbst mit der Funktion mit dem gleichen Namen aufbaust (denk daran, deine Importe alphabetisch zu organisieren). Speichere den Index in einer Variablen mit einem bedeutungsvollen Namen10 und verwende ihn mit den Konstanten, um das Ziel der entsprechenden Farbe an einem entsprechenden Standort zu erstellen. Dann musst du dieses einzelne Ziel zeichnen, bevor du auf eine Tasteneingabe wartest.\nSobald du den Code hast, setze einen Haltepunkt und prüfe, ob der Wert der Indexvariablen mit dem übereinstimmt, was auf dem Bildschirm angezeigt wird11.\n\nSchreib deinen Code in code05.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#clock-wait",
+    "href": "06-whack-a-mole.de.html#clock-wait",
+    "title": "6  Whack-a-Mole",
+    "section": "6.9 Zufällige Wartezeit",
+    "text": "6.9 Zufällige Wartezeit\nDas, was das Whack-a-Mole Spiel lustig macht, ist nicht nur, dass du nicht weißt, welches Tierchen auftaucht, sondern auch nicht, wann es auftaucht und wie viel Zeit du hast, um es zu treffen. Daher müssen wir unser Präsentationsschema modifizieren. Wir benötigen eine leere Periode mit zufälliger Dauer (ich würde vorschlagen zwischen 0,75 s und 1,5 s) und begrenzte Präsentationsdauer (zwischen 0,5 und 0,75 s). Zunächst musst du diese Bereiche als Konstanten definieren. Da du nun Listen kennst, kannst du eine einzelne Variable verwenden, um beide Enden des Bereichs zu speichern. Dann musst du zwei Zahlen generieren (eine für die Leerzeit und eine für die Präsentation), die aus einer gleichförmigen Verteilung innerhalb dieses Bereichs stammen.\nHier wird eine CONSTANTE Werte für die zwei Parameter der Funktion random.uniform() speichern und es gibt zwei Möglichkeiten, sie zu verwenden. Erstens kannst du einen Index 0 verwenden, um den Wert für den ersten Parameter zu erhalten, und 1 für den zweiten Parameter.\nimport random\n\nZEIT_BIS_ZUM_PIEPTON = [0.1, 0.3]\nrandom.uniform(ZEIT_BIS_ZUM_PIEPTON[0], ZEIT_BIS_ZUM_PIEPTON[1])\nAber Python hat einen coolen Trick namens Entpacken von Argumentlisten: Du kannst eine Liste von Argumenten voranstellen und Python entpackt die Liste in Argumente in der gleichen Reihenfolge, wie sie in der Liste sind: Der erste Wert geht an den Parameter, der zweite Wert an den zweiten Parameter usw. Also in unserem Fall kann der Code vereinfacht werden zu:\nrandom.uniform(*TIME_UNTIL_BEEP)\nAchte drauf, dass die Anzahl und Reihenfolge der Elemente in der Liste zu den Funktionsparametern passen! Das liegt in deiner Verantwortung!\n\ndef single_parameter_function(x):\n  \"\"\"Do nothing but require a single paramter\n  \"\"\"\n  pass\n\nTWO_VALUES = [1, 3]\n\nsingle_parameter_function(*TWO_VALUES)\n\nTypeError: single_parameter_function() takes 1 positional argument but 2 were given\n\n\nZurück zum Spiel, nutze die Funktion random.uniform(), um zufällige Leer- und Präsentationszeiten zu generieren, speichere sie in Variablen deiner Wahl und zeit deine Leer- und Präsentationsphasen mit der Funktion wait() aus dem clock-Modul.\nJetzt ist es Zeit, deinen Code zu aktualisieren und zu strukturieren. Hier ist eine ungefähre Gliederung (beachte, dass ich auf die Warte auf Tasten verzichtet habe):\n\"\"\"Dokumentiere deine Datei\n\"\"\"\nimport alle benötigten Bibliotheken in alphabetischer Reihenfolge\n\nCONSTANTS definieren\n\nErstelle ein Fenster\n\n# Zufällige Parameter für den Test erzeugen\nWähle zufälligen Index für den Maulwurf\nErstelle den Maulwurf\nErzeuge zufällige Dauern für Leerlauf und Präsentation\n\n# leerer Zeitabschnitt\nFenster klar machen (nur win.flip())\n\"blank duration\" Sekunden warten\n\n# Präsentation\nZeichne den Maulwurf\nWarte \"Präsentation Dauer\" Sekunden\n\nMach das Fenster zu!\nAchte darauf, dass es im Moment keine Verarbeitung von Antworten gibt und das Fenster direkt nach der Präsentation des Reizes geschlossen werden sollte.\n\nSchreib deinen Code in code06.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#wiederholte-versuche",
+    "href": "06-whack-a-mole.de.html#wiederholte-versuche",
+    "title": "6  Whack-a-Mole",
+    "section": "6.10 Wiederholte Versuche",
+    "text": "6.10 Wiederholte Versuche\nDu weißt bereits, wie man denselben Code wiederholt: viele Male ausführt. Entscheide dich für eine Anzahl an Versuchen / Runden (definiere dies als eine Konstante) und wiederhole die einzelne Runde so oft. Denke darüber nach, welchen Code du in die Schleife aufnimmst und welchen du außerhalb lässt, damit die Zufallsfunktion ordnungsgemäß funktioniert.\n\nSchreib deinen Code in code07.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#waitKeys-maxwait",
+    "href": "06-whack-a-mole.de.html#waitKeys-maxwait",
+    "title": "6  Whack-a-Mole",
+    "section": "6.11 Exit-Strategie",
+    "text": "6.11 Exit-Strategie\nIch hoffe, du hast nicht zu viele Versuche verwendet, denn (auf meinen Rat hin, ja!) haben wir keine Möglichkeit programmiert, das Spiel über die Escape-Taste zu beenden. Um dies hinzuzufügen, werden wir beide wait()-Aufrufe durch die waitKeys()-Funktion ersetzen. Diese hat einen maxWait-Parameter, der standardmäßig auf unendlich gesetzt ist, aber auf die von uns erforderliche Dauer eingestellt werden kann. Wenn ein Spieler keine Taste drückt, funktioniert es wie wait(). Wenn ein Spieler eine Taste drückt (nur \"escape\" für den Moment erlaubt), bedeutet dies, dass er das Spiel abbrechen möchte (die einzige mögliche Aktion im Moment). Daher weisen wir den zurückgegebenen Wert einer temporären Variablen (keys?) zu und überprüfen, ob sie gleich None ist12. Wenn sie nicht gleich None ist, breche aus der Schleife aus!\n\nSchreib deinen Code in code08.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#maul-den-maulwurf",
+    "href": "06-whack-a-mole.de.html#maul-den-maulwurf",
+    "title": "6  Whack-a-Mole",
+    "section": "6.12 Maul den Maulwurf",
+    "text": "6.12 Maul den Maulwurf\nWir haben Maulwürfe, die an einer zufälligen Stelle nach einer zufälligen Verzögerung für eine zufällige Dauer auftauchen. Jetzt müssen wir nur noch die Fähigkeit hinzufügen, sie zu verprügeln! Du verprügelst einen Maulwurf nur, wenn er da ist. Daher müssen wir nur den Aufruf von waitKeys() für das Präsentationsintervall modifizieren und handhaben.\nErstmal musst du eine neue Konstante mit drei Schlüsseln erstellen, die drei verschiedenen Orten entsprechen. Ich würde vorschlagen, [\"left\", \"down\", \"right\"] zu verwenden, das sind die Cursortasten13. Als nächstes musst du sie für den keyList-Parameter verwenden. Allerdings können wir diese Liste nicht direkt verwenden, da wir auch die Escape-Taste benötigen. Die einfachste Lösung ist, “escape” in eine eigene Liste zu packen und die beiden Listen über + zu verketten: [\"escape\"] + DEINE_KONSTANTE_MIT_TASTEN. Führe diese Verknüpfung direkt durch, wenn du einen Wert für keyList im Funktionsaufruf festlegst. Bevor wir weitermachen, führe den Code aus und teste, ob du das Programm während der Präsentation (aber nicht während der Pause) durch Drücken einer dieser drei Tasten abbrechen kannst. Überprüfe auch, ob Escape immer noch funktioniert!\nJetzt, wo wir Tasten drücken können, brauchen wir eine raffiniertere Verarbeitung (es wird eine Menge verschachtelte bedingte Anweisungen geben). Wir müssen immer noch überprüfen, ob waitKeys() None zurückgegeben hat. Wenn nicht, muss es eine Liste der gedrückten Tasten zurückgegeben haben. Tatsächlich wird es eine Liste mit nur einem Element sein14, also können wir direkt über keys[0] damit arbeiten. Verwende eine bedingte if-else-Anweisung, um die Schleife zu verlassen, wenn der Spieler die Escape-Taste gedrückt hat. Andernfalls war es eine der drei “whack”-Tasten.\nUnser nächster Schritt besteht darin herauszufinden, welchem Index der Schlüssel entspricht. Python macht das extrem einfach, da Listen die Methode .index(value) haben, die den Index des Wertes innerhalb der Liste zurückgibt. Du hast die (CONSTANT) Liste mit den Schlüsseln und du hast die gedrückte Taste: Finde den Index und überprüfe, ob er mit dem Index des Ziels übereinstimmt (imole Variable in meinem Code). Wenn ja, geben wir eine visuelle Rückmeldung des Erfolgs: ändere die Farbe des Mols (Kreis) fillColor in Weiß, zeichne es und warte 300 ms (richte eine Konstante für die Feedback-Dauer ein). Auf diese Weise färbt sich der Maulwurf weiß und bleibt kurz auf dem Bildschirm, wenn er getroffen wird, verschwindet aber sofort wieder, wenn du nicht getroffen hast.\n\nSchreib deinen Code in code09.py.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#du-hast-es-geschafft",
+    "href": "06-whack-a-mole.de.html#du-hast-es-geschafft",
+    "title": "6  Whack-a-Mole",
+    "section": "6.13 Du hast es geschafft!",
+    "text": "6.13 Du hast es geschafft!\nHerzlichen Glückwunsch zu deinem ersten Videospiel! Es könnte ein paar zusätzliche Features wie Punkte, Combos, richtige Maulwurfbilder statt Kreise etc. gebrauchen, aber es funktioniert und es macht Spaß (wenn du keine Herausforderung siehst, reduziere die Präsentationzeit)! Reiche deine Dateien ein und beim nächsten Mal werden wir die Tastatur beiseite legen und lernen, wie man die Maus im Memory-Spiel bedient.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
+    ]
+  },
+  {
+    "objectID": "06-whack-a-mole.de.html#footnotes",
+    "href": "06-whack-a-mole.de.html#footnotes",
+    "title": "6  Whack-a-Mole",
+    "section": "",
+    "text": "Mehr dazu und Tupel, die unveränderlichen Cousins der Listen, später.↩︎\nDies ist typisch für „klassische“ Programmiersprachen, aber weniger für solche, die auf lineare Algebra/Datenwissenschaft ausgerichtet sind. Sowohl Matlab als auch R verwenden eine einseitige Indizierung, daher musst du vorsichtig sein und doppelt überprüfen, ob du die richtigen Indizes verwendest.↩︎\nEs gibt eine einfachere Methode, die du in Kürze lernen wirst.↩︎\nAnmerkung: Dies ist fast, aber nicht ganz das gleiche wie einfach my_pretty_numbers zu schreiben, da my_pretty_numbers[:] eine andere Liste mit gleichem Inhalt zurückgibt. Der Unterschied ist subtil, aber wichtig und wir werden später darauf zurückkommen, wenn es um veränderliche gegen unveränderliche Typen geht.↩︎\nWenn du aus R kommst, ist negatives Indexieren in Python komplett anders.↩︎\nWenn du mit R und seiner liberalen Haltung gegenüber Indizes vertraut bist, wird dir das sehr gefallen.↩︎\nUnd wir haben noch nicht einmal an der Oberfläche gekratzt!↩︎\nHinweis: Das ist keine bessere Methode, sondern eine alternative Möglichkeit, dies zu tun.↩︎\nStilhinweis: Wenn eine Variable ein Index von etwas ist, nenne ich sie gerne isomething. Zum Beispiel, wenn sie einen Index für ein aktuelles Tier hält, würde ich sie itier nennen. Das ist meine Art, es zu machen. Andere verwenden einen i_-Präfix oder ein _i-Suffix. Aber auf jeden Fall ist es eine nützliche Benennungskonvention. Denk dran, je einfacher es ist, den Zweck einer Variablen aus ihrem Namen zu verstehen, desto einfacher ist es für dich, den Code zu lesen und zu ändern.↩︎\nitarget? imole?↩︎\nI weiß, es fühlt sich redundant an, aber das sind kleine Überprüfungen, die nicht viel Zeit kosten, aber dir helfen, viel Zeit beim Nachverfolgen von seltsamen Fehlern zu sparen. Hier überprüfst du, ob deine Erwartungen (wenn das mittlere Ziel angezeigt wird, sollte der Index 1 sein) der Realität entsprechen. Sobald du das überprüft hast, erwartest du es nicht mehr, du weißt es!↩︎\nVerwirrenderweise gibt getKeys() bei keinem gedrückten Tasten eine leere Liste mit einer Länge von null zurück, während waitKeys() None zurückgibt und None keine Länge hat.↩︎\nWillst du dir sicher sein, welche Tasten es sind? Schreib ein kleines Programm, das ein Fenster öffnet und dann immer wieder auf eine Tasteneingabe wartet und die Taste in der Konsole ausgibt.↩︎\nDu bekommst mehr als ein Element in dieser Liste nur, wenn du clearEvents=False festlegst. In diesem Fall bekommst du die Liste der Tasten, die vor dem Aufruf gedrückt wurden. Wenn du jedoch die Standardoption clearEvents=True gewählt hast, bekommst du nur einen Tastendruck in der Liste (zumindest habe ich nie mehr als einen bekommen).↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Whack-a-Mole</span>"
     ]
   }
 ]
