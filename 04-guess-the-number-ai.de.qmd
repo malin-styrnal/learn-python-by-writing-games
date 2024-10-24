@@ -1,0 +1,393 @@
+# Errate die Zahl: Der Computer ist dran {#guess-the-number-ai}
+Lass uns das Spiel "Raten Sie die Zahl" _wieder_ programmieren^[Das ist das letzte Mal, versprochen!], aber _vertauschen_ wir die Rollen. Diesmal _wählst du_ eine Zahl und der Computer rät. Denk mal darüber nach, welchen Algorithmus ein Computer dafür verwenden könnte, bevor du den nächsten Absatz liest^[Stell dir vor, ich bin Dora die Entdeckerin und starre dich an, während du nachdenkst.].
+
+Optimal ist es, die Mitte des Intervalls für eine Schätzung zu verwenden. So schließt du _halb_ der Zahlen aus, die entweder größer oder kleiner als dein Tipp sind (oder du triffst die Zahl natürlich). Also, wenn du weißt, dass die Zahl zwischen 1 und 10 ist, solltest du in der Mitte aufteilen, also 5 oder 6 wählen, da du keine 5,5 wählen kannst (wir gehen davon aus, dass du nur ganze Zahlen verwenden kannst). Wenn dein Gegner sagt, dass ihre Zahl größer als dein Tipp ist, weißt du, dass sie irgendwo zwischen deinem Tipp und der ursprünglichen oberen Grenze sein muss, z.B. zwischen 5 und 10. Umgekehrt, wenn der Gegner "kleiner" sagt, ist die Zahl zwischen der unteren Grenze und deinem Tipp, z.B. zwischen 1 und 5. Bei deinem nächsten Versuch teilst du das neue Intervall auf und wiederholst dies, bis du entweder die Zahl richtig errätst oder ein Intervall übrig hast, das nur eine Zahl enthält. Dann musst du nicht mehr raten.
+
+Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das [Übungsheft](notebooks/Guess the number - AI.ipynb)!
+
+## Kapitelbegriffe.
+
+* Schreibe deine eigenen [Funktionen](#funktion).
+* Verstehe die [Gültigkeitsbereiche](#gültigkeitsbereiche-für-unveränderliche-werte) von Variablen.
+* Verwende [Standardmethoden](#numpy-dokumentation) zur Dokumentation deines Codes.
+* Verwende deine eigenen [Bibliotheken](#nutze-deine-eigenen-bibliotheken).
+
+## Spielerantwort{#guess-the-number-players-response}
+Lassen wir uns aufwärmen, indem wir einen Code schreiben, der es einem Spieler ermöglicht, auf die Vermutung des Computers zu reagieren. Denke daran, dass es nur drei Optionen gibt: deine Zahl ist größer, kleiner oder gleich der Vermutung des Computers. Ich würde vorschlagen, die Symbole `>`, `<` und `=` zu verwenden, um dies mitzuteilen. Du musst den Code schreiben, der den Spieler nach seiner Antwort fragt, bis er eines dieser Symbole eingibt. D.h., die Eingabeaufforderung sollte wiederholt werden, wenn er etwas anderes eingibt. Also brauchst du auf jeden Fall die [input([prompt])](https://docs.python.org/3/library/functions.html#input)-Funktion und eine [while](#while-schleife)-Schleife. Denke dir eine nützliche und informative Promptnachricht dafür aus. Teste, ob es funktioniert. Das Setzen von Breakpoints kann hier sehr nützlich sein.
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+## Funktionen {#funktion}
+Du weißt bereits, wie man Funktionen verwendet, jetzt ist es an der Zeit, mehr darüber zu erfahren, warum du das tun solltest. Der Zweck einer Funktion besteht darin, bestimmten Code zu isolieren, der eine einzelne Berechnung durchführt, damit er getestet und wiederverwendet werden kann. Lass uns den letzten Satz Schritt für Schritt mit Beispielen durchgehen.
+
+### Funktion führt eine einzelne Berechnung durch
+Ich hab's dir ja schon [gesagt](#programmiertipps), dass das Lesen von Code einfach ist, weil jede Aktion für Computer auf eine klare und einfache Weise ausgeschrieben werden muss. Aber _viele_ einfache Dinge können trotzdem total überwältigend und verwirrend sein. Stell dir den finalen Code vom letzten Seminar vor: wir hatten zwei Schleifen mit bedingten Anweisungen darin verschachtelt. Füg ein paar mehr davon hinzu und du hast so viele Zweige zu verfolgen, dass du nie sicher sein wirst, was passieren wird. Das liegt daran, dass unsere kognitive Fähigkeit und unser Arbeitsgedächtnis, die du zum Verfolgen all dieser Zweige brauchst, auf etwa vier Dinge beschränkt sind^[Die offizielle magische Zahl ist [7±2](https://de.wikipedia.org/wiki/Der_magische_Zahl_sieben,_plus_oder_minus_zwei), aber das Lesen des Originalpapiers verrät dir, dass das bei den meisten von uns eher vier ist].
+
+Also, eine Funktion sollte _eine_ Berechnung / Aktion durchführen, die konzeptuell klar ist und dieser Zweck sollte direkt aus seinem Namen oder, maximal, aus einem Satz verstanden werden, der ihn beschreibt^[Das ist ähnlich wie wissenschaftliches Schreiben, bei dem ein einziger Absatz eine einzelne Idee übermittelt. Für mich hilft es, zuerst die Idee des Absatzes in einem einzigen Satz zu schreiben, bevor ich den Absatz selbst schreibe. Wenn ein Satz nicht ausreicht, muss ich den Text in mehr Absätze aufteilen.]. Der Name einer Funktion sollte typischerweise ein _Verb_ sein, weil die Funktion über die Durchführung einer Aktion spricht. Wenn du mehr als einen Satz benötigst, um zu erklären, was die Funktion tut, solltest du den Code weiter aufteilen. Das bedeutet nicht, dass die gesamte Beschreibung / Dokumentation in einen einzigen Satz passen muss. Die vollständige Beschreibung kann lang sein, insbesondere wenn die zugrunde liegende Berechnung komplex ist und viele Parameter berücksichtigt werden müssen. Allerdings sind dies optionale Details, die dem Leser sagen, _wie_ die Funktion ihre Arbeit macht oder wie ihr Verhalten verändert werden kann. Trotzdem sollten sie in der Lage sein, _was_ die Arbeit ist, nur aus dem Namen oder aus einem einzigen Satz zu verstehen. Ich wiederhole mich und betone dies so sehr, weil konzeptuell einfache Funktionen mit einer einzigen Aufgabe die Grundlage eines klaren, robusten und wiederverwendbaren Codes sind. Und die zukünftige Version von dir wird sehr dankbar sein, dass sie mit leicht verständlichem, isoliertem und zuverlässigem Code arbeiten muss, den du geschrieben hast.
+
+### Funktion isoliert Code vom Rest des Programms
+Isolation bedeutet, dass dein Code in einem separaten Gültigkeitsbereich ausgeführt wird, in dem nur die Funktionargumente (begrenzte Anzahl von Werten, die du von außen mit festem Bedeutung übergibst) und lokale Variablen, die du innerhalb der Funktion definierst, existieren. Du hast keinen Zugriff auf Variablen, die im äußeren Skript definiert sind^[Das ist nicht ganzstrict genommen wahr, aber das wird uns erst beschäftigen, wenn wir auf sogenannte "veränderliche" Objekte wie Listen oder Dictionaries kommen.] oder auf Variablen, die innerhalb anderer Funktionen definiert sind. Umgekehrt haben das globale Skript oder andere Funktionen keinen Zugriff auf Variablen und Werte, die du innerhalb verwendest. Das bedeutet, dass du nur den Code _innerhalb_ der Funktion studieren musst, um zu verstehen, wie er funktioniert. Entsprechend sollte der Code, den du schreibst, _unabhängig_ von jedem globalen Kontext sein, in dem die Funktion verwendet werden kann. Die Isolation ist sowohl praktisch (kein Laufzeitzugriff auf Variablen von außen bedeutet weniger Chancen, dass etwas schief geht) als auch konzeptuell (kein weiterer Kontext ist erforderlich, um den Code zu verstehen).
+
+### Funktionen erleichtern das Testen von Code
+Du kannst sogar moderat komplexe Programme nur dann erstellen, wenn du sicherstellen kannst, was einzelne Code-Blöcke unter jeder möglichen Bedingung tun. Produzieren sie die richtigen Ergebnisse? Scheitern sie klar und werfen einen korrekten Fehler, wenn die Eingaben falsch sind? Verwenden sie Standardwerte, wenn erforderlich? Das Testen aller Blöcke zusammen bedeutet jedoch, eine extreme Anzahl von Durchläufen durchzuführen, da du alle möglichen Kombinationen von Bedingungen für einen Block bei allen möglichen Bedingungen für andere Blöcke usw. testen musst. Funktionen erleichtern dein Leben erheblich. Weil sie einen einzigen Eintrittspunkt, eine feste Anzahl von Parametern, einen einzigen Rückgabewert und isoliert sind (siehe oben), kannst du sie unabhängig von anderen Funktionen und dem Rest des Codes einzeln testen. Dies wird _Einheitstest_ genannt und ist ein intensiver Einsatz von [automatischem Einheitstest](https://docs.python.org/3/library/unittest.html)^[Es ist normal, mehr Code für das Testen als für das eigentliche Programm zu haben.]. Es gewährleistet zuverlässigen Code für die absolute Mehrheit der Programme und Apps, die du verwendest^[Du benötigst immer noch Tests für das integrierte System, aber das Testen einzelner Funktionen ist ein klarer Voraussetzung.].
+
+### Funktionen machen Code wiederverwendbar
+Manchmal wird das als Hauptgrund genannt, warum man Funktionen verwenden sollte. Wenn man Code in eine Funktion packt, kann man die Funktion aufrufen, anstatt den Code zu kopieren und einzufügen. Letzteres ist eine schlechte Idee, denn dann muss man denselben Code an vielen Stellen pflegen und weiß vielleicht nicht einmal, an wie vielen Stellen. Das ist selbst bei einem extrem simplen Code ein Problem. Hier definieren wir eine _Standard_-Methode, um einen Anfangsbuchstaben aus einer Zeichenkette zu berechnen (du wirst später mehr über Indexierung und Slicing lernen). Der Code ist so einfach wie nur möglich.
+```python
+...
+initial = "test"[0]
+...
+initial_for_file = filename[0]
+...
+initial_for_website = first_name[0]
+...
+```
+Stell dir vor, du entscheidest dich, es zu ändern und die ersten _zwei_ Symbole zu verwenden. Wieder ist die Berechnung nicht kompliziert, man muss nur `[0]` durch `[:2]` ersetzen. Aber du musst es für _alle_ Codezeilen tun, die diese Berechnung durchführen. Und du kannst die Option "_Alle ersetzen_" nicht verwenden, weil du manchmal das erste Element für andere Zwecke verwendest. Und wenn du den Code bearbeitest, vergisst du garantiert einige Stellen (das passiert mir ständig), was die Dinge noch weniger konsistent und verwirrender macht. Wenn man Code in eine Funktion packt, muss man ihn nur an _einer_ Stelle ändern und testen. Hier ist der ursprüngliche Code, der über eine Funktion implementiert wurde.
+```python
+def generate_initial(full_string):
+    """Erzeuge einen Anfangsbuchstaben aus dem ersten Symbol.
+
+    Parameter
+    ----------
+    full_string : str
+
+    Returns
+    ----------
+    str
+        einzelnes Symbol
+    """
+    return full_string[0]
+...
+initial = generate_initial("test")
+...
+initial_for_file = generate_initial(filename)
+...
+initial_for_website = generate_initial(first_name)
+...
+```
+
+Und hier ist die "alternative" initiale Berechnung. Beachte, dass der Code, der die Funktion verwendet, gleich bleibt.
+```python
+def generate_initial(full_string):
+    """Erstelle einen Anfangsbuchstaben aus den ersten ZWEI Symbolen.
+
+    Parameter
+    ----------
+    full_string : str
+
+    Returns
+    ----------
+    str
+        zwei Symbole lang
+    """
+    return full_string[:2]
+
+initial = generate_initial("test")
+...
+initial_for_file = generate_initial(filename)
+...
+initial_for_website = generate_initial(first_name)
+...
+```
+
+Also, es ist besonders nützlich, den Code in eine Funktion zu packen, wenn der wiederverwendete Code komplex ist, aber es lohnt sich sogar, wenn die Berechnung so einfach und trivial ist wie im obigen Beispiel. Mit einer Funktion hast du nur einen Code-Block, um den du dich kümmern musst, und du kannst sicher sein, dass dieselbe Berechnung durchgeführt wird, wann immer du die Funktion aufrufst (und dass dies keine mehreren Kopien des Codes sind, die möglicherweise identisch sind oder auch nicht).
+
+Beachte, dass ich wiederverwendbaren Code als den letzten und am wenigsten wichtigen Grund für die Verwendung von Funktionen ansehe. Dies liegt daran, dass die anderen drei Gründe deutlich wichtiger sind. Selbst wenn du diese Funktion nur einmal aufrufst, ist es von Vorteil, wenn dein Code konzeptuell klar, isoliert und testbar ist. Dadurch wird der Code einfacher zu verstehen und zu testen, und du kannst seine Komplexität reduzieren, indem du Teile des Codes durch ihren Sinn ersetzst. Schau dir das Beispiel unten an. Der erste Code holt das erste Symbol, aber diese Aktion bedeutet alleine nichts, es ist nur eine mechanische Berechnung. Erst der ursprüngliche Kontext `initial_for_file = filename[0]` oder zusätzliche Kommentare geben ihm eine Bedeutung. Im Gegensatz dazu sagt der Aufruf einer Funktion namens _compute_initial_, was passiert, da sie den Zweck klärt. Ich vermute, dass deine zukünftige Version sehr pro-Klarheit und anti-Verwirrung ist.
+```python
+if filename[0] == "A":
+   ...
+
+if compute_initial(filename) == "A":
+   ...
+```
+
+## Funktionen in Python
+### Eine Funktion in Python definieren
+Eine Funktion in Python sieht so aus ( Beachte die Einrückung und das `:` am Ende der ersten Zeile)
+```python
+def <funktionsname>(param1, param2,...):
+    einige interne Berechnungen
+    if somecondition:
+        return some value
+    return some other value
+```
+
+Die Parameter sind optional, genau wie der Rückgabewert. Daher wäre die minimalste Funktion:
+```python
+def minimal_function():
+    pass # pass bedeutet "tu nichts"
+```
+
+Du musst deine Funktion (einmal!) definieren, bevor du sie aufrufst (ein- oder mehrmals). Also solltest du Funktionen _vor_ dem Code erstellen, der sie verwendet.
+
+```python
+def do_something():
+    """
+    Das ist eine Funktion namens "do_something". Sie tut eigentlich nichts.
+    Sie benötigt keinen Input und gibt keinen Wert zurück.
+    """
+    return
+
+def another_function():
+   ...
+    # Wir rufen sie in einer anderen Funktion auf.
+    do_something()
+   ...
+
+# Das ist ein Funktionsaufruf (diese Funktion verwenden wir)
+do_something()
+
+# Und wir verwenden es erneut!
+do_something()
+
+# Und wieder, aber diesmal über einen anderen_Funktionsaufruf
+another_function()
+```
+::: {.practice}
+Mach Übung #1.
+:::
+
+Du solltest auch im Hinterkopf behalten, dass das Über\-schreiben einer Funktion (oder das Definieren einer technisch anderen Funktion mit dem gleichen Namen) die ursprüngliche Definition _überschreibt_, sodass nur die _letzte_ Version davon beibehalten und verwendet werden kann.
+
+::: {.practice}
+Mach Übung #2.
+:::
+
+Obwohl das Beispiel im Übungsblatt das Problem einfach macht, kann es in einem großen Code, der mehrere Dateien umfasst und verschiedene Bibliotheken verwendet, nicht so einfach sein, dasselbe Problem zu lösen!
+
+### Funktionsargumente
+Einige Funktionen benötigen möglicherweise keine Argumente (auch Parameter genannt), da sie eine festgelegte Aktion ausführen:
+```python
+def ping():
+    """
+    Eine Maschine, die "ping!" sagt
+    """
+    print("ping!")
+```
+
+Allerdings musst du möglicherweise Informationen über Argumente an die Funktion übergeben, um zu beeinflussen, wie die Funktion ihre Aktion ausführt. In Python listest du einfach die Argumente in den runden Klammern nach dem Funktionsnamen auf (es gibt noch weitere Feinheiten, aber wir halten es vorerst einfach). Zum Beispiel könnten wir eine Funktion schreiben, die das Alter einer Person berechnet und ausgibt, basierend auf zwei Parametern: 1) ihrem Geburtsjahr, 2) dem aktuellen Jahr:
+
+```python
+def print_age(birth_year, current_year):
+    """
+    Gibt das Alter basierend auf Geburtsjahr und aktuellem Jahr aus.
+
+    Parameter
+    ---------
+    birth_year : int
+    current_year : int
+    """
+    print(current_year - birth_year)
+```
+
+Es ist eine **sehr gute Idee**, Funktionen, Parameter und Variablen sinnvolle Namen zu geben. Der folgende Code wird genau dasselbe Ergebnis produzieren, aber zu verstehen, _warum_ und _wozu_ er das tut, wäre viel schwerer (also **immer** sinnvolle Namen verwenden!):
+```python
+def x(a, b):
+    print(b - a)
+```
+
+Wenn du eine Funktion aufrufst, musst du die richtige Anzahl an Parametern übergeben und sie in der _richtigen Reihenfolge_ übergeben, ein weiterer Grund, warum Funktion-Argumente bedeutungsvolle Namen haben sollten^[Dies ist auch nicht unbedingt richtig, aber du wirst warten müssen, bis du etwas über benannte Parameter und Standardwerte gelernt hast.].
+
+::: {.practice}
+Mach Übung #3.
+:::
+
+Wenn du eine Funktion aufrufst, werden die Werte, die du _übergibst_, den Parametern zugeordnet und als _lokale_ Variablen verwendet (mehr dazu später zum _lokalen_ Teil). Aber es spielt keine Rolle, _wie_ du auf diese Werte gekommen bist, ob sie in einer Variablen waren, hartcodiert oder von einer anderen Funktion zurückgegeben wurden. Wenn du numerische, logische oder Zeichenfolgenwerte (_unveränderliche_ Typen) verwendest, kannst du davon ausgehen, dass jeder Link zur ursprünglichen Variablen oder Funktion, die ihn produziert hat, weg ist (wir werden uns später mit _veränderlichen_ Typen wie Listen befassen). Daher kannst du beim Schreiben einer Funktion oder beim Lesen ihres Codes einfach davon ausgehen, dass sie während des Aufrufs auf einen bestimmten Wert gesetzt wurde und du kannst den Kontext, in dem dieser Aufruf erfolgte, ignorieren.
+
+```python
+# hartcodiert
+print_age(1976, 2020)
+
+# Werte aus Variablen verwenden
+i_was_born = 1976
+today_is = 2024
+print_age(i_was_born, today_is)
+
+# den aktuellen Jahrgang von einer Funktion verwenden
+def get_current_year():
+    return 2024
+
+print_age(1976, get_current_year())
+```
+
+### Funktionen-Rückgabewert (Ausgabe)
+Deine Funktion kann eine Aktion durchführen, ohne einen Wert an den Aufrufer zurückzugeben (das hat unsere `print_age`-Funktion gemacht). Aber du könntest den Wert auch zurückgeben müssen. Zum Beispiel könnten wir eine neue Funktion namens `compute_age` schreiben, die das Alter anstatt es auszudrucken zurückgibt (das können wir immer selbst machen).
+```python
+def compute_age(geburtsjahr, aktuelles_jahr):
+    """
+    Berechnet das Alter anhand des Geburtsjahrs und des aktuellen Jahres.
+
+    Funktionsparameter
+    ----------
+    birth_year : int
+    current_year : int
+    
+    Rückgabe
+    ----------
+    int
+        Alter
+
+    """
+    return current_year - birth_year
+```
+
+Achte darauf, dass selbst wenn eine Funktion einen Wert zurückgibt, dieser nur gespeichert wird, wenn er tatsächlich verwendet wird (in einer Variablen gespeichert, als Wert verwendet, etc.). Also, einfach nur den Aufruf wird den zurückgegebenen Wert nicht automatisch speichern!
+
+::: {.practice}
+Mach Übung #4.
+:::
+
+### Gültigkeitsbereiche (für unveränderliche Werte)
+
+Okay, wie wir oben besprochen haben, verwandelt das Umwandeln von Code in eine Funktion ihn in eine _isolierte_ Einheit, die in ihrem eigenen _Scope_ läuft. In Python existiert jede Variable in dem _Scope_, in dem sie definiert wurde. Wenn sie im _globalen_ Skript definiert wurde, existiert sie in diesem _globalen_ Scope als _globale_ Variable. Allerdings ist sie nicht zugänglich (zumindest nicht ohne besonderen Aufwand mit dem `global`-Operator) von innerhalb einer Funktion aus. Umgekehrt existieren die Parameter einer Funktion und alle innerhalb einer Funktion definierten Variablen nur **innerhalb dieser Funktion**. Sie sind für die Außenwelt unsichtbar und können nicht vom globalen Skript oder von einer anderen Funktion aus erreicht werden. Umgekehrt haben alle Änderungen, die du an dem Funktionsparameter oder der lokalen Variablen vornimmst, keine Auswirkung auf die Außenwelt.
+
+Der Sinn von Scopes besteht darin, einzelne Codeabschnitte voneinander zu isolieren, damit das Ändern von Variablen innerhalb eines Scopes keine Auswirkungen auf alle anderen Scopes hat. Das bedeutet, dass du beim Schreiben oder Debuggen des Codes keine Sorgen wegen des Codes in anderen Scopes haben musst und dich nur auf den Code konzentrieren kannst, an dem du gerade arbeitest. Da Scopes isoliert sind, können sie _identisch benannte Variablen_ haben, die jedoch keine Beziehung zueinander haben, da sie in ihren eigenen parallelen Universen existieren^[Es ist wie bei zwei Personen mit demselben Namen, aber immer noch unterschiedliche Menschen.]. Daher musst du, wenn du wissen möchtest, welchen Wert eine Variable hat, nur innerhalb des Scopes nachsehen und alle anderen Scopes ignorieren (auch wenn die Namen übereinstimmen!).
+
+```python
+# das ist die Variable `x` im globalen Gültigkeitsbereich
+x  = 5
+
+def f1():
+  # Das ist Variable `x` im Gültigkeitsbereich der Funktion f1
+  # Sie hat denselben Namen wie die globale Variable, aber
+  # hat keine Beziehung dazu: viele Menschen heißen Sasha,
+  # aber sie sind trotzdem verschiedene Menschen. Was auch immer
+  # mit `x` in f1 passiert, bleibt im Gültigkeitsbereich von f1.
+  x = 3
+
+def f2(x):
+  # Das ist Parameter `x` im Gültigkeitsbereich der Funktion f2.
+  # Wieder keine Beziehung zu anderen globalen oder lokalen Variablen.
+  # Es ist ein vollständig separates Objekt, es hat nur zufällig
+  # denselben Namen (wieder nur Namensvettern)
+  print(x)
+```
+
+::: {.practice}
+Mach Übung #5.
+:::
+
+## Spielerantwort als Funktion
+Jetzt ist es an der Zeit, die Theorie über Funktionen in die Praxis umzusetzen. Nutze den Code, den du erstellt hast, um die [Spielerantwort](#rate-die-zahl-spielerantwort) zu erhalten und daraus eine Funktion zu machen. Diese sollte keine Parameter haben (vorerst) und die Spielerantwort zurückgeben. Ich schlage vor, sie `input_response` (oder etwas Ähnliches) zu nennen. Teste den Code, indem du diese Funktion in deinem Hauptskript aufrufst.
+
+::: {.program}
+Mach weiter mit [code02.py]{.program-filename}.
+:::
+
+## Debuggen einer Funktion
+Jetzt, wo du deine erste Funktion hast, kannst du die drei Schaltflächen "Schritt zurück/vor/raus" des Debuggers besser verstehen. Kopiere den folgenden Code in eine separate Datei (nenn sie zum Beispiel `test01.py`).
+
+```python
+def f1(x, y):
+  return x / y
+
+def f2(x, y):
+  x = x + 5
+  y = y * 2
+  return f1(x, y)
+
+z = f2(4, 2)
+print(z)
+```
+Okay, jetzt pass mal auf. Zuerst legst du einen Breakpoint auf die Zeile im Hauptskript, die die Funktion `f2()` aufruft. Starte den Debugger mit **F5** und das Programm wird an dieser Stelle pausieren. Wenn du jetzt **F10** (Schritt nach vorne) drückst, springt das Programm zur nächsten Zeile `print(z)`. Aber wenn du stattdessen **F11** (Schritt rein) drückst, springt das Programm in die Funktion und geht zur Zeile `x = x + 5`. Wenn du innerhalb der Funktion bist, hast du dieselben beiden Optionen wie zuvor, aber du kannst auch **Shift+F11** drücken, um aus der Funktion herauszuspringen. Hier springt das Programm den gesamten Code aus, bis du die nächste Zeile außerhalb der Funktion erreichst (du solltest wieder bei `print(z)` landen). Experimentiere damit, Breakpoints an verschiedenen Zeilen zu setzen und über/rein/raus zu schreiten, um den Dreh mit diesen nützlichen Debugging-Tools rauszukriegen.
+
+Setzt nun den Haltepunkt innerhalb der Funktion „f1()“ und führt den Code mit **F5** aus. Im linken Fensterbereich siehst du eine Registerkarte _Call Stack_. Während die gelb markierte Zeile im Editor anzeigt, wo du dich gerade befindest (innerhalb der Funktion `f1()`), zeigt der _Call Stack_ an, wie du dorthin gekommen bist. In diesem Fall sollte er zeigen:
+
+|    |  |
+|:----------|:-------------|---|
+| f1 | test01.py | 2:1 |
+| f2 | test01.py | 7:1 |
+| <module> | test01.py | 9:1 |
+
+Die Aufrufe werden von unten nach oben gestapelt, also bedeutet das, dass eine Funktion im Hauptmodul in Zeile 9 aufgerufen wurde, du landest in der Funktion `f2` in Zeile 7 und dann in der Funktion `f1` und in Zeile 2. Experimentiere damit, in und aus Funktionen zu gehen, während du ein Auge darauf hast. Du brauchst diese Information vielleicht nicht häufig, aber sie könnte in unseren späteren Projekten mit mehreren verschachtelten Funktionsaufrufen nützlich sein.
+
+## Deine Funktion dokumentieren{#numpy-docstring}
+Das Schreiben einer Funktion ist nur die halbe Arbeit. Du musst sie dokumentieren! [Erinnere dich](#programming-tips), dies ist eine gute Gewohnheit, die deinen Code leicht verwendbar und wiederverwendbar macht. Es gibt verschiedene Möglichkeiten, den Code zu dokumentieren, aber wir werden die [NumPy-Dokstrings](https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard) verwenden. Hier ist ein Beispiel für eine solche dokumentierte Funktion.
+
+Hier ist die Übersetzung des Textes über das Programmieren in Python auf Deutsch, mit informeller Sprache und Verwendung von "du" für "you":
+
+```python
+def generiere_anfangsvokal(voll_string):
+    """
+    Generiert einen Anfangsbuchstaben aus dem ersten Symbol.
+    
+    Parameters
+    ----------
+    full_string : str
+
+    Returns
+    ----------
+    str
+        einzelnes Symbol
+    """
+    return voll_string[0]
+```
+::: {.program}
+Aktualisiere deinen Code in [code02.py]{.program-filename}.
+:::
+
+
+## Prompt verwenden
+In Zukunft werden wir nach einer bestimmten Zahl fragen, die momentan vom Computer geraten wird, also können wir keine feste Promptnachricht verwenden. Ändere die `input_response`-Funktion, indem du einen `guess`-Parameter hinzufügst. Dann ändere den Prompt, den du für die [input()](https://docs.python.org/3/library/functions.html#input)-Funktion verwendet hast, um den Wert in diesem Parameter einzubeziehen. Aktualisiere die Dokumentation der Funktionen. Teste es, indem du es mit verschiedenen Werten für den `guess`-Parameter aufrufst und dabei einen unterschiedlichen Prompt für die Antwort siehst.
+
+::: {.program}
+Mach weiter mit [code03.py]{.program-filename}.
+:::
+
+## Interval in der Mitte teilen
+Lass uns noch ein bisschen an Funktionen schreiben üben. Denk dran, dass der Computer die Mitte des Intervalls als Schätzung verwenden sollte. Schreib eine Funktion (nennen wir sie `split_interval()` oder so) die zwei Parameter nimmt --- `lower_limit` und `upper_limit` --- und eine _ganze Zahl_ zurückgibt, die der Mitte des Intervalls am nächsten ist. Der einzige knifflige Teil ist, wie du eine eventuell float-Zahl (z.B. wenn du es für das Intervall 1..10 suchst) in eine ganze Zahl umwandelst. Du kannst die Funktion [int()](https://docs.python.org/3/library/functions.html#int) dafür verwenden. Beachte jedoch, dass sie _keine richtige Rundung_ durchführt (was macht sie? Lies die Dokumentation!). Daher solltest du die Zahl mit [round()](https://docs.python.org/3/library/functions.html#round) auf die nächstgelegene ganze Zahl runden, bevor du sie umwandelst.
+
+Schreib eine Funktion, dokumentiere sie und teste sie, indem du überprüfst, ob die Zahlen korrekt sind.
+
+:::{.program}
+Leg deinen **split_interval()** Funktion und den Testcode in [code04.py]{.program-filename} rein.
+:::
+
+## Einzige Runde
+Du hast beide Funktionen, die du brauchst, also lass uns den Code schreiben, um das Spiel zu initialisieren und eine Runde zu spielen. Die Initialisierung beschränkt sich darauf, zwei Variablen zu erstellen, die den unteren und oberen Grenzwerten des Spielbereichs entsprechen (wir haben bisher 1 bis 10 verwendet, aber du kannst das immer ändern). Als nächstes sollte der Computer eine Vermutung generieren (du hast deine `split_interval()`-Funktion dafür) und den Spieler nach seiner Vermutung fragen (das ist die `input_response()`-Funktion). Sobald du die Antwort hast (in einer separaten Variable gespeichert, denk dir einen Namen aus), aktualisiere entweder die obere oder untere Grenze mithilfe einer [if..elif..else](#if-statement)-Anweisung basierend auf der Antwort des Spielers (wenn der Spieler sagte, dass seine Zahl höher ist, bedeutet das, dass das neue Intervall von `guess` bis `upper_limit` ist, und umgekehrt, wenn es niedriger ist). Drucke eine freudige Nachricht aus, wenn die Vermutung des Computers korrekt war.
+
+:::{.program}
+Schreibe sowohl die Funktionen als auch den Skript-Code in [code05.py]{.program-filename}.
+:::
+
+## Mehrere Runden
+Erweitere das Spiel, damit der Computer immer weiter rät, bis er schließlich gewinnt. Du weißt bereits, wie man die [while-Schleife](#while-loop) verwendet, überlege dir nur, wie man die Antwort des Teilnehmers als Bedingungsvariable für die Schleife verwenden kann. Denke auch über den Anfangswert dieser Variablen nach und wie man ihn verwendet, damit man `input_response()` nur an einer Stelle aufruft.
+
+:::{.program}
+Schreib den aktualisierten Code in [code06.py]{.program-filename}.
+:::
+
+## Nochmal spielen
+Ändere den Code, damit du dieses Spiel mehrere Male spielen kannst. Du weißt bereits, wie man das macht, und musst nur noch darüber nachdenken, wo genau du die Initialisierung vor jedem Spiel durchführen solltest. Da du das beim letzten Spiel bereits implementiert hast, könntest du versucht sein, nachzusehen, wie du es gemacht hast oder sogar den Code zu kopieren und einzufügen. Ich würde jedoch empfehlen, es von Anfang an neu zu schreiben. Denk daran, dein Ziel ist es nicht, ein Programm zu schreiben, sondern zu lernen, wie man das macht, und daher ist die Reise wichtiger als das Ziel.
+
+:::{.program}
+Schreib den aktualisierten Code in [code07.py]{.program-filename}.
+:::
+
+## Bestes Ergebnis
+Füge den Code hinzu, um die Anzahl der Versuche zu zählen, die der Computer in jeder Runde benötigt hat, und das beste Ergebnis (wenigstens Anzahl von Versuchen) nach dem Spiel zu melden. Du benötigst eine Variable, um die Anzahl der Versuche zu zählen, und eine, um das beste Ergebnis zu speichern. Versuche erneut, es zu schreiben, ohne auf dein vorheriges Spiel zu schauen.
+
+:::{.program}
+Schreib den aktualisierten Code in [code08.py]{.program-filename}.
+:::
+
+## Benutze deine eigenen Bibliotheken
+Du weißt bereits, wie man [existierende Bibliotheken](#benutze-bibliotheken) verwendet, aber du kannst auch eigene erstellen und verwenden. Nimm die beiden Funktionen, die du entwickelt hast, und packe sie in eine neue Datei namens [utils.py]{.filename} (vergesse nicht, eine mehrzeilige Kommentarfunktion oben in der Datei zu hinterlassen, um dich daran zu erinnern, was drin ist!). Kopiere den restlichen Code (das globale Skript) in [code09.py]{.filename}. Es wird in seinem aktuellen Zustand nicht funktionieren, da es die beiden Funktionen nicht finden wird (versuche es, um die Fehlermeldung zu sehen), also musst du aus deinem eigenen [utils]{.filename}-Modul importieren. Importieren funktioniert genau gleich wie bei anderen Bibliotheken. Beachte, dass obwohl deine Datei [utils.py]{.filename} heißt, der Modulname [utils]{.filename} (ohne Erweiterung) ist.
+
+:::{.program}
+Leg die Funktion in [utils.py]{.program-filename} und den restlichen Code in [code09.py]{.program-filename}.
+:::
+
+## Ordnung muss sein!{#keep-imports-tidy}
+Bisher hast du maximal eine Bibliothek importiert. Doch da Python sehr modular ist, ist es üblich, viele Importe in einer einzigen Datei zu haben. Es gibt einige Regeln, die das Verfolgen der Importe erleichtern. Wenn du Bibliotheken importierst, sollten alle Import-Anweisungen oben in deiner Datei stehen und du solltest sie nicht in willkürlicher Reihenfolge plazieren. Die empfohlene Reihenfolge ist 1) Systembibliotheken, wie [os]{.filename} oder [random]{.filename}; 2) Drittanbieterbibliotheken, wie [psychopy]{.filename}; 3) deine Projektmodule. Und innerhalb jedes Abschnitts solltest du die Bibliotheken _alphabetisch_ anordnen, also
+```python
+import os
+import random
+```
+
+Das sieht vielleicht nicht besonders nützlich für deinen simplen Code aus, aber wenn deine Projekte wachsen, wirst du immer mehr Bibliotheken einbeziehen müssen. Sie in alphabetischer Reihenfolge zu halten, erleichtert das Verständnis, welche Bibliotheken du verwendest und welche nicht standard sind. Alphabetische Reihenfolge bedeutet auch, dass du schnell überprüfen kannst, ob eine Bibliothek enthalten ist, da du schnell die Position ihres Import-Statements finden kannst.
+
+## Videos in Videospiele einbauen
+Reiche deine Dateien ein und mach dich bereit für mehr Action, denn wir gehen jetzt zu "echten" Videospielen mit PsychoPy über.

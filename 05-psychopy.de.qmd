@@ -1,0 +1,216 @@
+# Los geht's mit PsychoPy {#psychopy-basics}
+
+Bevor wir unser erstes Spiel mit [PsychoPy](https://psychopy.org/) programmieren, müssen wir uns erstmal mit den Grundlagen vertraut machen. Es ist nicht die beste Wahl für die Entwicklung von Spielen, dafür eignen sich [Python Arcade](https://arcade.academy/) oder [PyGame](https://www.pygame.org/) besser. Aber es ist die beste Python-Bibliothek für die Entwicklung psychophysischer Experimente (und das ist es, was wir wollen).
+
+## Kapitelkonzepte
+
+* Verstehen, wie man [Klassen und Objekte](#klassen-und-objekte) verwendet.
+* Verwenden von [benannten Parametern](#position-oder-name) in Funktionen.
+* Verstehen des PsychoPy [Einheitensystems](#psychopy-einheiten).
+* Verwenden grundlegender Psycho [visueller Reize](#text-nachricht-hinzufügen) und Verwalten von [Benutzereingaben](#lasse-den-quadrat-springen-bei-deinem-befehl).
+
+## Minimal PsychoPy-Code {#minimal-psychopy}
+Kopier den folgenden Code in die Datei [code01.py]{.filename} (du hast doch eine neue Mappe für das Kapitel erstellt, oder?):
+```python
+"""
+Ein minimaler PsychoPy-Code.
+"""
+
+# das importiert zwei Module aus psychopy
+# visual hat alle visuellen Reize, einschließlich der Window-Klasse
+# die wir benötigen, um ein Programmfenster zu erstellen
+# event hat Funktionen für die Arbeit mit Maus und Tastatur
+from psychopy import visual, event
+
+# ein 800 x 600 Fenster erstellen
+win = visual.Window(size=(800, 600))
+
+# auf Tastendruck warten
+event.waitKeys()
+
+# das Fenster schließen
+win.close()
+```
+
+Lauf es, um zu prüfen, ob PsychoPy funktioniert. Wenn du einen Fehler bekommst, der besagt, dass die `psychopy`-Bibliothek nicht gefunden wurde, überprüfe den [aktiven Python-Interpreter](#install-vs-code). Du solltest ein graues Fenster mit der Überschrift _PsychoPy_ erhalten. Drücke eine beliebige Taste (klicke auf das Fenster, falls du zu einem anderen gewechselt hast, damit es die Tasteneingabe registriert) und es sollte sich schließen. Nicht sehr aufregend, aber es zeigt, dass alles wie erwartet funktioniert.
+
+::: {.program}
+Füge den Code in [code01.py]{.program-filename}
+:::
+
+Der Code ist einfach, aber packt einige neue Sachen. Die erste Zeile ist easy, wir importieren einfach [visual](https://psychopy.org/api/visual/index.html) und [event](https://psychopy.org/api/event.html) Module aus der _psychopy_ Bibliothek (eine Bibliothek kann selbst in Unterbibliotheken organisiert sein, um Dinge noch modularer zu gestalten). Dann erstellen wir ein _Objekt_ `win` using eine _Klasse_ [Window](https://psychopy.org/api/visual/window.html#psychopy.visual.Window) mit einer benutzerdefinierten Größe. Die dritte Zeile verwendet die Funktion [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) aus dem _event_ Modul, um auf eine Tasteneingabe zu warten. Die letzte schließt das Fenster, indem sie seine `close` _Methode_ aufruft. Du solltest keine Probleme mit Zeile #1 und #3 haben, aber du musst etwas über objektorientierte Programmierung lernen, um Zeile #2 und #4 zu verstehen.
+
+## Klassen und Objekte
+Die PsychoPy-Bibliothek ist eine Sammlung von _Klassen_, die du verwendest, um _Objekte_ zu erstellen, eine Methode, die als _objektorientierte Programmierung_ bekannt ist. Die Kernidee steckt im Namen: Statt Variablen (Daten) und Funktionen (Aktionen) getrennt zu halten, kombinierst du sie in einem Objekt, das eigene Attribute (Variablen) und Methoden (Funktionen) hat. Diese Methode nutzt unsere natürliche Neigung, die Welt als Sammlung von interagierenden Objekten wahrzunehmen.
+
+Erstmal musst du den Unterschied zwischen _Klassen_ und _Objekten_ verstehen. Eine _Klasse_ ist sozusagen eine "Bauplan", das die Eigenschaften und das Verhalten aller Objekte dieser Klasse beschreibt. Dieser "Bauplan" wird verwendet, um ein _Exemplar_ dieser Klasse zu erstellen, das ein _Objekt_ genannt wird. Zum Beispiel ist _Homo sapiens_ eine _Klasse_, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine _Idee_ von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen "Wie groß ist Homo sapiens?", sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten, solche realen Handlungen auszuführen. Stattdessen ist Alexander Pastuchow eine _Instanz_ der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Eine Klasse beschreibt also alle gemeinsamen Eigenschaften und Methoden, die alle _Instanzen_ der Klasse (alle Objekte) haben werden. Aber ein einzelnes Objekt wird sich aufgrund der unterschiedlichen Werte seiner Eigenschaften unterschiedlich verhalten. Wenn Sie also einen Homo sapiens treffen, können Sie sicher sein, dass er per se groß ist, aber Sie müssen sich eine individuelle _Instanz_ ansehen, um herauszufinden, welche Größe er hat.
+
+`Window` ist eine Klasse, die Eigenschaften beschreibt, die ein PsychoPy-Fenster haben muss, und Aktionen, die es ausführen kann (du kannst die vollständige Liste in [der Dokumentation](https://psychopy.org/api/visual/window.html#psychopy.visual.Window) sehen). Um ein Objekt zu erstellen, verwenden wir seine Klassendefinition und speichern das Ergebnis in einer Variablen. Im obigen Code rufen wir die `Window`-Klasse^[Technisch rufen wir eine Klassenkonstruktor-Methode namens `__init__` auf, aber das ist jetzt nicht wichtig.] auf, während wir ihr personalisierte Parameter übergeben (`size=(800, 600)`) und speichern ein Objekt, das sie zurückgibt, in der Variablen `win`.
+
+Attributes sind im Grunde genommen Variablen, die zur Klasse gehören und somit Variablen, die jedes Objekt besitzen wird. Zum Beispiel hat eine `Window`-Klasse ein [size](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.size)-Attribut, das seine Bildschirmgröße in Pixeln bestimmt. Es hat auch (Hintergrund-) [color](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.color), ein Attribut, das bestimmt, ob es im [Vollbildmodus](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.fullscr) angezeigt werden soll, usw. Also wird ein `win`-Objekt alle diese Attribute haben und sie werden spezifische Werte haben.
+
+Um die Eigenschaften und die Unterscheidung zwischen Klasse/Objekt besser zu verstehen, setze einen Breakpoint auf der dritten Codezeile (`event.waitKeys()`) und starte den Debugger über **F5**. Sobald das Fenster erstellt wurde, wird die Ausführung pausieren und du wirst ein `win`-Objekt in _Variables/Locals_ finden. Klicke darauf und es wird sich erweitern, um alle Attribute und ihre Werte anzuzeigen, einschließlich `size` (stelle sicher, dass es `[800, 600]` ist). Beachte, dass du `Window` selbst nicht in der gleichen Liste sehen wirst. Dies liegt daran, dass es eine Klasse ist, ein abstraktes Konzept, während `win` ihr Instanz und Objekt dieser Klasse ist.
+
+Methode wie `Window.close()` sind im Grunde genommen Funktionen, die zur Klasse/Objekt gehören und bestimmte Aktionen am Objekt durchführen. Zum Beispiel schließt die Methode [close()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.close) das Fenster, [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) aktualisiert es, nachdem wir darin gezeichnet haben, usw. Wichtig ist zu beachten, dass jede Methode nur auf dem Objekt _zu dem sie gehört_ wirkt und nicht auf anderen Instanzen der gleichen Klasse. Das bedeutet, dass du zwei Fenster (`win1` und `win2`) erstellen kannst und `win1.close()` nur das erste, aber nicht das zweite Fenster schließt (versuche es aus!). Gleiches gilt für Attribute, ihre Änderung in einem Objekt beeinflusst keine anderen Objekte der gleichen Klasse, genau wie die Änderung eines Wertes in einer Variablen keine anderen beeinflusst.
+
+Okay, du hast ja nur einen kleinen Einblick in die objektorientierte Programmierung bekommen, aber das sollte reichen, um die von PsychoPy definierten Klassen verwenden zu können.
+
+## Funktionsparameter: Standardwerte, Position oder Name {#arguments-by-position-or-name-de}
+In der `visual.Window(size=(800, 600))`-Aufrufzeile gibt es noch ein paar interessante Dinge, über die wir sprechen müssen. Diese Merkwürdigkeiten beziehen sich auf Funktionen (und damit auf Methoden, die Funktionen sind, die zu einer Klasse gehören) und nicht auf Klassen an sich. Erstens hat die Konstruktor-Methode der Window-Klasse [viele Argumente](https://psychopy.org/api/visual/window.html#psychopy.visual.Window) (wenn wir ein Objekt konstruieren, rufen wir eine Konstruktor-Methode der Klasse auf, deshalb sprechen wir über Funktionen). Und doch haben wir nur eines davon übergeben. Das liegt daran, dass du für einzelne Parameter [Standardwerte](https://docs.python.org/3/tutorial/controlflow.html#default-argument-values) festlegen kannst. In diesem Fall wird, wenn ein Parameter weggelassen wird, ein Standardwert verwendet.
+```{python}
+def divide(x1, x2=2):
+    """
+    Teilt Zahlen, verwendet 2 als zweiten Wert, wenn ein zweiter Term weggelassen wird.
+  
+    Parameters
+    ----------
+    x1 : float
+    x2 : float, default=2
+  
+    Returns
+    ----------
+    float
+    """
+    return x1 / x2
+
+print(divide(2)) # wir übergeben nur den Wert für x1 und der Standardwert wird für x2 verwendet
+print(divide(2, 4))
+```
+
+Wenn du die [Dokumentation](https://psychopy.org/api/visual/window.html#psychopy.visual.Window) ansiehst, wirst du sehen, dass für den Window-Klassen-Konstruktor _alle_ Parameter einen Standardwert haben. Das ist ein Teil der PsychoPy-Philosophie, die reichhaltige Anpassungsfähigkeit (schau dir nur die Anzahl der Parameter an!) mit Einfachheit der Benutzung durch sinnvolle Standardwerte verbindet (spezifiziere nichts und das Fenster funktioniert trotzdem).
+
+Zweitens, wir haben den Wert nicht nur übergeben, sondern auch angegeben, für welchen Parameter dieser Wert bestimmt ist, und zwar über `size=(800, 600)`. Diese Schreibweise nennt sich [Schlüsselwortargumente](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments). Der Vorteil besteht darin, dass es eindeutiger macht, welchen Parameter du einem Wert zuweist. Außerdem kannst du die Parameter in beliebiger Reihenfolge angeben, solange es im Kontext sinnvoll ist^[Allerdings solltest du zur Konsistenz bei der ursprünglichen Reihenfolge bleiben.]. Wenn du keine Namen verwendest, werden die Werte den einzelnen Parametern basierend auf ihrer _Position_ (auch bekannt als Positionsparameter) zugewiesen. Du kannst sogar beides mischen, aber Positionsparameter müssen zuerst kommen, siehe [Dokumentation](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions), wenn du mehr erfahren möchtest.
+```{python}
+# Verwendung von Positionsparametern
+print(divide(2, 4))
+```
+
+```{python}
+# mit Keyword-Argumenten
+print(divide(x2=4, x1=2))
+```
+
+```{python}
+# Mixen von Positions- und Keyword-Argumenten
+print(divide(2, x2=4))
+```
+
+```{python}
+#| error: true
+print(divide(2, x1=4))
+```
+
+## Hauptschleife hinzufügen
+Momentan passiert in unserem Programm nicht viel. Eine Sache, die wir hinzufügen müssen, ist eine Schleife, in der wir wiederholt in ein Fenster zeichnen (und es über seine [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip)-Methode aktualisieren) können, die Benutzereingabe überprüfen und andere notwendige Aktionen durchführen.
+
+Okay, dann fangen wir mal damit an, die Schleife und die Verarbeitung von Benutzereingaben hinzuzufügen (das lustige Zeichenteil kommt als nächstes). Die Schleife befindet sich zwischen dem Öffnen und Schließen des Fensters:
+```python
+importiere Bibliotheken
+öffne das Fenster
+
+--> unsere Hauptschleife <--
+
+Schließen des Fensters
+```
+
+Die Schleife sollte wiederholt werden, bis der Benutzer die _Escape_-Taste drückt, und daher benötigst du eine Variable, die dies signalisiert. Mein Ansatz ist, eine Variable `gameover` zu erstellen und sie auf `False` zu initialisieren und die Schleife solange zu wiederholen, bis das Spiel vorbei ist. Dann, innerhalb der Schleife, verwende die Funktion [event.getKeys()](https://psychopy.org/api/event.html#psychopy.event.getKeys), um zu überprüfen, ob die _Escape_-Taste gedrückt wurde (dazu musst du `keyList=['escape']` übergeben). Die Funktion gibt eine _Liste_ von Tasten zurück, wenn eine davon in der Zwischenzeit gedrückt wurde, oder eine leere Liste, wenn keine Tasten aus der `keyList` gedrückt wurden. Speichere diesen zurückgegebenen Wert in einer temporären Variable (ich tendiere dazu, sie `keys` zu nennen). Du wirst erst im _nächsten_ Kapitel etwas über Listen lernen, also verwende für den Moment eine fertige: `len(keys) > 0` ist ein Vergleich, der `True` ist, wenn die Liste nicht leer ist. Wenn die Liste tatsächlich nicht leer ist, bedeutet das, dass der Benutzer die _Escape_-Taste gedrückt hat (da dies die einzige Taste ist, die wir in dem Funktionsaufruf angegeben haben) und das Spiel sollte vorbei sein. Überlege dir, wie du es _ohne_ eine `if`-Anweisung machen kannst, indem du den logischen Wert direkt berechnest.
+
+::: {.program}
+Schreib deinen Code in [code02.py]{.program-filename}.
+:::
+
+## Textnachricht hinzufügen
+Obwohl wir jetzt eine nette Game-Loop laufen haben, haben wir immer noch nur ein langweiliges graues Fenster, auf das wir schauen können. Lass uns eine Textstimulanz erstellen, die "Escape drücken zum Beenden" sagt und sie während der Schleife anzeigt. Dafür werden wir die [visual.TextStim](https://psychopy.org/api/visual/textstim.html)-Klasse aus der PsychoPy-Bibliothek verwenden.
+
+Erstmal musst du das `press_escape_text`-Objekt (Instanz der [TextStim](https://psychopy.org/api/visual/textstim.html-Klasse)) vor der Hauptschleife erstellen. Es gibt einige Parameter, mit denen du herumspielen kannst, aber mindestens musst du das Fenster, in dem der Text angezeigt werden soll (unsere `win`-Variable), und den tatsächlichen Text, den du anzeigen möchtest (`text="Escape drücken, um zu beenden"`), übergeben. PsychoPy wird für alle anderen Einstellungen seine [Voreinstellungen](#arguments-by-position-or-name) verwenden (Standard-Schriftfamilie, -farbe und -größe, mittig im Fenster platziert).
+```python
+press_escape_text = visual.TextStim(win, "Escape drücken, um zu beenden")
+```
+
+Um die Visualisierungen in PsychoPy anzuzeigen, musst du zuerst jedes Element _zeichnen_, indem du seine [draw()](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.draw) Methode aufrufst, und dann das Fenster _aktualisieren_, indem du es _umblätterst_^[Dies wird Umblättern genannt, weil ein Fenster zwei Puffer hat: einen, der aktuell auf dem Bildschirm angezeigt wird, und einen anderen, in dem du deine Stimuli zeichnen kannst.] Sobald du fertig bist, mit [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) "umblätterst" du die Puffer, damit sie ihre Plätze tauschen. Jetzt wird der gezeichnete Puffer angezeigt und du hast den anderen Puffer zum Zeichnen. Beachte, dass du [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) nur _einmal_ aufrufst, nachdem _alle_ Stimuli gezeichnet wurden. Ich organisiere diesen Code normalerweise in einen separaten Block und füge eine Kommentarlinie `# zeichne Stimuli` davor ein.
+
+Der `# zeichne Stimuli`-Block gehört in die Hauptschleife, entweder vor oder nach der Tastaturprüfung.^[Ich persönlich ziehe es vor, zuerst zu zeichnen, aber in den meisten Fällen macht es keinen Unterschied.
+] Organisiere auch den letzteren als separaten Code-Block mit eigenem kurzem Kommentar.
+
+::: {.program}
+Schreib deinen Code in [code03.py]{.program-filename}.
+:::
+
+Jetzt solltest du eine nette, wenn auch statische, Nachricht in der Mitte des Fensters haben, die dir zeigt, wie du das Spiel beenden kannst. Schau dir die Handbuchseite für [visual.TextStim](https://psychopy.org/api/visual/textstim.html) an und versuche, es zu ändern, indem du zusätzliche Parameter an den Klassenaufruf übergibst. Zum Beispiel kannst du seine `Farbe`, ob der Text **fett** und/oder _kursiv_ ist, wie er ausgerichtet ist, usw. ändern. Aber wenn du ändern möchtest, _wo_ der Text angezeigt wird, lies weiter unten.
+
+## Ein Quadrat hinzufügen und es _nicht_ in die Mitte des Fensters setzen
+Jetzt müssen wir rausfinden, wie man visuelle Elemente an eine beliebige Stelle auf dem Bildschirm bewegt. Im Grunde ist das sehr einfach, denn jeder visuelle Stimulus (inklusive [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim), das wir gerade verwendet haben) hat eine [pos](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos)-Eigenschaft, die seine Position innerhalb eines Fensters angibt. Aber PsychoPy macht es erstmal komplizierter, indem es **fünf** (5!) verschiedene Positionseinheiten-Systeme hat.
+
+Bevor wir mit den Einheiten loslegen, lass uns ein einfaches weißes Quadrat erstellen. Die Klasse, die wir dafür brauchen, ist [visual.Rect](https://psychopy.org/api/visual/rect.html). Genau wie [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) benötigt es die `win`-Variable (damit es weiß, zu welchem Fenster es gehört), `width` (standardmäßig 0,5 dieser mysteriösen Einheiten), `height` (auch standardmäßig 0,5), `pos` (standardmäßig (0,0)), `lineColor` (standardmäßig `white`) und `fillColor` (standardmäßig `None`). Also, um ein "standardmäßiges" weißes Quadrat mit der Größe `(0,5, 0,5)` Einheiten an der Position `(0, 0)` zu erhalten, musst du nur die `win`-Variable übergeben: `white_square = visual.Rect(win)`. Allerdings kann es auf _einigen_ Computern zu einem seltsamen Fehler kommen, der PsychoPy daran hindert, den Rahmen korrekt zu zeichnen. Wenn du also auf einen leeren Bildschirm starrst^[Dies war manchmal ein Problem bei Intel-Grafikkarten.], füge `fillColor="white"` zum Aufruf hinzu und du solltest ein ausgefülltes weißes Quadrat sehen.
+
+Du zeichnest das Quadrat genau wie du den Textreiz gezeichnet hast, über seine [draw()](https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect.draw) Methode (und wieder, du zeichnest erst alle Reize und dann drehst du das Fenster _einmal_ um). Schreibe den Code (entweder behalte den Text und zeichne beide, oder lasse den Text weg), führe ihn aus, um ein sehr weißes Quadrat zu sehen.
+
+::: {.program}
+Schreib deinen Code in [code04.py]{.program-filename}.
+:::
+
+Na, dein Quadrat ist kein richtiges Quadrat? Ich hab's dir ja gesagt: [Fünf Einheitensysteme](https://psychopy.org/general/units.html#units)!
+
+## Fünf Einheitensysteme {#psychopy-einheiten}
+
+### Height units {#psychopy-units-height}
+Mit [height units](https://psychopy.org/general/units.html#height-units) wird alles in den Einheiten der Fensterhöhe angegeben. Die Mitte des Fensters befindet sich bei `(0,0)` und das Fenster verläuft vertikal von `-0.5` bis `0.5`. Die horizontalen Grenzen hängen jedoch vom Seitenverhältnis ab. Für unser 800×600-Fenster (Seitenverhältnis 4:3) verläuft es von -0.666 bis 0.666 (das Fenster ist 1.3333 Fensterhöhen breit). Für ein 600×800-Fenster (Seitenverhältnis 3:4) von -0.375 bis 0.375 (das Fenster ist 0.75 Fensterhöhen breit), für ein quadratisches Fenster 600×600 (Seitenverhältnis 1:1) von -0.5 bis 0.5 (in allen diesen Fällen verläuft es von -0.5 bis 0.5 vertikal). Das bedeutet, dass der tatsächliche Bildschirmabstand für die Einheiten auf beiden Achsen gleich ist. Daher ist ein Quadrat mit `size=(0.5, 0.5)` tatsächlich ein Quadrat (es spannt den gleichen Abstand vertikal und horizontal). Dadurch erleichtern height units das _Größenfestlegen_ von Objekten, machen das _korrekte Platzieren auf der horizontalen Achse_ jedoch schwieriger (da du das Seitenverhältnis kennen musst).
+
+Mach dein Code besser, indem du das Einheitensystem beim Erstellen des Fensters festlegst: `win = visual.Window(..., units="height")`. Spiele mit deinem Code, indem du die Position des Quadrats beim Erstellen festlegst. Du musst nur einen zusätzlichen Parameter `pos=(<x>, <y>)` übergeben.
+
+::: {.program}
+Schreib deinen Code in [code05.py]{.program-filename}.
+:::
+
+Übrigens: Wo ist oben, wenn y unter oder über Null liegt? Leider, im Gegensatz zur x-Achse, kann die y-Achse in beide Richtungen gehen. In PsychoPy zeigt die y-Achse nach oben (d.h. negative Werte bewegen den Quadrat nach unten und positive nach oben). Aber wenn du einen Eyelink Eye-Tracker verwenden würdest, um aufzuzeichnen, wohin die Teilnehmer geschaut haben _auf dem Bildschirm_, geht die y-Achse von der Spitze des Bildschirms aus und zeigt nach unten^[Das könnte sehr verwirrend sein, wenn du das vergisst, wenn du die Blickdaten auf ein Bild überlagerst, das du in der Studie verwendet hast, und dich fragst, was die Teilnehmer denn gemacht haben.].
+
+Jetzt ändere die Größe des Quadrats (und mache es zu einem nicht-quadratischen Rechteck), indem du `width=<some-width-value>` und `height=<some-height-value>` übergibst.
+
+::: {.program}
+Schreib deinen Code in [code06.py]{.program-filename}.
+:::
+
+### Normale Einheiten {#psychopy-einheiten-norm}
+[Normale Einheiten](https://psychopy.org/general/units.html#normalised-units) sind die Standard-Einheiten und gehen davon aus, dass das Fenster von -1 bis 1 sowohl entlang der x- als auch der y-Achse reicht. Wiederum ist (0,0) die Mitte des Bildschirms, aber die linke untere Ecke ist (-1, -1) und die rechte obere Ecke ist (1, 1). Das erleichtert das _Positionieren_ deiner Objekte, macht das _Größenfestlegen_ jedoch schwieriger (du musst das Seitenverhältnis kennen, um sicherzustellen, dass ein Quadrat tatsächlich ein Quadrat ist).
+
+Mach dein Code so um, dass er `"norm"`-Einheiten verwendet, wenn du das Fenster erstellst und deinen weißen quadratischen Reiz größenanpasst, damit es wie ein Quadrat aussieht.
+
+::: {.program}
+Schreib deinen Code in [code07.py]{.program-filename}.
+:::
+
+### Bildschirmpixel
+Für [Bildschirmpixel](https://psychopy.org/general/units.html#pixels-on-screen) Einheiten liegt das Fensterzentrum immer noch bei `(0,0)`, geht jedoch horizontal von `-<Breite-in-Pixeln>/2` bis `<Breite-in-Pixeln>/2` (in unserem Fall von -400 bis 400) und vertikal von `-<Höhe-in-Pixeln>/2` bis `<Höhe-in-Pixeln>/2` (von -300 bis 300). Diese Einheiten können intuitiver sein, wenn du mit einem Fenster fester Größe arbeitest, da der Bereich auf beiden Achsen gleich ist (wie bei den Höheneinheiten). Sie können jedoch Probleme bereiten, wenn die Fenstergröße verändert wurde oder du ein Vollbildfenster auf einem Monitor mit unbekannter Auflösung verwendest. Kurz gesagt, du solltest sie nur verwenden, wenn sie deinen Code dramatisch vereinfachen.
+
+Mach dein Code so, dass er `"pix"`-Einheiten verwendet und test kurz die Größe und Position deines Quadrats innerhalb des Fensters.
+
+::: {.program}
+Schreib deinen Code in [code08.py]{.program-filename}.
+:::
+
+### Visuelle Winkelgrade
+Im Gegensatz zu den drei Einheiten darüber, das Verwenden von [visuellen Winkelgraden](https://psychopy.org/general/units.html#degrees-of-visual-angle) erfordert das Wissen über die physikalische Größe des Bildschirms, seine Auflösung und die Betrachtungsdistanz (wie weit deine Augen vom Bildschirm entfernt sind). Sie sind _die_ Maßeinheiten, die in der visuellen Psychophysik verwendet werden, da sie die Stimulusgröße beschreiben, wie sie auf der Netzhaut erscheint (siehe [Wikipedia](https://de.wikipedia.org/wiki/Sehwinkel) für Details). Daher sind dies die Einheiten, die du verwenden möchtest, wenn du ein echtes Experiment im Labor durchführst.
+
+### Zentimeter auf dem Bildschirm
+Hier musst du die physikalische Größe deines Bildschirms und seine Auflösung kennen. Das sind relativ exotische Einheiten für sehr spezifische Anwendungsfälle^[So spezifisch, dass ich ehrlich gesagt keins einfallen will.].
+
+## Lass deinen Quadrat springen
+Bis jetzt haben wir die Position des Quadrats festgelegt, als wir es erstellt haben. Aber du kannst es jederzeit bewegen, indem du neue `(<x>, <y>)` Koordinaten seinem `pos`-Eigenschaft zuweist. Zum Beispiel `white_square.pos = (-0.1, 0.2)`. Lass uns experimentieren, indem wir das Quadrat bei jeder Schleifeniteration an eine zufällige Position bewegen (das kann viel blinken verursachen, also wenn du eine lichtempfindliche Epilepsie hast, die durch Blinken ausgelöst werden kann, solltest du es wahrscheinlich nur einmal vor der Schleife machen). Verwende die Einheiten deiner Wahl und erzeuge eine neue Position mithilfe der Funktion [random.uniform(a, b)](https://docs.python.org/3/library/random.html#random.uniform), die einen zufälligen Wert innerhalb des Bereichs _a..b_ generiert^[Du musst natürlich das random-Modul dafür importieren.]. Erzeuge zwei Werte (einen für x, einen für y). Wenn du `"norm"`-Einheiten verwendest, ist der Bereich für die beiden Dimensionen gleich (von -1 bis 1). Wenn du jedoch `"height"`-Einheiten verwendet hast, musst du das Seitenverhältnis deines Fensters berücksichtigen (4:3, wenn du ein 800×600-Pix-Fenster verwendest).
+
+::: {.program}
+Schreib deinen Code in [code09.py]{.program-filename}.
+:::
+
+## Lass den Quadrat springen, wenn du es sagst
+Das war sehr beeindruckend, also lass uns den Quadrat nur springen, wenn du die **Leertaste** drückst. Dafür müssen wir den Code erweitern, der die Tastatureingabe verarbeitet. Bisher haben wir ihn nur auf die **Esc-Taste** beschränkt und geprüft, ob eine (also **Esc**) Taste gedrückt wurde.
+
+In der nächsten Kapitel lernst du über Listen und Indizes, also hier ist noch ein vorgefertigtes. Zuerst füge `"space"` zur `keyList`-Parameter hinzu. Als nächstes verwende eine bedingte [if-Anweisung](#{#if-anweisung}), um zu prüfen, ob [event.getKeys()](https://psychopy.org/api/event.html#psychopy.event.getKeys) eine Tasteneingabe zurückgegeben hat. Wenn ja (`len(keys) > 0`), kannst du nun prüfen, ob `keys[0]` gleich `"space"` oder `"escape"` ist^[Du kannst `if..else` verwenden, da wir nur zwei Optionen haben, aber ich würde empfehlen, auf eine allgemeinere Lösung `if..elif` zu gehen]. Wenn es letztere war, ist das Spiel vorbei, wie zuvor. Wenn es `"space"` war, dann bewege das Quadrat an eine neue zufällige Position (und bewege es nicht bei jedem Frame!).
+
+Tipp, wenn du debuggst, setz deinen Breakpoint innerhalb des `if`-Statements, damit das Programm erst anhält, wenn du eine Taste gedrückt hast (was passiert, wenn du ihn auf der `win.flip()`-Zeile setzt?)
+
+::: {.program}
+Schreib deinen Code in [code10.py]{.program-filename}.
+:::
+
+## Grundlagen abgedeckt
+Es gibt noch viel mehr zu lernen über PsychoPy, aber wir haben die Grundlagen abgedeckt. Schick deine Dateien ab und mach dich bereit für ein [Mole schlagen](#mole-schlagen)!

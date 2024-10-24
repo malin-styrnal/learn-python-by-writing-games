@@ -1,0 +1,178 @@
+# Rate das Zahl: die Multi-Runde-Edition {#rate-das-zahl-multi-runde}
+
+In der vorherigen Kapitel hast du ein "Raten Sie die Zahl"-Spiel programmiert, bei dem nur ein Versuch möglich war. Jetzt werden wir das System erweitern, um mehrere Versuche zuzulassen, und wir werden weitere Funktionen hinzufügen, damit es mehr Spaß macht. Erstelle einen neuen Unterordner und lade das [Übungsheft](notebooks/Guess%20the%20number%20-%20multi%20round.ipynb) herunter, bevor wir loslegen!
+
+## Kapitelkonzepte
+
+* Wiederholenden Code mit einer [while-Schleife](#while-schleife).
+* Machen eines [Notausstiegs](#break) aus einer Schleife.
+
+## While-Schleife {#while-loop}
+Wenn du etwas wiederholen möchtest, musst du Schleifen verwenden. Es gibt zwei Arten von Schleifen: die [while](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement)-Schleife, die _solange_ eine Bedingung wahr ist, wiederholt wird, und die [for](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement)-Schleife, die über Elemente iteriert (dazu kommen wir später).
+
+Die Grundstruktur einer _while_-Schleife ist
+```python
+# Anweisungen vor der Schleife
+
+while <Bedingung>:
+    # Anweisungen innerhalb werden ausgeführt
+    # wiederholt ausgeführt, so lange wie
+    # die Bedingung wahr ist
+
+# Anweisungen nach der Schleife
+```
+
+Du kannst eine Schleife mit `while` erstellen, indem du eine Bedingung angibst, die entweder `True` oder `False` ist. Das ist genau wie in einer `if...elif...else`-Anweisung. Und die gleichen Einrückungsregeln gelten auch hier, um zu bestimmen, welcher Code in der Schleife und welcher außerhalb ist.
+
+::: {.practice}
+Mach Übung #1
+:::
+
+Lass uns eine _while_-Schleife verwenden, damit der Spieler immer weiter raten kann, bis er es endlich richtig hat. Du kannst den Code, den du beim letzten Seminar programmiert hast, kopieren und einfügen oder ihn von Neuem schreiben (ich würde dir empfehlen, Letzteres zu tun!). Die allgemeine Programmstruktur sollte wie folgt aussehen:
+```python
+# importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst
+
+# eine zufällige Zahl generieren und in der Variable
+# number_picked speichern die Eingabe des Spielers holen, sie in eine Ganzzahl umwandeln und in der Variable guess speichern
+
+# Solange deine Vermutung nicht gleich dem Wert ist, den der Computer gewählt hat:
+    # Drucke "Meine Zahl ist kleiner" oder "Meine Zahl ist größer" mithilfe eines if-else-Statements
+    # Hol dir die Eingabe des Spielers, konvertiere sie in eine Ganzzahl und speichere sie in der Variable "Vermutung"
+
+# Drucke "Treffer!" (weil wir hier sind, bedeutet das, dass "Vermutung" gleich der Wahl des Computers ist)
+```
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+vergiss nicht, die Datei zu dokumentieren und nutze Breakpoints und Step-overs, um den Programmablauf zu erkunden.
+
+## Versuche zählen
+Jetzt fügen wir eine Variable hinzu, die die Gesamtzahl der Versuche des Spielers zählt. Dazu erstellst du eine neue Variable (nenn sie `versuche` oder ähnlich) _vor der Schleife_ und initialisierst sie mit `1` (denn der erste Versuch findet vor dem Eintritt in die Schleife statt). Addiere `1` zu ihr jedes Mal, wenn der Spieler eine Vermutung eingibt. Nach der Schleife erweiterst du die Meldung `"Treffer!"` um Informationen über die Anzahl der Versuche. Verwende [String-Formatierung](##string-formatierung), um es nett aussehen zu lassen, z.B. `"Richtig, und du hast nur 5 Versuche gebraucht!"`. Stelle sicher, dass die Anzahl der Versuche, die du benötigst, _übereinstimmt_ mit der Anzahl der Versuche, die das Programm meldet!
+
+::: {.program}
+Füge deinen Code in [code02.py]{.progam-filename} ein.
+:::
+
+
+## Abbrechen (und Beenden){#break}
+Der Code innerhalb der _while_-Schleife wird so lange ausgeführt, wie die Bedingung `True` ist, und wichtig ist, dass der gesamte Code innerhalb ausgeführt wird, bevor die Bedingung erneut ausgewertet wird. Manchmal möchtest du jedoch früher abbrechen, ohne den restlichen Code auszuführen. Dafür hat Python einen [break](https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops)-Befehl, der das Programm dazu veranlasst, die Schleife sofort zu verlassen, ohne den restlichen Code innerhalb der Schleife auszuführen, damit das Programm mit dem Code _nach_ der Schleife fortfährt.
+
+```python
+# Dieser Code wird vor der Schleife ausgeführt.
+
+while <Einige_Bedingung>:
+    # dieser Code wird bei jeder Iteration ausgeführt
+
+    if <eine_andere_Bedingung>:
+        break
+
+    # Dieser Code wird bei jeder Iteration ausgeführt,
+    # aber nicht, wenn man die Schleife verlässt.
+
+# Dieser Code wird nach der Schleife ausgeführt.
+```
+
+::: {.practice}
+Mach Übung #2, um dein Verständnis zu vertiefen.
+:::
+
+## Anzahl der Versuche begrenzen via break
+Mach mal Druck auf den Spieler! Entscheide, wie viele Versuche du maximal erlaubst und speichere es als eine [CONSTANT](#constants). Wähle einen passenden Namen (z.B. `MAX_VERSUCHE`) und denke dran, dass für eine Konstante alle Buchstaben großgeschrieben werden müssen! Verwende jetzt `break`, um die `while`-Schleife zu verlassen, wenn die aktuelle Versuchsnummer größer als `MAX_VERSUCHE` ist. Überlege, wann (innerhalb des Codes in der Schleife) du das überprüfen solltest.
+
+::: {.program}
+Füge deinen Code in [code03.py]{.progam-filename} ein.
+:::
+
+
+## Richtige Endnachricht
+Lassen wir die finale Nachricht aktualisieren. Aktuell sagt sie "Treffer..." weil wir annahmen, dass das Programm den Loop nur verlässt, wenn der Spieler die richtige Antwort gibt. Bei begrenzten Versuchen ist das jedoch nicht unbedingt der Fall. Jetzt gibt es zwei Gründe, warum es den while-Loop verlassen hat:
+
+1. Du hast richtig geantwortet!
+2. Du bist aus Versuchen ausgegangen.
+
+Verwende eine `if-else`-Bedingung, um eine passende Nachricht auszugeben. Zum Beispiel: `"Pech gehabt, beim nächsten Mal mehr Glück!"`, wenn der Spieler verloren hat (keine Versuche mehr übrig).
+
+::: {.program}
+Füge deinen Code in [code04.py]{.progam-filename} ein.
+:::
+
+## Anzahl der Versuche begrenzen ohne Break
+Obwohl ich es vorgeschlagen habe, das `break`-Statement hinzuzufügen, solltest du es sparsam verwenden. Ohne `break` gibt es nur _einen_ Ort im Code, den du überprüfen musst, um zu verstehen, wann das Programm die Schleife verlässt: die Bedingung. Aber wenn du ein `break` hinzufügst, musst du jetzt _zwei_ Orte untersuchen. Und jeder zusätzliche `break` fügt immer weiter hinzu. Das bedeutet aber nicht, dass du sie um jeden Preis vermeiden solltest! Du _solltest_ sie verwenden, wenn es den Code einfacher verständlich macht. Aber überprüfe immer, ob eine geänderte Bedingung auch funktionieren könnte.
+
+Lass uns genau das machen. Ändere deinen Code, damit er _ohne_ die `break`-Anweisung funktioniert. Du brauchst eine kompliziertere Bedingung für deine `while`-Schleife, damit sie sich wiederholt, solange der Spieler rate falsch liegt und die Anzahl der Versuche noch kleiner als das maximal erlaubte ist. Teste, ob dein Code sowohl im Gewinn- als auch im Verlustfall funktioniert.
+
+::: {.program}
+Füge deinen Code in [code05.py]{.progam-filename} ein.
+:::
+
+## Verbliebene Versuche anzeigen
+Es geht ums User-Interface! Ändere die `input`-Prompts-Nachricht, um die Anzahl der _verbliebenen_ Versuche einzubeziehen. Zum Beispiel: `"Bitte gib deine Vermutung ein, du hast noch X Versuche übrig."`
+
+::: {.program}
+Füge deinen Code in [code06.py]{.progam-filename} ein.
+:::
+
+## Das Spiel wiederholen {#rate-zahlen-repeat-game}
+Lass uns dem Spieler die Möglichkeit geben, das Spiel erneut zu spielen. Das bedeutet, _alle_ aktuellen Code in eine andere `while`-Schleife (das nennt man _verschachtelte Schleifen_) zu packen, die so lange wiederholt wird, wie der Spieler weiterspielen möchte. Der Code sollte folgendermaßen aussehen:
+```python
+# importiere die random-Bibliothek, damit du die randint-Funktion verwenden kannst
+
+# Definiere MAX_ATTEMPTS = 5
+
+
+# Variablen "willst_du_weiterspielen" definieren und auf True setzen
+# Solange der Spieler weiter spielen möchte
+
+  # Dein aktueller Spielcode geht hier rein
+
+  # Frage den Benutzer mit der input-Funktion. z.B. "Willst du nochmal spielen? J/N"
+  # willst_du_weiterspielen sollte True sein, wenn die Benutzereingabe "J" oder "j" ist
+
+# Letzte Botschaft, z.B. "Danke fürs Spielen!"
+```
+
+**Achte besonders auf die Einrückungen, um den Code ordentlich zu gruppieren!**
+
+::: {.program}
+Füge deinen Code in [code07.py]{.progam-filename} ein.
+:::
+
+## Du brauchst keinen Vergleich, wenn du bereits den Wert hast
+In deinem aktualisierten Code hast du die `want_to_play`-Variable, die entweder `True` oder `False` ist. Sie wird in der Schleife verwendet, die sich solange wiederholt, wie ihr Wert `True` ist. Manchmal schreiben Leute `want_to_play == True`, um das auszudrücken. Während es technisch korrekt ist und sicherlich korrekt funktionieren wird, ist es auch redundant. Da `want_to_play` nur `True` oder `False` sein kann, wird dieser Vergleich zu `True == True` (was natürlich `True` ist) oder `False == True` (was `False` ist). Daher produziert der Vergleich beider Werte mit `True` genau denselben Wert. Du kannst also einfach `while want_to_play:` schreiben und den logischen Wert direkt verwenden.
+
+## Best score
+Ein "richtiges" Spiel führt normalerweise die Leistung der Spieler mit. Lass uns die geringste Anzahl von Versuchen aufzeichnen, die der Spieler benötigte, um die Zahl zu erraten. Dazu erstellst du eine neue Variable `fewest_attempts` und setzt sie auf `MAX_ATTEMPTS` (das ist so schlecht wie es nur geht). Überlege, wo du sie erstellen musst. Du solltest sie nach jeder Spielrunde aktualisieren. Füge Informationen über "Bisheriger Rekord" in die Runden-Endnachricht ein.
+
+::: {.program}
+Füge deinen Code in [code08.py]{.progam-filename} ein.
+:::
+
+## Spielrunden zählen
+Lass uns zählen, wie oft der Spieler das Spiel gespielt hat. Die Idee und die Umsetzung sind dieselben wie beim Zählen der Versuche. Erstelle eine neue Variable, initialisiere sie auf 0 und erhöhe sie um 1, wenn eine neue Runde beginnt. Füge die Gesamtzahl der gespielten Spiele in die allerletzte Nachricht ein, z.B. "Danke für das Spielen des Spiels _X_ Mal!"
+
+::: {.program}
+Füge deinen Code in [code09.py]{.progam-filename} ein.
+:::
+
+## Mehrrunde Einarmiger Bandit
+Am Ende des vorherigen Kapitels hast du ein Spiel mit einem Einarmigen Banditen für eine Runde programmiert. Du weißt bereits alles, was du brauchst, um eine Version mit mehreren Runden zu implementieren, und ihre Struktur ist ähnlich (aber einfacher) als die des Multi-Round-Game-Of-Guess-Number-Spiels, das du gerade implementiert hast.
+
+Lass den Spieler mit einem Anfangsguthaben von 10 Münzen starten. Jede Runde kostet 1 Münze, drei gleiche Karten bringen 10 Münzen ein, während ein Paar 2 Münzen einbringt (du kannst die Auszahlungen nach Belieben ändern). In jeder Runde:
+
+* Nimm eine Münze aus dem Topf (Gebühr fürs Spielen).
+* Wirf den Würfel (das hast du schon implementiert).
+* Sag dem Spieler, wie's gelaufen ist (das hast du auch schon gemacht).
+* Füge Münzen dem Topf hinzu, falls nötig.
+* Gib die verbleibende Münzen im Topf aus.
+* Frag den Spieler, wo's weitergeht.
+
+Sonderfall: Wenn dem Spieler die Münzen ausgehen, ist das Spiel definitiv vorbei.
+
+::: {.program}
+Füge deinen Code in [code10.py]{.progam-filename} ein.
+:::
+
+## Zusammenfassung
+Super gemacht, jetzt hast du zwei funktionierende Computerspiele mit Spielrunden, begrenzten Versuchen und Bestenpunkten! Pack die Ordner zusammen und abgeben.

@@ -1,0 +1,280 @@
+# Whack-a-Mole {#whack-a-mole-de}
+
+Heute wirst du dein erstes _Video_spiel Whack-a-Mole erstellen. Das Spiel selbst ist ein echter Reaktionszeit-Test: Marder/Ziele erscheinen nach einer zufälligen Verzögerung an einer der vordefinierten Stellen, die Aufgabe des Spielers besteht darin, den Marder/Ziel zu treffen (die entsprechende Taste zu drücken), bevor er verschwindet. Dein endgültiges Spiel sollte etwa so aussehen wie das im Video: Kreise (Marder) werden weiß, wenn ich die richtige Taste rechtzeitig drücke.
+
+```{r, eval=knitr::is_html_output(excludes = "epub"), results = 'asis', echo = F}
+cat(
+'<div style="text-align:center;"><video controls>
+    <source src="videos/whack-a-mole.m4v" type="video/mp4">
+  </video></div>'
+)
+```
+
+Hol' dir das [Übungsheft](notebooks/Whack-a-mole.ipynb), bevor wir loslegen!
+
+## Kapitelkonzepte
+
+* Viele Dinge in [Listen](#listen) speichern.
+* Über Dinge mit einer [for-Schleife](#for-schleife) iterieren.
+* Eine Reihe von Zahlen mit [range()](#range) erzeugen.
+* [Pause machen](#uhr-warten) und die [Wartezeit auf eine Taste begrenzen](#warteTasten-maxwarten).
+
+## Listen {#listen}
+Bis jetzt haben wir Variablen verwendet, um einzelne Werte zu speichern: die Wahl des Computers, die Vermutung des Spielers, die Anzahl der Versuche, das PsychoPy-Fenster-Objekt usw. Aber manchmal müssen wir mehr als einen Wert verwalten. Wir hatten dieses Problem bereits im [Computer-basierten Ratespiel](#guess-the-number-ai), als wir den verbleibenden Zahlenbereich speichern mussten. Wir kamen damit davon, indem wir zwei Variablen verwendeten, eine für die untere und eine für die obere Grenze. Allerdings skaliert dieser Ansatz nicht gut und manchmal wissen wir nicht einmal, wie viele Werte wir speichern müssen. Python's [Listen](https://docs.python.org/3/library/stdtypes.html#lists) sind die Lösung für dieses Problem.
+
+Eine Liste ist eine veränderbare^[Mehr dazu und Tupel, die unveränderlichen Cousins der Listen, später.] Abfolge von Elementen, auf die über ihren nullbasierten Index zugegriffen werden kann. Wenn man die Idee von [Variable-als-Box](#variablen) verlängert, kann man sich Listen als eine Box mit nummerierten Fächern vorstellen. Um ein bestimmtes Stück zu speichern und abzurufen, benötigst du sowohl den _Variablennamen_ als auch den _Index des Elements_, das du innerhalb dieser Box interessiert. Dann arbeitest du mit einer Variable-plus-Index auf genau dieselbe Weise wie mit einer normalen Variable, indem du über dieselbe Syntax wie zuvor auf ihren Wert zugreifst oder ihn änderst.
+
+Eine Liste wird über eckige Klammern definiert: `<variable> = [<value1>, <value2>,... <valueN>]`. Ein einzelner Slot innerhalb einer Liste wird ebenfalls über eckige Klammern erreicht: `<variable>[<index>]`, wobei der Index wieder **nullbasiert** ist^[Dies ist typisch für „klassische“ Programmiersprachen, aber weniger für solche, die auf lineare Algebra/Datenwissenschaft ausgerichtet sind. Sowohl Matlab als auch R verwenden eine einseitige Indizierung, daher musst du vorsichtig sein und doppelt überprüfen, ob du die richtigen Indizes verwendest.]. Das bedeutet, dass das erste Element `variable[0]` ist und, wenn es N Elemente in der Liste gibt, das letzte `variable[N-1]` ist. Du kannst die Gesamtzahl der Elemente in einer Liste herausfinden, indem du ihre Länge über eine spezielle [len()](https://docs.python.org/3/library/functions.html#len)-Funktion erhältst. Daher kannst du das letzte Element über `variable[len(variable)-1]` erreichen^[Es gibt eine einfachere Methode, die du in Kürze lernen wirst.]. Beachte das `-1`: Wenn deine Liste 3 Elemente hat, ist der Index des letzten Elements 2, wenn sie 100 hat, dann 99 usw. Ich verbringe so viel Zeit damit, weil es eine ziemliche häufige Quelle für Verwirrung ist.
+
+::: {.practice}
+Mach die Übung #1 und schau dir an, wie Listen definiert und indiziert werden.
+:::
+
+Listen ermöglichen auch den gleichzeitigen Zugriff auf mehr als einen Slot/Index über [slicing] (https://docs.python.org/3/library/functions.html#slice). Du kannst den Index der Elemente über die `<start>:<stop>`-Notation angeben. Zum Beispiel gibt `x[1:3]` dir Zugriff auf die Elemente mit den Indizes 1 und 2. Ja, _zwei_ Elemente: Der Slice-Index geht vom `start` bis **ohne** das `stop` mit einzuschließen. Also, um _alle_ Elemente einer Liste zu erhalten, musst du `x[0:length(x)]` schreiben, und um das letzte Element allein zu erhalten, schreibst du immer noch `x[len(x)-1]`. Verstehst du? Ich auch nicht so richtig! Ich verstehe die Logik, aber ich finde es immer noch verwirrend, dass das `stop`-Element nicht mit einbezogen wird, und ich muss mich immer noch bewusst daran erinnern. Leider ist das eine Standardmethode, um Sequenzen von Zahlen in Python zu definieren, also musst du es dir merken.
+
+::: {.practice}
+Mach Übung #2, um das Gefühl dafür zu kriegen.
+:::
+
+Wenn du Slicing verwendest, kannst du entweder `start` oder `stop` weglassen. In diesem Fall wird Python annehmen, dass ein fehlendes `start` `0` bedeutet (der Index des ersten Elements) und ein fehlendes `stop` `len(<liste>)` bedeutet (d.h. das letzte Element ist enthalten). Wenn du _beide_ weglässt, z.B. `my_pretty_numbers[:]`, wird es alle Werte zurückgeben, da dies äquivalent zu `my_pretty_numbers[0:len(my_pretty_numbers)]` ist.^[Anmerkung: Dies ist fast, aber nicht ganz das gleiche wie einfach `my_pretty_numbers` zu schreiben, da `my_pretty_numbers[:]` eine _andere_ Liste mit _gleichem_ Inhalt zurückgibt. Der Unterschied ist subtil, aber wichtig und wir werden später darauf zurückkommen, wenn es um veränderliche gegen unveränderliche Typen geht.]
+
+::: {.practice}
+Mach Übung #3.
+:::
+
+Du kannst auch _negative_ Indizes verwenden, die relativ zur Länge der Liste berechnet werden^[Wenn du aus R kommst, ist negatives Indexieren in Python komplett anders.]. Zum Beispiel, wenn du das _letzte_ Element der Liste abrufen möchtest, kannst du `my_pretty_numbers[len(my_pretty_numbers)-1]` oder einfach `my_pretty_numbers[-1]` sagen. Das vorletzte Element wäre `my_pretty_numbers[-2]`, usw. Du kannst negative Indizes zum Slicing verwenden, aber beachte die _einschließlich-Start-aber-ausschließen-Stopp_-Falle: `my_pretty_numbers[:-1]` wird alle Elemente bis auf das letzte der Liste zurückgeben, nicht die gesamte Liste!
+
+::: {.practice}
+Mach Übung #4.
+:::
+
+Slicing kann um eine `step`-Angabe erweitert werden, indem du `start:stop:step`-Notation verwendest. `step` kann negativ sein, wodurch du Indizes in umgekehrter Reihenfolge erstellen kannst:
+```{python}
+meine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_nette_zahlen[4:0:-1]
+```
+
+Aber pass auf, in welche Richtung der Schritt geht. Wenn er in die falsche Richtung geht, dann kannst du `stop` nicht erreichen und Python wird eine leere Liste zurückgeben.
+```{python}
+meine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_nette_zahlen[4:0:1]
+```
+
+Schritte können mit ausgelassenen und negativen Indizes kombiniert werden. Um jedes _ungerade_ Element der Liste zu erhalten, schreibst du `meine_nette_zahlen[::2]`:
+
+```{python}
+meine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_nette_zahlen[::2]
+```
+
+::: {.practice}
+Mach Übung #5.
+:::
+
+Wenn du versuchst, auf Indizes _außerhalb_ des gültigen Bereichs zuzugreifen, wird Python einen [IndexError](https://docs.python.org/3/library/exceptions.html#IndexError) auslösen^[Wenn du mit R und seiner liberalen Haltung gegenüber Indizes vertraut bist, wird dir das sehr gefallen.]. Also, wenn du versuchst, das 6. Element (Index 5) einer fünf-elementigen Liste zu erhalten, wird ein einfacher und klarer Fehler generiert. Aber wenn dein _Slice_ größer als der Bereich ist, wird er ohne zusätzliche Warnung oder einen Fehler gekürzt. Also, für eine fünf-elementige Liste `my_pretty_numbers[:6]` oder `my_pretty_numbers[:600]` werden beide alle Zahlen zurückgeben (effektiv ist das gleichbedeutend mit `my_pretty_numbers[:]`). Außerdem, wenn der Slice leer ist (`2:2`, kann 2 nicht enthalten, obwohl es auch als Startwert verwendet wird) oder der gesamte Slice außerhalb des Bereichs liegt, wird Python eine leere Liste zurückgeben, wieder ohne Warnung oder Fehler.
+
+::: {.practice}
+Mach Übung #6.
+:::
+
+In Python sind Listen dynamisch, also kannst du immer Elemente hinzufügen oder entfernen. Schau dir [die Liste der Methoden](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) an. Du kannst ein neues Element am Ende der Liste hinzufügen, indem du die `.append(<neuer_wert>)` Methode verwendest.
+
+```{python}
+meine_schönen_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_schönen_zahlen.append(10)
+meine_schönen_zahlen
+```
+
+Oder, du kannst `insert(<index>, <new_value>)` _vor_ einem Element mit diesem Index einfügen. Leider bedeutet das, dass du einen beliebig großen Index verwenden kannst und es wird einen neuen Wert als _letztes_ Element einfügen, ohne einen Fehler zu generieren.
+```{python}
+meine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_nette_zahlen.insert(2, 10)
+meine_nette_zahlen.insert(500, 20)
+meine_nette_zahlen
+```
+Du kannst ein Element mithilfe von `pop(<index>)` entfernen, beachte, dass das Element _zurückgegeben_ wird. Wenn du den Index weglässt, entfernt `pop()` das _letzte_ Element der Liste. Hier kannst du nur gültige Indizes verwenden.
+```{python}
+meine_nette_zahlen = [1, 2, 3, 4, 5, 6, 7]
+meine_nette_zahlen.pop(-1)
+meine_nette_zahlen.pop(3)
+meine_nette_zahlen
+```
+
+::: {.practice}
+Mach Übung #7.
+:::
+
+## Grundlegendes Spielgerüst
+Puh, das war _eine Menge_ über Listen^[Und wir haben noch nicht einmal an der Oberfläche gekratzt!]. Aber [Arbeit ohne Spiel macht Jack langweilig](https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy)! Also lass uns mit einem grundlegenden PsychoPy-Gerüst beginnen. Hier der Code-Aufbau:
+```python
+importiere Bibliotheken (von psychopy)
+erzeuge das PsychoPy-Fenster (visual.Window())
+blende das Fenster (.flip())
+warte darauf, dass ein Spieler die Escape-Taste drückt (event.waitKeys())
+schließe das Fenster (.close())
+```
+
+Versuch's mal von vorne. Ich habe dir ein paar Hinweise hinterlassen, die dir dabei helfen sollten, und du kannst jederzeit die [Online-Dokumentation](https://psychopy.org/api/index.html) zurate ziehen. Vergiss nicht, die Datei zu dokumentieren und deinen Code in sinnvolle Blöcke mit Kommentaren (wenn nötig) zu unterteilen.
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+## Drei Maulwürfe
+Lass uns drei Maulwürfe erstellen, die durch [Kreise](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle) dargestellt werden. Erstelle eine neue Liste-Variable `moles` und füge drei Kreise hinein. Einer sollte links sein, einer in der Mitte und einer rechts. Schau dir das Video oben an, um zu sehen, was ich meine. Denke an eine vernünftige Größe (welche [Einheiten](#psychopy-einheiten) erleichtern das Beibehalten des Kreises als Kreis?) und Position. Du kannst auch unterschiedliche Farben für sie verwenden, wie ich es gemacht habe.
+
+Du kannst entweder eine leere Liste erstellen und dann `.append()` verwenden, um Kreise nacheinander hinzuzufügen, oder du kannst eckige Klammern verwenden, um alle drei auf einmal in die Liste zu packen. Dann [draw()](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle.draw) die Kreise, bevor du das Fenster [flippt](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) und auf eine Tasteneingabe wartest. Beachte, dass du sie nacheinander zeichnen musst. Daher benötigst du drei Zeilen für dies, aber der nächste Abschnitt zeigt dir eine einfachere Methode.
+
+::: {.program}
+Schreib deinen Code in [code02.py]{.program-filename}.
+:::
+
+## For-Schleife{#for-loop}
+In dem obigen Code mussten wir über drei Kreise (Kreise) iterieren, die wir in einer Liste hatten. Python hat genau das richtige Werkzeug dafür: eine
+[For-Schleife](https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements), die über die Elemente in jeder Sequenz iteriert (unsere Liste ist eine Sequenz!). Hier ist ein Beispiel:
+```{python}
+zahlen = [2, 4, 42]
+for eine_zahl in zahlen:
+    print("Wert der Variable 'eine_zahl' in dieser Iteration ist %d"%(eine_zahl))
+    eine_zahl = eine_zahl + 3
+    print("  Wir haben sie jetzt um 3 erhöht: %d"%(eine_zahl))
+    print("  Wir verwenden sie jetzt in einer Formel 'eine_zahl / 10': %g"%(eine_zahl / 10))
+```
+
+Hier wird der Code innerhalb der `for`-Schleife dreimal wiederholt, da es drei Elemente in der Liste gibt. Bei jeder Iteration wird der nächste Wert aus der Liste einer temporären Variable `a_number` zugewiesen (siehe Ausgabe). Sobald der Wert einer Variablen zugewiesen ist, kannst du ihn wie jede andere Variable verwenden. Du kannst ihn ausgeben (erster `print`), ihn ändern (zweite Zeile innerhalb der Schleife), seinen Wert bei Aufrufen anderer Funktionen verwenden usw. Um das besser zu verstehen, kopiere diesen Code in eine temporäre Datei (nenn sie `test01.py`), setze ein [Breakpoint](#debugging) auf die erste `print`-Anweisung und verwende dann **F10**, um die Schleife Schritt für Schritt durchzulaufen und zu sehen, wie sich der Wert der `a_number`-Variablen bei jeder Iteration ändert und dann in der zweiten Zeile innerhalb der Schleife geändert wird.
+
+Beachte, dass du die gleiche [break](https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#break-and-continue-statements-and-else-clauses-on-loops) Anweisung wie für die [while](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) Schleife verwenden kannst.
+
+::: {.practice}
+Mach Übung #8.
+:::
+
+## In einer Schleife zeichnen
+Jetzt, wo du das [for](#for-loop) Schleifen-Konzept kennst, ist es easy, die Maulwürfe zu zeichnen. Du musst nur über die Liste iterieren (denke dir einen guten temporären Variablennamen aus) und `draw()` das _aktuelle_ Element (das in deiner temporären Variable ist).
+
+::: {.program}
+Schreib deinen Code in [code03.py]{.program-filename}.
+:::
+
+## range() Funktion: Code N-mal wiederholen{#range}
+Manchmal musst du den Code mehrere Male wiederholen. Stell dir zum Beispiel vor, du hast 40 Versuche in einem Experiment. Dann musst du den versuchsbezogenen Code 40 Mal wiederholen. Natürlich könntest du eine Liste mit 40 Elementen von Hand erstellen und darüber iterieren, aber Python hat eine praktische [range()](https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#the-range-function)-Funktion dafür. `range(N)` liefert N ganze Zahlen von 0 bis N-1 (gleiche Regel wie beim Slicing, auch ohne das letzte Element) die du in einer for-Schleife durchlaufen kannst.
+```{python}
+for x in range(3):
+    print("Wert von x ist %d"%(x))
+```
+
+Du kannst das Verhalten der [range()](https://docs.python.org/3/library/stdtypes.html#range)-Funktion modifizieren, indem du einen Startwert und eine Schrittgröße angibst. In seiner einfachsten Form `range(N)` ist jedoch ein nützliches Werkzeug, um den Code so oft zu wiederholen. Beachte, dass du in einer `for`-Schleife immer eine temporäre Variable benötigst, aber manchmal diese Variable gar nicht verwendest. In solchen Fällen solltest du `_` (Unterstrich-Symbol) als Variablennamen verwenden, um die Nichtverwendung anzuzeigen.
+```{python}
+for _ in range(2):
+    print("Ich werde zweimal wiederholt!")
+```
+
+Alternativ kannst du `range()` verwenden, um durch die Indizes einer Liste zu Schleifen (denk dran, du kannst immer auf ein einzelnes Listenelement über `var[index]` zugreifen). Mach genau das^[Hinweis: Das ist keine _bessere_ Methode, sondern eine _alternative_ Möglichkeit, dies zu tun.]! Ändere deinen Code, um die [range()]((https://docs.python.org/3/library/stdtypes.html#range))-Funktion in der for-Schleife zu verwenden (wie kannst du die Anzahl der Iterationen berechnen, die du benötigst, aus der Länge der Liste?), verwende eine temporäre Variable als _Index_ für die Liste, um jedes Element abzurufen^[Stilhinweis: Wenn eine Variable ein _Index_ von etwas ist, nenne ich sie gerne `isomething`. Zum Beispiel, wenn sie einen Index für ein aktuelles Tier hält, würde ich sie `itier` nennen. Das ist _meine_ Art, es zu machen. Andere verwenden einen `i_`-Präfix oder ein `_i`-Suffix. Aber auf jeden Fall ist es eine nützliche Benennungskonvention. Denk dran, je einfacher es ist, den Zweck einer Variablen aus ihrem Namen zu verstehen, desto einfacher ist es für dich, den Code zu lesen und zu ändern.]. Wenn du unsicher bist, setze einen Breakpoint innerhalb (oder einfach vor) der Schleife und gehe durch deinen Code, um zu verstehen, welche Werte eine temporäre Schleifenvariable bekommt und wie sie verwendet wird.
+
+::: {.program}
+Schreib deinen Code in [code04.py]{.program-filename}.
+:::
+
+## Ein zufälliger Maulwurf {#zufaellig-maulwurf}
+Das Zeichnen aller drei Maulwürfe diente als praktische Übung mit Schleifen, aber in einem echten Spiel müssen wir nur ein zufälliges Ziel auf einmal anzeigen. Wir könnten die drei Ziele wie zuvor erstellen und eines davon zeichnen. Allerdings möchten wir später die Farbe des Ziels ändern, um anzuzeigen, dass der Spieler es getroffen hat, daher ist es einfacher (wenn auch etwas verschwendet), jedes Mal, wenn wir einen benötigen, einen einzelnen Maulwurf zu erstellen.
+
+Für das hier, definierst du eine [CONSTANT](#constants) mit einer Liste von drei Farben, die du verwendet hast, und eine weitere mit drei horizontalen Standorten (die vertikale Position ist gleich, also müssen wir uns darüber keine Gedanken machen). Als nächstes wählst du zufällig aus, welches Ziel aus drei du erstellen möchtest, d.h. wir müssen einen _Index_ des Ziels generieren und diesen _Index_ verwenden, um die Position und Farbe des Ziels herauszufinden. Du kannst es entweder über [random.randrange()](https://docs.python.org/3/library/random.html#random.randrange) oder über [random.choice()](https://docs.python.org/3/library/random.html#random.choice) erledigen, indem du den Bereich selbst mit der Funktion mit dem gleichen Namen aufbaust (denk daran, deine Importe alphabetisch zu organisieren). Speichere den Index in einer Variablen mit einem bedeutungsvollen Namen^[`itarget`? `imole?`] und verwende ihn mit den Konstanten, um das Ziel der entsprechenden Farbe an einem entsprechenden Standort zu erstellen. Dann musst du dieses einzelne Ziel zeichnen, bevor du auf eine Tasteneingabe wartest.
+
+Sobald du den Code hast, setze einen Haltepunkt und prüfe, ob der Wert der Indexvariablen mit dem übereinstimmt, was auf dem Bildschirm angezeigt wird^[I weiß, es fühlt sich redundant an, aber das sind kleine Überprüfungen, die nicht viel Zeit kosten, aber dir helfen, viel Zeit beim Nachverfolgen von seltsamen Fehlern zu sparen. Hier überprüfst du, ob deine Erwartungen (wenn das mittlere Ziel angezeigt wird, sollte der Index 1 sein) der Realität entsprechen. Sobald du das überprüft hast, _erwartest_ du es nicht mehr, du _weißt_ es!].
+
+::: {.program}
+Schreib deinen Code in [code05.py]{.program-filename}.
+:::
+
+## Zufällige Wartezeit{#clock-wait}
+Das, was das Whack-a-Mole Spiel lustig macht, ist nicht nur, dass du nicht weißt, _welches_ Tierchen auftaucht, sondern auch nicht, _wann_ es auftaucht und _wie viel Zeit_ du hast, um es zu treffen. Daher müssen wir unser Präsentationsschema modifizieren. Wir benötigen eine leere Periode mit zufälliger Dauer (ich würde vorschlagen zwischen 0,75 s und 1,5 s) und begrenzte Präsentationsdauer (zwischen 0,5 und 0,75 s). Zunächst musst du diese Bereiche als [Konstanten](#constants) definieren. Da du nun Listen kennst, kannst du eine einzelne Variable verwenden, um beide Enden des Bereichs zu speichern. Dann musst du zwei Zahlen generieren (eine für die Leerzeit und eine für die Präsentation), die aus [einer gleichförmigen Verteilung](https://docs.python.org/3/library/random.html#random.uniform) innerhalb dieses Bereichs stammen.
+
+Hier wird eine CONSTANTE Werte für die _zwei_ Parameter der Funktion [random.uniform()](https://docs.python.org/3/library/random.html#random.uniform) speichern und es gibt zwei Möglichkeiten, sie zu verwenden. Erstens kannst du einen Index `0` verwenden, um den Wert für den ersten Parameter zu erhalten, und `1` für den zweiten Parameter.
+
+```python
+import random
+
+ZEIT_BIS_ZUM_PIEPTON = [0.1, 0.3]
+random.uniform(ZEIT_BIS_ZUM_PIEPTON[0], ZEIT_BIS_ZUM_PIEPTON[1])
+```
+Aber Python hat einen coolen Trick namens [Entpacken von Argumentlisten](https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments): Du kannst eine Liste von Argumenten voranstellen und Python entpackt die Liste in Argumente in der gleichen Reihenfolge, wie sie in der Liste sind: Der erste Wert geht an den Parameter, der zweite Wert an den zweiten Parameter usw. Also in unserem Fall kann der Code vereinfacht werden zu:
+```python
+random.uniform(*TIME_UNTIL_BEEP)
+```
+
+Achte drauf, dass die Anzahl und Reihenfolge der Elemente in der Liste zu den Funktionsparametern passen! Das liegt in deiner Verantwortung!
+```{python}
+#| error: true
+def single_parameter_function(x):
+  """Do nothing but require a single paramter
+  """
+  pass
+
+TWO_VALUES = [1, 3]
+
+single_parameter_function(*TWO_VALUES)
+```
+
+Zurück zum Spiel, nutze die Funktion [random.uniform()](https://docs.python.org/3/library/random.html#random.uniform), um zufällige Leer- und Präsentationszeiten zu generieren, speichere sie in Variablen deiner Wahl und zeit deine Leer- und Präsentationsphasen mit der Funktion [wait()](https://psychopy.org/api/clock.html#psychopy.clock.wait) aus dem [clock](https://psychopy.org/api/clock.html)-Modul.
+
+Jetzt ist es Zeit, deinen Code zu aktualisieren und zu strukturieren. Hier ist eine ungefähre Gliederung (beachte, dass ich auf die Warte auf Tasten verzichtet habe):
+```python
+"""Dokumentiere deine Datei
+"""
+import alle benötigten Bibliotheken in alphabetischer Reihenfolge
+
+CONSTANTS definieren
+
+Erstelle ein Fenster
+
+# Zufällige Parameter für den Test erzeugen
+Wähle zufälligen Index für den Maulwurf
+Erstelle den Maulwurf
+Erzeuge zufällige Dauern für Leerlauf und Präsentation
+
+# leerer Zeitabschnitt
+Fenster klar machen (nur win.flip())
+"blank duration" Sekunden warten
+
+# Präsentation
+Zeichne den Maulwurf
+Warte "Präsentation Dauer" Sekunden
+
+Mach das Fenster zu!
+```
+
+Achte darauf, dass es im Moment keine Verarbeitung von Antworten gibt und das Fenster direkt nach der Präsentation des Reizes geschlossen werden sollte.
+
+::: {.program}
+Schreib deinen Code in [code06.py]{.program-filename}.
+:::
+
+## Wiederholte Versuche
+Du weißt bereits, wie man denselben Code [wiederholt](#range): viele Male ausführt. Entscheide dich für eine Anzahl an Versuchen / Runden (definiere dies als eine Konstante) und wiederhole die einzelne Runde so oft. Denke darüber nach, welchen Code du in die Schleife aufnimmst und welchen du außerhalb lässt, damit die Zufallsfunktion ordnungsgemäß funktioniert.
+
+::: {.program}
+Schreib deinen Code in [code07.py]{.program-filename}.
+:::
+
+## Exit-Strategie{#waitKeys-maxwait}
+Ich hoffe, du hast nicht zu viele Versuche verwendet, denn (auf meinen Rat hin, ja!) haben wir keine Möglichkeit programmiert, das Spiel über die **Escape**-Taste zu beenden. Um dies hinzuzufügen, werden wir beide [wait()](https://psychopy.org/api/clock.html#psychopy.clock.wait)-Aufrufe durch die [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys)-Funktion ersetzen. Diese hat einen `maxWait`-Parameter, der standardmäßig auf unendlich gesetzt ist, aber auf die von uns erforderliche Dauer eingestellt werden kann. Wenn ein Spieler keine Taste drückt, funktioniert es wie [wait()](https://psychopy.org/api/clock.html#psychopy.clock.wait). Wenn ein Spieler eine Taste drückt (nur `"escape"` für den Moment erlaubt), bedeutet dies, dass er das Spiel abbrechen möchte (die einzige mögliche Aktion im Moment). Daher weisen wir den zurückgegebenen Wert einer temporären Variablen (`keys?`) zu und überprüfen, ob sie gleich `None` ist^[Verwirrenderweise gibt [getKeys()](https://psychopy.org/api/event.html#psychopy.event.getKeys) bei keinem gedrückten Tasten eine leere Liste mit einer Länge von null zurück, während [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) `None` zurückgibt und `None` keine Länge hat.]. Wenn sie nicht gleich `None` ist, [breche](#break) aus der Schleife aus!
+
+::: {.program}
+Schreib deinen Code in [code08.py]{.program-filename}.
+:::
+
+## Maul den Maulwurf
+Wir haben Maulwürfe, die an einer zufälligen Stelle nach einer zufälligen Verzögerung für eine zufällige Dauer auftauchen. Jetzt müssen wir nur noch die Fähigkeit hinzufügen, sie zu verprügeln! Du verprügelst einen Maulwurf nur, wenn er da ist. Daher müssen wir nur den Aufruf von [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) für das Präsentationsintervall modifizieren und handhaben.
+
+Erstmal musst du eine neue Konstante mit drei Schlüsseln erstellen, die drei verschiedenen Orten entsprechen. Ich würde vorschlagen, `["left", "down", "right"]` zu verwenden, das sind die Cursortasten^[Willst du dir sicher sein, welche Tasten es sind? Schreib ein kleines Programm, das ein Fenster öffnet und dann immer wieder auf eine Tasteneingabe wartet und die Taste in der Konsole ausgibt.]. Als nächstes musst du sie für den `keyList`-Parameter verwenden. Allerdings können wir diese Liste nicht direkt verwenden, da wir auch die **Escape**-Taste benötigen. Die einfachste Lösung ist, "escape" in eine eigene Liste zu packen und die beiden Listen über `+` zu verketten: `["escape"] + DEINE_KONSTANTE_MIT_TASTEN`. Führe diese Verknüpfung direkt durch, wenn du einen Wert für `keyList` im Funktionsaufruf festlegst. Bevor wir weitermachen, führe den Code aus und teste, ob du das Programm während der Präsentation (aber nicht während der Pause) durch Drücken einer dieser drei Tasten abbrechen kannst. Überprüfe auch, ob **Escape** immer noch funktioniert!
+
+Jetzt, wo wir Tasten drücken können, brauchen wir eine raffiniertere Verarbeitung (es wird eine Menge verschachtelte bedingte Anweisungen geben). Wir müssen immer noch überprüfen, ob [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) `None` zurückgegeben hat. Wenn nicht, muss es eine Liste der gedrückten Tasten zurückgegeben haben. Tatsächlich wird es eine Liste mit nur einem Element sein^[Du bekommst mehr als ein Element in dieser Liste nur, wenn du `clearEvents=False` festlegst. In diesem Fall bekommst du die Liste der Tasten, die vor dem Aufruf gedrückt wurden. Wenn du jedoch die Standardoption `clearEvents=True` gewählt hast, bekommst du nur einen Tastendruck in der Liste (zumindest habe ich nie mehr als einen bekommen).], also können wir direkt über `keys[0]` damit arbeiten. Verwende eine bedingte [if-else-Anweisung](#if-Anweisung), um die Schleife zu verlassen, wenn der Spieler die **Escape**-Taste gedrückt hat. Andernfalls war es eine der drei "whack"-Tasten.
+
+Unser nächster Schritt besteht darin herauszufinden, welchem Index der Schlüssel entspricht. Python macht das extrem einfach, da Listen die Methode [.index(value)](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) haben, die den Index des Wertes innerhalb der Liste zurückgibt. Du hast die (CONSTANT) Liste mit den Schlüsseln und du hast die gedrückte Taste: Finde den Index und überprüfe, ob er mit dem Index des Ziels übereinstimmt (`imole` Variable in meinem Code). Wenn ja, geben wir eine visuelle Rückmeldung des Erfolgs: ändere die Farbe des Mols (Kreis) `fillColor` in Weiß, zeichne es und [warte](https://psychopy.org/api/clock.html#psychopy.clock.wait) 300 ms (richte eine Konstante für die Feedback-Dauer ein). Auf diese Weise färbt sich der Maulwurf weiß und bleibt kurz auf dem Bildschirm, wenn er getroffen wird, verschwindet aber sofort wieder, wenn du nicht getroffen hast.
+
+::: {.program}
+Schreib deinen Code in [code09.py]{.program-filename}.
+:::
+
+## Du hast es geschafft!
+Herzlichen Glückwunsch zu deinem ersten Videospiel! Es könnte ein paar zusätzliche Features wie Punkte, Combos, richtige Maulwurfbilder statt Kreise etc. gebrauchen, aber es funktioniert und es macht Spaß (wenn du keine Herausforderung siehst, reduziere die Präsentationzeit)! Reiche deine Dateien ein und beim nächsten Mal werden wir die Tastatur beiseite legen und lernen, wie man die Maus im Memory-Spiel bedient.

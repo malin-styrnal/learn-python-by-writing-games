@@ -1,0 +1,279 @@
+# Python Grundlagen {#python-basics}
+Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch [erstellt](#files-folder). Lade das [Übungsheft](notebooks/Basics.ipynb) herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe [relevante Anweisungen](#jupyter-notebooks). Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.
+
+## Kapitelkonzepte
+
+* [Variablen](#variablen).
+* [Konstanten](#konstanten).
+* Grundlegende [Werttypen](#werttypen).
+* Dinge [ausgeben](#printen).
+* Werte [in Strings einfügen](#string-formatierung).
+
+## Variablen {#variablen}
+Der erste grundlegende Begriff, den wir uns aneignen müssen, ist die **Variable**. Variablen werden verwendet, um Informationen zu speichern, und man kann sie sich als Kiste mit einem Namensschild vorstellen, damit man etwas darin unterbringen kann. Das Namensschild auf dieser Kiste ist der Name der Variablen und ihr Wert ist das, was man darin speichert. Zum Beispiel können wir eine Variable erstellen, die die Anzahl der Beine eines Spielcharakters speichert. Wir beginnen mit einer für einen Menschen typischen Zahl.
+
+```{r echo=FALSE, out.width = "50%", fig.align = 'center'}
+knitr::include_graphics("images/variable-as-box.png")
+```
+
+In Python, du würdest schreiben:
+```python
+number_of_legs = 2
+```
+
+Das **Zuweisungsstatement** oben hat eine sehr einfache Struktur:
+```python
+<variablenname> = <wert>
+```
+Der Variablenname (Name-Tag auf der Box) sollte sinnvoll sein, er kann mit Buchstaben oder _ beginnen und Buchstaben, Zahlen und das _-Zeichen enthalten, aber keine Leerzeichen, Tabulatoren, Sonderzeichen usw. Python empfiehlt^[Na ja, eigentlich [fordert](https://www.python.org/dev/peps/pep-0008/).], dass du **snake_case** (alles Kleinbuchstaben, Unterstrich für Leerzeichen) für die Formatierung deiner Variablennamen verwendest. Der `<wert>` auf der rechten Seite ist eine komplexere Geschichte, da er hartcodiert sein kann (wie im obigen Beispiel), unter Verwendung anderer Variablen oder der gleichen Variable berechnet werden kann, von einer Funktion zurückgegeben werden kann, usw.
+
+Verwende Variablen, damit du dich auf das konzentrieren kannst, was die entsprechenden Werte **bedeuten**, anstatt darüber nachzudenken, was diese Werte sind. Zum Beispiel: Nächstes Mal, wenn du etwas basierend auf der Anzahl der Beine eines Charakters berechnen musst (z.B. wie viele Schuhpaare braucht ein Charakter), kannst du es basierend auf dem aktuellen Wert der `number_of_legs`-Variablen berechnen, anstatt davon auszugehen, dass es `1` ist.
+```{python}
+#| eval: false
+# SCHLECHT: warum 1? Ist es, weil der Charakter zwei Beine hat oder
+# weil wir unabhängig von der tatsächlichen Anzahl der Beine
+# pro Charakter ein Schuhpaar ausgeben?
+pairs_of_shoes = 1
+
+# BESSER (aber was, wenn unser Charakter nur ein Bein hat?)
+pairs_of_shoes = number_of_legs / 2
+```
+
+Die Variablen bieten dir auch Flexibilität. Ihre Werte können sich während der Programmausführung ändern: Der Punktestand des Spielers steigt, die Anzahl der Leben sinkt, die Anzahl der Zauber, die er wirken kann, wächst oder fällt je nach Verwendung usw. Aber du kannst immer den Wert in der Variablen verwenden, um notwendige Berechnungen durchzuführen. Zum Beispiel hier ein etwas erweitertes `number_of_shoes`-Beispiel.
+```{python}
+#| eval: false
+number_of_legs = 2
+
+#...
+# und plötzlich passiert was und unser Charakter wird zu einem Oktopus
+number_of_legs = 8
+#...
+
+# der gleiche Code funktioniert immer noch und wir können immer noch
+# die korrekte Anzahl an Schuhpaaren berechnen
+pairs_of_shoes = number_of_legs / 2
+```
+
+Okay, also hier oben erwähnt, kannst du dir eine Variable wie eine beschriftete Kiste vorstellen, in der du etwas aufbewahren kannst. Das bedeutet, dass du immer das alte Wert "wegwerfen" und einen neuen reinsetzen kannst. Bei Variablen passiert das "wegwerfen" automatisch, weil ein neuer Wert den alten überschreibt. Überprüfe doch mal, welchen Wert die Variable am Ende im folgenden Code hat:
+```{python}
+#| eval: false
+number_of_legs = 2
+number_of_legs = 5
+number_of_legs = 1
+number_of_legs
+```
+
+::: {.practice}
+Mach Übung #1.
+:::
+
+Achtung, eine Variable ("ein Kasten mit einem Namensschild") existiert erst, wenn du ihr etwas zuweist. Also wird der folgende Code einen `NameError` erzeugen, eine Art von Python, um dir mitzuteilen, dass es die Variable `number_of_hands` nicht kennt.
+```{python}
+#| error: true
+number_of_legs = 2
+number_of_gloves = number_of_hands / 2
+```
+
+Aber du kannst auch eine Variable erstellen, die keinen _bestimmten_ Wert enthält, indem du ihr `None` zuweist. `None` wurde speziell hinzugefügt, um _keinen Wert_ oder _nichts_ zu bedeuten.
+```python
+anzahl_der_hände = None # Variable existiert jetzt, enthält aber keinen bestimmten Wert.
+```
+
+Als du das schon gesehen hast, kannst du einen Wert _berechnen_ anstatt ihn festzulegen. Was wäre hier die Antwort?
+```python
+anzahl_der_beine = 2 * 2
+anzahl_der_beine = 7 - 2
+anzahl_der_beine
+```
+
+::: {.practice}
+Mach Übung #2.
+:::
+
+## Du solltest Assignments nicht mit Gleichungen verwechseln!
+
+**Sehr wichtig**: obwohl Zuweisungen _ähnlich_ wie mathematische Gleichungen aussehen, sind sie **keine Gleichungen!** Sie befolgen eine **sehr wichtige** Regel, die du im Kopf behalten musst, wenn du Zuweisungen verstehst: Die rechte Seite eines Ausdrucks wird _erst_ ausgewertet, bis der endgültige Wert berechnet wurde, erst dann wird dieser endgültige Wert der Variable zugewiesen, die auf der linken Seite angegeben ist (in die Kiste gelegt). Das bedeutet, dass du dieselbe Variable auf _beiden_ Seiten verwenden kannst! Schauen wir uns diesen Code an:
+```python
+x = 2
+y = 5
+x = x + y - 4
+```
+
+Was passiert, wenn der Computer die letzte Zeile auswertet? Zuerst nimmt er die _aktuellen_ Werte aller Variablen (also `2` für `x` und `5` für `y`) und setzt sie in den Ausdruck ein. Danach sieht der Ausdruck so aus:
+```python
+x = 2 + 5 - 4
+```
+
+Dann berechnet es den Ausdruck auf der rechten Seite und speichert, **sobald die Berechnung abgeschlossen ist**, diesen neuen Wert in `x`
+```python
+x = 3
+```
+
+::: {.practice}
+Mach Übung #3, um sicherzustellen, dass du das verstanden hast.
+:::
+
+## Konstanten {#konstanten}
+Obwohl die wahre Kraft von Variablen darin besteht, dass du ihren Wert ändern kannst, solltest du sie auch verwenden, wenn der Wert während des entire Programms konstant bleibt. Es gibt keine echten Konstanten in Python, sondern eine Übereinkunft, dass ihre Namen vollständig in `GROSSBUCHSTABEN` geschrieben werden sollten. Entsprechend weißt du, dass du den Wert nicht ändern solltest, wenn du `EINE_DERSELBE_VARIABLE` siehst. Technisch gesehen ist dies nur eine Empfehlung, da niemand dich daran hindern kann, den Wert einer `KONSTANTE` zu ändern. Allerdings stammt ein großer Teil der Leichtigkeit von Python aus solchen Übereinkünften (wie die `schreibweise_mit_unterstrichen` oben). Wir werden später auf mehr solcher Übereinkünfte stoßen, zum Beispiel beim Erlernen von Objekten.
+
+Okay, wenn die Anzahl der Beine während des Spiels konstant bleibt, solltest du diese Konstanz hervorheben und folgendes in Python schreiben:
+```python
+ANZAHL_DER_BEINE = 2
+```
+
+Ich empfehle dir dringend, Konstanten zu verwenden und Hardcoden von Werten zu vermeiden. Erstens, wenn du mehrere identische Werte hast, die unterschiedliche Dinge bedeuten (2 Beine, 2 Augen, 2 Ohren, 2 Fahrzeuge pro Charakter usw.), wird ein `2` im Code nicht verraten, was dieses `2` bedeutet (die Beine? die Ohren? der Punktemultiplikator?). Natürlich kannst du das basierend auf dem Code, der diese Zahl verwendet, herausfinden, aber du könntest dir diese zusätzliche Arbeit sparen und stattdessen eine entsprechend benannte Konstante verwenden. Dann musst du nur noch ihren Namen lesen und der Sinn des Wertes wird offensichtlich, und es ist der Sinn, nicht der tatsächliche Wert, an dem du am meisten interessiert bist. Zweitens, wenn du entscheidest, diesen Wert dauerhaft zu _ändern_ (sagen wir, unser Hauptcharakter ist jetzt ein Tripod), bedeutet das Verwenden einer Konstante, dass du dich nur um eine Stelle sorgen musst, der Rest des Codes bleibt unverändert. Wenn du diesen Wert hartcodiert hast, steht dir ein aufregender^[eigentlich nicht] und auf jeden Fall langer Suchen- und Ersetzen-Vorgang durch den gesamten Code bevor.
+
+::: {.practice}
+Mach Übung #4.
+:::
+
+## Werttypen {#werttypen}
+Bisher haben wir nur ganze numerische Werte verwendet (1, 2, 5, 1000...). Obwohl Python [viele verschiedene Werttypen](https://docs.python.org/3/library/stdtypes.html) unterstützt, werden wir uns zunächst auf eine kleine Teilmenge davon konzentrieren:
+
+* Ganze Zahlen, die wir bereits verwendet haben, z.B. `-1`, `100000`, `42`.
+* Fließkommazahlen, die jeden realen Wert annehmen können, z.B. `42.0`, `3.14159265359`, `2.71828`.
+* Zeichenketten, die Text speichern können. Der Text wird zwischen entweder doppelten Anführungszeichen `"irgendein Text"` oder einfachen Anführungszeichen `'irgendein Text'` eingeschlossen. Das bedeutet, dass du Anführungszeichen oder einfache Anführungszeichen innerhalb der Zeichenkette verwenden kannst, solange sie von der Alternative eingeschlossen sind. z.B., `"wie's"` (von `"` eingeschlossen, einfache Anführungszeichen `'` innerhalb) oder `'"Alle Verallgemeinerungen sind falsch, einschließlich dieser." Mark Twain'` (Anführungszeichen von einfachen Anführungszeichen eingeschlossen). Es gibt noch viel mehr zu Zeichenketten und wir werden dieses Material im Laufe des Kurses abdecken.
+* Logische / boolesche Werte, die entweder `True` oder `False` sind.
+
+Wenn du eine Variable verwendest, ist es wichtig, dass du weißt, welchen Wertstyp sie speichert. Das liegt meist an dir. In manchen Fällen wird Python einen Fehler auswerfen, wenn du eine Berechnung mit inkompatiblen Wertstypen versuchst. In anderen Fällen konvertiert Python automatisch Werte zwischen bestimmten Typen, z.B. ist jeder Integer-Wert auch ein Realwert, so dass die Konvertierung von `1` in `1.0` meist trivial und automatisch ist. Allerdings musst du in anderen Fällen eine explizite Konvertierung verwenden. Geh zu Übung #5 und versuche zu erraten, welcher Code ausgeführt wird und welcher aufgrund von inkompatiblen Typen einen Fehler wirft.
+```python
+5 + 2.0
+'5' + 2
+'5' + '2'
+'5' + True
+5 + True
+```
+
+::: {.practice}
+Mach Übung #5.
+:::
+
+Erstaunt über den letzten? Das liegt daran, dass `True` intern auch `1` ist und `False` `0`!
+
+Du kannst explizit von einem Typ in einen anderen konvertieren, indem du spezielle Funktionen verwendest. Zum Beispiel kannst du eine Zahl oder einen logischen Wert in einen String umwandeln, indem du einfach [str(<Wert>)](https://docs.python.org/3/library/functions.html#func-str) schreibst. Was wäre das Ergebnis in den folgenden Beispielen?
+```python
+str(10 / 2)
+str(2.5 + True)
+str(True)
+```
+
+::: {.practice}
+Mach Übung #6.
+:::
+
+Gleiches gilt für die Umwandlung in eine logische/Boolesche Variable mit der Funktion [bool(<Wert>)](https://docs.python.org/3/library/functions.html#bool). Die Regeln sind einfach: Für numerische Werte ist `0` `False`, jeder andere Wert ungleich Null wird zu `True` umgewandelt. Für Strings wird ein leerer String `''` als `False` ausgewertet und ein nicht leerer String zu `True` umgewandelt. Was wäre das Ergebnis in den folgenden Beispielen?
+
+```python
+bool(-10)
+bool(0.0)
+
+secret_message = ''
+bool(secret_message)
+
+bool('False')
+```
+::: {.practice}
+Mach Übung #7.
+:::
+
+Die Umwandlung in Ganzzahl- oder Fließkommazahlen mit [int(\<Wert\>)](https://docs.python.org/3/library/functions.html#int) bzw. [float(\<Wert\>)](https://docs.python.org/3/library/functions.html#float) ist schwieriger. Der einfachste Fall ist von logisch zu ganzzahlig/Gleitkomma, da `True` dir `int(True)` als `1` und `float(True)` als `1.0` gibt und `False` dir `0`/`0.0` gibt. Beim Umwandeln von Gleitkommazahl zu Ganzzahl lässt Python einfach den Bruchteil weg (es macht keine richtige Rundung!). Beim Umwandeln eines Strings muss es eine gültige Zahl des entsprechenden Typs sein, andernfalls wird ein Fehler generiert. Also, du kannst einen String wie `"123"` in eine Ganzzahl oder eine Gleitkommazahl umwandeln, aber das funktioniert nicht für `"a123"`. Außerdem kannst du `"123.4"` in eine Gleitkommazahl umwandeln, aber nicht in eine Ganzzahl, da sie einen Bruchteil enthält. Angesichts all dessen, welche Zellen würden funktionieren und welches Ergebnis würden sie produzieren?
+
+```{python}
+#| eval: false
+float(False)
+int(-3.3)
+float("67.8")
+int("123+3")
+```
+
+::: {.practice}
+Mach Übung #8.
+:::
+
+## Ausgabe drucken {#print}
+Um den Wert auszugeben, musst du die [print()](https://docs.python.org/3/library/functions.html#print)-Funktion verwenden (wir werden später über Funktionen im Allgemeinen sprechen). Im einfachsten Fall gibst du den Wert an und er wird ausgegeben.
+```{python}
+print(5)
+```
+
+oder
+```{python}
+print("fünf")
+```
+
+Klar, du weißt ja schon über Variablen Bescheid, also musst du den Wert nicht direkt einfügen. Du kannst stattdessen eine Variable übergeben und ihr _Wert_ wird ausgegeben.
+```{python}
+anzahl_der_pfannkuchen = 10
+print(anzahl_der_pfannkuchen)
+```
+
+```{python}
+frühstück = "Pfannkuchen"
+print(frühstück)
+```
+
+Du kannst auch mehr als einen Wert/Variable an die print-Funktion übergeben und alle Werte werden nacheinander gedruckt. Zum Beispiel, wenn wir dem Benutzer sagen wollen, was ich zum Frühstück hatte, können wir das so machen:
+```{python}
+frühstück = "Pfannkuchen"
+anzahl_der_artikeln = 10
+print(frühstück, anzahl_der_artikeln)
+```
+
+Was wird von folgendem Code ausgegeben?
+```python
+abendessen = "steak"
+anzahl_der_artikeln = 4
+nachtisch = "cupcakes"
+
+print(anzahl_der_artikeln, abendessen, anzahl_der_artikeln, nachtisch)
+```
+
+::: {.practice}
+Mach Übung #9.
+:::
+
+Aber du möchtest wahrscheinlich expliziter sein, wenn du die Informationen ausgibst. Stell dir zum Beispiel vor, du hast diese drei Variablen:
+```{python}
+meal = "Frühstück"
+dish = "Pfannkuchen"
+count = 10
+```
+
+Du könntest natürlich `print(meal, dish, count)` machen, aber es wäre netter, "_Ich hatte **10 Pfannkuchen** zum **Frühstück**_" auszugeben, wobei die fett gedruckten Elemente die Werte der eingefügten Variablen sind. Dafür müssen wir String-Formatierung verwenden. Bitte beachte, dass die String-Formatierung nicht spezifisch für das Ausgeben ist, du kannst einen neuen String-Wert über die Formatierung erstellen und ihn in einer Variablen speichern, ohne ihn auszugeben oder ihn ausgeben, ohne ihn zu speichern.
+
+## Zeichenkettenformatierung {#string-formatting}
+Eine super Ressource zum Thema Zeichenkettenformatierung in Python ist [pyformat.info](https://pyformat.info/). Da sich Python ständig weiterentwickelt, gibt es jetzt mehr als eine Möglichkeit, Zeichenketten zu formatieren. Im Folgenden werde ich das „alte“ Format vorstellen, das auf der klassischen String-Formatierung basiert, die in der Funktion `sprintf` in C, Matlab, R und vielen anderen Programmiersprachen verwendet wird. Es ist etwas weniger flexibel als die neueren Formate, aber für einfache Aufgaben ist der Unterschied vernachlässigbar. Die Kenntnis des alten Formats ist wegen seiner Allgemeingültigkeit nützlich. Wenn du Alternativen kennenlernen willst, lies den Link oben.
+
+Der allgemeine Aufruf lautet: `„eine Zeichenkette mit Formatierung“%(Tupel von Werten, die bei der Formatierung verwendet werden sollen)`. Du wirst später etwas über Tupel lernen. Für den Moment nehmen wir an, dass es sich nur um eine kommagetrennte Liste von Werten handelt, die in runden Klammern eingeschlossen sind: `(1, 2, 3)`.
+
+In "eine Zeichenkette mit Formatierung"` gibst du an, wo du den Wert über das "%"-Symbol einfügen willst, gefolgt von einer _optionalen_ Formatierungsinformation und dem _erforderlichen_ Symbol, das den **Typ** des Wertes definiert. Die Typsymbole sind
+
+* `s` für Zeichenkette
+* `d` für eine ganze Zahl
+* `f` für einen Float-Wert
+* `g` für einen "optimal" gedruckten Float-Wert, damit wissenschaftliche Schreibweise für große Werte verwendet wird (_z.B._ `10e5` statt `100000`).
+
+Hier ist ein Beispiel für das Formatieren einer Zeichenkette unter Verwendung einer Ganzzahl:
+```{python}
+print("Ich hatte %d Pfannkuchen zum Frühstück"%(10))
+```
+
+Du bist nicht auf einen einzelnen Wert beschränkt, den du in einen String packen kannst. Du kannst mehr Orte über `%` angeben, aber du musst sicherstellen, dass du die richtige Anzahl an Werten in der richtigen Reihenfolge übergibst. Kannst du herausfinden, welcher Aufruf tatsächlich funktionieren wird (und welches die Ausgabe sein wird) und welcher einen Fehler produzieren wird, bevor du ihn ausführst?
+
+```python
+print('Ich hatte %d Pfannkuchen und entweder %d oder %d Steaks zum Abendessen'%(2))
+print('Ich hatte %d Pfannkuchen und %d Steaks zum Abendessen'%(7, 10))
+print('Ich hatte %d Pfannkuchen und %d Steaks zum Abendessen'%(1, 7, 10))
+```
+
+::: {.practice}
+Mach Übung #10.
+:::
+
+Also, wie oben erwähnt, hast du bei echten Werten zwei Optionen: `%f` und `%g`. Letzterer verwendet die wissenschaftliche Schreibweise (z.B. `1e10` für `10000000000`), um die Darstellung kompakter zu gestalten.
+
+::: {.practice}
+Mach Übung #11, um ein besseres Gefühl für den Unterschied zu kriegen.
+:::
+
+Da gibt's noch viel mehr zum Formatieren und du kannst mehr darüber auf [pyformat.info](https://pyformat.info/) lesen. Aber das hier reicht erstmal, um in Kapitel 3 mit der Programmierung unseres ersten Spiels zu beginnen.
