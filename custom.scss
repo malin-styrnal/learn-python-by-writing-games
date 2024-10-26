@@ -1,5 +1,59 @@
 /*-- scss:uses --*/
 
+
+$link-color : #31525B;
+
+//@import "bootstrap/functions";
+//@import "bootstrap/variables";
+$primary: lighten(#31525B, 10%);
+//@import "bootstrap";
+
+// Style for the language button
+// .btn-primary, .language-selector {
+.btn-primary {
+  background-color: #9BD7DB; // Your custom background color
+  border-color: #9BD7DB;     // Ensure the border color matches
+
+  // Optional: Change the text color if needed
+  color: #ffffff; // White text for better contrast
+
+  &:hover {
+    background-color: darken(#9BD7DB, 10%); // Slightly darker shade on hover
+    border-color: darken(#9BD7DB, 10%);
+  }
+
+  &:focus, &:active {
+    background-color: darken(#9BD7DB, 15%); // Darker shade when focused or active
+    border-color: darken(#9BD7DB, 15%);
+    box-shadow: 0 0 0 0.2rem rgba(155, 215, 219, 0.5); // Custom focus outline
+  }
+}
+
+
+// Style for the dropdown menu
+#languages-links {
+  background-color: #ecf0f1; // Dropdown background color
+  border: 1px solid #bdc3c7; // Border for the dropdown
+
+  // Style for each item in the dropdown
+  .dropdown-item {
+    color: #2c3e50; // Text color of language links
+
+    &:hover {
+      background-color: #bdc3c7; // Background color on hover
+      color: #2c3e50; // Text color on hover
+    }
+  }
+}
+
+.program-function {
+  font-weight: bold;
+}
+
+.progam-class {
+  font-weight: bold;
+}
+
 .filename {
     font-family: 'Courier New', Courier, monospace; /* Console-style font */
     /* font-weight: bold;  Make it bold */

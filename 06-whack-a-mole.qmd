@@ -3,15 +3,9 @@
 Today you will create your first _video_ game Whack-a-Mole. The game itself is very much a reaction time experiment: moles/targets appear after a random delay at one of the predefined locations, the player's task is to whack (press a corresponding button) the mole/target before it disappears. Your final game should look approximately like the one in the video: Circles (moles) turn white, if I hit the correct button in time.
 
 
-```{r, eval=knitr::is_html_output(excludes = "epub"), results = 'asis', echo = F}
-cat(
-'<div style="text-align:center;"><video controls>
-    <source src="videos/whack-a-mole.m4v" type="video/mp4"> 
-  </video></div>'
-)
-```
+{{< video videos/whack-a-mole.m4v >}}
 
-Grab the [exercise notebook](notebooks/Whack-a-mole.ipynb) before we start!
+Grab the [exercise notebook](notebooks/06-Whack-a-mole.ipynb) before we start!
 
 ## Chapter concepts
 

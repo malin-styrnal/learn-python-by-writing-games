@@ -1,6 +1,6 @@
 # Rate das Zahl: die Multi-Runde-Edition {#rate-das-zahl-multi-runde}
 
-In der vorherigen Kapitel hast du ein "Raten Sie die Zahl"-Spiel programmiert, bei dem nur ein Versuch möglich war. Jetzt werden wir das System erweitern, um mehrere Versuche zuzulassen, und wir werden weitere Funktionen hinzufügen, damit es mehr Spaß macht. Erstelle einen neuen Unterordner und lade das [Übungsheft](notebooks/Guess%20the%20number%20-%20multi%20round.ipynb) herunter, bevor wir loslegen!
+In der vorherigen Kapitel hast du ein "Raten Sie die Zahl"-Spiel programmiert, bei dem nur ein Versuch möglich war. Jetzt werden wir das System erweitern, um mehrere Versuche zuzulassen, und wir werden weitere Funktionen hinzufügen, damit es mehr Spaß macht. Erstelle einen neuen Unterordner und lade das [Übungsheft](notebooks/03-Guess the number - multi round-de.ipynb) herunter, bevor wir loslegen!
 
 ## Kapitelkonzepte
 

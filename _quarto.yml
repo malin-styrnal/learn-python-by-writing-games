@@ -16,6 +16,10 @@ book:
     - 04-guess-the-number-ai.qmd
     - 05-psychopy.qmd
     - 06-whack-a-mole.qmd
+    - 07-memory.qmd
+    - 08-christmas.qmd
+    - 09-flappy-bird.qmd
+    - 10-guitar-hero.qmd
 
 # bibliography: references.bib
 

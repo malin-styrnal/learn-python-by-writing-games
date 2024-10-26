@@ -3,7 +3,7 @@ Lass uns das Spiel "Raten Sie die Zahl" _wieder_ programmieren^[Das ist das letz
 
 Optimal ist es, die Mitte des Intervalls für eine Schätzung zu verwenden. So schließt du _halb_ der Zahlen aus, die entweder größer oder kleiner als dein Tipp sind (oder du triffst die Zahl natürlich). Also, wenn du weißt, dass die Zahl zwischen 1 und 10 ist, solltest du in der Mitte aufteilen, also 5 oder 6 wählen, da du keine 5,5 wählen kannst (wir gehen davon aus, dass du nur ganze Zahlen verwenden kannst). Wenn dein Gegner sagt, dass ihre Zahl größer als dein Tipp ist, weißt du, dass sie irgendwo zwischen deinem Tipp und der ursprünglichen oberen Grenze sein muss, z.B. zwischen 5 und 10. Umgekehrt, wenn der Gegner "kleiner" sagt, ist die Zahl zwischen der unteren Grenze und deinem Tipp, z.B. zwischen 1 und 5. Bei deinem nächsten Versuch teilst du das neue Intervall auf und wiederholst dies, bis du entweder die Zahl richtig errätst oder ein Intervall übrig hast, das nur eine Zahl enthält. Dann musst du nicht mehr raten.
 
-Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das [Übungsheft](notebooks/Guess the number - AI.ipynb)!
+Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das [Übungsheft](notebooks/04-Guess the number - AI-de.ipynb)!
 
 ## Kapitelbegriffe.
 

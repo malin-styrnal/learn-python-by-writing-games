@@ -1,0 +1,480 @@
+# Memory game {#memory-game-de}
+
+Heute, du wirst ein klassisches _Memory_-Spiel schreiben: Es liegen acht Karten mit der Rückseite nach oben, du kannst beliebige zwei davon umdrehen und wenn sie identisch sind, werden sie vom Tisch entfernt. Wenn sie unterschiedlich sind, werden die Karten wieder "mit der Rückseite nach oben" gedreht.
+
+{{< video videos/memory.m4v >}}
+
+Bevor wir loslegen, erstelle einen neuen Ordner für das Spiel und darin einen Unterordner namens _Bilder_. Lade dann [Hühnerbilder](material/chicken.zip) herunter^[Die Bilder stammen von [Kevin David Pointon](https://openclipart.org/artist/Firkin) und wurden von [OpenClipart](https://openclipart.org/) heruntergeladen. Sie sind [Public Domain](https://creativecommons.org/publicdomain/zero/1.0/) und können frei verwendet und verbreitet werden.] und entpacke sie in den _Bilder_-Unterordner. Hol dir auch das [Übungsheft](notebooks/07-Memory game-de.ipynb)!
+
+## Kapitelkonzepte
+
+* [Veränderliche](#mutable-objects) vs. [unveränderliche](#variables-as-boxes-immutable-objects) Objekte
+* Anzeigen von [Bildern](#imagestim).
+* Dateien bearbeiten über die [os](#os-library) Bibliothek.
+* Verwenden von [Wörterbüchern](#dictionaries).
+* Durchführen von [Listenoperationen](#list-operations).
+* Schleifen über Index und Element mit Listen-[Aufzählung](#enumerate).
+
+## Variablen als Kisten (unveränderliche Objekte)
+In diesem Spiel wirst du [Wörterbücher](#wörterbücher) verwenden. Das sind _veränderliche_, wie [Listen](#listen), im Gegensatz zu "normalen" _unveränderlichen_ Werten (Ganzzahlen, Fließkommazahlen, Zeichenfolgen). Du musst diese Unterscheidung lernen, da sich diese beiden Arten von Objekten (Werten) unter bestimmten Umständen sehr unterschiedlich verhalten, was sowohl gut (Macht!) als auch schlecht (merkwürdiges unerwartetes Verhalten!) ist.
+
+Du erinnerst dich vielleicht an das _Variable-als-Box_ Bild, das ich verwendet habe, um [Variablen](#variables) einzuführen. Kurz gesagt, eine Variable kann als "Box" mit einem Variablennamen darauf und einem Wert darin gedacht werden. Wenn du diesen Wert verwendest oder ihn einer anderen Variable zuweist, kannst du davon ausgehen, dass Python _eine Kopie_ davon _erstellt_^[Nicht wirklich, aber das erleichtert das Verständnis.] und diese _Kopie_ in eine andere "Box" der Variablen legt. Wenn du den Wert einer Variable _ersetzt_, nimmst du den alten Wert heraus, zerstörst ihn (indem du ihn in ein nahes schwarzes Loch wirfst, nehme ich an), erstellst einen neuen und legst ihn in die "Box" der Variablen. Wenn du eine Variable basierend auf ihrem aktuellen Zustand _veränderst_, geschieht dasselbe. Du nimmst den Wert heraus, erstellst einen neuen Wert (indem du den ursprünglichen Wert addierst oder eine andere Operation durchführst), zerstörst den alten und legst den neuen wieder in die "Box" der Variablen. Wichtig ist, dass obwohl eine _Variable_ verschiedene unveränderliche Werte haben kann (wir [änderten](#random-mole) die Variable `imole` bei jeder Runde), der unveränderliche _Wert_ selbst nie verändert wird. Er wird _ersetzt_ durch einen anderen unveränderlichen Wert, _verändert_ sich jedoch nie^[Ein Metaphernversuch: Du kannst verschiedene Hemden tragen, also verändert sich dein _Aussehen_ (Variable), aber jedes einzelne Hemd (mögliche Werte) bleibt gleich (wir ignorieren hier den Verschleiß), unabhängig davon, ob du es trägst (der Wert wird einer Variable zugewiesen) oder nicht.].
+
+Der Kasten-Metapher erklärt, warum [Gültigkeitsbereiche](#gültigkeitsbereiche-für-unveränderliche-werte) so funktionieren, wie sie es tun. Jeder Gültigkeitsbereich hat seinen eigenen Satz an Kästen und wann immer du Informationen zwischen Gültigkeitsbereichen austauschst, z.B. von einem globalen Skript zu einer Funktion, wird eine Kopie eines Wertes (von einer Variablen) erstellt und in einen neuen Kasten (z.B. einen Parameter) innerhalb der Funktion gelegt. Wenn eine Funktion einen Wert zurückgibt, wird er kopiert und in einen der Kästen im globalen Skript gelegt (Variable, der du den zurückgegebenen Wert zugewiesen hast), usw.
+
+Das gilt aber nur für _unveränderliche_ Objekte (Werte) wie Zahlen, Strings, logische Werte usw. sowie [ Tupel ](https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple) (siehe unten, was das ist). Wie du sicher schon erraten hast, bedeutet das, dass es auch andere _veränderliche_ Objekte gibt und sie sich sehr unterschiedlich verhalten.
+
+## Variablen als Post-it-Zettel (veränderliche Objekte){#veraenderliche-objekte}
+Veränderliche Objekte sind zum Beispiel Listen oder Wörterbücher^[Kommen bald!], also Dinge, die sich verändern können. Der entscheidende Unterschied besteht darin, dass _unveränderliche_ Objekte als in ihrer Größe fixiert betrachtet werden können. Eine Zahl benötigt so viele Bytes zur Speicherung, genau wie ein gegebener String (obwohl ein anderer String mehr oder weniger Bytes erfordern würde). Trotzdem ändern sie sich nicht, sie werden erstellt und zerstört, wenn sie nicht mehr benötigt werden, aber nie wirklich aktualisiert.
+
+_Mutable_ Objekte können verändert werden^[Verwende das Metapher des Aussehens: Du kannst dein Aussehen ändern, indem du ein anderes (immutables) Hemd trägst oder indem du deine Frisur änderst. Dein Haar ist mutabel, du trägst nicht an verschiedenen Tagen ein anderes, um anders auszusehen, du musst es ändern, um anders auszusehen.]. Zum Beispiel kannst du Elemente zu deiner Liste hinzufügen oder sie entfernen oder durcheinander bringen. Das gilt auch für [Wörterbücher](https://docs.python.org/3/tutorial/datastructures.html?highlight=dictionary#dictionaries). Das Machen solcher Objekte _unveränderlich_ wäre rechnerisch ineffizient: Jedes Mal, wenn du einen Wert hinzufügst, wird eine (lange) Liste zerstört und neu erstellt, nur mit diesem einen zusätzlichen Wert. Daher aktualisiert Python einfach das originale Objekt. Aus Effizienzgründen für weitere Berechnungen werden diese Objekte nicht kopiert, wenn du sie einer anderen Variablen zuweist oder als Parameterwert verwendest, sondern _per Referenz übergeben_. Das bedeutet, dass die Variable nicht mehr ein "Kasten", in den du Werte hineinlegst, sondern ein "Aufkleber", den du auf ein Objekt (eine Liste, ein Wörterbuch) klebst. Und du kannst so viele Aufkleber auf ein Objekt kleben, wie du willst, doch _es bleibt immer noch dasselbe Objekt_!
+
+Was soll das denn jetzt? Wenn du bedenkst, dass eine Variable nur ein Aufkleber (von vielen) auf einem veränderlichen Objekt ist, versuche rauszufinden, was der folgende Code ausgeben wird:
+
+```python
+x = [1, 2, 3]
+y = x
+y.append(4)
+print(x)
+```
+::: {.practice}
+Mach Übung #1
+:::
+
+Hä? Genau das meine ich mit "Sticker auf demselben Objekt". Erstellen wir eine Liste und kleben ein `x`-Sticker darauf. Dann weisen wir _die gleiche Liste_ `y` zu, d.h. wir kleben ein `y`-Sticker _auf dieselbe Liste_. Da sowohl `x` als auch `y` Sticker auf dem _gleichen_ Objekt sind, sind sie effektiv Synonyme. In diesem speziellen Fall spielt es keine Rolle, welchen Variablennamen du verwendest, um _das_ Objekt zu ändern, sie sind einfach zwei Sticker, die nebeneinander auf der _gleichen_ Liste hängen. Nochmals, nur zur Erinnerung, das wäre nicht der Fall für _unveränderliche_ Werte wie Zahlen, wo sich die Dinge so verhalten würden, wie du es erwarten würdest.
+
+Dieser "Variable-als-Aufkleber", auch bekannt als "Wertübergabe per Referenz", hat wichtige Auswirkungen auf Funktionsaufrufe, da er deinen Gültigkeitsbereich bricht, ohne je eine Warnung auszugeben. Schau dir den folgenden Code an und versuche herauszufinden, was die Ausgabe sein wird.
+
+```python
+def ändere_es(y):
+    y.append(4)
+
+
+x = [1, 2, 3]
+ändere_es(x)
+print(x)
+```
+::: {.practice}
+Mach Übung #2.
+:::
+
+Wie haben wir es geschafft, eine _globale_ Variable von innerhalb der Funktion zu ändern? Haben wir nicht den _lokalen_ Parameter der Funktion verändert? Ja, genau das ist das Problem beim Übergeben per Referenz. Dein Funktionsparameter ist nur ein weiteres Etikett auf dem _gleichen_ Objekt, also musst du dir immer noch Sorgen um globale Variablen machen (deshalb hast du die Funktion geschrieben und über Bereiche gelernt!), auch wenn es so aussieht, als bräuchtest du das nicht. Wenn du verwirrt bist, bist du in guter Gesellschaft. Das ist einer der überraschendsten und verwirrendsten Aspekte in Python, der Menschen^[Na ja, zumindest mich!] immer wieder auf die Füße fällt. Lass uns noch ein paar Übungen machen, bevor ich dir zeige, wie man das Problem der Gültigkeitsbereiche für veränderliche Objekte löst.
+
+::: {.practice}
+Mach Übung #3.
+:::
+
+## Tuple: eine gefrorene Liste {#tuple}
+Die weisen Leute, die Python geschaffen haben, waren sich des Problems bewusst, das die _Variable-als-Aufkleber_-Problematik verursacht. Daher haben sie eine **unveränderliche** Version einer Liste hinzugefügt, die als [Tuple](https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple) bezeichnet wird. Es handelt sich um eine "gefrorene" Liste von Werten, die du durchlaufen, auf deren Elemente per Index zugreifen oder herausfinden kannst, wie viele Elemente sie hat, aber du _kannst sie nicht ändern_. Kein Hinzufügen, Entfernen, Ersetzen von Werten usw. Für dich bedeutet das, dass eine Variable mit einer gefrorenen Liste eine Schachtel und nicht ein Aufkleber ist und dass sie sich wie jedes andere "normale" **unveränderliche** Objekt verhält. Du kannst ein `tuple` durch die Verwendung von runden Klammern erstellen.
+```{python}
+ich_bin_ein_tuple = (1, 2, 3)
+```
+
+Du kannst es durchlaufen, z.B.,
+```{python}
+ich_bin_ein_tuple = (1, 2, 3)
+for zahl in ich_bin_ein_tuple:
+    print(zahl)
+```
+
+Aber wie ich schon sagte, das Anhängen wird einen Fehler werfen
+```{python}
+#| error: true
+i_am_a_tuple = (1, 2, 3)
+
+# wirft einen AttributeError: 'tuple' Objekt hat keine 'append' Eigenschaft
+i_am_a_tuple.append(4)
+```
+
+Gleiches gilt für das Versuchen, es zu ändern
+```{python}
+#| error: true
+i_am_a_tuple = (1, 2, 3)
+
+# wirft einen TypeError: 'tuple' Objekt unterstützt keine Elementzuweisung
+i_am_a_tuple[1] = 1
+```
+
+Das bedeutet, dass wenn du eine Liste von Werten an eine Funktion übergeben musst und keine Verbindung zum ursprünglichen Variablen haben möchtest, du stattdessen _ein Tupel von Werten_ an die Funktion übergeben solltest. Die Funktion hat immer noch eine Liste von Werten, aber die Verbindung zum ursprünglichen Listenobjekt ist jetzt unterbrochen. Du kannst eine Liste in ein Tupel mit `tuple()` umwandeln. Behalte im Hinterkopf, dass `tuple()` eine gefrorene Kopie der Liste erstellt. Was wird unten passieren?
+```python
+x = [1, 2, 3]
+y = tuple(x)
+x.append(4)
+print(y)
+```
+::: {.practice}
+Mache Übung #4.
+:::
+
+Also, wie du sicher schon gemerkt hast, wenn `y = tuple(x)`, erstellt Python **eine Kopie** der Listenwerte, friert sie ein (sie sind jetzt unveränderlich) und packt sie in das "y"-Fach. Daher hat alles, was du mit der ursprünglichen Liste machst, keine Auswirkung auf das unveränderliche "y".
+
+Ganz im Gegenteil, du "taust" ein Tuple auf, indem du es mit `list()` in eine Liste verwandelst. Bitte beachte, dass es **eine neue Liste** erstellt, die keine Beziehung zu jeder anderen existierenden Liste hat, selbst wenn die Werte gleich sind oder ursprünglich aus einer von ihnen stammten!
+
+::: {.practice}
+Mach Übung #5.
+:::
+
+Okay, ich hab doch gesagt, dass `list()` eine neue Liste erstellt, oder? Das bedeutet, du kannst es verwenden, um eine Kopie einer Liste direkt zu erstellen, ohne einen Zwischenschritt über ein Tupel. Auf diese Weise kannst du zwei _unterschiedliche_ Listen mit _identischen_ Werten haben. Du kannst das gleiche Ergebnis auch erreichen, indem du eine gesamte Liste schneidest, z. B. `list(x)` ist das gleiche wie `x[:]`.
+
+::: {.practice}
+Mach Übung #6.
+:::
+
+Hier hat `y = list(x)` eine neue Liste erstellt (die ein exaktes Abbild der mit dem "x"-Etikett versehenen war) und das "y"-Etikett wurde auf dieser neuen Liste angebracht, während das "x" weiterhin an der ursprünglichen hing.
+
+Wenn dir schwindelig wird, tut es mir leid, aber es wird noch schlimmer. Der folgende Absatz behandelt ein relativ fortgeschrittenes Szenario, aber ich möchte, dass du darüber Bescheid weißt, denn die Dinge verhalten sich extrem entgegen der Intuition und ich bin selbst ein paar Mal darauf hereingefallen und es hat jedes Mal ewig gedauert, das Problem zu lösen. Also, was passiert, wenn du ein Tupel (unveränderlich!) hast, das eine Liste (veränderbar) enthält? Wie ich bereits erwähnt habe, kannst du das Element selbst nicht ändern, aber dieses Element ist lediglich ein Verweis auf die Liste (ein Aufkleber auf einem _veränderbaren_ Objekt!), also kannst du trotzdem mit der Liste selbst herumspielen, obwohl das Tupel unveränderlich ist. Außerdem macht das Erstellen einer Kopie eines Tupels lediglich eine Kopie des Verweises, der immer noch auf dieselbe Liste zeigt! Also könntest du denken, dass alles in Ordnung ist, weil es sich ja um Tupel handelt, und dann von genau diesem Umstand überrascht werden. Hier ist ein Beispiel für ein solches Durcheinander:
+```{python}
+#| error: true
+tuple_1 = tuple([1, ["A", "B"], 2])
+tuple_2 = tuple_1
+
+# Das funktioniert (richtig) nicht
+tuple_1[0] = ["C", "D"]
+
+# Aber wir können das erste Element der Liste in "C" und das zweite in "D" ändern
+# Der Verweis auf die Liste ist eingefroren, aber die Liste selbst ist veränderbar!
+tuple_1[1][0] = "C"
+tuple_2[1][1] = "D"
+
+print(tuple_1)
+print(tuple_2)
+```
+
+Verwirrend? Aber sowas von! Wenn du das Gefühl hast, von diesem ganzen immutabel/mutabel, Tuple/Liste, Kopie/Referenz-Konfusion überfordert zu sein, bist du einfach nur ein normaler Mensch. Ich verstehe die (rechnerischen) Gründe dafür, auf diese Weise vorzugehen, ich bin mir dieser Unterschiede bewusst und weiß, wie nützlich sie sein können, aber es erwischt mich immer noch hin und wieder auf dem falschen Fuß! Also, mein Rat: sei vorsichtig und überprüfe deinen Code mit einem Debugger, wann immer du Listen oder Dictionaries zuweist, sie an Funktionen übergibst, Kopien erstellst, Listen in Listen hast, usw. Sei dir bewusst, dass Dinge vielleicht nicht so funktionieren, wie du denkst, dass sie sollten!
+
+## Minimaler Code
+Jetzt aber genug mit der Theorie, lass uns das Spiel programmieren. Wie immer fangen wir mit einem minimalen Code an (versuche es selbst zu schreiben, anstatt es von dem letzten Spiel zu kopieren):
+```python
+Importiere die benötigten PsychoPy-Module.
+
+Erstelle ein Fenster in einer nützlichen Größe und mit nützlichen Einheiten.
+
+Warte auf einen Tastendruck.
+
+Schließe das Fenster.
+```
+
+Das erste, was du entscheiden musst, ist die Fenstergröße _in Pixeln_ und welche Einheiten das Größen- und Platzieren von Karten einfacher machen. Jedes Hühnerbild ist 240×400 Pixel groß und für das Spiel benötigen wir Platz für _genau_ 4×2 Bilder, d.h. unser Fenster muss 4 Karten breit und 2 Karten hoch sein. Vergiss nicht, die Datei zu dokumentieren!
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+## Ein Bild zeichnen{#bildzeichnen}
+Heute werden wir keine abstrakten und langweiligen Kreise mehr verwenden, um Maulwürfe darzustellen, sondern echte Hühnerbilder verwenden (siehe Anweisungen oben zum Herunterladen). Das Verwenden eines [Bildreizes](https://psychopy.org/api/visual/imagestim.html) in PsychoPy ist sehr einfach, da es sich wie andere visuelle Reize verhält, die du bereits kennst. Zunächst musst du ein neues Objekt erstellen, indem du `visual.ImageStim(...)` aufrufst. Du kannst die vollständige Liste der Parameter in der [Dokumentation]((https://psychopy.org/api/visual/imagestim.html)) finden, aber für unsere ursprünglichen Absichten müssen wir nur drei davon übergeben:
+
+* unsere Fenster-Variable: `win`.
+* Dateiname des Bildes: `image="Images/r01.png"` (Bilder befinden sich in einem Unterordner, daher müssen wir einen _relativen_ Pfad verwenden).
+* Größe: `size=(???,???)`. Das musst du selbst berechnen. Wenn du [norm](#psychopy-einheiten-norm) Einheiten gewählt hast, wie ich, dann ist das Fenster 2 Einheiten breit und 2 Einheiten hoch, aber für [höhe](#psychopy-einheiten-höhe) ist es 1 Einheit hoch und _aspekt-verhältnis_ Einheiten breit. Wir möchten ein 4×2 Bild haben, welche Größe (beide Breite und Höhe) hat jedes Bild in den Einheiten deiner Wahl?
+
+Zeichne das Huhn (es sollte in der Mitte des Bildschirms erscheinen).
+
+::: {.program}
+Mach weiter mit [code02.py]{.program-filename}.
+:::
+
+## Bild plazieren (Index zur Position)
+Standardmäßig wird unser Bild in der Mitte des Bildschirms platziert, was für einen typischen psychophysikalischen Versuch, der Stimuli auf der Fixierung zeigt (die sich auch typischerweise in der Mitte des Bildschirms befindet), überraschenderweise nützlich ist. Allerdings müssen wir acht Bilder an ihren bestimmten Positionen zeichnen. Du musst eine Funktion erstellen, die einen Bildindex (der von 0 bis 7 geht) entgegennimmt und eine Liste mit einem Paar von Werten mit seiner Position auf dem Bildschirm zurückgibt. Unten siehst du eine Skizze, wie der Index der Position entspricht. Beachte, dass die Bildposition ([pos](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim.pos attribute)) der _Mitte_ des Bildes entspricht.
+
+![Kartenstandort-Index](images/memory-location-index.png){ width=100% }
+
+Nenn die Funktion `position_from_index`. Sie sollte einen Argument (`index`) entgegennehmen und eine Liste mit `[<x>, <y>]` Koordinaten in den PsychoPy-Einheiten (ab jetzt nehme ich an, dass diese [norm](#psychopy-units-norm) sind) zurückgeben. Du kannst dann diesen Wert für das Argument [pos](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim.pos) der [ImageStim()](https://psychopy.org/api/visual/imagestim.html#imagestim) verwenden.
+
+Die Berechnung könnte kompliziert aussehen, also lass mich dir helfen loszulegen. Wie kannst du die _x_-Koordinate für die _oberste_ Reihe berechnen? Wenn du dich nur auf die oberste Reihe konzentrierst, wird es einfacher, weil hier der _Spaltenindex_ gleich dem Gesamtindex ist: Die linke Spalte ist 0, die nächste ist 1 usw. Du brauchst eine einfache Algebra von $x = a_x + b_x \cdot Spalte$. Du kannst beide $a_x$ und $b_x$ leicht ableiten, wenn du die Positionen der ersten und zweiten Karten von Hand berechnest. Das Gleiche gilt für die _y_-Koordinate. Angenommen, du weißt die _Reihe_, die entweder 0 (oberste Reihe) oder 1 (unterste Reihe) ist, kannst du $y = a_y + b_y \cdot Reihe$ berechnen (beachte, dass die Reihen von oben nach unten gehen, aber die PsychoPy-Koordinaten von unten nach oben gehen).
+
+Aber, höre ich dich sagen, du hast keine Zeilen- und Spaltenindizes, sondern nur den Gesamtindex? Um diese zu berechnen, musst du nur im Kopf behalten, dass jede Zeile _vier_ Karten hat. Dann kannst du zwei spezielle Divisionsoperatoren verwenden: den [Bodenschneide-Operator `//`](https://python-reference.readthedocs.io/en/latest/docs/operators/floor_division.html) und die [Modulo-Operatoren `%`](https://python-reference.readthedocs.io/en/latest/docs/operators/modulus.html). Der erstere gibt nur den ganzzahligen Teil der Division zurück, also ist `4 // 3` ist `1` (weil 4/3 1,33333 ist) und `1 // 4` ist `0` (weil 1/4 0,25 ist). Letzterer gibt die verbleibenden Ganzzahlen zurück, also `4 % 3`ist `1` und `1 % 4` ist `0`. Diese beiden Operatoren reichen aus, um die Zeilen- und Spaltenindizes zu berechnen.
+
+Meine Empfehlung wäre erstmal, mit einzelnen Formeln in Jupyter Notebook rumzuspielen. Das macht es einfacher, Dinge auszuprobieren und das Ergebnis zu sehen, verschiedene Werte in Formeln einzugeben usw. Wenn du dir sicher bist, dass der Code funktioniert, verwandle ihn in eine Funktion, dokumentiere ihn und pack ihn in eine separate Datei (_utilities.py_, vergiss nicht, einen Kommentar oben in der Datei zu hinterlassen!). Dann kannst du ihn in das Hauptskript einbinden und damit die Karte plazieren. Versuche verschiedene Indizes und stell sicher, dass die Karte an der richtigen Stelle erscheint. Und wenn was nicht so läuft wie erwartet, setz einen Breakpoint und gehe Schritt für Schritt durch das Programm, während du die Variablen im Auge behältst.
+
+::: {.program}
+Füge **position_from_index** in [utilities.py]{.program-filename} ein. Füge aktualisierten Code in [code03.py]{.program-filename} ein.
+:::
+
+## Rückseite der Karte
+Ein Hühnerbild ist die _Vorderseite_ einer Karte, aber das Spiel beginnt mit den Karten verdeckt, also sollte der Spieler ihre Rückseiten sehen. Wir werden ein einfaches [Rechteck](https://psychopy.org/api/visual/rect.html) als Rückseite verwenden. Wähle eine schöne Kombination aus `fillColor` (Innen) und `lineColor` (Umrandung) Farben, das einzige Requirement ist, dass sie unterschiedlich sind, da man sie sonst nicht auseinanderhalten kann. Ändere deinen Code, um das Bild (Vorderseite der Karte) und das Rechteck (Rückseite der Karte) nebeneinander zu zeichnen (_z.B._, wenn das Bild an der Position mit Index 0 ist, sollte das Rechteck an der Position 1 oder 4 sein). So kannst du überprüfen, ob die Größen übereinstimmen und ob sie korrekt positioniert sind.
+
+::: {.program}
+Füge deinen Code in [code04.py]{.program-filename} ein.
+:::
+
+## Wörterbücher {#wörterbücher}
+Jede Karte, die wir verwenden, hat viele Eigenschaften: Eine Vorderseite (Bild), eine Rückseite (Rechteck) und andere Eigenschaften wie z.B. welche Seite gezeigt werden soll oder ob die Karte bereits vom Bildschirm entfernt wurde. Das erfordert einen Container, damit wir all diese relevanten Informationen in einer einzigen Variablen speichern können. Wir _könnten_ diese Werte in einer Liste speichern und numerische Indizes verwenden, um auf einzelne Elemente zuzugreifen (z.B. `karte[0]` wäre das Vorderseitenbild, aber `karte[2]` würde die aktive Seite angeben), aber Indizes haben an sich keine Bedeutung, also wäre es schwierig herauszufinden, was `karte[0]` von `karte[2]` unterscheidet. Python hat eine Lösung für solche Fälle: [Wörterbücher](https://docs.python.org/3/library/stdtypes.html#dict).
+
+Ein Dictionary ist ein Container, der Informationen mit _Schlüssel : Wert_-Paaren speichert. Das ist ähnlich wie beim Nachschlagen einer Bedeutung oder Übersetzung (Wert) eines Wortes (Schlüssel) in einem echten Dictionary, daher der Name. Um ein Dictionary zu erstellen, verwendest du _geschweifte_ Klammern `{<Schlüssel1> : <Wert1>}, {<Schlüssel2> : <Wert2>,...}` oder erstellst es über `dict(<Schlüssel1>=<Wert1>, <Schlüssel2>=<Wert2>,...)`. Beachte, dass die zweite Version strenger ist, da Schlüssel den Regeln für Variablennamen folgen müssen, während bei der Version mit geschweiften Klammern Schlüssel beliebige Zeichenfolgen sein können.
+```python
+buch = {"Autor" : "Walter Moers",
+        "Titel": "Die 13½ Leben des Käpt'n Blaubär"}
+
+# oder, äquivalent
+buch = dict(Autor="Walter Moers",
+            Titel="Die 13½ Leben des Käpt'n Blaubär")
+```
+
+Sobald du ein Dictionary erstellt hast, kannst du auf jedes Feld zugreifen oder es ändern, indem du seinen Schlüssel verwendest, z.B. `print(book["Autor"])` oder `book["Autor"] = "Moers, W."`. Du kannst auch neue Felder hinzufügen, indem du ihnen Werte zuweist, z.B., `book["Veröffentlichung Jahr"] = 1999`. Kurz gesagt, du kannst eine Kombination aus `<dictionary-variable>[<key>]` verwenden, genau wie du eine normale Variable verwenden würdest. Das ist ähnlich wie die Verwendung von `list[index]`, der Unterschied besteht darin, dass `index` eine ganze Zahl sein muss, während `key` jeder hashable Wert sein kann.^[Unveränderliche Werte sind [hashable](https://docs.python.org/3/glossary.html#term-hashable), während veränderliche wie Dictionaries und Listen nicht sind. Das liegt daran, dass veränderliche Objekte während der Ausführung des Programms verändert werden können und daher als Schlüssel unbrauchbar sind. Das bedeutet, es ist schwierig, auf ein Dictionary zuzugreifen, wenn der Schlüssel sich ändern kann, wenn du darauf zugreifen musst.]
+
+## Eine Karte mit einem Dictionary darstellen
+Deine Karte hat folgende Eigenschaften, also werden diese als Key-Value-Einträge in einem Dictionary gespeichert.
+
+1. `"front"`: Vorderseite (Bild einer Henne).
+2. `"back"`: Rückseite (Rechteck).
+3. `"filename"`: Identität auf der Karte, die wir später verwenden werden, um zu überprüfen, ob der Spieler zwei identische Karten (ihre Dateinamen stimmen überein) oder zwei verschiedene geöffnet hat.
+4. `"side"`: kann entweder `"front"` oder `"back"` sein, Informationen darüber, welche Seite oben ist (auf dem Bildschirm gezeichnet). Setze es auf `"back"`, da initially alle Karten mit der Rückseite nach oben liegen. Du kannst es jedoch jederzeit temporär auf `"front"` setzen, um zu sehen, wie die Karten verteilt sind.
+5. `"show"`: ein logischer Wert, setze ihn auf `True`. Wir werden ihn später verwenden, um Karten zu markieren, die vom Tisch entfernt sind und daher nicht angezeigt werden. Initially sind alle Karten gezeigt, also sollten alle Karten mit `"show"` gleich `True` erstellt werden.
+
+Erstelle eine Dictionary-Variable (nenn sie `card`) und fülle sie mit relevanten Werten (verwende entweder `"front"` und `"back"` für den `"side"`-Schlüssel) und Reizen (du kannst PsychoPy-Reize in ein Dictionary packen, genau wie wir sie zuvor in eine Liste gepackt haben). Ändere deinen Code so, dass er das richtige Bild basierend auf dem Wert des `"side"`-Eintrags zeichnet. Beachte, dass **du keinen if-Ausschnitt dafür benötigst**! Denke über einen Schlüssel nach, den du benötigst, um auf diese beiden Seiten zuzugreifen, und den Wert, den du für den `"side"`-Schlüssel hast.
+
+::: {.program}
+Mach weiter mit [code05.py]{.program-filename}.
+:::
+
+## Die Kartenfabrik
+Du hast den Code, um eine Karte zu erstellen, aber wir brauchen acht davon. Das erfordert definitiv eine Funktion. Schreibe eine Funktion (setze sie in [utilities.py]{.filename}, um die Hauptdatei aufzuräumen), die drei Parameter annimmt.
+
+1. ein Fenster-Variable (die brauchst du, um PsychoPy-Stimuli zu erstellen),
+2. ein Dateiname,
+3. Karten-Positionsindex.
+
+Und zurück gibt's ein Dictionary, genau wie das, das du erstellt hast. Du hast den Code schon, musst ihn nur in eine Funktion packen und dokumentieren. Ruf die Funktion `create_card_path`^[Diese Funktion geht davon aus, dass du einen vollständigen relativen Pfad zu der Datei angibst. Später werden wir eine Version dieser Funktion erstellen, die die Ordnerinformationen selbst anhängen wird.] auf und nutz sie im Hauptskript, um das `card`-Dictionary zu erstellen. Überleg dir jetzt, welche Bibliotheken du in [utilities.py]{.filename} importieren musst.
+
+::: {.program}
+Füge [create_card_path]{.program-function} in [utilities.py]{.program-filename} ein. Füge den Code in [code06.py]{.program-filename} ein.
+:::
+
+## Dateiliste abrufen
+Für eine einzelne Karte haben wir einfach den Namen einer Bilddatei sowie ihren Speicherort hartcodiert. Allerdings möchten wir für ein richtiges Spiel (oder ein Experiment) flexibler sein und automatisch bestimmen, welche Dateien sich im Ordner _Bilder_ befinden. Dies wird von der [os](https://docs.python.org/3/library/os.html) Bibliothek abgedeckt, die verschiedene Hilfsmittel für die Arbeit mit deinem Betriebssystem und insbesondere mit Dateien und Verzeichnissen enthält. Speziell gibt [os.listdir(path=".")](https://docs.python.org/3/library/os.html#os.listdir) eine Liste mit den Dateinamen aller Dateien in einem durch den Pfad angegebenen Ordner zurück. Standardmäßig ist es der aktuelle Pfad (`path="."`). Du kannst jedoch auch einen relativen Pfad verwenden - `os.listdir("Bilder")`, vorausgesetzt, dass _Bilder_ ein Unterordner in deinem aktuellen Verzeichnis ist - oder einen absoluten Pfad `os.listdir("E:/Lehre/Python/MemoryGame/Bilder")` (in meinem Fall)^[Verwende einen absoluten Pfad nur, wenn es die einzige Option ist, da er fast sicherlich auf einem anderen Rechner deinen Code unterbrechen wird.].
+
+Versuchs das mal in einem Jupyter Notebook (vergiss nicht, die [os](https://docs.python.org/3/library/os.html#module-os) Bibliothek zu importieren). Du solltest eine Liste von 8 Dateien erhalten, die als [[r|l][index].png]{.filename} codiert sind, wobei _r_ oder _l_ die Richtung angeben, in die das Huhn schaut. Allerdings benötigen wir für unser Spiel nur vier Bilder (4 × 2 = 8 Karten). Daher müssen wir eine Teilmenge davon auswählen, z.B. nur Hühner, die nach links oder rechts schauen. Hier werden wir uns auf Hühner konzentrieren, die nach links schauen, was bedeutet, dass wir nur Dateien auswählen müssen, die mit "l" beginnen. Um diese Filterung zu erleichtern, werden wir einen coolen Python-Trick namens [List Comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions) verwenden.
+
+## List comprehension {#list-comprehension}
+List comprehension bietet eine elegante und leicht lesbare Möglichkeit, Elemente einer Liste zu erstellen, zu ändern und/oder zu filtern und eine neue Liste zu erstellen. Die allgemeine Struktur ist
+```python
+neue_liste = [<Transformation-des-Elements>
+              for element in alte_liste 
+              if <Bedingung-gegebenes-Element>]
+```
+Lassen wir uns Beispiele anschauen, um zu verstehen, wie es funktioniert. Stell dir vor, du hast eine Liste `zahlen = [1, 2, 3]` und du musst jede Zahl um 1 erhöhen^[Ein sehr willkürlich gewähltes Beispiel!]. Du kannst dies tun, indem du eine neue Liste erstellst und in der <Transformation-des-Elements>-Teil zu jedem Element 1 addierst.
+
+```python
+zahlen = [1, 2, 3]
+zahlen_plus_1 = [element + 1 for element in zahlen]
+```
+
+Das ist äquivalent zu:
+```python
+zahlen = [1, 2, 3]
+zahlen_plus_1 = []
+for element in zahlen:
+    zahlen_plus_1.append(element + 1)
+```
+
+Oder, stell dir vor, du musst jeden Eintrag in einen String umwandeln. Das kannst du einfach so machen:
+
+```python
+zahlen = [1, 2, 3]
+zahlen_als_zeichenketten = [str(element) for element in zahlen]
+```
+
+Und hier ist die äquivalente Form mit einer normalen for-Schleife:
+
+```python
+zahlen = [1, 2, 3]
+zahlen_als_zeichenketten = []
+for element in zahlen:
+    zahlen_als_zeichenketten.append(str(element))
+```
+
+Beide Versionen kannst du in Jupyter-Zellen schreiben und überprüfen, ob die Ergebnisse gleich sind.
+
+::: {.practice}
+Mach Übung #7.
+:::
+
+Jetzt implementiere den folgenden Code mithilfe von List Comprehension. Überprüfe, ob die Ergebnisse stimmen.
+```python
+zeichenketten = ['1', '2', '3']
+zahlen = []
+for zeichenkette in zeichenketten:
+    zahlen.append(int(zeichenkette) + 10)
+```
+
+::: {.practice}
+Mach Übung #8 im Jupyter-Notizbuch.
+:::
+
+Wie oben erwähnt, kannst du auch eine bedingte Anweisung verwenden, um zu filtern, welche Elemente an die neue Liste übergeben werden. In unserem Zahlenbeispiel können wir Zahlen, die größer als 1 sind, beibehalten:
+```python
+zahlen = [1, 2, 3]
+zahlen_größer_als_1 = [element for element in zahlen if element > 1]
+```
+
+Manchmal wird dieselbe Anweisung in drei Zeilen geschrieben, anstatt in einer, um das Lesen zu erleichtern:
+```python
+zahlen = [1, 2, 3]
+zahlen_größer_als_1 = [element
+                       for element in zahlen
+                       if element > 1]
+```
+
+Du kannst natürlich die Transformation und die Filterung in einer einzigen Anweisung kombinieren. Erstell einen Code, der alle Elemente unter 2 herausfiltert und ihnen 4 hinzufügt.
+
+::: {.practice}
+Mach Übung #9 im Jupyter-Notizbuch.
+:::
+
+## Liste der relevanten Dateien abrufen
+Verwende List Comprehension, um eine Liste von Dateien zu erstellen, auf denen das Huhn nach links schaut, d.h. Dateien mit Dateinamen, die mit "l" beginnen. Verwende [<dein-string>.startswith()](https://docs.python.org/3/library/stdtypes.html#str.startswith), um zu überprüfen, ob es mit "l" beginnt, und speichere die Liste in der `filenames`-Variablen. Teste deinen Code in einem Jupyter Notebook. Du solltest eine Liste von vier Dateien erhalten.
+
+## Listen-Operationen {#listen-operationen}
+Unsere Liste besteht aus vier eindeutigen Dateinamen, aber im Spiel sollte jede Karte zweimal auftreten. Es gibt mehrere Möglichkeiten, Listen zu duplizieren. Hier nutzen wir dies als Gelegenheit, um über Listen-Operationen zu lernen. Python-Listen implementieren zwei Operationen:
+
+* Listen zusammenfügen: `<list1> + <list2>`.
+```{python}
+a = [1, 2, 3]
+b = [4, 5, 6]
+a + b
+```
+
+Beachte, dass dies eine _neue_ Liste produziert und dass dies daher nicht äquivalent ist zur [extend](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)-Methode `a.extend(b)`! Das `+` erstellt eine _neue_ Liste, `.extend()` erweitert die ursprüngliche Liste `a`.^[Du wirst später über praktische Auswirkungen davon lernen. Vorerst behalte im Kopf, dass scheinbar identische Ausgaben fundamental unterschiedlich sein können.]
+
+* Listen-Vervielfältigung: `<list> * <integer-value>` erstellt eine _neue_ Liste, indem sie die ursprüngliche Liste `<integer-value>`-mal kopiert. Zum Beispiel:
+```{python}
+a = [1, 2, 3]
+b = 4
+a * b
+```
+
+Nutze entweder die Operation oder die `.extend()` Methode, um eine Liste zu erstellen, in der jeder Dateiname zweimal vorkommt. Tipp: Du kannst die Listendarstellung direkt auf die Dateinamen-Liste anwenden, die du über List Comprehension erstellt hast (also repliziere es in derselben Zeile). Versuche diesen Code in einem Jupyter Notebook auszuführen.
+
+## Schleifen über Index und Element mit Listenummerierung {#enumerate}
+Da wir nun eine Liste von Dateinamen haben, können wir daraus eine Liste von Karten erstellen. Unsere Wörterbuchfunktion benötigt sowohl den Index als auch den Dateinamen. Letzterer ist das _Element_ der Liste, ersterer ist der _Index_ dieses Elements. Du könntest den Index mit der [range()](#range)-Funktion aufbauen, aber Python hat eine bessere Lösung dafür: die [enumerate()](https://docs.python.org/3/library/functions.html#enumerate)-Funktion! Wenn du statt über eine Liste über [enumerate(<liste>)](https://docs.python.org/3/library/functions.html#enumerate) iterierst, bekommst du ein Tupel mitboth `(index, value)`. Hier ist ein Beispiel:
+```{python}
+buchstaben = ['a', 'b', 'c']
+for index, buchstabe in enumerate(buchstaben):
+    print('%d: %s'%(index, buchstabe))
+```
+
+Und so kannst du [enumerate()](https://docs.python.org/3/library/functions.html#enumerate) für List Comprehension verwenden.
+```{python}
+buchstaben = ['a', 'b', 'c']
+["%d: %s"%(index, buchstabe) for index, buchstabe in enumerate(buchstaben)]
+```
+
+## Pfad berechnen{#os-bibliothek}
+Ursprünglich haben wir den Dateinamen als `"Images/r01.png"` angegeben. Das hat funktioniert, aber jetzt haben wir viele Dateinamen, die wir mit dem Ordnernamen verbinden müssen, um eine Pfadzeichenfolge zu bilden. Dazu kommt, dass die meisten Betriebssysteme mit Windows uneins sind, wo `/` (Vorwärtsschslash) oder `\` (Backslash) für Pfade verwendet werden sollten. Um deinen Code plattformunabhängig und damit robuster zu gestalten, musst du eine Dateinamenzeichenfolge mit der [join](https://docs.python.org/3/library/os.path.html#os.path.join)-Funktion im [path](https://docs.python.org/3/library/os.path.html)-Submodul erstellen. Du kannst dazu die _os_-Bibliothek importieren und `os.path.join(...)` aufrufen (das ist meine persönliche Vorliebe). Oder du kannst den gleichen Ansatz wie bei PsychoPy-Modulen verwenden und `path` aus _os_ importieren, um den Code zu verkürzen. Oder natürlich kannst du auch _join_ direkt importieren, aber ich finde, dass das Fehlen von Bibliotheksinformationen während der Verwendung die Verständlichkeit erschwert (auch wenn der Code noch kürzer ist).
+
+[join](https://docs.python.org/3/library/os.path.html#os.path.join) nimmt Pfadkomponenten als Parameter und fügt sie zusammen, um das OS-Format zu entsprechen. Zum Beispiel würde `os.path.join("Python seminar", "Memory game", "memory01.py")` unter Windows `'Python seminar\\Memory game\\memory01.py'` zurückgeben. Da wir mehrere Dateien laden müssen, wird sich der _Dateiname_ ändern. Der _Ordner_, in dem sich die Bilder befinden, wird jedoch gleich bleiben und es wäre, wie üblich, eine gute Idee, ihn in eine formal erklärte [CONSTANTE](#constants) zu verwandeln.
+
+Erstelle die Funktion `create_card` auf der Grundlage von `create_card_path`, so dass sie annimmt, dass der Parameter `filename` nur der Dateiname ohne die Ordnerinformationen ist und daher den Pfad durch [join](https://docs.python.org/3/library/os.path.html#os.path.join) mit dem Ordnernamen (definiert als Konstante in diesem Modul!) erstellt. Du musst nun das `"Images/"` in dem Wert, den du übergibst, weglassen. Teste, dass der Code wie zuvor funktioniert!
+
+::: {.program}
+Erstelle [create_card]{.program-function} in [utilities.py]{.program-filename}. Füge aktualisierten Code in [code07.py]{.program-filename} ein.
+:::
+
+## Ein Kartenspiel
+Lass uns alle Codeschnipsel zusammenfügen, die wir brauchen, um die Dateinamen von Karten herauszufinden, sie zu duplizieren und die Karten mithilfe von Dateinamen und Index zu erstellen.
+
+Kopier den Code zum Erstellen einer duplizierten Liste von Dateinamen, die du in deinem Jupyter-Notizbuch getestet hast, in dein Hauptskript ([code08.py]{.filename}). Verwende dann `enumerate` und List Comprehension über die enumerierten duplizierten Dateinamen, um `cards` (Mehrzahl, ersetzt deine Singular `card`-Variable) mit der `create_card`-Funktion zu erstellen, die du zuvor geschrieben hast. Aktualisiere deinen Zeichencode, um alle Karten zu durchlaufen und zu zeichnen. Wenn deine Standard-"seite" auf "rückseite" eingestellt ist, sieht das alles pretty langweilig aus. Ändere das auf "vorderseite", um ihre Gesichter zu sehen.
+
+
+::: {.program}
+Mach weiter mit [code08.py]{.program-filename}.
+:::
+
+## Karten mischen {#mischen}
+Wenn du Karten ziehst, wirst du feststellen, dass das Duplizieren der Dateinamenliste eine sehr ordentliche Reihenfolge produziert, die das Spielspielen einfach (und langweilig) macht. Wir müssen die Dateinamenliste _vor_ der Erstellung von `cards` [shuffle()](https://docs.python.org/3/library/random.html#random.shuffle) _mischen_. Beachte, dass [shuffle()](https://docs.python.org/3/library/random.html#random.shuffle) die Listenelemente _an Ort und Stelle_ mischt, indem es die Tatsache nutzt, dass die Liste [veränderbar](#veränderbare-Objekte) ist. Das bedeutet, du rufst einfach die Funktion auf und übergibst die Liste als Argument. Die Liste wird verändert, nichts wird zurückgegeben und nichts muss der `filenames`-Variablen zugewiesen werden.
+
+::: {.program}
+Mach weiter mit [code09.py]{.program-filename}.
+:::
+
+## Lass uns eine Pause machen!
+Wir haben viel geschafft, also könnte es ein guter Zeitpunkt sein, um eine Pause einzulegen und deinen Code für meine Überprüfung einzureichen.
+
+
+## Hauptschleife hinzufügen
+Jetzt haben wir einen gemischten Kartensatz, den wir anzeigen, bis ein Spieler eine Taste drückt. Ändere den Code, um eine Hauptpräsentationsschleife zu haben, ähnlich wie die, die wir hatten, als wir mit [PsychoPy](#psychopy-basics)-Reizen experimentiert haben. Zuvor haben wir eine logische `gameover`-Variable verwendet, um die [while](##while-Schleife)-Schleife zu steuern. Hier werden wir zwei Gründe haben, die Schleife zu beenden: Der Spieler hat die **Escape**-Taste gedrückt oder er hat das Spiel gewonnen. Daher lass uns eine _Zeichenfolge_-Variable `game_state` verwenden, die auf `"laufend"` initialisiert wird. Wiederhole die Schleife, solange `game_state` gleich `"laufend"` ist, aber ändere es auf `"abbruch"`, wenn ein Spieler die **Escape**-Taste drückt. Du musst auch [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) durch [getKeys()](https://psychopy.org/api/event.html#psychopy.event.getKeys) ersetzen.
+
+
+::: {.program}
+Mach weiter mit [code10.py]{.program-filename}.
+:::
+
+## Mausklick erkennen {#psychopy-mouse}
+Im Spiel wird der Spieler einzelne Karten anklicken, um sie umzudrehen. Bevor du eine [Maus](https://psychopy.org/api/event.html#psychopy.event.Mouse) in PsychoPy verwenden kannst, musst du sie über den Aufruf `mouse = event.Mouse(visible=True, win=win)` erstellen, wobei `win` das PsychoPy-Fenster ist, das du bereits erstellt hast. Dieser Code sollte direkt unter der Zeile appear, in der du das Fenster selbst erstellst.
+
+Jetzt kannst du mit der Methode [mouse.getPressed()](https://psychopy.org/api/event.html#psychopy.event.Mouse.getPressed) überprüfen, ob die linke Maustaste gedrückt wurde. Sie gibt ein Dreier-Tupel zurück mit `True`/`False`-Werten, die angeben, ob jede der drei Tasten _momentan gedrückt_ wird. Verwende es in der Hauptschleife, damit, wenn der Spieler die _linke_ Taste drückt (ihr Index in der zurückgegebenen Liste ist 0), du die `"seite"` der ersten Karte (also die Karte mit Index 0 in der Liste) auf `"vorderseite"` änderst. Dies setzt voraus, dass du die Karte mit ihrer `"rückseite"` initialisiert hast, natürlich. Wenn du den Code ausführst und _irgendwo_ klickst, sollte die erste Karte umgedreht werden.
+
+Leg deinen Mausklick-Code _vor_ das Ziehen von Karten. Im Moment macht es keinen Unterschied, aber es wird später nützlich sein, da es uns ermöglichen wird, den aktuellen Zustand der Karte (also direkt nachdem sie von einem Spieler umgedreht wurde) zu ziehen.
+
+::: {.program}
+Mach weiter mit [code11.py]{.program-filename}.
+:::
+
+
+## Position zu Index
+Momentan wird die erste Karte umgedreht, wenn du _irgendwo_ klickst. Aber die Karte, die du umdrehst, sollte die Karte sein, auf die der Spieler geklickt hat. Dafür müssen wir eine Funktion `index_from_position` implementieren, die das Gegenteil von `position_from_index` ist. Sie sollte ein Argument `pos` entgegennehmen, das ein Tupel aus `(<x>, <y>)`-Werten ist (eine Mausposition innerhalb des Fensters), und eine _ganzzahlige Kartenindex_ zurückgeben. Du hast Float-Werte (mit Dezimalpunkten) im `pos`-Argument (weil es sich von -1 bis 1 für [norm](#psychopy-einheiten-norm) Einheiten bewegt) und standardmäßig werden die Werte, die du daraus berechnest, auch Float sein. Allerdings _muss_ ein Index ganzzahlig sein, also musst du ihn in einen [int()](https://docs.python.org/3/library/functions.html#int)-Aufruf einwickeln, bevor du ihn zurückgibst.
+
+Gehen wir rückwärts --- von Position zu Index --- finde ich (IMHO) es einfacher. Zuerst musst du darüber nachdenken, wie du eine _x_-Koordinate (die von -1 bis 1 geht) in einen Spaltenindex (der von 0 bis 3 geht) umwandeln kannst, wenn du 4 Spalten hast (zeichne es auf Papier, um die Mathematik einfacher zu verstehen). Ähnlich übersetzt du _y_ (von -1 bis 1) in einen Zeilenindex, wenn es nur zwei Zeilen gibt. Sobald du den Zeilen- und Spaltenindex kennst, kannst du den Index selbst berechnen, wobei du im Hinterkopf behältst, dass es vier Karten in einer Zeile gibt. Wie bei `position_from_index` denke ich, dass es einfacher ist, erst mit den Formeln in einem Jupyter Notebook zu spielen, bevor du den Code in eine Funktion umwandelst, dokumentierst und ihn in `utilities.py` aufnimmst.
+
+::: {.program}
+Füge [index_from_position]{.program-function} in [utilities.py]{.program-filename} ein.
+:::
+
+## Klicke auf eine ausgewählte Karte, um sie umzudrehen
+Jetzt, wo du eine Funktion hast, die einen Index aus einer Position zurückgibt (vergiss nicht, sie zu importieren), kannst du die Karte umdrehen, auf die der Spieler geklickt hat. Dazu musst du den Code zum Umdrehen der Karte innerhalb des Codes _wenn die linke Maustaste gedrückt wurde_ erweitern. Hol dir die Position der Maus innerhalb des Fensters, indem du [mouse.getPos()](https://psychopy.org/api/event.html#psychopy.event.Mouse.getPos) aufrufst. Dies wird ein Paar `(x, y)`-Werte zurückgeben, das du an deine `index_from_position()`-Funktion übergeben kannst. Diese wird ihrerseits den Index der Karte zurückgeben, auf die der Spieler geklickt hat. Ändere die `"seite"` einer Karte mit diesem Index auf `"vorderseite"`. Teste den Code, indem du verschiedene Karten umdrehst und stelle sicher, dass es die Karte ist, auf die du geklickt hast, die sich umdreht. Und wie immer, zögere nicht, einen Breakpoint innerhalb der if-Anweisung zu setzen, um die tatsächlichen Mauspositionswerte und wie sie in den Index übersetzt werden zu überprüfen, wenn etwas nicht funktioniert.
+
+::: {.program}
+Mach weiter mit [code12.py]{.program-filename}.
+:::
+
+## Offene Karten im Auge behalten
+Im eigentlichen Spiel darf ein Spieler nur _zwei_ Karten gleichzeitig umdrehen. Wenn sie übereinstimmen, werden sie entfernt. Wenn nicht, werden sie wieder auf ihre Rückseiten gedreht. Das bedeutet, wir müssen aufzeichnen, welche und wie viele Karten oben liegen. Wir können das immer durch eine List Comprehension herausfinden, indem wir nach Karten suchen, deren `"seite"` `"vorderseite"` ist. Aber das veränderliche Wesen von Dictionaries bietet uns eine einfachere Lösung. Wir erstellen eine neue Liste (nennen wir sie `face_up`) und fügen Karten hinzu. Dictionaries sind veränderlich, also wird eine Referenz auf das gleiche Dictionary-Objekt in beiden Listen vorhanden sein (die gleiche Kartendictionary hat zwei Sticker darauf, einen von der `cards`-Liste und einen von der `face_up`-Liste). Auf diese Weise wissen wir, _welche_ Karten oben liegen (jene, die in der Liste sind) und wir wissen, wie viele (Länge der `face_up`-Liste).
+
+Aber pass auf, dass du keine Karte zweimal hinzufügst (das würde unsere "wie viele Karten sind oben" Zahl durcheinanderbringen). Es gibt mehrere Möglichkeiten, das zu verhindern. Angenommen, `icard` ist der Index der Karte, den du über `position_to_index()` aus der Mausposition berechnet hast, du kannst einfach überprüfen, ob diese Karte `"seite"` `"vorderseite"` ist. Alternativ kannst du überprüfen, ob diese Karte bereits [in](https://docs.python.org/3/reference/expressions.html?highlight=list%20dictionary#in) der `face_up`-Liste ist. Auf jeden Fall wird dir das sagen, ob die Karte oben ist. Wenn sie es nicht ist, solltest du ihre `"seite"` auf `"vorderseite"` setzen und sie zur `face_up`-Liste hinzufügen.
+
+Mach das hier, öffne ein paar Karten. Dann setz einen Breakpoint, um das Programm anzuhalten und zu überprüfen, ob die `face_up`-Liste genau diese (diese Anzahl) Karten enthält. Wenn es _mehr_ hat, funktionieren deine face-up-Prüfungen nicht. Setz einen Breakpoint darauf und gehe durch den Code, um zu sehen, was passiert.
+
+::: {.program}
+Mach weiter mit [code13.py]{.program-filename}.
+:::
+
+## Nur zwei Karten aufdecken
+Jetzt müssen wir überprüfen, ob ein Spieler genau zwei Karten aufgedeckt hat. In deinem Code sollten die Mausprüfungen _vor_ dem Zeichencode sein. Das bedeutet, dass die Karten sofort nach einem Klick mit der Vorderseite nach oben gezogen werden. Sobald sie gezogen wurden, überprüfe die Länge von `face_up`, ob sie gleich 2 ist:
+
+* Mach eine Pause von ~0.5 s^[Wähle die Dauer, die du magst!] mit [wait](https://psychopy.org/api/clock.html#psychopy.clock.wait), damit der Spieler beide Karten sehen kann.
+* Klapp beide Karten um (d.h. setze ihre `"seite"` auf `"rückseite"`).
+* Nimm sie aus der `face_up`-Liste raus (siehe [.clear()](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) Methode).
+
+::: {.program}
+Mach weiter mit [code14.py]{.program-filename}.
+:::
+
+## Ein passendes Paar vom Tisch nehmen
+Unser Code dreht die Karten wieder um, selbst wenn du ein passendes Paar gefunden hast, aber wir müssen sie vom Tisch nehmen. Sobald du zwei Karten in der `face_up`-Liste hast, musst du überprüfen, ob sie das gleiche Huhn haben, d.h., ihre Dateinamen sind gleich. Wenn ja, setzt du das `"show"`-Feld auf `False`. Wenn nicht, setzt du ihre `"seite"` auf `"rückseite"` (was dein Code bereits tut). Auf jeden Fall musst du das Programm pausieren, damit der Spieler sie sehen und die `face_up`-Liste löschen kann (sie sind entweder vom Tisch oder mit der Rückseite nach oben, definitiv nicht mit der Vorderseite nach oben).
+
+Wir müssen unseren Code anpassen, auch um das `"show"`-Feld korrekt zu verarbeiten. Zunächst musst du deinen Zeichencode anpassen, um nur die Karten zu zeichnen, die gezeigt werden sollen. Zweitens, beim Verarbeiten des Mausklicks musst du überprüfen, ob die Karte nicht bereits oben liegt und ob sie gezeigt wird (ansonsten könntest du unsichtbare Karten "öffnen").
+
+::: {.program}
+Mach weiter mit [code15.py]{.program-filename}.
+:::
+
+## Das Spiel ist vorbei, wenn alle Karten vom Tisch sind
+Wenn dein Code korrekt funktioniert, kannst du alle Karten vom Tisch nehmen, sodass nur noch der graue Bildschirm übrig bleibt. Aber das sollte der Punkt sein, an dem das Spiel endet und dich zu deinem Erfolg gratuliert. Schreibe eine Funktion `remaining_cards`, die die Liste mit Karten (also unsere `cards`-Liste) entgegennimmt und zurückgibt, wie viele Karten noch gezeigt werden (ihr `"show"`-Feld ist `True`). Du brauchst auf jeden Fall eine [for-Schleife](#for-Schleife) dafür, aber die Implementierung kann sehr unterschiedlich sein. Du könntest eine zusätzliche Zählervariable verwenden, die du auf 0 initialisierst und dann um eins erhöhst (siehe [+=](https://docs.python.org/3/reference/simple_stmts.html#augmented-assignment-statements) für eine Abkürzung). Alternativ kannst du [List Comprehensions](l#list-comprehension) verwenden, um alle Karten herauszufiltern, die nicht gezeigt werden, und die Länge dieser Liste zurückzugeben (eine einzeilige Lösung). Implementiere diese Funktion in [utilities.py]{.filename} und beende die Schleife, indem du `game_state` auf `"victory"` setzt. Nach der Schleife kannst du die `game_state`-Variable überprüfen und wenn der Spieler gewonnen hat, eine Gratulationsnachricht anzeigen ([TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim), beachte, dass du nicht einmal eine Variable dafür erstellen musst, du kannst ein Objekt erstellen und `draw()` darauf aufrufen, also z.B. `visual.TextStim(...).draw()`) und auf eine Tasteneingabe warten, bevor du das Fenster schließt.
+
+::: {.program}
+Implementiere [remaining_cards]{.program-function} in [utilities.py]{.program-filename}. Füge deinen Code in [code16.py]{.program-filename} ein.
+:::
+
+## Mach's schnell!
+Es gibt verschiedene Möglichkeiten, um die Geschwindigkeit in diesem Spiel zu quantifizieren. Du könntest die Anzahl der Paare betrachten, die der Spieler öffnen musste, bis sie alle gelöst hat (je weniger, desto besser). Oder du könntest messen, wie schnell der Spieler es in Sekunden geschafft hat. Oder du könntest eine Kombination aus diesen beiden Maßnahmen verwenden. Lassen wir uns die zweite Option - die gesamte benötigte Zeit - als Gelegenheit nutzen, um PsychoPy [Uhren](https://psychopy.org/api/clock.html) kennenzulernen.
+
+Die beiden Klassen, die dich am meisten interessieren werden, sind [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock) und [CountdownTimer](https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer). Der einzige Unterschied zwischen den beiden ist, dass [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock) bei 0 startet und die verstrichene Zeit zählt, sodass seine [getTime()](https://psychopy.org/api/clock.html#psychopy.clock.MonotonicClock.getTime)-Methode nur positive Werte zurückgibt. Im Gegensatz dazu startet der [CountdownTimer](https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer) mit einem von dir initialisierten Wert und zählt die verbleibende Zeit herunter. Wichtig ist, dass er nicht stoppt, wenn er 0 erreicht, also wirst du schließlich mit negativer verbleibender Zeit enden. Daher überprüfst du bei [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock), ob die verstrichene Zeit länger als ein vordefinierter Wert ist, während du beim [CountdownTimer](https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer) mit einem vordefinierten Wert startest und überprüfst, ob die verbleibende Zeit über Null liegt. Beachte, dass es nicht garantiert ist, dass die verbleibende Zeit genau Null ist. Im Gegenteil, es ist sehr unwahrscheinlich, dass dies jemals passiert, also vergleiche nie Float-Werte mit exakten Zahlen^[Allgemeiner gesagt, vergleiche nie Float-Werte mit exakten Zahlen. Sie sind [tricky](http://www.lahey.com/float.htm), da die darunterliegende Darstellung nicht garantiert, dass die Berechnung genau die Zahl produziert, die sie sollte: `.1 +.1 +.1 ==.3` ist überraschend `False`, probiere es selbst!].
+
+Hier interessieren wir uns für die _verstrichene_ Zeit, also ist [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock) die offensichtliche Wahl. Erstelle eine Uhr vor der Spielschleife und verwende die verstrichene Zeit in der Glückwunschnachricht.
+
+::: {.program}
+Mach weiter mit [code17.py]{.program-filename}.
+:::
+
+## Wie kannst du es verbessern?
+Super Spiel, aber du kannst es immer verbessern: Highscore, mehrere Runden, usw. Der Himmel ist die Grenze!

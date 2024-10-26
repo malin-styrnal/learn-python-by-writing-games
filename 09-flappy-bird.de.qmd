@@ -1,0 +1,349 @@
+# Flappy Bird
+
+Heute werden wir ein _Flappy Bird_ Spiel entwickeln. Du steuerst einen Vogel, der durch die Öffnungen in den Hindernissen fliegen muss, aber deine einzige Aktion ist es, mit den Flügeln zu schlagen, um der Schwerkraft entgegenzuwirken. So wird das Spiel am Ende aussehen.
+
+{{< video videos/flappy-bird.m4v >}}
+
+## Kapitelkonzepte
+
+* Objektorientierte Programmierung
+* Berechnete Eigenschaften von Objekten: `@property`
+
+Wir nutzen dieses Spiel, um mehr über die objektorientierte Programmierung zu lernen. Du weißt bereits, wie man Klassen verwendet, jetzt ist es an der Zeit, sie zu erstellen und zu sehen, wie es dein Leben erleichtert.
+
+## Objektorientierte Programmierung
+Die Kernidee steckt im Namen: Statt separate Variablen/Daten und Funktionen zu haben, kombinierst du sie in einem Objekt, das Attribute/Eigenschaften (seine eigenen Variablen) und Methoden (Funktionen) hat. Diese Herangehensweise nutzt unsere natürliche Neigung, die Welt als Sammlung von interagierenden Objekten wahrzunehmen, und hat mehrere Vorteile, über die ich unten sprechen werde.
+
+### Klassen und Objekte (Instanzen von Klassen)
+Bevor wir weitermachen, muss ich eine wichtige Unterscheidung zwischen _Klassen_ und _Objekten_^[Nein, das ist kein Déjà-vu, ich wiederhole mich, um dich an die Unterscheidung zu erinnern.] treffen. Eine _Klasse_ ist sozusagen ein "Bauplan", das die Eigenschaften und das Verhalten (Methoden) von Objekten dieser Klasse beschreibt. Diese "Bauplan" wird verwendet, um eine _Instanz_ dieser Klasse zu erstellen, die als _Objekt_ bezeichnet wird. Zum Beispiel ist _Homo sapiens_ eine _Klasse_, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine _Idee_ von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen "Wie groß ist Homo sapiens?", sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten mit solchen realen Handlungen. Stattdessen ist Alexander Pastukhov eine _Instanz_ der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Die Klasse beschreibt also, welche Art von Eigenschaften und Methoden Objekte haben. Wenn du also einen Homo sapiens triffst, kannst du sicher sein, dass er groß ist. Einzelne Objekte haben jedoch unterschiedliche Werte für verschiedene Eigenschaften, so dass der Aufruf ihrer Methoden (d. h. die Aufforderung, bestimmte Aktionen durchzuführen) zu unterschiedlichen Ergebnissen führen kann.
+
+Ein weiteres, praktischeres Beispiel wäre deine Verwendung der [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim)-Klasse, um mehrere Instanzen der Vorderseite einer Karte in einem [Memory](memory-game)-Spiel zu erstellen. Wieder definiert die Klasse Eigenschaften (`image`, `pos`, `size`, etc.) und Methoden (z.B. die Methode `draw()`), die individuelle Objekte haben werden. Du hast diese Objekte erstellt, um als Vorderseite der Karten zu dienen. Du hast unterschiedliche Werte für dieselben Eigenschaften (`image`, `pos`) festgelegt und so sichergestellt, dass beim Aufrufen ihrer Methode `draw()` jede Karte an ihrer eigenen Position und mit ihrem eigenen Bild gezeichnet wird.
+
+### Kapselung
+All deine Daten (Eigenschaften) und Verhaltensweisen (Methoden) in die Klasse zu packen, erleichtert das Programmieren, indem sichergestellt wird, dass alle relevanten Informationen in ihrer Definition zu finden sind. So hast du einen einzigen Ort, an dem _alles_ enthalten sein sollte, was das Verhalten deines Objekts definiert. Im Gegensatz dazu war unser Ansatz in vorherigen Seminaren, Karten als Dictionaries von den Funktionen zu trennen, die sie erstellten. Heute wirst du sehen, wie das Einpacken von allem in Klassen dieses Durcheinander in einen einfacheren und leichter verständlichen Code verwandelt.
+
+### Vererbung / Verallgemeinerung
+In der objektorientierten Programmierung kann eine Klasse von einer _Vorfahren_-Klasse abgeleitet werden und so deren Eigenschaften und Methoden _erben_. Außerdem können mehrere Klassen von einem einzelnen Vorfahren abgeleitet werden, was eine Mischung aus einzigartigen und gemeinsamen Funktionen ergibt. Das bedeutet, dass du statt denselben Code für jede Klasse neu zu schreiben, einen gemeinsamen Code in einer Vorfahren-Klasse definieren und dich auf Unterschiede oder zusätzliche Methoden und Eigenschaften in Nachkommen konzentrieren kannst.
+
+Verwende das Beispiel von Homo sapiens aus oben. Menschen, Schimpansen und Gorillas sind alle verschiedene Arten, aber wir teilen einen gemeinsamen Vorfahren. Daher sind wir in vielen Hinsichten unterschiedlich, aber du könntest uns alle als "Affen" betrachten, die gemeinsame Eigenschaften wie binokulare Trichromasie haben. Mit anderen Worten: Wenn du dich für die Farbwahrnehmung interessierst, spielt es keine Rolle, welche spezifische Art du betrachtest, da alle Affen in dieser Hinsicht (ungefähr) gleich sind. Oder du kannst weiter unten an der Evolutionsleiter bleiben und uns als "Säuger" betrachten, die wiederum gemeinsame Eigenschaften und Verhaltensweisen wie Thermoregulation und Laktation haben. Wiederum, wenn du _nur_ wissen möchtest, ob ein Tier Thermoregulation hat, reicht es aus zu wissen, dass es ein Säuger ist.
+
+In PsychoPy, die verschiedenen visuellen Reize, die wir verwendet haben ([ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim), [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim), [Rect](https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect)), haben dieselben Eigenschaften (z.B. `pos`, `size`, etc.) und Methoden (vor allem `draw()`). Das liegt daran, dass sie alle von einem gemeinsamen Vorfahren `BaseVisualStim` abstammen, der ihre gemeinsamen Eigenschaften und Methoden definiert^[`BaseVisualStim` definiert tatsächlich nicht die `draw()`-Methode, sondern nur, dass sie vorhanden sein muss.]. Das bedeutet, dass du davon ausgehen kannst, dass _jeder_ visuelle Reiz (solange er von `BaseVisualStim` abstammt) `size`, `pos`, `ori` hat und gezeichnet werden kann. Das bedeutet wiederum, dass du eine Liste verschiedener PsychoPy-visueller Reize haben kannst und alle in einer Schleife bewegen oder zeichnen kannst, ohne darüber nachzudenken, welchen _spezifischen_ visuellen Reiz du bewegst oder zeichnest. Beachte auch, dass du diese gleichen Eigenschaften nicht für _Ton_-Reize voraussetzen kannst, da sie nicht von `BaseVisualStim`, sondern von der Klasse `_SoundBase` abstammen.
+
+Es gibt auch andere Möglichkeiten, um in Python gemeinsame Verhaltensweisen (Verallgemeinerung) ohne geordnete Vererbung zu erreichen, wie zum Beispiel "duck typing"^[Ja, es heißt wirklich "duck typing".] oder Mixins, aber das wird ein Thema eines anderen Kapitels sein.
+
+### Polymorphismus
+Wie du im vorherigen Abschnitt gelernt hast, ermöglicht Vererbung verschiedenen Nachkommen, gemeinsame Eigenschaften und Verhalten zu teilen, sodass sie in bestimmten Fällen als äquivalent zu einem Vorfahren betrachtet werden können. Zum Beispiel kann jeder visuelle Reiz (ein Nachkomme der `BaseVisualStim`-Klasse) gezeichnet werden, also rufst du einfach seine `draw()`-Methode auf. Es ist jedoch klar, dass diese verschiedenen Reize das Zeichnen _unterschiedlich_ implementieren, da der [Rect](https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect)-Reiz anders aussieht als der [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) oder [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim). Dies wird als "Polymorphismus" bezeichnet und die Idee besteht darin, die gemeinsame Schnittstelle (gleicher `draw()`-Aufruf) beizubehalten, während die tatsächliche Implementierung abstrahiert wird. Dies ermöglicht es dir, darüber nachzudenken, was du mit einem Objekt tun möchtest (oder was ein Objekt tun soll), anstatt darüber nachzudenken, wie es genau implementiert ist.
+
+### Ein minimaler Klassenbeispiel
+Jetzt aber genug mit der Theorie, schauen wir uns mal an, wie man Klassen in Python umsetzt. Hier ist eine sehr einfache Klasse, die nur die _Konstruktor_-Methode `__init__()` hat, die aufgerufen wird, wenn ein neues Objekt (Klasseninstanz) erstellt wird, und eine einzelne Eigenschaft/Attribut `total`.
+
+```python
+class Accumulator:
+    """
+    Einfache Klasse, die Werte akkumuliert (aufsummiert).
+
+    Attributes
+    ----------
+    total : float
+        Kumulierter Gesamtwert
+    """
+
+    def __init__(self):
+        """
+        Konstruktor, initialisiert den Gesamtwert auf Null.
+        """
+        self.total = 0
+        
+# Hier erstellen wir ein Objekt number_sum, das eine Instanz der Klasse Accumulator ist.
+number_sum = Accumulator()
+print(number_sum.total)
+```
+
+Lass uns das Zeug Zeile für Zeile durchgehen. Die erste Zeile `class Accumulator:` zeigt, dass dies eine Deklaration einer `class` ist, deren Name `Accumulator` ist. Beachte, dass der erste Buchstabe großgeschrieben ist. Das ist nicht zwingend erforderlich, also wird der Python-Polizei nicht an deine Tür klopfen, wenn du alles in Klein- oder Großbuchstaben schreibst. Allerdings wird empfohlen, dass **Klassen** Namen mit `UpperCaseCamelCase` und **Objekte** (Instanzen der Klasse) mit `lower_case_snake_case` geschrieben werden. Das erleichtert das Unterscheiden zwischen Klassen und Objekten (Instanzen von Klassen), also solltest du dieser Konvention folgen.
+
+Die Definition der Klasse sind die restlichen _einrückenden_ Zeilen. Wie bei Funktionen oder Schleifen ist es die Einrückung, die definiert, was innerhalb und was außerhalb der Klasse ist. Die einzige Methode, die wir definiert haben, ist `def __init__(self):`. Das ist eine _spezielle_ Methode^[Es gibt mehr spezielle Methoden, die du später lernen wirst, sie alle folgen dem `__methodname__()`-Konvention.], die aufgerufen wird, wenn ein Objekt (Instanz der Klasse) erstellt wird. Das ermöglicht es dir, das Objekt basierend auf Parametern zu initialisieren, die an diese Funktion übergeben wurden (falls vorhanden). Du rufst diese Funktion nicht direkt auf, sondern sie wird immer dann aufgerufen, wenn ein Objekt erstellt wird, z.B. `number_sum = Accumulator()` (letzte Zeile). Es wird auch kein Wert explizit über `return` zurückgegeben. Stattdessen wird `self` (der erste Parameter, mehr dazu unten) automatisch zurückgegeben.
+
+Alle Methoden einer Klasse (außer den speziellen Fällen, mit denen wir uns momentan nicht beschäftigen) müssen einen speziellen ersten Parameter haben, der _das Objekt_ selbst ist. Üblicherweise wird er `self` genannt.^[Wieder kannst du jeden Namen für diesen Parameter verwenden, aber das wird sicherlich alle verwirren.]. Er wird automatisch an die Methode übergeben, also bekommst du immer einen Parameter, wenn du `square.draw()` aufrufst (keine expliziten Parameter im Funktionsaufruf), der eine _Referenz_ auf die `square`-Variable ist, deren Methode du aufgerufen hast. Innerhalb einer Methode verwendest du diese Variable, um auf das Objekt selbst zu verweisen.
+
+Lass uns zurück zum Konstruktor `__init()__` gehen, um zu sehen, wie du `self` verwenden kannst. Hier fügen wir eine neue _persistente_ Eigenschaft/Attribut zum Objekt hinzu und weisen ihr einen Wert zu: `self.total = 0`. Es ist _persistent_, weil wir es zwar innerhalb der Methode erstellt haben, aber das veränderliche Objekt per Referenz übergeben wird und daher dem Objekt selbst zugewiesen wird. Jetzt kannst du diese Eigenschaft entweder von innen `self.total` oder von außen `number_sum.total` verwenden. Du kannst dir Eigenschaften wie Feld/Wert-Paare im Wörterbuch vorstellen, das wir beim Memory-Spiel verwendet haben, aber mit anderer Syntax: `objekt.eigenschaft` gegenüber `dictionary["feld"]`^[Tatsächlich werden alle Eigenschaften und Methoden in einem `__dict__`-Attribut gespeichert, also kannst du `number_sum.__dict__["total"]` schreiben, um darauf zuzugreifen.]. Technisch gesehen kannst du neue Eigenschaften in jeder Methode oder sogar von außen erstellen (z.B. hindert nichts daran, `number_sum.farbe = "rot"` zu schreiben). Allerdings macht das Verständnis des Codes viel schwieriger, daher wird empfohlen, _alle_ Eigenschaften innerhalb des Konstruktors `__init()__`-Verfahrens zu erstellen, sogar wenn dies bedeutet, ihnen `None` zuzuweisen^[Wenn du einen Linter verwendest, wird er jedes Mal protestieren, wenn er eine Eigenschaft sieht, die nicht im Konstruktor definiert ist].
+
+### `add`-Methode
+Lass uns eine Methode hinzufügen, die 1 zur `total`-Eigenschaft addiert.
+```python
+class Accumulator:
+   ... # Ich überspringe hier den gesamten vorherigen Code
+
+    def add(self):
+        """
+        Addiere 1 zu total
+        """
+        self.total += 1
+```
+
+Sie hat als erstes spezielles Argument `self`, das das Objekt selbst ist, und wir addieren einfach 1 zu seiner Eigenschaft `Total`. Nochmals: Denk daran, dass `self` automatisch übergeben wird, wenn du die Methode aufrufst, was bedeutet, dass ein tatsächlicher Aufruf wie `number_sum.add()` aussieht.
+
+Erstelle ein Jupyter-Notizbuch (das musst du als Teil der Aufgabe abgeben) und kopiere den Code für die `Accumulator`-Klasse, einschließlich der `.add()`-Methode. Erstelle **zwei** Objekte, nenne sie `counter1` und `counter2`. Rufe die `.add()`-Methode zweimal für `counter2` und dreimal für `counter1` auf (Bonus: mache es mit einer `for`-Schleife). Was ist der Wert der `.total`-Eigenschaft jedes Objekts? Überprüfe es, indem du es ausgibst.
+
+::: {.practice}
+Kopier den Code der [Accumulator]{.program-function}-Klasse und teste ihn in einem Jupyter-Notizbuch.
+:::
+
+### Flexibler Akkumulator mit einer `subtrahiere` Methode
+Jetzt erstellen wir eine neue Klasse, die ein _Nachfahre_ der `Akkumulator` ist. Wir nennen sie `FlexiblerAkkumulator`, da sie es dir auch ermöglicht, von der Gesamtzahl _abzuziehen_. Du spezifizierst die Vorfahren (es können mehr als einen geben!) in runden Klammern nach dem Klassennamen.
+
+```python
+class FlexibleAccumulator(Accumulator):
+    pass # Du musst mindestens eine nicht-leere Zeile haben, und pass bedeutet "tu nichts"
+```
+
+Jetzt hast du eine neue Klasse, die von `Accumulator` abstammt, aber bisher eine perfekte Kopie davon ist. Füge eine `subtract`-Methode zu der Klasse hinzu. Sie sollte `1` von der `.total`-Eigenschaft abziehen (vergiss nicht, sie zu _dokumentieren_!). Überprüfe, ob es funktioniert. Erstelle eine Instanz von `Accumulator` und eine weitere von der `FlexibleAccumulator`-Klasse und überprüfe, dass du `add()` auf beiden aufrufen kannst, aber `subtract()` nur auf der letzteren.
+
+::: {.practice}
+Füge die [subtract]{.program-function}-Methode zur [FlexibleAccumulator]{.program-function}-Klasse in einem Jupyter-Notizbuch hinzu. Füge Tests hinzu.
+:::
+
+## Methoden-Argumente
+Jetzt erstelle eine neue Klasse `SuperFlexibleAccumulator`, die sowohl `add()` als auch `subtract()` einen _beliebigen_ Wert hinzufügen kann. Überlege, von welcher Klasse sie erben sollte. Überarbeite beide `.add()` und `.subtract()` Methoden in dieser neuen Klasse, indem du einen `value`-Argument hinzufügst und diesen Wert hinzufügst oder abziehst, anstatt `1`. Beachte, dass du jetzt _zwei_ Argumente in jeder Methode `(self, value)` hast, aber du musst nur das letztere übergeben (wiederum wird `self` automatisch übergeben). Vergiß nicht, das `value`-Argument zu dokumentieren (aber du musst nicht `self` dokumentieren, da dessen Bedeutung feststeht).
+
+::: {.practice}
+Erstelle die [SuperFlexibleAccumulator]{.program-function}-Klasse und definiere super flexible [add]{.program-function}- und [subtract]{.program-function}-Methoden mit einem [value]{.program-function}-Parameter in einem Jupyter-Notizbuch. Teste sie!
+:::
+
+### Konstruktor-Argumente
+Obwohl `__init(...)__` ein spezieller Konstruktor ist, ist es immer noch eine Methode. Daher kannst du ihm Argumente übergeben, genau wie du es bei anderen Methoden tun würdest. Du übergibst diese Argumente, wenn du ein Objekt erstellst, also in unserem Fall innerhalb der Klammer für `counter = SuperFlexibleAccumulator(...)`.
+
+Mach den Code so um, dass du den Anfangswert übergibst, auf den total gesetzt wird, anstatt null.
+
+::: {.practice}
+Füge den Parameter [initial_value]{.program-function} zum Konstruktor der [SuperFlexibleAccumulator]{.program-function}-Klasse in einem Jupyter-Notizbuch hinzu. Test es!
+:::
+
+### Methoden aus anderen Methoden aufrufen
+Du kannst eine Funktion oder ein Objekt-Methode jederzeit aufrufen, also kannst du Methoden in Methoden verwenden. Lass uns unseren Code ändern, indem wir _Subtrahieren_ als _Hinzufügen eines negativen Werts_ betrachten. Ändere deinen Code so, dass `.subtract()` den Wert nur negiert, bevor er an `.add()` für die tatsächliche Verarbeitung übergeben wird. Dadurch wird `total` _nur_ innerhalb der `add()`-Methode verändert.
+
+::: {.practice}
+Ändere die [subtract()]{.program-function}-Methode von [SuperFlexibleAccumulator]{.program-function} damit du [add()]{.program-function} in einem Jupyter-Notizbuch nutzen kannst. Teste es!
+:::
+
+### Lokale Variablen
+Genauso wie bei normalen Funktionen können Methoden auch lokale Variablen haben. Sie sind lokal (nur innerhalb der Methode sichtbar und zugänglich) und nicht persistent (ihre Werte überleben nicht zwischen den Aufrufen). Konzeptionell trennst du Variablen, die persistent sein müssen (ihren Wert die ganze Zeit behalten, wenn das Objekt existiert), als Attribute/Properties und temporäre Variablen, die nur für die Berechnung selbst benötigt werden, als lokale Methoden-Variablen. Welten Wert hätte die Eigenschaft `.total` in diesem Beispiel:
+```python
+class Accumulator:
+    def __init__(self, initial):
+        temp = initial * 2
+        self.total = initial
+
+counter = Accumulator(1)
+```
+
+Und was ist hier los?
+```python
+class Accumulator:
+    def __init__(self, initial):
+        temp = initial * 2
+        self.total = temp
+
+counter = Accumulator(1)
+```
+
+## Flappy Bird: der einfache Anfang
+Wir fangen mit einer grundlegenden Gerüst für unser Programm an. Lade das [Vogelbild](material/Blue-Bird.png)^[Erstellt von [Madison Kingsford](https://openclipart.org/artist/Scout).] herunter und speichere es in einem Ordner, in dem du den Code aufbewahren wirst. Erstelle einen grundlegenden Code, der eine [Einstellungsdatei](settings-files) verwendet, die minimale Einstellungen für ein Fenster (Größe) und einen Vogel (Bilddatei) definiert. Organisiere es hierarchisch wie folgt, da dies uns helfen wird, die Einstellungen für verschiedene Klassen ordentlich zu halten.
+```json
+{
+  "Vogel": {
+    "Bild": "Blue-Bird.png"
+  },
+  "Fenster": {
+    "Größe": [800, 600]
+  }
+}
+```
+
+Erstelle ein [Fenster](https://psychopy.org/api/visual/window.html#psychopy.visual.Window) mit dieser angegebenen Größe und einen [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) mithilfe des Dateinamens aus der Einstellungsdatei. Füge eine grundlegende Spielschleife ein, in der du den Vogel (der genau in der Mitte des Bildschirms erscheinen sollte) wiederholt zeichnest und auf eine Tasteneingabe (_Escape_ sollte das Spiel beenden) überprüfst.
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+## Flappy Bird Klasse {#flappy-bird-klasse}
+Unser Flappy Bird ist im Grunde genommen ein Bild, aber wir möchten ihm zusätzliche Verhaltensweisen verleihen, wie zum Beispiel automatisch nach unten zu fallen aufgrund der Schwerkraft oder nach oben zu fliegen aufgrund des Flügelschlagens usw. Es gibt mehrere Möglichkeiten, dies zu tun. Wir können das Bild in [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) speichern und zusätzliche Funktionen schreiben, um es zu handhaben (wie wir es zuvor gemacht haben). Wir könnten eine neue Klasse `FlappyBird` erstellen, die [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) als ihr Attribut hat. Oder, wir könnten die Kraft der Vererbung nutzen und die `FlappyBird` Klasse auf der Grundlage von [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) aufbauen. Das bedeutet weniger Arbeit für uns, also ist das der Weg, den wir einschlagen werden.
+
+Erstelle eine neue Datei, die deine `FlappyBird`-Klasse enthalten wird. So sollte sie aussehen:
+```python
+"""Dein Kommentar, worum es in dieser Datei geht.
+"""
+# importiere Bibliotheken, welche brauchst du?
+
+class FlappyBird(visual.image.ImageStim):
+  """
+  FlappyBird-Klasse basierend auf ImageStim
+  """
+  def __init__(self, win, settings):
+    """
+    Konstruktor.
+    """
+    super().__init__(win, image=settings["Image"])
+```
+
+In dem obigen Code habe ich `FlappyBird` als Nachfolger von [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) definiert^[Beachte, dass du `ImageStim` zwar aus `visual` importieren kannst, es ist jedoch besser, seinen Untermodul für die Vererbung anzugeben: `visual.image.ImageStim`. Die Vererbung funktioniert für `ImageStim` sogar ohne diesen extra `.image`-Teil, wird jedoch für einige andere Reize aufgrund des sogenannten "lazy loading" von Klassen nicht funktionieren. Bei diesen anderen Klassen, wie `Rect`, bekommst du eine sehr mysteriöse Fehlermeldung, daher ist es besser, immer die vollständigen Pfade zur Klasse bei der Vererbung zu verwenden. Du kannst den vollständigen Pfad in der "Details"-Abschnitt der Dokumentation finden. Zum Beispiel ist der vollständige Pfad für die `Rect`-Klasse [psychopy.visual.rect.Rect](https://psychopy.org/api/visual/rect.html#details)]. Damit das Letztere funktioniert, müssen wir es richtig initialisieren, indem wir seinen Konstruktor aufrufen. Das tut der Aufruf von `super().__init__(...)`: Ruft den Konstruktor der Vorfahrklasse auf (`super()` bezieht sich auf den direkten Vorfahren), um all die Magie zu aktivieren, die wir wiederverwenden möchten. Beachte, dass [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) mindestens zwei Parameter benötigt: ein PsychoPy [Fenster]((https://psychopy.org/api/visual/window.html#psychopy.visual.Window)), dem der Reiz angehört, und ein Bild (ein Dateiname in diesem Fall). Hier nehme ich an, dass ich, wenn ich ein Vogel-Objekt erstelle (den Konstruktor aufrufe), _zwei_ Parameter übergebe (wieder kommt `self` "umsonst", also musst du es nicht explizit übergeben, aber du gehst davon aus, dass es das _erste_ Argument ist, das du bekommst): das [Fenster]((https://psychopy.org/api/visual/window.html#psychopy.visual.Window), das wir erstellt haben, plus ein Dictionary mit Einstellungen für den Vogel (es wird mehr Einstellungen geben, daher wäre es praktischer, das ganze Dictionary zu übergeben, anstatt einen Parameter nach dem anderen zu übergeben).
+
+Kopier und einfüg den Code (mit passenden Imports und Kommentaren) und verwende die `FlappyBird`-Klasse anstelle von [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim). Beachte, dass `FlappyBird` _alle_ Funktionalitäten von [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) erbt, also kannst du es auf die gleiche Weise verwenden, abgesehen davon, wie du es erstellst. Das bedeutet, du musst nichts anderes in deinem Code ändern (hab ich doch gesagt, das würde uns Zeit und Aufwand sparen!).
+
+::: {.program}
+Leg den Code der [FlappyBird]{.program-function}-Klasse in eine separate Datei. Verwende ihn stattdessen für [ImageStim]{.program-function} in [code02.py]{.program-filename}.
+:::
+
+## Ein Bird in passender Größe
+Unser Vogel ist total niedlich, aber viel zu groß. Füge eine neue Einstellung für ihn hinzu (ich schlage vor, sie `Größe` zu nennen und auf 0.1 zu setzen) und verwende sie im Konstruktor, indem du `size=...` zum Aufruf von `super().__init__` hinzufügst. Musst du etwas im Hauptcode ändern?
+
+::: {.program}
+Füge eine Einstellung für die Vogelhohe hinzu. Verwende sie im Konstruktor der [FlappyBird]{.program-function}-Klasse.
+:::
+
+## Flappy Bird fällt runter (meine Liebe)
+Bevor unser Vogel fliegt, muss es lernen, wie man runterfällt. Runterfallen ist einfach nur eine Änderung der vertikalen Position des Vogels basierend auf seiner vertikalen Geschwindigkeit. Wir haben bereits eine Eigenschaft für die (horizontale und) vertikale Position: `self.pos`, ein Tupel mit der `(x, y)`-Position des Bildschirmzentrums. Aber wir brauchen ein zusätzliches neues Attribut, das die vertikale Geschwindigkeit des Vogels codiert. Erstelle es im Konstruktor (wenn du vergessen hast, wie das geht, schau oben nach, wie wir das `total`-Attribut für die `Accumulator`-Klasse erstellen) und nenne es `vspeed`. Erstelle auch eine neue Einstellung (ich würde sie `"Anfangliche vertikale Geschwindigkeit"` nennen) und setze sie auf `-0.01`. Verwende diese Einstellung im Konstruktor, um `vspeed` zu initialisieren.
+
+Jetzt brauchen wir auch noch eine Methode, die den Standort des Vogels basierend auf seiner (aktuellen) Geschwindigkeit aktualisiert. Erstelle diese Methode unter dem Konstruktor (braucht sie neben dem obligatorischen `self` noch weitere Parameter?). Sie sollte einfach $y_{new} = y + vspeed$ berechnen und $y_{new}$ zurück an den `pos`-Attribut zuweisen ( beachte, dass du nicht nur die y-Koordinate zuweisen kannst, du musst das Tupel `(x, y)` verwenden, indem du den ursprünglichen x-Wert aus `pos` wiederverwendest). Vergesse nicht, die neue Methode zu dokumentieren!
+
+Jetzt musst du `update_per_frame()` auf _jedem_ Frame aufrufen, bevor du den Vogel zeichnest. Das sollte dafür sorgen, dass dein Vogel vom Bildschirm fällt! (Experimentiere mit der Einstellung `"Anfangliche vertikale Geschwindigkeit"` um ihn schneller oder langsamer oder sogar nach oben fallen zu lassen!)
+
+::: {.program}
+Aktualisiere die [FlappyBird]{.program-function}-Klasse. Benutze die [update_per_frame]{.program-function}-Methode in [code03.py]{.program-filename}.
+:::
+
+## Den Fall timen
+Momentan wird die Geschwindigkeit unseres Vogels beim Fallen in Norm-Einheiten pro _Frame_ gemessen. Das funktioniert, aber diese Einheiten sind nicht die bequemsten zum Nachdenken. Außerdem hängt es davon ab, dass PsychoPy (und der Rest unseres Codes) sicherstellt, dass die Zeit zwischen einzelnen Frames genau gleich ist. Das ist _meistens_ der Fall und ein gelegentlich langsamer Vogel ist kein großes Problem für ein Spiel. Allerdings könnte das ein Problem für ein echtes Experiment sein, das eine genaue Zeitmessung der Bewegung erfordert. Daher müssen wir über die vertikale Geschwindigkeit in Einheiten von Norm-Einheiten pro _Sekunde_ nachdenken und die Zeit zwischen Aufrufen selbst messen.
+
+Erstelle ein neues [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock)-Attribut, das die seit dem letzten Reset verstrichene Zeit zählt (ich würde es `frame_timer` nennen). Erstelle eine Methode `update()`, um $y_{new} = y + vspeed * T_{elapsed}$ zu berechnen, wobei $T_{elapsed}$ die zwischen den Bildern verstrichene Zeit ist. Vergiss nicht, den Timer zurückzusetzen! (Was passiert, wenn du es doch vergisst?)?)
+
+Jetzt setz du deine `"Anfangliche vertikale Geschwindigkeit"` auf einen vernünftigen Wert (z.B. 0.5) und überprüf, ob die Zeit, die der Vogel braucht, um vom Bildschirm zu fallen, vernünftig aussieht (bei 0.5 Norm-Einheiten pro Sekunde sollte er in zwei Sekunden vom Bildschirm fallen).
+
+::: {.program}
+Aktualisiere die [FlappyBird]{.program-function} Klasse mit einem Timer und der [update]{.progam-function} Methode. Verwende [update]{.progam-function} anstelle von [update_per_frame]{.progam-function} in [code04.py]{.program-filename}.
+:::
+
+## Das ist alles Newtons Schuld
+Jetzt fügen wir Schwerkraft hinzu, damit die Fallgeschwindigkeit ständig verändert wird. Erstelle eine neue Einstellung und nenne sie `"Schwerkraft"`. Setze es auf `-0.5` (Einheiten sind `normale Einheiten pro Sekundequadrat`), aber experimentiere später mit verschiedenen Werten. Die Beschleunigung aufgrund der Schwerkraft verändert die vertikale Geschwindigkeit genauso wie die Geschwindigkeit selbst die vertikale Position verändert^[D.h., Geschwindigkeit ist eine Ableitung der Position und Beschleunigung ist eine Ableitung der Geschwindigkeit]. Aktualisiere deine `update`-Methode, um die Geschwindigkeit basierend auf der Beschleunigung und der vergangenen Zeit zu ändern. Was musst du zuerst aktualisieren, die Geschwindigkeit oder den Standort? Und überlege auch, wie du die Beschleunigung speichern wirst: Sie befindet sich im Settings-Parameter, der nur im Konstruktor existiert. Du kannst entweder einen neuen Attribut speichern oder alle Einstellungen in einem Attribut für spätere Verwendung speichern.
+
+::: {.program}
+Aktualisiere die [FlappyBird]{.program-function}-Klasse mit der Beschleunigung aufgrund der Schwerkraft.
+:::
+
+## Flatter Vogel, flatter!
+Mach den Vogel "flattern" lassen, damit er in der Luft bleibt. Erstelle eine neue Einstellung `Flattergeschwindigkeit` und setze sie auf `0.4` (wie immer, experimentier' ruhig rum!). Füge eine neue Methode `.flap(self)` hinzu und setze darin einfach `vspeed` auf `Flattergeschwindigkeit`. So setzt ein einzelner Flatterschlag den Vogel mit `Flattergeschwindigkeit` nach oben, was jedoch durch die Schwerkraft ständig reduziert wird, sodass der Vogel schließlich wieder nach unten fällt.
+
+Im Hauptcode auf „Escape“- und „Space“-Tasten prüfen. Wenn die Leertaste gedrückt wird, rufe die Methode `.flap()` des Vogels auf. Prüfe, ob du den Vogel auf dem Bildschirm halten kannst, indem du das Drücken der Leertaste zeitlich abstimmst, oder ob du ihn nach oben vom Bildschirm wegfliegen lassen kannst.
+
+::: {.program}
+Füge die [flap]{.program-function}-Methode zur [FlappyBird]{.program-function}-Klasse hinzu. Verwende sie in [code05.py]{.program-filename}, wann immer der Spieler die _Leertaste_ drückt.
+:::
+
+## Bleib in der Luft
+In unserem Spiel verliert der Spieler entweder, wenn er auf ein Hindernis trifft (das wir noch nicht haben) oder wenn der Vogel unter die Bodenhöhe fällt, d.h. die untere Kante des Fensters. Erstelle eine neue Methode `is_airborne()`, die `True` zurückgibt, wenn die `y`-Position des Vogels über `-1` liegt (denke daran, du brauchst kein explizites `if` dafür und musst auch nicht `True` oder `False` irgendwo schreiben, überlege, wie das ohne diese gemacht werden kann).
+
+In der Hauptschleife fügst du die Überprüfung der Bedingung `bird.is_airborne()` hinzu, damit sie weiterläuft, bis der Spieler `"escape"` drückt oder der Vogel auf den Boden auftrifft.
+
+::: {.program}
+Füge die [is_airborne]{.program-function}-Methode zur [FlappyBird]{.program-function}-Klasse hinzu. Verwende sie in [code06.py]{.program-filename} als zusätzliche Bedingung für die Game-Schleife.
+:::
+
+## Computed attribute `@property`
+Wie im Abschnitt "Objektorientierte Programmierung" oben erklärt, beschreiben Properties den Zustand eines Objekts, während Methoden beschreiben, was ein Objekt tun kann oder was du mit einem Objekt machst. Unser `is_airborne()`-Methoden bricht diese Logik: Es beschreibt den _Zustand_ des Vogels, aber wir _rufen_ es (nutzen es) wie eine Methode. Was wir hier haben, ist eine _berechnete_ Property, die aus anderen Eigenschaften eines Objekts abgeleitet wird. In unserem Fall leiten wir die Eigenschaft `is_airborne` von `y` ab. Natürlich könnten wir `is_airborne` in den Konstruktor einbauen und es dann innerhalb der `update()`-Methode aktualisieren. Stattdessen werden wir jedoch ein cooles Feature namens [Decorators](https://www.python.org/dev/peps/pep-0318/) verwenden, um eine Methode in eine schreibgeschützte Property zu verwandeln. Das Einzige, was du tun musst, ist, den `@property`-Decorator direkt über der `def is_airborne(self):`-Zeile hinzuzufügen und die Klammern wegzulassen, wenn du ihn in der Hauptschleife verwendest (also nur `bird.is_airborne` statt `bird.is_airborne()`).
+
+`@property` sagt Python, dass die Methode direkt darunter **wird** (muss!) einen Wert zurückgeben und dass die Außenwelt sie nicht als Methode, sondern als _Eigenschaft_ sehen sollte. Du kannst es verwenden, um Eigenschaften nur lesbar zu machen, damit sie von außen nicht (einfach) verändert werden können, oder um Eigenschaften zu erstellen, die auf der Stelle berechnet werden, wie in unserem Beispiel.
+
+Beachte, dass der Unterschied nicht so sehr auf der praktischen Umsetzung (die Änderungen, die wir am Code vorgenommen haben, waren minimal) liegt, sondern auf konzeptioneller Ebene: Die Zustände von Objekten sollten Eigenschaften und keine Methoden sein. In unserem kleinen Beispiel mag dies übertrieben wirken, aber in einem mittelgroßen Projekt könnten selbst kleine konzeptionelle Unklarheiten das Verständnis des Codes erschweren.
+
+::: {.program}
+Mach aus [is_airborne]{.program-function} eine Eigenschaft. Benutz es als Eigenschaft in [code07.py]{.program-filename}.
+:::
+
+## Eine Lücke im Hindernis
+Unser Ziel im Spiel ist es, dass der Vogel fliegt und Hindernisse vermeidet. Ein Hindernis besteht aus zwei Rechtecken, einem, das von oben herausragt, und einem anderen von unten. Die Lücke zwischen ihnen gibt dem Vogel die Möglichkeit hindurchzufliegen. Also lass uns damit beginnen, einen Code zu schreiben (im Jupyter-Notizbuch), der eine zufällige Lücke generiert, die durch `y_bottom` und `y_top` gekennzeichnet ist, basierend auf vier Parametern:
+
+* `lower_margin` : der niedrigste mögliche Standpunkt des Bodens der Öffnung relativ zum Boden des Bildschirms, d.h. `y_bottom` kann nicht näher an -1 als dieser sein.
+* `upper_margin` : der höchste mögliche Standpunkt der Oberseite der Öffnung relativ zur Oberseite des Bildschirms, d.h. `y_top` kann nicht näher an 1 als dieser sein.
+* `min_size` : die minimale Größe der Öffnung, d.h. der minimale Abstand zwischen `y_top` und `y_bottom`.
+* `max_size` : die maximale Größe der Öffnung, d.h. der maximale Abstand zwischen `y_top` und `y_bottom`.
+
+Schreibe einen Code, der bestimmte Werte für jeden Parameter annimmt (z.B. `lower_margin = 0.2`, `upper_margin = 0.2`, `min_size = 0.2`, `max_size = 0.4`) und ein zufälliges Paar `(y_bottom, y_top)` generiert, das die Bedingungen erfüllt.
+
+::: {.practice}
+Schreibe einen zufälligen Öffnungscode in ein Jupyter-Notizbuch.
+:::
+
+## Ein Hindernis
+Jetzt erstellen wir eine `Obstacle`-Klasse (setze sie in eine separate Datei). Sie besteht aus zwei Rechtecken, eines ragt von oben und das andere von unten, mit einer zufälligen Öffnung dazwischen. Im Moment benötigst du sechs Einstellungen, um ein `Obstacle` zu beschreiben: Die vier Parameter, die eine zufällige Öffnung definieren, plus die Breite der Rechtecke und ihre Farbe. Beschreibe sie als separate Gruppe in den Einstellungsdateien (wahrscheinlich unter `"Obstacles"`) und übergebe sie an den Konstruktor der `Obstacle`-Klasse.
+
+Im Konstruktor, erzeuge eine zufällige Öffnung (du hast den Code dafür bereits) und erstelle die beiden Rechtecke, beide `width` breit, eines von oben bis `y_top`, das andere von unten bis `y_bottom`. Platziere beide horizontal am rechten Rand des Fensters, aber so, dass man sie sehen kann. Entscheide, wie du die beiden Rechtecke speichern wirst, du kannst sie in zwei verschiedene Attribute (z.B. `upper_rect` und `lower_rect`) oder in einer Liste unterbringen. Ich würde Letzteres vorschlagen, da es deinen zukünftigen Code vereinfachen wird. Überlege, welche Parameter du für die `__init__()`-Konstruktorfunktion benötigst.
+
+Du benötigst auch eine `draw()` Methode, die einfach beide Rechtecke zeichnet. Implementiere die Klasse in einer separaten Datei, dann erstelle und zeichne ein einzelnes Hindernis im Hauptcode, um zu prüfen, ob es richtig aussieht.
+
+::: {.program}
+Erstelle die [Obstacle]{.program-function}-Klasse in einer separaten Datei. Verwende sie in [code08.py]{.program-filename}.
+:::
+
+## Ein sich bewegendes Hindernis
+Konzepuell fliegt unser Vogel auf ein Hindernis zu, aber stattdessen werden wir die Wahrnehmung seiner Bewegung erzeugen, indem wir die Hindernisse von rechts nach links bewegen. Definiere eine neue `Geschwindigkeitseinstellung` für eine `Obstacle`-Klasse, sie sollte in `normaleinheiten pro Sekunde` sein und erstelle ein `update`-Verfahren, das die horizontale Position beider Rechtecke basierend auf der vergangenen Zeit zwischen den Aufrufen ändern würde. Dies ist ähnlich wie wir die Position des Vogels basierend auf seiner Geschwindigkeit aktualisiert haben, folge also der gleichen Logik und denke darüber nach, welche zusätzlichen Attribute du benötigst und wie du relevante Informationen speicherst und verwendest.
+
+Mach `update()` genau an der Stelle, wo du den Standort des Vogels im Hauptschleife aktualisierst und prüfe, ob das Hindernis von rechts nach links bewegt wird.
+
+::: {.program}
+Füge die [update]{.program-function}-Methode zur [Obstacle]{.program-function}-Klasse hinzu. Verwende sie in [code09.py]{.program-filename}.
+:::
+
+## An der Wand angelangt
+Im Moment fliegt unser Vogel durch das Hindernis, als ob es nicht da wäre. Aber es ist da! Zum Glück für uns macht PsychoPy das Implementieren davon sehr einfach, da es überprüfen kann, ob sich zwei Stimuli überlappen, indem es die Methode [overlaps()](https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps) eines von ihnen verwendet (und der zweite Stimulus wird als Argument übergeben).
+
+Also, um zu prüfen, ob der Vogel die Wand getroffen hat, müssen wir einfach nur eine Methode (nennen wir sie `check_if_hit`) in einer `Obstacle`-Klasse erstellen, die ein Vogel-Objekt entgegennimmt und prüft, ob es mit einem der Rechtecke [overlaps()](https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps) überlappt. Beachte, dass unser `FlappyBird` ein Nachfolger von [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) ist, also können wir es direkt an die [overlaps()](https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps)-Methode übergeben (Vorteile der Vererbung!).
+
+Im Hauptspielschleife, fügst du die Überprüfung hinzu, ob der Vogel das Hindernis _nicht_ trifft, zur Hauptbedingung hinzu (jetzt solltest du also drei Dinge überprüfen). Teste deinen Code, indem du den Vogel in die Wand fliegen lässt. Auch indem du deinen Vogel durch die Öffnung fliegen lässt. Beachte, dass du, wenn unsere Einstellungen zu schwierig sind, sie ändern kannst, um die Öffnung größer zu machen.
+
+::: {.program}
+Füge die [check_if_hit]{.program-function}-Methode zur [Obstacle]{.program-function}-Klasse hinzu. Verwende sie in [code10.py]{.program-filename}.
+:::
+
+## Hindernismanager
+Ein Spiel mit nur einem Hindernis ist langweilig, aber bevor wir mehr hinzufügen, brauchen wir eine Klasse, die sie für uns verwaltet. Lassen wir sie `ObstaclesManager` nennen. Im Moment wird sie einfach alle Funktionalität einwickeln, die wir im Hauptskript implementiert haben. Im Konstruktor sollte sie ein _Listen_-Attribut für Hindernisobjekte erstellen und ein erstes hinzufügen, und sie sollte Methoden `draw()`, `update()` und `check_if_hit()` implementieren, die für _alle_ Hindernisse auf der Liste gezeichnet, aktualisiert und auf eine Überlappung mit einem Vogel überprüft. Im Moment werden wir immer noch nur eines davon in der Liste haben, aber das Implementieren von Dingen in der Schleife bedeutet, dass es einfacher sein wird, mehr hinzuzufügen. Erstelle die Klasse und verwende sie dann im Hauptskript.
+
+Keine tatsächlichen Änderungen am Spielverlauf, nur eine Code-Umgestaltung. Aber es hilft uns, den Verwaltungsanteil vom Hauptskript zu verstecken (macht es einfacher zu verstehen) und wenn du alles richtig gemacht hast, sollte der Code "einfach funktionieren", sobald du `Obstacle` durch ein `ObstaclesManager`-Objekt ersetzt hast.
+
+::: {.program}
+Erstelle die [ObstaclesManager]{.program-function}-Klasse. Verwende sie in [code11.py]{.program-filename}.
+:::
+
+## Eine Menge Hindernisse
+Jetzt sind wir bereit, weitere Hindernisse hinzuzufügen. Du musst die `update`-Methode des `ObstaclesManager` aktualisieren, damit sie nach einem zufälligen Zeitintervall ein neues Hindernis zur Liste hinzufügt. Definiere eine neue Einstellung `Zeit bis zum Erscheinen`, eine Liste mit zwei Werten, die die minimale und maximale Zeit zwischen den Erscheinungen definieren, und erstelle einen [CountdownTimer](https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer) (oder eine [Uhr](https://psychopy.org/api/clock.html#psychopy.clock.Clock), erinnere dich, dass sie sich nur darin unterscheiden, ob die Zeit subtrahiert oder addiert wird). Sobald der Timer abgelaufen ist, füge ein neues Hindernis zur Liste hinzu, generiere eine neue Verzögerung und setze den Timer erneut. Beachte, dass du jetzt Einstellungen und ein Fenster im `update` benötigst, da sie zum Erstellen eines neuen Hindernisses erforderlich sind. Überlege dir, wie du sie später im Konstruktor speichern kannst.
+
+Hast du was im Hauptskript ändern müssen? Achte drauf, dass im Laufe der Zeit mehr Hindernisse auftauchen!
+
+::: {.program}
+Aktualisiere [update]{.program-function} der Klasse [ObstaclesManager]{.program-function}.
+:::
+
+## Redundante Hindernisse entfernen
+Sobald das Hindernis den linken Bildschirmrand passiert hat (seine x-Achsen-Position ist kleiner als `-1`), müssen wir es aus der Liste entfernen. Andernfalls verschwenden wir viel Zeit und Speicher, indem wir Hindernisse verfolgen und zeichnen, die weder relevant noch sichtbar sind. Überlege dir, wie du das umsetzen würdest, bevor du weiterliest.
+
+Erstmal müssen wir die horizontale Position eines Hindernisses berechnen. Du kannst sie aus dem `pos`-Attribut eines der Rechtecke ableiten und die Verwendung dieses Attributs (`pos` von `Obstacle`) eines Attributs (`obstacles` von `ObstaclesManager`) direkt umsetzen. Aber das Arbeiten mit Attributen von Attributen macht den Code schwerer lesbar und wartbar. Stattdessen füge eine neue berechnete Eigenschaft `x` zur `Obstacle`-Klasse hinzu, die eine einzelne Zahl (horizontale Position) zurückgibt, indem du den `@property`-Dekorator verwendest, den wir für das `is_airborne`-Dynamikattribut des Vogels verwendet haben.
+
+Aktualisiere die `update`-Methode des `ObstaclesManager`, um die Position des **ersten** Hindernisses in der Liste zu überprüfen. Wenn es kleiner als -1 ist, einfach [pop](https://docs.python.org/3.1/tutorial/datastructures.html) es aus der Liste. Warum das erste? Weil jedes andere Hindernis in der Liste später hinzugefügt wurde und daher weiter rechts sein muss. Warum **nur** das erste? Wenn wir eine vernünftige Bewegungsgeschwindigkeit und eine vernünftige Erzeugungsverzögerung voraussetzen, ist es sehr unwahrscheinlich, dass mehr als eines Hindernisses gleichzeitig die linke Kante erreicht.
+
+Achte drauf, dass du zuerst prüfst, ob das `obstacles`-Attribut nicht leer ist! Tipp: Eine leere Liste wird direkt in einer bedingten Anweisung als `False` ausgewertet. Debugge den Code, um sicherzustellen, dass die Hindernisse tatsächlich entfernt werden. Du kannst entweder einen anderen Abbruchpunkt verwenden (z.B. -0.25), um es einfacher zu machen, oder eine Unterbrechung an der Zeile einrichten, an der das überflüssige Hindernis entfernt wird (noch besser, mache beides!).
+
+::: {.program}
+Aktualisiere [update]{.program-function} der Klasse [ObstaclesManager]{.program-function}.
+:::
+
+## Punkte zählen
+Es ist schwer, mit deinen Vogel-Flugkünsten anzugeben, wenn du nicht weißt, wie viele Hindernisse du durchflogen hast. Lass uns die Punkte hinzufügen! Erstelle eine [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) (nenn sie `score_text`) und platziere sie irgendwo auf dem Bildschirm, z.B. in der oberen linken oder rechten Ecke. Initialisiere den Text auf `"0"`. Zeichne sie in der Hauptschleife. Stelle sicher, dass es funktioniert, bevor du fortfährst.
+
+Um den Score zu halten, müssen wir die Anzahl der Hindernisse zählen, die der Vogel auf jedem Frame überwindet, und sie zum Gesamt-Score hinzufügen. Wie beim Entfernen überflüssiger Hindernisse wird es entweder null oder ein Hindernis sein, das die Mitte des Bildschirms überquert. Aber in diesem Fall müssen wir nicht das linksseitige Hindernis überprüfen, sondern das _linksseitige_ unter denen, die die Mittellinie noch nicht überquert haben. Es gibt verschiedene Wege, wie du das angehen kannst, also denk erstmal darüber nach, wie du es angehen würdest, bevor du weiterliest. Und wenn du eine andere Lösung gefunden hast, nur zu - implementier es!
+
+Mein Ansatz ist, dem `Obstacle`-Klass eine neue Eigenschaft `scored = False` und eine Methode `score()` hinzuzufügen. In der `score()`-Methode wird überprüft, ob das Objekt die `0`-Linie überquert hat _und_ noch nicht bewertet wurde. Wenn ja, wird es als `scored` markiert und die Methode gibt `1` zurück. Andernfalls wurde das Objekt entweder bereits bewertet oder hat die Mittellinie noch nicht überquert, also gibt es `0` zurück. Anschließend habe ich eine `score()`-Methode für den `ObstaclesManager` hinzugefügt, die einfach die Gesamtpunktzahl (Summe der Punkte) aller Hindernisse in der Liste berechnet. In dem Hauptskript wird diese Punktzahl einer `score`-Variablen hinzugefügt, die wiederum verwendet wird, um `score_text` zu aktualisieren.
+
+::: {.program}
+Aktualisiere deinen Code und nutze ihn in [code12.py]{.program-filename}.
+:::
+
+## Eine Grundlage
+Das ist nur die Grundlage eines Spiels, also fühle dich frei, es zu erweitern. Animierter Vogel? Schwierigkeitsstufen? Verschiedene Arten von Hindernissen? Highscore-Tabelle?

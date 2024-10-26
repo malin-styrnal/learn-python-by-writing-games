@@ -2,15 +2,9 @@
 
 Heute wirst du dein erstes _Video_spiel Whack-a-Mole erstellen. Das Spiel selbst ist ein echter Reaktionszeit-Test: Marder/Ziele erscheinen nach einer zufälligen Verzögerung an einer der vordefinierten Stellen, die Aufgabe des Spielers besteht darin, den Marder/Ziel zu treffen (die entsprechende Taste zu drücken), bevor er verschwindet. Dein endgültiges Spiel sollte etwa so aussehen wie das im Video: Kreise (Marder) werden weiß, wenn ich die richtige Taste rechtzeitig drücke.
 
-```{r, eval=knitr::is_html_output(excludes = "epub"), results = 'asis', echo = F}
-cat(
-'<div style="text-align:center;"><video controls>
-    <source src="videos/whack-a-mole.m4v" type="video/mp4">
-  </video></div>'
-)
-```
+{{< video videos/whack-a-mole.m4v >}}
 
-Hol' dir das [Übungsheft](notebooks/Whack-a-mole.ipynb), bevor wir loslegen!
+Hol' dir das [Übungsheft](notebooks/06-Whack-a-mole-de.ipynb), bevor wir loslegen!
 
 ## Kapitelkonzepte
 

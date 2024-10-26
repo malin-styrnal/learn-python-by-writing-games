@@ -1,5 +1,5 @@
 # Python Grundlagen {#python-basics}
-Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch [erstellt](#files-folder). Lade das [Übungsheft](notebooks/Basics.ipynb) herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe [relevante Anweisungen](#jupyter-notebooks). Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.
+Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch [erstellt](#files-folder). Lade das [Übungsheft](notebooks/01-Basics-de.ipynb) herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe [relevante Anweisungen](#jupyter-notebooks). Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.
 
 ## Kapitelkonzepte
 
@@ -12,9 +12,9 @@ Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch [erstellt](#
 ## Variablen {#variablen}
 Der erste grundlegende Begriff, den wir uns aneignen müssen, ist die **Variable**. Variablen werden verwendet, um Informationen zu speichern, und man kann sie sich als Kiste mit einem Namensschild vorstellen, damit man etwas darin unterbringen kann. Das Namensschild auf dieser Kiste ist der Name der Variablen und ihr Wert ist das, was man darin speichert. Zum Beispiel können wir eine Variable erstellen, die die Anzahl der Beine eines Spielcharakters speichert. Wir beginnen mit einer für einen Menschen typischen Zahl.
 
-```{r echo=FALSE, out.width = "50%", fig.align = 'center'}
-knitr::include_graphics("images/variable-as-box.png")
-```
+
+![Variable als Kasten](images/variable-as-box.png){width=50%}
+
 
 In Python, du würdest schreiben:
 ```python

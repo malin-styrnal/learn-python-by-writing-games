@@ -1,0 +1,247 @@
+# Guitar Hero
+
+## Kapitelkonzepte
+
+* Treppenprozedur
+* Iterator / Generator-Funktionen
+* Spezielle Klassenmethoden
+
+## Schwierigkeit auf den Punkt bringen: Treppenprozedur
+In der Spielentwicklung ist es einer der schwierigsten Aspekte, die Schwierigkeit richtig hinzubekommen. Mach dein Spiel zu einfach und es wird langweilig. Mach es zu schwer und nur die hartgesottenen Fans werden spielen und das nur für eine [Leistung](https://www.imdb.com/title/tt4975856/). Du möchtest also, dass dein Spiel schwer genug ist, um den Spieler an seine Grenzen zu bringen, aber nicht viel schwerer, damit er nicht frustriert wird. Eine Möglichkeit, dieses Dilemma zu lösen, ist die Schaffung verschiedener voreingestellter Schwierigkeitsgrade. Eine alternative Möglichkeit ist die Erstellung eines Spiels, das seine Schwierigkeit an den Spieler anpasst.
+
+Gleiches gilt für psychophysikalische Experimente. Du möchtest die Fähigkeit deiner Teilnehmer, eine bestimmte Aufgabe an ihrer Grenze durchzuführen, testen, und das aus einem einfachen Grund: An diesem Schwellenpunkt ist der Einfluss jedes zusätzlichen Faktors, ob positiv oder negativ, am deutlichsten. Zum Beispiel: Verwende eine ungewöhnliche Reizkonfiguration oder erhöhe die Aufmerksamkeitslast, und die Leistung wird wahrscheinlich sinken. Lasse die Aufmerksamkeit durch Hinweise vorab zuweisen oder verwende einen Priming-Stimulus, der mit einem Ziel übereinstimmt, und die Leistung wird sich wahrscheinlich verbessern. Natürlich werden diese Manipulationen auch dann den gleichen Gesamt Effekt haben, wenn die Aufgabe besonders einfach oder frustrierend schwer ist, aber es wird viel schwieriger sein, diesen Effekt zu messen. Es ist etwas anderes, wenn die Leistung von 75% auf 65% sinkt, als wenn sie von 98% auf 95% oder von 53% auf 52% sinkt oder umgekehrt.^[Hier nehme ich an, dass 50% die Zufallsleistung ist.] Das Dümmste, was du tun kannst, ist zu hoffen, dass die Leistung den Effekt der Faktoren, die du manipuliert hast, erkennen lässt. In solchen Dingen ist Wissen und sorgfältige Planung definitiv besser als Hoffnung.
+
+Also, du möchtest die Leistung deiner Teilnehmer ungefähr in der Mitte zwischen der Decke (100% Leistung, schnellste Reaktionszeiten, super einfach) und dem Boden (Zufallslevel-Leistung, langsamste Reaktionszeiten, super schwer oder sogar unmöglich) haben. Aber wie weißt du, wo dieser magische Punkt für eine _bestimmte_ Person ist? Besonders, wenn die Aufgabe neu ist und du wenig Informationen hast, um dich zu orientieren^[Es ist das übliche Paradoxon, dass du, um eine Schwellenbedingung für eine bestimmte Aufgabe optimal zu messen, in der Nähe der Schwelle messen solltest. Aber wenn du bereits weißt, wo du messen sollst, musst du nicht messen.]. Die Lösung besteht darin, die Schwierigkeit basierend auf den Antworten des Teilnehmers dynamisch anzupassen. Zum Beispiel kannst du bei einer Aufgabe mit zwei Alternativen eine Zwei-auf-eins-abwärts-Treppe verwenden (die Schwierigkeit erhöht sich nach zwei richtigen Antworten und verringert sich nach einem Fehler), die auf eine 70,7%ige Leistung abzielt. Es gibt verschiedene Methoden und sogar verschiedene Möglichkeiten, die gleiche Kernmethode zu verwenden (z. B. bleibt der Schritt konstant oder ändert er sich, was sind die Abbruchkriterien für den Lauf usw.), daher ist es immer eine gute Idee, dein Wissen aufzufrischen und über [adaptive Verfahren](https://doi.org/10.3758/BF03194543) zu lesen, wenn du dein nächstes Experiment planst.
+
+In unserem Spiel verwenden wir eine sehr einfache 3-auf-1-abwärts Treppe: drei richtige Antworten hintereinander und das Spiel wird schneller, ein Fehler und das Spiel wird langsamer. Mal sehen, wie schnell du es schaffst! Zuerst implementierst du es selber und dann verwenden wir eine [PsychoPy-Implementierung](https://psychopy.org/api/data.html#stairhandler).
+
+## Guitar Hero
+Heute programmieren wir das Guitar Hero Spiel. Im Original musst du auf einem gitarrenförmigen Controller Knöpfe zur richtigen Zeit drücken, genau wie beim richtigen Gitarrenspiel. Einerseits ist es eine einfache und repetitive Bewegung. Andererseits kann es Minuten oder sogar Stunden dauern, um ein schnelles und kompliziertes Musikstück richtig zu spielen. Es macht unglaublich viel Spaß, da die Musik deine Reaktionen antreibt. Die gleiche Idee von musik-synchronisierten-Aktionen wurde in _Rayman Legends_ Musiklevels verwendet, bei denen Sprünge und Treffer auf Drums oder Bass abgestimmt sind. Es ist eine merkwürdig coole tanzähnliche Abfolge und ein sehr befriedigendes Erlebnis, auch wenn man Profis dabei zuschaut (ich hatte zufällig ein paar in meinem Haushalt).
+
+Wir programmieren dieses Spiel (aber ohne Guitar und Hero) und du kannst es im Video unten sehen. Der Spieler muss eine korrekte Taste (_links_, _unten_ oder _rechts_) drücken, sobald das Ziel die Linie überquert. Drücken zu früh oder zu spät zählt als Fehler. Natürlich wird es immer schwieriger, auf die Ziele zu reagieren, je schneller sie vorbeilaufen. Wie ich oben geschrieben habe, werden wir das 3-up-1-down-Verfahren verwenden, um dies auszugleichen.
+
+{{< video videos/guitar-hero.m4v >}}
+
+Wie immer gehen wir Schritt für Schritt vor:
+
+* Boilerplate-Code
+* Erstelle eine Klasse für einzelne bewegliche Ziele
+* Erstelle eine zeitgesteuerte Aufgabenklasse, die sie (mit coolen Generatoren) erstellt, entsorgt, die Antwort überprüft und die Treppe anpasst.
+* Füge nette Extras wie Punkte und zeitlich begrenzte Läufe hinzu.
+
+## Boilerplate
+Erstelle unser übliches Boilerplate-Code in [code01.py]{.filename}:
+
+* Erstelle eine Datei mit grundlegenden Einstellungen (z.B. Fenstergröße, ich habe 640×480 gewählt, aber du kannst jede Größe wählen, die auf deinem Bildschirm gut aussieht), die du später erweitern kannst.
+* Importiere das Notwendige aus PsychoPy.
+* Erstelle ein Fenster.
+* Erstelle unsere übliche Hauptspielschleife mit der `gamover`-Variablen, dem Umblättern des Fensters und der Überprüfung auf eine _Escape_-Tastendruck.
+
+::: {.program}
+Leg deinen Boilerplate-Code in [code01.py]{.program-filename} ab.
+:::
+
+## Ziel- und TimedResponseTask-Klassen
+Unser Hauptarbeitsgerät wird die `TimedResponseTask`-Klasse sein. Sie wird ein neues zufälliges `Ziel` in zufälligen Intervallen erzeugen (die von der Geschwindigkeit abhängen), die Geschwindigkeitsinformationen an die sich bewegenden Ziele weitergeben und Ziele entfernen, sobald sie unterhalb des Bildschirms verschwinden. Die `Ziel`-Klasse wird von der [visual.rect.Rect](https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect)-Klasse erben und hat einige zusätzliche Funktionen, um es an der richtigen Stelle erscheinen zu lassen, sich mit der richtigen Geschwindigkeit zu bewegen, seine Linienfarbe zu ändern (die eine korrekte Antwort anzeigt) und zu berechnen, ob es bereits vom Bildschirm verschwunden ist. Wir werden zunächst mit einem einzigen Ziel beginnen.
+
+## Zielklasse: ein statisches Ziel
+Erstelle zuerst eine `Ziel` Klasse: ein farbiger Rechteck in einer von drei Positionen, der oben im Fenster beginnt und sich mit einer bestimmten Geschwindigkeit nach unten bewegt. Ihr Konstruktor sollte ein PsychoPy-Fenster als Parameter entgegennehmen (das brauchst du, um das Rechteck zu erstellen), den Positionsindex (`ipos`, von 0 bis 2), die Geschwindigkeit (`speed`, in `"norm"`-Einheiten _pro Sekunde_) und gemeinsame Einstellungen (`settings`, ein Zielspezifisches Dictionary aus unserer Einstellungsdatei). Im Moment müssen wir im Konstruktor nur den Konstruktor der Vorfahrklasse `Rect()` über den Aufruf `super().__init__(...)` verwenden, ähnlich wie du die `FlappyBird`-Klasse initialisiert hast. Überlege dir, welche Parameter du übergeben musst, da du über die Position, Größe und Farbe des Rechtecks nachdenken musst. Speichere sowohl `ipos` als auch `speed` als Attribute für spätere Verwendung. Definiere außerdem ein `score`-Attribut und setze es auf `None`. Das wird die Punkte halten, die der Teilnehmer für dieses Ziel erzielt hat, und `None` bedeutet, dass noch nicht darauf reagiert wurde.
+
+Der zweite Parameter --- die Positionsindex --- bestimmt die horizontale Position des Ziels und dessen Farbe (um Ziele lustiger und unterscheidbarer zu machen). In meinem Code habe ich mich dafür entschieden, das Rechteck 0.4 Norm-Einheiten breit und 0.1 Norm-Einheiten hoch zu machen. Das ganz linke _rote_ Rechteck (für `ipos` 0) ist bei -0,5 zentriert, das mittlere _grüne_ ist genau in der Mitte und das ganz rechte _blaue_ Rechteck ist bei 0,5 zentriert. Ich habe all das in meiner `settings.json` Datei unter der `Target` Gruppe definiert. Überlege dir, wie du sowohl die Farbe als auch die Position für ein Ziel aus `ipos` und `settings` berechnen kannst, ohne if-else-Anweisungen zu verwenden. Überlege auch die y-Position des Rechtecks, damit es genau oben im Fenster erscheint.
+
+Mach es aus, indem du ein Ziel an einer der Positionen (oder drei Ziele an allen drei Positionen) erstellst und sie in der Hauptschleife zeichnest. Du solltest schöne, aber statische Rechteck(e) erhalten.
+
+::: {.program}
+Leg deinen aktualisierten Code in [code02.py]{.program-filename} und erstelle die Klasse [Target]{.program-class} in einer separaten Datei.
+:::
+
+## Zielklasse: ein sich bewegendes Ziel
+Unsere Ziele fallen mit einer Geschwindigkeit herab, die von ihrem `Geschwindigkeit`-Attribut definiert wird. Später werden wir dieses Attribut dynamisch ändern, um ihre Fallgeschwindigkeit zu beschleunigen oder zu verlangsamen.
+
+Für das eigentliche Fallen, implementierst du eine neue Methode, nenn sie `fall()`, die die Position des Ziels auf jedem Frame aktualisiert. Die Geschwindigkeit ist in `norm-Einheiten pro Sekunde`, also brauchst du auch die vergangene Zeit _in Sekunden_ seit der letzten Positionsaktualisierung, um die Änderung der vertikalen Position zu berechnen. Die einfachste Möglichkeit ist, die [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock)-Klasse zu verwenden. Du erstellst sie als Attribut im Konstruktor und verwendest dann in der `fall()`-Methode ihre aktuelle Zeit, um eine Änderung der vertikalen Position des Rechtecks zu berechnen und anzuwenden. Vergiss nicht, die Uhr danach zurückzusetzen! (Gleiche Logik wie bei dem Flappy Bird, das du bereits programmiert hast.)
+
+Mach mal `fall()` aufrufen in der Hauptschleife und schau zu, wie das Ziel fällt. Experimentier doch mal mit der Fallgeschwindigkeit!
+
+
+::: {.program}
+Füge den aktualisierten Code in [code03.py]{.program-filename} ein und aktualisiere die Klasse [Target]{.progam-class}.
+:::
+
+## Iterator/Generator-Funktionen
+Im nächsten Abschnitt werden wir eine `TimedResponseTask`-Klasse erstellen, die Ziele an einem zufälligen Ort und nach einem zufälligen Intervall generiert. Natürlich könnten wir das direkt in der Klasse machen, aber wo bleibt da der Spaß? Stattdessen nutzen wir diese Gelegenheit, um Iterator/Generator-Funktionen kennenzulernen. Ein Iterator ist eine _Funktion_, die `yield` statt `return` verwendet, um, na ja, _einen Wert zu liefern_. Sie liefert ihn, weil die Funktion selbst ein Iterator-Objekt zurückgibt, das du in einer for-Schleife oder über die `next()`-Funktion durchlaufen kannst. Wichtig ist, dass `yield` die Ausführung der Funktion "einfriert" und beim nächsten Aufruf der Funktion _von diesem Punkt_ weiterläuft, anstatt von Anfang an. Sobald du das Ende der Funktion erreichst, wird automatisch eine `StopIteration()`-Ausnahme ausgelöst, sodass du dir keine Gedanken darüber machen musst, wie du mitteilen kannst, dass du keine Items mehr hast. Es mag verwirrend klingen, aber es ist wirklich einfach. Hier ein Beispiel, um dies zu veranschaulichen:
+
+```{python}
+def iterator_fun():
+    yield 3
+    yield 1
+    yield "wow!"
+
+# Die Funktion gibt einen Iterator zurück, keinen Wert!
+print(iterator_fun())
+```
+
+```{python}
+# Iterieren mit einer for-Schleife
+for elem in iterator_fun():
+    print(elem)
+    
+```
+
+```{python}
+# Iterieren mit next(), beachte, dass du ein Iterator-Objekt verwendest,
+# das die Funktion zurückgibt, nicht die Funktion selbst!
+an_iterator = iterator_fun()
+
+# jetzt kannst du an_iterator verwenden, um ein nächstes Element davon zu erhalten
+print(next(an_iterator))
+print(next(an_iterator))
+print(next(an_iterator))
+```
+
+```{python}
+#| error: true
+
+# beim nächsten Aufruf wird eine Ausnahme StopIteration() ausgelöst
+print(next(iterator_var))
+```
+
+Dieses Format erleichtert das Schreiben von Iteratoren sehr, du musst nur `yield` geben, was und in welcher Reihenfolge du willst, und Python erledigt den Rest. Du kannst auch in einer Schleife, in einer if-else-Anweisung usw. `yield` geben. Schau dir den folgenden Code an und versuche herauszufinden, was gedruckt wird, bevor du ihn ausführst.
+```python
+def iterator_fun():
+  for e in range(4):
+    if e % 2 == 1:
+      yield e
+
+for element in iterator_fun():
+  print(element)
+```
+
+Für unsere `TimedResponseTask`-Klasse benötigen wir zwei _Generatoren_. Sie sind _Generatoren_ und keine _Iteratoren_, weil beide endlos sind (Iteratoren durchlaufen eine endliche Menge von Elementen). Einen, der eine zufällige Verzögerung bis zum nächsten Ziel generiert, und einen, der eine zufällige Zielposition (0, 1 oder 2) generiert. Implementiere beide in einer separaten Datei (ich habe sie [generators.py]{.filename} genannt).
+
+Die Funktion `time_to_next_target_generator()` sollte ein Tupel aus zwei Float-Werten als Parameter entgegennehmen, die die kürzeste und längste erlaubte Verzögerung definieren, und innerhalb dieses Bereichs eine [zufällige Zahl](https://docs.python.org/3/library/random.html#random.uniform) liefern. Wir benötigen eine endlose Schleife (`while True:` tut's), weil wir nicht wissen, wie viele Werte wir benötigen werden, also erzeugen wir einfach so viele wie benötigt auf Abruf.
+
+Die `next_target_generator()` wird ein bisschen interessanter. Es könnte einfach ein [random.choice](https://docs.python.org/3/library/random.html#random.choice) aus 0, 1 und 2 zurückgeben, aber wo bleibt da der Spaß? Stattdessen machen wir es ein bisschen komplizierter, um sicherzustellen, dass alle drei Ziele innerhalb von _3N_ Versuchen gleich oft auftreten, wobei _N_ ein Parameter der Generatorfunktion sein wird. Dies würde sicherstellen, dass die Ziele in der kurzen Laufzeit zufällig, relativ unvorhersehbar aber ausgewogen sind. Denk daran, dass die zufällige Wahl in der langen Laufzeit immer eine ausgewogene gleichmäßige Verteilung liefern wird, aber es gibt keine solche Garantie für die kürzeren Laufzeiten von wenigen Versuchen. Zunächst solltest du eine Liste erstellen, in der jedes Ziel _N_-mal vorkommt (denk darüber nach, wie du das mit [range()](https://docs.python.org/3/library/functions.html#func-range), [list()](https://docs.python.org/3/library/functions.html#func-list) und [*](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations) machen kannst). Dann erstellst du eine endlose Schleife (wieder wissen wir nicht, wie viele Werte wir benötigen), in der du 1) die Elemente der Liste mischst, 2) jeweils ein Element über eine for-Schleife ausgibst. Wenn du alle Elemente aufgebraucht hast, mischst du sie erneut und gibst sie wieder eins nach dem anderen aus. Dann wiederholst du das Ganze. Und wieder. Endlose Schleife!
+
+Ich würde vorschlagen, zuerst beide Funktionen in einem Jupyter-Notizbuch zu erstellen und zu testen und sie dann in eine separate Datei (z.B. [generators.py]{.filename}) zu packen. Sei vorsichtig, wenn du entscheidest, eine for-Schleife anstelle von `next()` zum Testen zu verwenden. Denk dran, sowohl Generatoren als auch werden nie ausgehen und haben immer Items, die sie für eine for-Schleife ausgeben können!
+
+::: {.program}
+Leg beide Generatoren in [generators.py]{.program-filename} ab.
+:::
+
+## TimedResponseTask-Klasse
+Jetzt sind wir bereit, die `TimedResponseTask`-Klasse zu erstellen. Zunächst wird sie Ziele an einer zufälligen Position (`next_target_generator()`) nach einem zufälligen Intervall (`time_to_next_target_generator()`) erzeugen und sich um das Bewegen und Zeichnen aller kümmern. Später kommen noch mehr Features dazu (Ziele entfernen, die den Bildschirm verlassen, Geschwindigkeit ändern, Antwortvalidität überprüfen usw.).
+
+**Für den Konstruktor**, brauchen wir auf jeden Fall ein PsychoPy-Fenster als Parameter, weil wir es jedes Mal brauchen, wenn wir ein neues Ziel erstellen. Außerdem müssen wir ein Dictionary mit Einstellungen für die Aufgabe (Anfangsgeschwindigkeit, ein Tupel mit Bereich für Zeitintervalle zwischen Zielen für `time_to_next_target_generator()` und Anzahl der Zielwiederholungen für `next_target_generator()`) und ein Dictionary mit Einstellungen für die `Target`-Klasse (wir brauchen es jedes Mal, wenn wir ein neues Ziel erstellen) übergeben. Wir werden diese Parameter auch außerhalb des Konstruktors verwenden, also speichere sie als Attribute. Erstelle außerdem ein Attribut `targets` und initialisiere es mit einer leeren Liste (dort werden wir `Target`-Objekte speichern), und erstelle Attribute für beide Generator-Objekte unter Verwendung der entsprechenden Parameter. Erstelle auch ein Attribut `speed_factor` und setze es auf 1. Wir werden es später verwenden, um die Bewegungsgeschwindigkeit und die Häufigkeit der Zielgenerierung zu steuern. Je höher der Faktor ist, desto schneller bewegen sich die Ziele und desto kürzer ist das Intervall zum Ziel und umgekehrt. Schließlich benötigen wir eine [Uhr](https://psychopy.org/api/clock.html#psychopy.clock.Clock)^[Warum nicht der CountdownTimer? Weil wir, wie du unten sehen wirst, die Zeit _mit_ dem Geschwindigkeitsfaktor zählen, so dass wir die Uhr "beschleunigen" können, was für den Timer etwas schwieriger zu implementieren ist.], die die Zeit bis zum Zeitpunkt zählt, an dem wir ein neues Ziel generieren müssen (`new_target_timer`), und ein Attribut, das diese Zeit speichern wird (`time_till_next_target`). Initialisiere Letzteres mit dem `next()`-Element aus dem Zeit-zu-nächstem-Ziel-Generator (erinnere dich, du musst das Attribut verwenden, das das von der Funktion zurückgegebene Generator-Objekt ist, nicht die Funktion selbst).
+
+Jetzt müssen wir drei Methoden hinzufügen: `draw`, `update` und `add_next_target`. Die erste ist einfach, sie zeichnet alle `targets` in einer Schleife. Die zweite ist auch einfach, sie lässt alle Ziele `fallen` und ruft nach der Schleife die `add_next_target`-Methode auf. Die `add_next_target`-Methode sollte überprüfen, ob die verstrichene Zeit für `new_target_timer` **mal den `speed_factor`** (je höher die Geschwindigkeit, desto schneller geht die Zeit bis zum nächsten Ziel) die `time_till_next_target` überschritten hat. Wenn dies der Fall ist, erstelle ein neues zufälliges Ziel (hole die `next()`-Position aus dem Positionsgenerator und vergiss nicht, `speed` _mal_ `speed_factor` zu übergeben!), füge es der Liste der Ziele hinzu, setze den Timer zurück und hole die neue `time_till_next_target` mithilfe des `next()`-Elements aus dem Zeitgenerator.
+
+In der Hauptdatei, erstell ein `TimedResponsTask`-Objekt (nenn es, wie du möchtest) und ruf seine `draw` und `update`-Methoden im Hauptschleife auf. Du solltest sehen, wie Ziele zufällig erscheinen und regelmäßig nach unten fallen.
+
+::: {.program}
+Leg deinen aktualisierten Code in [code04.py]{.program-filename} und erstelle die Klasse [TimedResponseTask]{.program-class}.
+:::
+
+## Ziele entsorgen
+Momentan fallen unsere Ziele immer noch runter, auch wenn sie schon unter dem Bildschirm sind. Das wird die Performance _erstmal_ nicht beeinflussen, aber es belastet sowohl den Speicher als auch den CPU, also sollten wir sie entsorgen. In der `Target`-Klasse erstellst du eine neue schreibgeschützte (berechnete) `@property` namens `is_below_the_screen`, die `True` zurückgibt, wenn die obere Kante des Ziels unter der unteren Kante des Bildschirms ist, ansonsten `False`. Natürlich brauchst du kein if-else dafür!
+
+Nächster Schritt: Füge in der `update`-Methode von `TimedResponseTask` eine zweite Schleife hinzu (oder ändere die bestehende Schleife), um alle Objekte zu löschen, die `is_below_the_screen` sind.
+
+Für das Debuggen, führe den Hauptcode aus, warte bis mindestens ein Ziel unter den Bildschirm fällt, setze einen Breakpoint und prüfe das `targets`-Attribut. Seine Länge sollte der Anzahl der sichtbaren Ziele entsprechen, nicht der insgesamt generierten Ziele.
+
+::: [.program]
+Aktualisiere die Klassen [Target]{.program-class} und [TimedResponseTask]{.program-class}.
+:::
+
+## Zielgerade
+Füge dem `TimedResponseTask` ein neues visuelles Attribut hinzu, das eine horizontale [Linie](https://psychopy.org/api/visual/line.html#psychopy.visual.Line) ist. Die Aufgabe des Spielers wird es sein, eine entsprechende Taste zu drücken, sobald ein Ziel die Linie kreuzt (mit ihr überlappt). Erstelle es zunächst als Attribut im Konstruktor (wähle die vertikale Position, die dir gefällt) und zeichne es innerhalb der `draw()`-Methode.
+
+::: {.program}
+Update die Klasse [TimedResponseTask]{.program-class}.
+:::
+
+## Antwort
+Jetzt wird's erst richtig spaßig! Wir lassen einen Spieler Tasten drücken und überprüfen, ob ein entsprechendes Ziel auf der Linie ist. Dafür benötigen wir neue Methoden für sowohl die `Target`- als auch die `TimedResponseTask`-Klassen. Für das `Target` implementierst du eine neue Methode namens `overlaps()`, die eine vertikale Position (der Ziellinie) als einzigen Float-Parameter entgegennimmt. In der Methode überprüfst du zuerst, ob das `score`-Attribut `None` ist. Wenn es nicht `None` ist, bedeutet das, dass der Spieler bereits auf das Ziel reagiert hat und sie dürfen nicht zweimal auf dasselbe Ziel reagieren. Wenn es `None` ist, berechnest du einen Score mithilfe der folgenden Formel:
+$$score = int \left(10 - 10 \cdot \frac{|y_{target} - y_{line}|}{h_{target} / 2} \right)$$
+wobei $y_{target}$ die vertikale Mitte des Ziels ist, $y_{line}$ die vertikale Position der Linie (die bekommst du als Funktionsparameter), $h_{target}$ die Höhe des Ziels ist, $|x|$ den absoluten Wert von $x$ bedeutet (nutze die [fabs](https://docs.python.org/3/library/math.html#math.fabs)-Funktion aus der _math_-Bibliothek dafür) und `10` ein beliebiger Skalierungsfaktor ist (du kannst jede ganze Zahl verwenden und in den Einstellungen speichern). Studiere die Formel und du wirst sehen, dass der Score 10 ist, wenn die Mitte des Ziels genau auf der Linie ist, aber linear mit jeder Verschiebung für sowohl frühe (die Mitte des Ziels ist über der Linie) als auch späte (die Mitte des Ziels ist bereits unter der Linie) Reaktionen abnimmt. Sobald das Ziel nicht mehr auf der Linie ist, wird der Score negativ. Wir konvertieren ihn in `int`, weil wir einfache Scores (Fließkommazahlen sehen hier unordentlich aus) möchten. Berechne den Score und speichere ihn in einer _vorübergehenden lokalen Variablen_. Wenn der Wert _positiv_ ist, bedeutet das Erfolg, also solltest du diesen Wert permanent im `score`-Attribut speichern, die Linienfarbe des Rechtecks in Weiß ändern (um dem Spieler zu zeigen, dass sie es richtig gemacht haben) und `True` zurückgeben (ja, das Ziel überschneidet sich mit der Linie!). Für alle anderen Ergebnisse gibst du `False` zurück. Das bedeutet, dass entweder die Reaktion bereits erfolgte oder das Ziel sich zum Zeitpunkt des Tastendrucks nicht mit der Linie überschneidet.
+
+In der `TimerResponseTask`-Klasse benötigen wir eine neue Methode `check()`, die die Position des Ziels basierend auf der Tasteneingabe bestimmt (also wenn ein Spieler die _linke_ Taste gedrückt hat, ist die Position $0$, _unten_ ist $1$ und _rechts_ ist $2$). Durchlaufe die Ziele und wenn die Position des Ziels (`ipos`-Attribut) mit der Position der Tasteneingabe (Parameter der Funktion) _und_ das Ziel die Linie überschneidet (die `overlaps()`-Methode gibt `True` zurück), gib den `score`-Attribut des Ziels zurück. Beachte, dass die Reihenfolge der Bedingungen hier wichtig ist! Du musst nur dann auf die Überschneidung prüfen, wenn die Zielposition mit der Taste übereinstimmt. Wenn du alle Ziele durchgelaufen hast und keines passt, bedeutet das, dass der Spieler eine falsche Taste oder zur falschen Zeit gedrückt hat, also solltest du `0` (bedeutet "Fehler") zurückgeben.
+
+Im Hauptschleifen-Code, fügst du `"left"`, `"down"` und `"right"` der Key-Liste des [getKeys()](https://psychopy.org/api/event.html#psychopy.event.getKeys)-Aufrufs hinzu. Wenn dann eine dieser drei Tasten gedrückt wird, übersetzt du das in eine Position, also 0, 1 oder 2 (überlege dir, wie du das ohne if-else mit einem Dictionary machen kannst), und rufst die neue `check`-Methode der `TimedResponseClass` auf. Teste den Code, die Ränder der Ziele sollten weiß werden, wenn du den Tastendruck richtig zeitest!
+
+::: {.progam}
+Füge den aktualisierten Code in [code05.py]{.program-filename} ein und aktualisiere die Klassen [Target]{.program-class} und [TimedResponseTask]{.program-class}.
+:::
+
+## Punkte
+Spielen macht mehr Spaß, wenn du sehen kannst, wie gut du bist. Lass uns einen simplen Punkteanzeiger hinzufügen, der sich mit der Antwortpunktzahl aktualisiert. Du weißt bereits, wie du das über den [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim)-Stimulus machen kannst, aber du weißt auch, wie du von einer Basisklasse erben und ihre Funktionalität erweitern kannst. Das werden wir hier machen, da die Klasse die Punkte aufzeichnet und anzeigt (diesen Teil übernimmt die Vererbung).
+
+Erstelle eine neue Klasse (ich habe sie `ScoreText` genannt), die von [visual.text.TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) erbt. Im Konstruktor musst du ein ganzzahliges Attribut erstellen, das den aktuellen `score` speichern wird, und es auf 0 initialisieren. Außerdem rufst du den Konstruktor des Vorfahren über `super().__init__(...)` auf, um den Textstimulus zu initialisieren und zu positionieren (ich habe die linke obere Ecke gewählt). Denk daran, welche Parameter der Konstruktor und der Konstruktor des Vorfahren benötigen.
+
+Als nächstes müssen wir den Score (sowohl seine numerische Form als auch den Text, den wir zeichnen) jedes Mal aktualisieren, wenn ein Teilnehmer eine Taste drückt. Wir könnten den Code außerhalb der Klasse implementieren, aber das ist keine so gute Idee, da es class-bezogenen Code woanders hinstellt. Wir könnten auch eine "normale" Methode implementieren, z.B. `add()`, die das übernimmt. Stattdessen werden wir eine _spezielle_ Methode [__iadd__](https://docs.python.org/3/reference/datamodel.html#object.__iadd__) implementieren, die es ermöglicht, "zu dem Objekt hinzuzufügen". Sie nimmt einen einzelnen Parameter (neben dem obligatorischen `self`) entgegen, führt die "Hinzufügung zu self" durch (was auch immer das in Bezug auf dein Objekt bedeutet, kann mathematische Addition für ein Attribut, Konkatenation der Zeichenkette, Hinzufügen zu der Liste sein, etc.) und **gibt die Referenz auf sich selbst zurück**, d.h., es gibt `self` zurück, nicht den Wert eines beliebigen Attributs! So funktioniert es:
+
+```{python}
+class AddIt():
+    def __init__(self):
+        self.number = 0
+        
+    def __iadd__(self, addendum):
+        self.number += addendum
+        return self # wichtig!!!
+
+
+adder = AddIt()
+print(adder.number)
+```
+
+```{python}
+adder += 10
+print(adder.number)
+```
+
+Mach das spezielle Method für deine Klasse, damit wir `score_stim += timed_task.check(...)` machen können. Vergiss nicht, sowohl numerische als auch visuelle Darstellungen des Scores in dieser Methode zu aktualisieren! Füge den Score in den Hauptcode ein.
+
+::: {.program}
+Aktualisiere deinen Code in [code06.py]{.program-filename}. Erstelle eine [ScoreText]{.program-class}-Klasse.
+:::
+
+## Treppe
+Wir werden die Treppe als Teil der `TimerResponseTask`-Klasse implementieren, damit sie sich selbst beschleunigen und verlangsamen kann. Dafür benötigen wir einen Attribut, der die Anzahl der _konsekutiven_ richtigen Antworten zählt (ich nenne es typischerweise `correct_in_a_row` oder so etwas). Erstelle und initialisiere es auf null im Konstruktor.
+
+Nächster Schritt: Erstelle eine neue Methode `staircase()`, die einen einzelnen Parameter (außer `self`) benötigt, um festzustellen, ob die Antwort `correct` oder nicht war. Wenn ja, erhöhe `correct_in_a_row` um eins und überprüfe, ob es 3 erreicht hat. Wenn ja, erhöhe den `speed_factor` indem du ihn mit einem gewählten Faktor multiplizierst (ich habe 1.3 gewählt) und setze `correct_in_a_row` auf 0 zurück. Das ist äquivalent dazu, einen logarithmischen Schritt zu verwenden, da unser `speed_factor` als Bruchteil seiner Größe angepasst wird. Andernfalls, wenn die Antwort nicht korrekt war, teile den `speed_factor` durch dieselbe Zahl (z.B. 1.3, um die Dinge zu verlangsamen) und setze erneut `correct_in_a_row` auf 0 zurück. Danach durchlaufe alle Ziele und aktualisiere ihre Geschwindigkeit basierend auf den `speed` und `speed_factor`-Attributen.
+
+Du musst diese Methode innerhalb der `check`-Methode aufrufen, überleg dir wann und wie.
+
+::: {.program}
+Aktualisiere die Klasse [TimedTaskResponse]{.program-class}.
+:::
+
+## Zeitlimit
+Mach es interessanter, indem du die Laufzeit auf 20 Sekunden beschränkst (du kannst natürlich deine eigene Dauer wählen und solltest definitiv eine Einstellung dafür festlegen). Füge eine zusätzliche äußere Schleife hinzu, damit das Spiel mehrfach gespielt werden kann. Sobald die Runde vorbei ist, zeige den aktuellen Zustand (zeichne alle Spielobjekte neu) sowie das "Runde vorbei"-Zeichen an und warte darauf, dass der Spieler entweder die _Escape_-Taste drückt (dann verlässt du das Spiel) oder die _Leertaste_ drückt (um die nächste Runde zu starten). Vergiss nicht, alle Spielobjekte für die nächste Runde neu zu erstellen (oder eine `reset`-Methode für alle zu erstellen).
+
+::: {.program}
+Füge aktualisierten Code in [code07.py]{.program-filename} ein.
+:::
+
+## PsychoPy's StairHandler verwenden
+Jetzt, wo du weißt, wie man eine sehr grundlegende Treppe programmiert, lass uns die viel flexiblere Implementierung von PsychoPy über die [StairHandler](https://psychopy.org/api/data.html#stairhandler)-Klasse verwenden. Wir werden sie verwenden, um die Treppe zu replizieren, die wir bereits implementiert haben. Allerdings ist sie zu viel mehr fähig und PsychoPy hat Implementierungen für andere adaptive Methoden, wie die parametrische [Psi](https://psychopy.org/api/data.html#psychopy.data.PsiHandler)- oder [Quest](https://psychopy.org/api/data.html#questhandler)-Ansatz. Ich empfehle dir dringend, die Literatur zu konsultieren, um zu entscheiden, welche Methode am besten für dein Experiment geeignet ist, und dann auf die PsychoPy-Implementierung in deinem Code zu vertrauen.
+
+Okay, wir müssen unser `TimedResponseTask` anpassen, also lass uns eine Kopie namens `TimedResponseTask2` (oder `TimedResponseTaskPsychoPy`, wenn dir das mehr Sinn ergibt) erstellen. Kopier einfach den gesamten Code, ändere den Namen und importiere ihn in deinem [code08.py]{.filename}. Achte darauf, dass alles genau so funktioniert wie vorher (weil du ja nichts weiter gemacht hast, als eine Kopie zu erstellen).
+
+Jetzt nutzen wir den [StairHandler](https://psychopy.org/api/data.html#stairhandler) in `TimedResponseTask2`. Wir entfernen das `correct_on_a_row`-Attribut und erstellen stattdessen einen [StairHandler](https://psychopy.org/api/data.html#stairhandler) als `stairhandler`-Attribut. Du musst den `startVal` angeben, der der Anfangswert für den `speed_factor` ist, also verwende einfach den Wert, den du vorher verwendet hast. Der [StairHandler](https://psychopy.org/api/data.html#stairhandler) verwendet standardmäßig `nUp=1` und `nDown=3`. Das entspricht unserer benutzerdefinierten Treppe, also könntest du theoretisch die Standardwerte verwenden, indem du diese Parameter weglässt. Aber zum Zwecke der Lesbarkeit des Codes solltest du sie explizit angeben. Unsere Schritte waren logarithmisch, also verwende `stepType="log"` und eine einzelne feste `stepSizes=-0.1`. Die Größe von `-0.1` entspricht ungefähr dem Schritt, den wir in der benutzerdefinierten Treppe verwendet haben, und wir benötigen das negative Vorzeichen, weil der [StairHandler](https://psychopy.org/api/data.html#stairhandler) den Treppenlevel nach einer falschen Antwort erhöht. In unserem Fall möchten wir jedoch das genaue Gegenteil, nämlich die Verringerung des `speed_factor`, um die Ziele zu verlangsamen. Daher das negative Vorzeichen, das die Erhöhung in eine Verringerung verwandelt. Schließlich wird der [StairHandler](https://psychopy.org/api/data.html#stairhandler) nach Erreichen entweder der gewünschten Anzahl von Versuchen (`nTrial`) oder Wendepunkten (`nReversals`, Änderungen von korrekt zu falsch oder umgekehrt) beendet. Das sind normalerweise die Einstellungen, die die Länge eines einzelnen Blocks/Laufs im realen Experiment bestimmen würden. Da wir unsere Runden jedoch nach _Zeit_ begrenzen, müssen wir nur sicherstellen, dass der [StairHandler](https://psychopy.org/api/data.html#stairhandler) nicht vor Ablauf der Spielrunde die Versuche ausreizt. Gib also eine sehr große Zahl (z. B. 1000) für beide Parameter an.
+
+Sobald du das Attribut `stairhandler` erstellt hast, ist es bereit für die Verwendung über `next(self.stairhandler)`. Rufe es das erste Mal im Konstruktor auf undweise den Wert, den es zurückgibt, dem Attribut `speed_factor` zu (es sollte immer noch der Wert von `startVal` sein, den du ihm zugewiesen hast, aber leg besser einen Breakpoint und überprüfe es nochmal!).
+
+Jetzt müssen wir unsere `staicase()` Methode vereinfachen. Zunächst entfernen wir den `if correct:... else:...` Code, aber wir lassen den Geschwindigkeitsanpassungscode für die Ziele intakt (den brauchen wir immer noch!). Dann lässt sich `stairhandler` selbst über die [addResponse()](https://psychopy.org/api/data.html#psychopy.data.StairHandler.addResponse) Methode anpassen, indem es Informationen darüber verwendet, ob die Antwort richtig war (du hast bereits einen Parameter mit genau dieser Information). Zum Schluss holen wir den nächsten `speed_factor` genau auf die gleiche Weise wie im Konstruktor. Fertig!
+
+::: {.program}
+Füge aktualisierten Code in [code08.py]{.program-filename} unter Verwendung von [TimedResponseTask2]{.program-class} ein.
+:::
+
+Dein Programm sollte jetzt ähnlich wie zuvor laufen, aber du hast jetzt viele mehr Möglichkeiten, es flexibler zu gestalten, und das fast ohne zusätzlichen Aufwand für dich (schau dir die Einstellungen von [StairHandler](https://psychopy.org/api/data.html#stairhandler) an) und es via einer der `saveAs`-Methoden zu protokollieren. Lass uns das Letztere machen, speichere die Stufenprotokolle via [saveAsText()](https://psychopy.org/api/data.html#psychopy.data.StairHandler.saveAsText), wenn ein Lauf beendet ist. Finde einen Weg, um einen eindeutigen Dateinamen für jeden Lauf zu erzeugen, damit die Protokolle nicht überschrieben werden.
+
+::: {.program}
+Speichere die Treppenprotokolle in [code09.py]{.program-filename}.
+:::
+
+## Das ist erst der Anfang!
+Wie immer, überlege dir, wie du das Spiel erweitern kannst. Eine Uhr, die die verbleibende Zeit anzeigt, fehlt definitiv. Akustische Rückmeldung wäre cool. Mehr Positionen? Zufällige Farben, um einen Spieler zu verwirren?

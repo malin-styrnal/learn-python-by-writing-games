@@ -1,0 +1,184 @@
+# Weihnachts-Spezial
+
+Heute programmieren wir eine Weihnachts-Spezialversion. Aber keine Sorge, das ist immer noch eine Gelegenheit, etwas Neues zu lernen. Du wirst lernen, wie man Listen zusammenfügt und wir werden beginnen, Einstellungen in eine separate Datei auszulagern. So sieht mein Weihnachtsbaum aus:
+
+Sure, here's the text translated to German with an informal tone and using "du":
+
+{{< video videos/christmas.m4v >}}
+
+## Kapitelkonzepte
+
+* Weihnachtsstimmung aufbauen
+* Durch Listen sausen
+* Einstellungen aus JSON- oder YAML-Datei laden.
+
+## Weihnachtsbaum
+Lass uns mit einem Weihnachtsbaum unsere Weihnachtsdekoration starten. Du kannst [den Baum, den ich gefunden habe](material/pine-tree.png) herunterladen^[Erstellt von [isaiah658](https://openclipart.org/artist/isaiah658).] oder ein Bild auswählen, das dir gefällt. Erstelle deinen grundlegenden PsychoPy-Code, um ein Fenster zu erstellen (wir werden später [Circle](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle) verwenden, also denke an geeignete Einheiten), ein [ImageStim](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) mit einem Baum, zeichne es und warte auf eine Tasteneingabe.
+
+::: {.program}
+Schreib deinen Code in [code01.py]{.program-filename}.
+:::
+
+## Weihnachtsbaumschmuck
+Für den Schmuck verwenden wir [Circle](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle)-Objekte in verschiedenen Größen und Farben. Wir könnten jedes separat mit eigenen festcodierten Werten erstellen, aber lass uns stattdessen drei Konstanten erstellen, die Listen gleicher Länge sind, die jeweils die Position jeder Kugel (`BALL_POS` wäre ein guter Name, jeder Eintrag sollte ein Tupel aus `(x, y)` sein), die Größe (`BALL_SIZE`) und die Farbe (`BALL_COLOR`, bleib bei `"rot"`, `"blau"` und `"gelb"`) beschreiben. Diese begrenzte Auswahl an bestimmten Farben wird später wichtig, wenn wir sie animieren.
+
+Erstelle eine Liste von Bällen, indem du über diese drei Listen iterierst. Du hast zwei Möglichkeiten: Du kannst entweder eine Indexvariable verwenden und einen Index mit `range()` mithilfe von `len()` einer der Listen erstellen (sie sollten alle die gleiche Länge haben). Aber lass uns einen coolen Trick verwenden, indem wir über ein `zip()` der Listen iterieren. `zip()` gibt dir ein Tupel, das ein Element aus jeder Liste kombiniert, das du auf der Stelle entpacken kannst, wie im folgenden Beispiel gezeigt (beachte, dass die Schleifenvariablen Werte in der Reihenfolge erhalten, in der du die Listen verwendet hast).
+```{python}
+zahlen = [1, 2, 3]
+buchstaben = ["A", "B", "C"]
+for eine_zahl, ein_buchstabe in zip(zahlen, buchstaben):
+  print("%d: %s"%(eine_zahl, ein_buchstabe))
+```
+
+Du kannst so viele Listen zusammenfassen, wie du willst. Wir wollen natürlich drei. Entscheide dich dafür, ob du `balls` als leere Liste erstellen und dann jeden neu erstellten [Circle](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle) in der Schleife hinzufügen möchtest oder [List Comprehension](#list-comprehension) verwendest. Vergesse nicht, die Bälle zu zeichnen und überlege dir, was du zuerst zeichnen solltest: den Baum oder die Bälle. Experimentiere mit der Position und den Größen, um es perfekt aussehen zu lassen.
+
+::: {.program}
+Mach weiter mit [code02.py]{.program-filename}.
+:::
+
+## Blink, blink, kleiner Stern
+Jetzt lass uns unsere Weihnachtskugeln blinken, wie im Video. Die Idee ist, dass nur eine Farbe "aktiv" ist, und zwar zur gleichen Zeit. Die Kugeln dieser Farbe sind "an" und die Kugeln anderer Farben sind "aus" (weiß oder grau, oder eine andere Farbe deiner Wahl). Jetzt wird unsere Anzeige dynamisch, also brauchst du eine Game-Schleife und die Möglichkeit, das Programm mit der _Escape_-Taste zu beenden.
+
+Dazu müssen wir eine Liste von Farben („rot“, „blau“, „gelb“) definieren, die wir durchlaufen können, und eine Variable, die den Index der gerade aktiven Farbe enthält (ich habe sie `icolor` genannt). Alle X Sekunden (ich mache es alle 0,5 Sekunden, definiere dies als Konstante, z.B. `TWINKLE_DURATION`), wird dieser Index erhöht, so dass die nächste Farbe in der Liste aktiv wird. Beachte, dass du ein Problem hast, das außerhalb des Bereichs liegt: Wenn du `icolor` auf 0 initialisierst und dreimal um 1 erhöhst, ist dein Index bereits zu groß (3, die Länge unserer `Farbenliste` ist 3, also ist der maximale Index 2). Du kannst entweder ein `if` benutzen, um das zu überprüfen, oder du kannst einen Restoperator `%` benutzen (denke an den Rest, wenn du _irgendeinen_ positiven Wert durch die Länge der `Farben`-Liste teilst).
+
+Wenn du aktualisieren musst, ob die Kugeln "an" oder "aus" sind, musst du in einer Schleife sowohl die Kugeln als auch ihre Farben in der ursprünglichen `BALLS_COLOR`-Liste durchgehen (wenn du eine Zeichenkette mit Farbnamen verwendest, wird sie in einen RGB-Wert übersetzt, so dass wir sie nicht direkt vergleichen können). Auch hier kannst du [zip()](https://docs.python.org/3/library/functions.html#zip) verwenden, um gleichzeitig eine Schleife durch die Weihnachtskugeln und ihre Farbe zu ziehen. Wenn ihre Farbe mit der aktiven Farbe übereinstimmt, sollte ihre `fillColor` diese Farbe sein. Wenn nicht, sollte ihre `fillColor` eine „neutrale“ / „off“-Farbe sein (weiß? grau?).
+
+Um die Zeit im Auge zu behalten, brauchst du eine Timer-Variable. Du kannst entweder [Clock](https://psychopy.org/api/clock.html#psychopy.clock.Clock) oder [CountdownTimer](https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer) verwenden. Sobald die `TWINKLE_DURATION` abgelaufen ist, aktualisiere die aktive Farbe, alle Bälle und vergesse nicht, den Timer zurückzusetzen.
+
+::: {.program}
+Schreib deinen Code in [code03.py]{.program-filename}.
+:::
+
+## Lass uns Krach machen!
+Lass uns ein bisschen Weihnachtsmusik einbauen! Lade [Deck the Halls Version von Kevin MacLeod](material/Deck%20the%20Halls%20B.ogg) herunter^[Deck the Halls B von Kevin MacLeod <http://incompetech.com> Creative Commons — Namensnennung 4.0 International — CC BY 4.0
+Kostenloser Download / Stream: <https://bit.ly/deck-the-halls-b> Musik beworben von Audio Library <https://youtu.be/RzjZ-WdVeyk>]. Dafür werden wir das [sound](https://psychopy.org/api/sound.html) Modul der PsychoPy Bibliothek verwenden, das Sounds auf die Schnelle generiert und auch Audio-Dateien in verschiedenen Formaten wie wav oder ogg (aber nicht mp3!) abspielt. Leider ist Sound überraschend kompliziert, es gibt viele Bibliotheken, die von PsychoPy verwendet werden können (Stand 2023 listet PsychoPy vier Backends auf), und manchmal funktioniert es nicht. Also, wenn die Musik bei dir nicht abgespielt wird, frag mich einfach und wir werden versuchen, deine Sound-Bibliotheken einzurichten.
+
+Die Verwendung von Sound ist sehr einfach. Zunächst musst du die Klasse `Sound` importieren, wie im Handbuch vorgeschlagen:
+```python
+from psychopy.sound import Sound
+```
+
+Dann brauchst du ein neues Objekt der `Sound`-Klasse, wobei du den Dateinamen als ersten Parameter angibst (ich habe die Variable `song` dafür verwendet). Kurz bevor du mit der Schleife beginnst, spielst du den Ton mit `.play()` ab. Beachte, dass du den Ton explizit mit seiner `.stop()`-Methode zurückspulen musst, wenn du ihn erneut abspielen möchtest. Aus irgendeinem Grund stoppt der Ton am Ende, wird aber nicht zurückgespult, sodass er beim erneuten Abspielen bereits am Ende ist und ohne etwas abzuspielen stoppt.
+
+::: {.program}
+Mach weiter mit [code04.py]{.program-filename}.
+:::
+
+## Dateiformate für Einstellungen {#einstellungen-dateien}
+Bisher haben wir entweder bestimmte Werte hartcodiert oder sie als Konstanten definiert (einer dieser Ansätze ist besser als der andere). Allerdings bedeutet das, dass du, wenn du dein Spiel mit anderen Einstellungen ausführen möchtest, das Programm selbst ändern musst. Und wenn du zwei Versionen des Spiels haben möchtest (zwei experimentelle Bedingungen), würdest du zwei Programme benötigen, mit allen Problemen, die das Pflegen von nahezu identischem Code an mehreren Stellen gleichzeitig mit sich bringt.
+
+Eine bessere Methode ist, separate Dateien mit Einstellungen zu haben, damit du den Code konstant halten und spezifische Parameter ändern kannst, indem du festlegst, welche Einstellungsdatei das Programm verwenden soll. Das ist sogar hilfreich, wenn du nur eine einzige Satz von Einstellungen planst, da es den Code von Konstanten trennt, letztere alle an einem Ort zusammenführt und das Editieren und Überprüfen erleichtert. Es gibt mehrere Formate für Einstellungsdateien: XML, INI, JSON, YAML usw. Unser Format der Wahl für heute wird JSON sein. Allerdings ist das eine Frage des Geschmacks. Ich persönlich bevorzuge YAML aus subjektiven Gründen (weniger geschweifte Klammern und Anführungszeichen), aber du bist frei, jedes Format zu verwenden, das du magst. Wie du sehen wirst, macht das wenig Unterschied für den eigentlichen Python-Code.
+
+### XML
+[XML](https://de.wikipedia.org/wiki/Extensible_Markup_Language) --- eine erweiterbare Markup-Sprache --- sieht ähnlich aus wie HTML (HyperText Markup Language). Experimente, die mit der PsychoPy Builder entworfen wurden, werden in XML-Dateien mit der [.psyexp-Erweiterung](https://www.psychopy.org/psyexp.html) gespeichert. Eine Einstellungsdatei für unser Weihnachtsprogramm in XML könnte so aussehen:
+```XML
+<Bälle>
+  <Ball>
+    <Position>
+      <x>0.1</x>
+      <y>0.2</y>
+    </Position>
+    <Größe>0.01</Größe>
+    <Farbe>rot</Farbe>
+  </Ball>
+  <Ball>
+    <Position>
+      <x>0.2</x>
+      <y>0.1</y>
+    </Position>
+    <Größe>0.02</Größe>
+    <Farbe>gelb</Farbe>
+  </Ball>
+ ...
+</Bälle>
+<Zeitplang>
+  <Blinkendauer>0.5</Blinkendauer>
+</Zeitplan>
+```
+
+Der Vorteil von XML besteht darin, dass es sehr flexibel, aber gleichzeitig strukturiert ist und du die [native Python-Interface](https://docs.python.org/3/library/xml.html) verwenden kannst, um damit zu arbeiten. Allerdings ist XML für Menschen nicht leicht zu lesen, es ist übertrieben für unsere Zwecke, nur eine einfache Sammlung von eindeutigen Konstanten zu haben, und seine Leistungsfähigkeit bedeutet, dass seine Verwendung relativ umständlich ist (ich verwende `\` zum Aufteilen einer einzelnen Zeile in viele Zeilen).
+
+```python
+from xml.dom import minidom
+settings = minidom.parse('settings.xml')
+# so bekommst du die Größe der ersten Kugel
+size = settings.getElementsByTagName("Bälle")[0]. \
+                getElementsByTagName("Ball")[0]. \
+                getElementsByTagName("Größe")[0].firstChild.data
+```
+
+### INI
+Das ist ein Format mit einer Struktur, die der in MS Windows INI-Dateien ähnelt.
+```ini
+[Bälle]
+    x = 0.1, 0.2
+    y = 0.2, 0.1
+    Größe = 0.01, 0.02
+    Farbe = rot, gelb
+[Zeitplan]
+    Blinkendauer = 0.5
+```
+
+Das ist einfacher zu lesen und Python hat eine spezielle [configparser](https://docs.python.org/3/library/configparser.html) Bibliothek, um damit zu arbeiten. Das Objekt, das du bekommst, ist im Grunde genommen ein Wörterbuch mit zusätzlichen Methoden und Attributen. Allerdings versucht `ConfigParser` nicht, den Datentyp zu erraten, also werden alle Werte als _Strings_ gespeichert und es ist deine Aufgabe, sie in den benötigten Typ, z.B. Ganzzahl, Liste usw., umzuwandeln.
+
+```python
+import configparser
+einstellungen = configparser.ConfigParser()
+einstellungen.read('einstellungen.ini')
+einstellungen['Bälle']['Größe']  # das gibt dir einen String '0,01, 0,02'
+```
+
+### JSON
+[JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation) (JavaScript Object Notation) ist ein beliebtes Format, um Daten für Webanwendungen zu serialisieren, die es verwenden, um Daten zwischen einem Server und einem Client auszutauschen.
+```json
+{
+  "Bälle": {
+    "Position": [[0.1, 0.2], [0.2, 0.1]],
+    "Größe": [0.01, 0.02],
+    "Farbe": ["rot", "gelb"]
+  },
+  "Zeitplan": {
+    "Blinkdauer": 0.5
+  }
+}
+```
+
+Du kannst jeden _String_ im JSON-Format in ein Dictionary in Python mit dem [json](https://docs.python.org/3/library/json.html)-Modul parsen. Im Vergleich zu INI-Dateien hat JSON den Vorteil, dass es den Datentyp explizit angibt (d.h. Strings sind in Anführungszeichen), sodass es automatisch konvertiert wird. Beachte, dass im Gegensatz zu configparse das json-Modul keine Dateien direkt verarbeitet, also musst du es manuell öffnen (ignoriere den `with`-Zauber für den Moment, du wirst später mehr darüber lernen, wenn wir über Kontextmanager sprechen).
+```python
+import json
+with open('settings.json') as json_file:
+    settings = json.load(json_file)
+
+settings["Bälle"]["Größe"] # das wird eine Liste [0.01, 0.02] zurückgeben
+```
+
+### YAML{#yaml}
+[YAML](https://de.wikipedia.org/wiki/YAML) (YAML Ain't Markup Language, rhymes with camel) ist sehr ähnlich wie JSON, aber seine Konfigurationsdateien sind für Menschen leichter zu lesen. Es hat weniger spezielle Symbole und geschweifte Klammern, aber wie in Python musst du auf die Einrückungen achten, da sie die Hierarchie bestimmen.
+```yaml
+Bälle:
+  Position: [[0.1, 0.2], [0.2, 0.1]]
+  Größe: [0.01, 0.02]
+  Farbe: ["rot", "gelb"]
+Zeitplan:
+  Blinkdauer: 0.5
+```
+
+Du benötigst eine Drittanbieterbibliothek [pyyaml](https://pyyaml.org/), um mit YAML-Dateien zu arbeiten. Du bekommst das gleiche Dictionary wie für JSON
+```python
+import yaml
+with open("settings.yaml") as yaml_stream:
+    settings = yaml.safe_load(yaml_stream)
+
+settings["Balls"]["size"] # das wird eine Liste [0.01, 0.02] zurückgeben
+```
+
+## Settings verwenden
+Schau dir deine [code04.py]{.filename} an und identifiziere Konstanten und hartcodierte Werte, die du in eine Settings-Datei packen solltest. Zum Beispiel definitiv Konstanten, die Weihnachtsbälle und Twinkle-Dauer beschreiben, aber möglicherweise auch die Größe des Fensters, den Namen des Weihnachtsbaums und die Song-Dateien usw. Im Allgemeinen packe ich jeden solchen Wert in die Settings, sogar wenn er nur einmal verwendet wird (wie bei der Fenstergröße), weil ich dann weiß, dass _alle_ Konstanten in der Settings-Datei sind. Auf diese Weise gibt es einen einzigen, ordentlich organisierten Ort, an dem ich nachprüfen kann, und ich muss nicht durch den Code suchen, um einen bestimmten Wert herauszufinden.
+
+Nachdem du alle deine Konstanten in die Einstellungen-Datei (entweder JSON oder YAML) übertragen hast, füge den Code ein, der sie am Anfang lädt und verwende das settings-Dictionary anstelle der Konstanten.
+
+::: {.program}
+Mach weiter mit [code05.py]{.program-filename}.
+:::
+
+## Frohe Weihnachten und ein gutes Neues Jahr! {-}
