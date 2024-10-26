@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/06-whack-a-mole.html" />
-<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html" />
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/06-whack-a-mole.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
@@ -56,11 +56,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./07-memory.html" rel="next">
 <link href="./05-psychopy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script><link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html" id="language-link-de">Deutsch</a></li></ul>
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/06-whack-a-mole.de.html" id="language-link-de">Deutsch</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -173,13 +175,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Christmas special</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#chapter-concepts" id="toc-chapter-concepts" class="nav-link active" data-scroll-target="#chapter-concepts"><span class="header-section-number">6.1</span> Chapter concepts</a></li>
+  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="header-section-number">6.2</span> Lists</a></li>
+  <li><a href="#basic-game-scaffolding" id="toc-basic-game-scaffolding" class="nav-link" data-scroll-target="#basic-game-scaffolding"><span class="header-section-number">6.3</span> Basic game scaffolding</a></li>
+  <li><a href="#three-moles" id="toc-three-moles" class="nav-link" data-scroll-target="#three-moles"><span class="header-section-number">6.4</span> Three moles</a></li>
+  <li><a href="#for-loop" id="toc-for-loop" class="nav-link" data-scroll-target="#for-loop"><span class="header-section-number">6.5</span> For loop</a></li>
+  <li><a href="#drawing-in-a-loop" id="toc-drawing-in-a-loop" class="nav-link" data-scroll-target="#drawing-in-a-loop"><span class="header-section-number">6.6</span> Drawing in a loop</a></li>
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><span class="header-section-number">6.7</span> range() function: Repeating code N times</a></li>
+  <li><a href="#random-mole" id="toc-random-mole" class="nav-link" data-scroll-target="#random-mole"><span class="header-section-number">6.8</span> A random mole</a></li>
+  <li><a href="#clock-wait" id="toc-clock-wait" class="nav-link" data-scroll-target="#clock-wait"><span class="header-section-number">6.9</span> Random time</a></li>
+  <li><a href="#repeating-trials" id="toc-repeating-trials" class="nav-link" data-scroll-target="#repeating-trials"><span class="header-section-number">6.10</span> Repeating trials</a></li>
+  <li><a href="#waitKeys-maxwait" id="toc-waitKeys-maxwait" class="nav-link" data-scroll-target="#waitKeys-maxwait"><span class="header-section-number">6.11</span> Exit strategy</a></li>
+  <li><a href="#whacking-that-mole" id="toc-whacking-that-mole" class="nav-link" data-scroll-target="#whacking-that-mole"><span class="header-section-number">6.12</span> Whacking that mole</a></li>
+  <li><a href="#you-did-it" id="toc-you-did-it" class="nav-link" data-scroll-target="#you-did-it"><span class="header-section-number">6.13</span> You did it!</a></li>
+  </ul></nav>
+</div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="whack-a-mole" class="quarto-section-identifier"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></h1>
@@ -197,10 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Today you will create your first <em>video</em> game Whack-a-Mole. The game itself is very much a reaction time experiment: moles/targets appear after a random delay at one of the predefined locations, the player’s task is to whack (press a corresponding button) the mole/target before it disappears. Your final game should look approximately like the one in the video: Circles (moles) turn white, if I hit the correct button in time.</p>
-<div style="text-align:center;">
-<video controls=""><source src="videos/whack-a-mole.m4v" type="video/mp4"></source></video>
-</div>
-<p>Grab the <a href="notebooks/Whack-a-mole.ipynb">exercise notebook</a> before we start!</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="videos/whack-a-mole.m4v"></source></video></div>
+<p>Grab the <a href="notebooks/06-Whack-a-mole.ipynb">exercise notebook</a> before we start!</p>
 <section id="chapter-concepts" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="chapter-concepts">
 <span class="header-section-number">6.1</span> Chapter concepts</h2>
 <ul>
@@ -229,26 +269,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do exercise #4.</p>
 </div>
 <p>Slicing can be extended by specifying a <code>step</code> via <code>start:stop:step</code> notation. <code>step</code> can be negative, allowing you to build indexes in the reverse order:</p>
-<div class="cell">
+<div id="c34229af" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>[5, 4, 3, 2]</code></pre>
 </div>
 </div>
 <p>However, you must pay attention to the sign of the step. If it goes in the wrong direction then <code>stop</code> cannot be reached, Python will return an empty list.</p>
-<div class="cell">
+<div id="2d12b506" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>[]</code></pre>
 </div>
 </div>
 <p>Steps can be combined with omitted and negative indexes. To get every <em>odd</em> element of the list, you write <code>my_pretty_numbers[::2]</code>:</p>
-<div class="cell">
+<div id="6a21fe59" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[::<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[1, 3, 5, 7]</code></pre>
 </div>
 </div>
@@ -260,37 +300,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do exercise #6.</p>
 </div>
 <p>In Python lists are dynamic, so you can always add or remove elements to it, see <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">the list of methods</a>. You can add a new item to the of the end of the list via <code>.append(&lt;new_value&gt;)</code> method</p>
-<div class="cell">
+<div id="20e634e1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.append(<span class="dv">10</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>[1, 2, 3, 4, 5, 6, 7, 10]</code></pre>
 </div>
 </div>
 <p>Or, you can <code>insert(&lt;index&gt;, &lt;new_value&gt;)</code> <em>before</em> an element with that index. Unfortunately, this means that you can use an arbitrary large index and it will insert a new value as a <em>last</em> element without generating an error.</p>
-<div class="cell">
+<div id="f55f31e7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">2</span>, <span class="dv">10</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">500</span>, <span class="dv">20</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[1, 2, 10, 3, 4, 5, 6, 7, 20]</code></pre>
 </div>
 </div>
 <p>You can remove an item using its index via <code>pop(&lt;index&gt;)</code>, note that the item is <em>returned</em> as well. If you omit the index, <code>pop()</code> removes the <em>last</em> element of the list. Here, you can only use valid indexes.</p>
-<div class="cell">
+<div id="42f1eaca" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="op">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>7</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>4</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="dv">3</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>[1, 2, 3, 5, 6]</code></pre>
 </div>
 </div>
@@ -300,11 +334,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="basic-game-scaffolding" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="basic-game-scaffolding">
 <span class="header-section-number">6.3</span> Basic game scaffolding</h2>
 <p>Phew that was <em>a lot</em> about lists<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. However, <a href="https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy">All work and no play makes Jack a dull boy</a>! So let us start with a basic PsychoPy scaffolding. Here the code structure:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> libraries (<span class="im">from</span> psychopy)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>create the PsychoPy window (visual.Window())</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>flip the window (.flip())</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> a player to press the escape key (event.waitKeys())</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>close the window (.close())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> libraries (<span class="im">from</span> psychopy)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>create the PsychoPy window (visual.Window())</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>flip the window (.flip())</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> a player to press the escape key (event.waitKeys())</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>close the window (.close())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Try doing it from scratch. I have left hints to help you with this and you can always consult the <a href="https://psychopy.org/api/index.html">online documentation</a>. Do not forget to document the file and to split your code into meaningful chunks with comments (if needed).</p>
 <div class="program">
 <p>Put your code into <span class="program-filename">code01.py</span>.</p>
@@ -319,13 +353,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="for-loop" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="for-loop">
 <span class="header-section-number">6.5</span> For loop</h2>
 <p>In the code above, we needed to iterate over three moles (circles) that we had in a list. Python has a tool just for that: a <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements">for loop</a> that iterates over the items in any sequence (our list is a sequence!). Here is an example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">42</span>]</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a_number <span class="kw">in</span> numbers:</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of a_number variable on this iteration is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    a_number <span class="op">=</span> a_number <span class="op">+</span> <span class="dv">3</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we incremented it by 3: </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we use in a formula a_number / 10: </span><span class="sc">%g</span><span class="st">"</span><span class="op">%</span>(a_number <span class="op">/</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3c3fac34" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">42</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a_number <span class="kw">in</span> numbers:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of a_number variable on this iteration is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    a_number <span class="op">=</span> a_number <span class="op">+</span> <span class="dv">3</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we incremented it by 3: </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Now we use in a formula a_number / 10: </span><span class="sc">%g</span><span class="st">"</span><span class="op">%</span>(a_number <span class="op">/</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Value of a_number variable on this iteration is 2
   Now we incremented it by 3: 5
@@ -352,9 +386,9 @@ Value of a_number variable on this iteration is 42
 </section><section id="range" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="range">
 <span class="header-section-number">6.7</span> range() function: Repeating code N times</h2>
 <p>Sometimes, you might need to repeat the code several times. For example, imagine that you have 40 trials in an experiment. Thus, you need to repeat a trial-related code 40 times. You can, of course, build a list 40 items long by hand and iterate over it but Python has a handy <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#the-range-function">range()</a> function for that. <code>range(N)</code> yields N integers from 0 to N-1 (same up-to-but-not-including rule as for slicing) that you can iterate over in a for loop.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of x is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1494024e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of x is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Value of x is 0
 Value of x is 1
@@ -362,9 +396,9 @@ Value of x is 2</code></pre>
 </div>
 </div>
 <p>You can modify <a href="https://docs.python.org/3/library/stdtypes.html#range">range()</a> function behavior by providing a starting value and a step size. But in its simplest form <code>range(N)</code> is a handy tool to repeat the code that many times. Note that while you always need to have a temporary variable in a <code>for</code> loop, sometimes you may not use it at all. In cases like this, you should use <code>_</code> (underscore symbol) as a variable name to indicate the lack of use.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I will be repeated twice!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e435b7a2" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I will be repeated twice!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>I will be repeated twice!
 I will be repeated twice!</code></pre>
@@ -386,50 +420,59 @@ I will be repeated twice!</code></pre>
 <span class="header-section-number">6.9</span> Random time</h2>
 <p>What makes Whack-a-Mole game fun is not only that you do not know <em>which</em> mole will appear but you also do not know <em>when</em> it will appear and <em>how much time</em> you have to whack it. Thus, we need to modify our presentation schedule. We need a blank period of a random duration (I would suggest between 0.75 s to 1.5 s) and limited presentation duration (between 0.5 to 0.75 s). First, you need to define these ranges as <a href="01-basics.html#constants">constants</a>. Now that you know lists you can use a single variable to hold both ends of the range. Then, you need to generate two numbers (one for the blank another for the presentation) coming from <a href="https://docs.python.org/3/library/random.html#random.uniform">a uniform distrubition</a> within that range.</p>
 <p>Here, a CONSTANT will hold values for <em>two</em> parameters of <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a> function and there are two ways of using them. First, you can use an index <code>0</code> to get the value for the first parameter and <code>1</code> for the second parameter:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>TIME_UNTIL_BEEP <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.3</span>]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>random.uniform(TIME_UNTIL_BEEP[<span class="dv">0</span>], TIME_UNTIL_BEEP[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>TIME_UNTIL_BEEP <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.3</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>random.uniform(TIME_UNTIL_BEEP[<span class="dv">0</span>], TIME_UNTIL_BEEP[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>However, Python has a nifty trick called <a href="https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments">Unpacking Argument Lists</a>: You can pass a list of arguments prepended by an asterisk and Python will unpack the list into arguments in the same order they are in the list: first value goes to the parameter, second value to the second parameter, etc. So, in our case, the code can be simplified to</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>random.uniform(<span class="op">*</span>TIME_UNTIL_BEEP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>random.uniform(<span class="op">*</span>TIME_UNTIL_BEEP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that it is on you to make sure that the number and the order of elements in the list match function parameters!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_parameter_function(x):</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Do nothing but require a single paramter</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>TWO_VALUES <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>]</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>single_parameter_function(<span class="op">*</span>TWO_VALUES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TypeError: single_parameter_function() takes 1 positional argument but 2 were given</code></pre>
+<div id="63383646" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_parameter_function(x):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Do nothing but require a single paramter</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">pass</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>TWO_VALUES <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>single_parameter_function(<span class="op">*</span>TWO_VALUES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[10], line 8</span>
+<span class="ansi-green-fg">      4</span>   <span style="font-weight:bold;color:rgb(0,135,0)">pass</span>
+<span class="ansi-green-fg">      6</span> TWO_VALUES <span style="color:rgb(98,98,98)">=</span> [<span style="color:rgb(98,98,98)">1</span>, <span style="color:rgb(98,98,98)">3</span>]
+<span class="ansi-green-fg ansi-bold">----&gt; 8</span> <span class="ansi-yellow-bg">single_parameter_function</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">TWO_VALUES</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-red-fg ansi-bold">TypeError</span>: single_parameter_function() takes 1 positional argument but 2 were given</pre>
+</div>
 </div>
 </div>
 <p>Back to the game, use <a href="https://docs.python.org/3/library/random.html#random.uniform">random.uniform()</a> function to generate random blank and presentation times, store them into variables of your choice, and time your blank and presentation using the <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait()</a> function from the <a href="https://psychopy.org/api/clock.html">clock</a> module.</p>
 <p>Now is time to update and structure you code. Here is a approximate outline (note that I have dropped the wait for keys):</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Document your file</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">all</span> libaries you need <span class="kw">in</span> an alphabetical order</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>define CONSTANTS</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>create window</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># generating random parameters for the trial</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>pick random index <span class="cf">for</span> the mole</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>create the mole</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>generate random durations <span class="cf">for</span> blank <span class="kw">and</span> presentation interval</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># blank</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>clear window (win.flip() alone)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"blank duration"</span> seconds</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co"># presentation</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>draw the mole</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"presentation duration"</span> seconds</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>close the window</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Document your file</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">all</span> libaries you need <span class="kw">in</span> an alphabetical order</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>define CONSTANTS</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>create window</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># generating random parameters for the trial</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>pick random index <span class="cf">for</span> the mole</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>create the mole</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>generate random durations <span class="cf">for</span> blank <span class="kw">and</span> presentation interval</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># blank</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>clear window (win.flip() alone)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"blank duration"</span> seconds</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># presentation</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>draw the mole</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>wait <span class="cf">for</span> <span class="st">"presentation duration"</span> seconds</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>close the window</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that it has no response processing at the moment and that window should close right after the stimulus is presented.</p>
 <div class="program">
 <p>Put your code into <span class="program-filename">code06.py</span>.</p>
@@ -460,9 +503,7 @@ I will be repeated twice!</code></pre>
 <p>Congratulations on your first video game! It could use some bells-and-whistles like having a score, combos would be cool, proper mole images instead of a circle, etc. but it works and it is fun (if you do not feel challenged, reduce the presentation time)! Submit your files and next time we will ditch the keyboard and learn how to handle the mouse in the Memory game.</p>
 
 
-</section></main>
-</div>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>More on that and tuples, list’s immutable cousins, later.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is typical for “classic” programming languages but less so for ones that are linear algebra / data science oriented. Both Matlab and R use one-based indexing, so you need to be careful and double-check whether you are using correct indexes.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -478,7 +519,7 @@ I will be repeated twice!</code></pre>
 <li id="fn12"><p>Confusingly, if no key was pressed, <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">getKeys()</a> returns an empty list that has length of zero but <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> returns <code>None</code> and <code>None</code> has no length.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13"><p>Want to know key codes for sure? Write a small program that opens a window and then repeatedly waits for any key press and prints out into console.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p>You will get more than one item in that list only if you set <code>clearEvents=False</code>. In this case, you will get the list of keys pressed before the call. However, if you opted for a default <code>clearEvents=True</code>, you will get only one key press in the list (at least I was never able to get more than one).<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -903,7 +944,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./07-memory.html" class="pagination-link" aria-label="Memory game">
+        <span class="nav-page-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
-</nav><!-- /content -->
+</nav>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
 </body>
 </html>

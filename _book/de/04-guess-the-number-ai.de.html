@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/04-guess-the-number-ai.html" id="language-link-en">English</a></li></ul>
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/04-guess-the-number-ai.html" id="language-link-en">English</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -172,6 +172,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
         
@@ -235,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><p>Lass uns das Spiel “Raten Sie die Zahl” <em>wieder</em> programmieren<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, aber <em>vertauschen</em> wir die Rollen. Diesmal <em>wählst du</em> eine Zahl und der Computer rät. Denk mal darüber nach, welchen Algorithmus ein Computer dafür verwenden könnte, bevor du den nächsten Absatz liest<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>Optimal ist es, die Mitte des Intervalls für eine Schätzung zu verwenden. So schließt du <em>halb</em> der Zahlen aus, die entweder größer oder kleiner als dein Tipp sind (oder du triffst die Zahl natürlich). Also, wenn du weißt, dass die Zahl zwischen 1 und 10 ist, solltest du in der Mitte aufteilen, also 5 oder 6 wählen, da du keine 5,5 wählen kannst (wir gehen davon aus, dass du nur ganze Zahlen verwenden kannst). Wenn dein Gegner sagt, dass ihre Zahl größer als dein Tipp ist, weißt du, dass sie irgendwo zwischen deinem Tipp und der ursprünglichen oberen Grenze sein muss, z.B. zwischen 5 und 10. Umgekehrt, wenn der Gegner “kleiner” sagt, ist die Zahl zwischen der unteren Grenze und deinem Tipp, z.B. zwischen 1 und 5. Bei deinem nächsten Versuch teilst du das neue Intervall auf und wiederholst dies, bis du entweder die Zahl richtig errätst oder ein Intervall übrig hast, das nur eine Zahl enthält. Dann musst du nicht mehr raten.</p>
-<p>Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das <a href="notebooks/Guess%20the%20number%20-%20AI.ipynb">Übungsheft</a>!</p>
+<p>Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie man sie dokumentiert und wie man seine eigenen Bibliotheken verwendet. Hol dir vorher das <a href="notebooks/04-Guess%20the%20number%20-%20AI-de.ipynb">Übungsheft</a>!</p>
 <section id="kapitelbegriffe." class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="kapitelbegriffe.">
 <span class="header-section-number">4.1</span> Kapitelbegriffe.</h2>
 <ul>

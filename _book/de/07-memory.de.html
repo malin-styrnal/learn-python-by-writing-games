@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/07-memory.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/07-memory.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>7  Memory game – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./08-christmas.de.html" rel="next">
+<link href="./06-whack-a-mole.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script><link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-memory.de.html"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/07-memory.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">7.1</span> Kapitelkonzepte</a></li>
+  <li><a href="#variablen-als-kisten-unver%C3%A4nderliche-objekte" id="toc-variablen-als-kisten-unveränderliche-objekte" class="nav-link" data-scroll-target="#variablen-als-kisten-unveränderliche-objekte"><span class="header-section-number">7.2</span> Variablen als Kisten (unveränderliche Objekte)</a></li>
+  <li><a href="#veraenderliche-objekte" id="toc-veraenderliche-objekte" class="nav-link" data-scroll-target="#veraenderliche-objekte"><span class="header-section-number">7.3</span> Variablen als Post-it-Zettel (veränderliche Objekte)</a></li>
+  <li><a href="#tuple" id="toc-tuple" class="nav-link" data-scroll-target="#tuple"><span class="header-section-number">7.4</span> Tuple: eine gefrorene Liste</a></li>
+  <li><a href="#minimaler-code" id="toc-minimaler-code" class="nav-link" data-scroll-target="#minimaler-code"><span class="header-section-number">7.5</span> Minimaler Code</a></li>
+  <li><a href="#bildzeichnen" id="toc-bildzeichnen" class="nav-link" data-scroll-target="#bildzeichnen"><span class="header-section-number">7.6</span> Ein Bild zeichnen</a></li>
+  <li><a href="#bild-plazieren-index-zur-position" id="toc-bild-plazieren-index-zur-position" class="nav-link" data-scroll-target="#bild-plazieren-index-zur-position"><span class="header-section-number">7.7</span> Bild plazieren (Index zur Position)</a></li>
+  <li><a href="#r%C3%BCckseite-der-karte" id="toc-rückseite-der-karte" class="nav-link" data-scroll-target="#rückseite-der-karte"><span class="header-section-number">7.8</span> Rückseite der Karte</a></li>
+  <li><a href="#w%C3%B6rterb%C3%BCcher" id="toc-wörterbücher" class="nav-link" data-scroll-target="#wörterbücher"><span class="header-section-number">7.9</span> Wörterbücher</a></li>
+  <li><a href="#eine-karte-mit-einem-dictionary-darstellen" id="toc-eine-karte-mit-einem-dictionary-darstellen" class="nav-link" data-scroll-target="#eine-karte-mit-einem-dictionary-darstellen"><span class="header-section-number">7.10</span> Eine Karte mit einem Dictionary darstellen</a></li>
+  <li><a href="#die-kartenfabrik" id="toc-die-kartenfabrik" class="nav-link" data-scroll-target="#die-kartenfabrik"><span class="header-section-number">7.11</span> Die Kartenfabrik</a></li>
+  <li><a href="#dateiliste-abrufen" id="toc-dateiliste-abrufen" class="nav-link" data-scroll-target="#dateiliste-abrufen"><span class="header-section-number">7.12</span> Dateiliste abrufen</a></li>
+  <li><a href="#list-comprehension" id="toc-list-comprehension" class="nav-link" data-scroll-target="#list-comprehension"><span class="header-section-number">7.13</span> List comprehension</a></li>
+  <li><a href="#liste-der-relevanten-dateien-abrufen" id="toc-liste-der-relevanten-dateien-abrufen" class="nav-link" data-scroll-target="#liste-der-relevanten-dateien-abrufen"><span class="header-section-number">7.14</span> Liste der relevanten Dateien abrufen</a></li>
+  <li><a href="#listen-operationen" id="toc-listen-operationen" class="nav-link" data-scroll-target="#listen-operationen"><span class="header-section-number">7.15</span> Listen-Operationen</a></li>
+  <li><a href="#enumerate" id="toc-enumerate" class="nav-link" data-scroll-target="#enumerate"><span class="header-section-number">7.16</span> Schleifen über Index und Element mit Listenummerierung</a></li>
+  <li><a href="#os-bibliothek" id="toc-os-bibliothek" class="nav-link" data-scroll-target="#os-bibliothek"><span class="header-section-number">7.17</span> Pfad berechnen</a></li>
+  <li><a href="#ein-kartenspiel" id="toc-ein-kartenspiel" class="nav-link" data-scroll-target="#ein-kartenspiel"><span class="header-section-number">7.18</span> Ein Kartenspiel</a></li>
+  <li><a href="#mischen" id="toc-mischen" class="nav-link" data-scroll-target="#mischen"><span class="header-section-number">7.19</span> Karten mischen</a></li>
+  <li><a href="#lass-uns-eine-pause-machen" id="toc-lass-uns-eine-pause-machen" class="nav-link" data-scroll-target="#lass-uns-eine-pause-machen"><span class="header-section-number">7.20</span> Lass uns eine Pause machen!</a></li>
+  <li><a href="#hauptschleife-hinzuf%C3%BCgen" id="toc-hauptschleife-hinzufügen" class="nav-link" data-scroll-target="#hauptschleife-hinzufügen"><span class="header-section-number">7.21</span> Hauptschleife hinzufügen</a></li>
+  <li><a href="#psychopy-mouse" id="toc-psychopy-mouse" class="nav-link" data-scroll-target="#psychopy-mouse"><span class="header-section-number">7.22</span> Mausklick erkennen</a></li>
+  <li><a href="#position-zu-index" id="toc-position-zu-index" class="nav-link" data-scroll-target="#position-zu-index"><span class="header-section-number">7.23</span> Position zu Index</a></li>
+  <li><a href="#klicke-auf-eine-ausgew%C3%A4hlte-karte-um-sie-umzudrehen" id="toc-klicke-auf-eine-ausgewählte-karte-um-sie-umzudrehen" class="nav-link" data-scroll-target="#klicke-auf-eine-ausgewählte-karte-um-sie-umzudrehen"><span class="header-section-number">7.24</span> Klicke auf eine ausgewählte Karte, um sie umzudrehen</a></li>
+  <li><a href="#offene-karten-im-auge-behalten" id="toc-offene-karten-im-auge-behalten" class="nav-link" data-scroll-target="#offene-karten-im-auge-behalten"><span class="header-section-number">7.25</span> Offene Karten im Auge behalten</a></li>
+  <li><a href="#nur-zwei-karten-aufdecken" id="toc-nur-zwei-karten-aufdecken" class="nav-link" data-scroll-target="#nur-zwei-karten-aufdecken"><span class="header-section-number">7.26</span> Nur zwei Karten aufdecken</a></li>
+  <li><a href="#ein-passendes-paar-vom-tisch-nehmen" id="toc-ein-passendes-paar-vom-tisch-nehmen" class="nav-link" data-scroll-target="#ein-passendes-paar-vom-tisch-nehmen"><span class="header-section-number">7.27</span> Ein passendes Paar vom Tisch nehmen</a></li>
+  <li><a href="#das-spiel-ist-vorbei-wenn-alle-karten-vom-tisch-sind" id="toc-das-spiel-ist-vorbei-wenn-alle-karten-vom-tisch-sind" class="nav-link" data-scroll-target="#das-spiel-ist-vorbei-wenn-alle-karten-vom-tisch-sind"><span class="header-section-number">7.28</span> Das Spiel ist vorbei, wenn alle Karten vom Tisch sind</a></li>
+  <li><a href="#machs-schnell" id="toc-machs-schnell" class="nav-link" data-scroll-target="#machs-schnell"><span class="header-section-number">7.29</span> Mach’s schnell!</a></li>
+  <li><a href="#wie-kannst-du-es-verbessern" id="toc-wie-kannst-du-es-verbessern" class="nav-link" data-scroll-target="#wie-kannst-du-es-verbessern"><span class="header-section-number">7.30</span> Wie kannst du es verbessern?</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="memory-game-de" class="quarto-section-identifier"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Heute, du wirst ein klassisches <em>Memory</em>-Spiel schreiben: Es liegen acht Karten mit der Rückseite nach oben, du kannst beliebige zwei davon umdrehen und wenn sie identisch sind, werden sie vom Tisch entfernt. Wenn sie unterschiedlich sind, werden die Karten wieder “mit der Rückseite nach oben” gedreht.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="videos/memory.m4v"></source></video></div>
+<p>Bevor wir loslegen, erstelle einen neuen Ordner für das Spiel und darin einen Unterordner namens <em>Bilder</em>. Lade dann <a href="material/chicken.zip">Hühnerbilder</a> herunter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> und entpacke sie in den <em>Bilder</em>-Unterordner. Hol dir auch das <a href="notebooks/07-Memory%20game-de.ipynb">Übungsheft</a>!</p>
+<section id="kapitelkonzepte" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">7.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>
+<a href="#mutable-objects">Veränderliche</a> vs. <a href="#variables-as-boxes-immutable-objects">unveränderliche</a> Objekte</li>
+<li>Anzeigen von <a href="#imagestim">Bildern</a>.</li>
+<li>Dateien bearbeiten über die <a href="#os-library">os</a> Bibliothek.</li>
+<li>Verwenden von <a href="#dictionaries">Wörterbüchern</a>.</li>
+<li>Durchführen von <a href="#list-operations">Listenoperationen</a>.</li>
+<li>Schleifen über Index und Element mit Listen-<a href="#enumerate">Aufzählung</a>.</li>
+</ul></section><section id="variablen-als-kisten-unveränderliche-objekte" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="variablen-als-kisten-unveränderliche-objekte">
+<span class="header-section-number">7.2</span> Variablen als Kisten (unveränderliche Objekte)</h2>
+<p>In diesem Spiel wirst du <a href="#w%C3%B6rterb%C3%BCcher">Wörterbücher</a> verwenden. Das sind <em>veränderliche</em>, wie <a href="06-whack-a-mole.de.html#listen">Listen</a>, im Gegensatz zu “normalen” <em>unveränderlichen</em> Werten (Ganzzahlen, Fließkommazahlen, Zeichenfolgen). Du musst diese Unterscheidung lernen, da sich diese beiden Arten von Objekten (Werten) unter bestimmten Umständen sehr unterschiedlich verhalten, was sowohl gut (Macht!) als auch schlecht (merkwürdiges unerwartetes Verhalten!) ist.</p>
+<p>Du erinnerst dich vielleicht an das <em>Variable-als-Box</em> Bild, das ich verwendet habe, um <a href="#variables">Variablen</a> einzuführen. Kurz gesagt, eine Variable kann als “Box” mit einem Variablennamen darauf und einem Wert darin gedacht werden. Wenn du diesen Wert verwendest oder ihn einer anderen Variable zuweist, kannst du davon ausgehen, dass Python <em>eine Kopie</em> davon <em>erstellt</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> und diese <em>Kopie</em> in eine andere “Box” der Variablen legt. Wenn du den Wert einer Variable <em>ersetzt</em>, nimmst du den alten Wert heraus, zerstörst ihn (indem du ihn in ein nahes schwarzes Loch wirfst, nehme ich an), erstellst einen neuen und legst ihn in die “Box” der Variablen. Wenn du eine Variable basierend auf ihrem aktuellen Zustand <em>veränderst</em>, geschieht dasselbe. Du nimmst den Wert heraus, erstellst einen neuen Wert (indem du den ursprünglichen Wert addierst oder eine andere Operation durchführst), zerstörst den alten und legst den neuen wieder in die “Box” der Variablen. Wichtig ist, dass obwohl eine <em>Variable</em> verschiedene unveränderliche Werte haben kann (wir <a href="#random-mole">änderten</a> die Variable <code>imole</code> bei jeder Runde), der unveränderliche <em>Wert</em> selbst nie verändert wird. Er wird <em>ersetzt</em> durch einen anderen unveränderlichen Wert, <em>verändert</em> sich jedoch nie<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Der Kasten-Metapher erklärt, warum <a href="04-guess-the-number-ai.de.html#g%C3%BCltigkeitsbereiche-f%C3%BCr-unver%C3%A4nderliche-werte">Gültigkeitsbereiche</a> so funktionieren, wie sie es tun. Jeder Gültigkeitsbereich hat seinen eigenen Satz an Kästen und wann immer du Informationen zwischen Gültigkeitsbereichen austauschst, z.B. von einem globalen Skript zu einer Funktion, wird eine Kopie eines Wertes (von einer Variablen) erstellt und in einen neuen Kasten (z.B. einen Parameter) innerhalb der Funktion gelegt. Wenn eine Funktion einen Wert zurückgibt, wird er kopiert und in einen der Kästen im globalen Skript gelegt (Variable, der du den zurückgegebenen Wert zugewiesen hast), usw.</p>
+<p>Das gilt aber nur für <em>unveränderliche</em> Objekte (Werte) wie Zahlen, Strings, logische Werte usw. sowie <a href="https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple">Tupel</a> (siehe unten, was das ist). Wie du sicher schon erraten hast, bedeutet das, dass es auch andere <em>veränderliche</em> Objekte gibt und sie sich sehr unterschiedlich verhalten.</p>
+</section><section id="veraenderliche-objekte" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="veraenderliche-objekte">
+<span class="header-section-number">7.3</span> Variablen als Post-it-Zettel (veränderliche Objekte)</h2>
+<p>Veränderliche Objekte sind zum Beispiel Listen oder Wörterbücher<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, also Dinge, die sich verändern können. Der entscheidende Unterschied besteht darin, dass <em>unveränderliche</em> Objekte als in ihrer Größe fixiert betrachtet werden können. Eine Zahl benötigt so viele Bytes zur Speicherung, genau wie ein gegebener String (obwohl ein anderer String mehr oder weniger Bytes erfordern würde). Trotzdem ändern sie sich nicht, sie werden erstellt und zerstört, wenn sie nicht mehr benötigt werden, aber nie wirklich aktualisiert.</p>
+<p><em>Mutable</em> Objekte können verändert werden<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Zum Beispiel kannst du Elemente zu deiner Liste hinzufügen oder sie entfernen oder durcheinander bringen. Das gilt auch für <a href="https://docs.python.org/3/tutorial/datastructures.html?highlight=dictionary#dictionaries">Wörterbücher</a>. Das Machen solcher Objekte <em>unveränderlich</em> wäre rechnerisch ineffizient: Jedes Mal, wenn du einen Wert hinzufügst, wird eine (lange) Liste zerstört und neu erstellt, nur mit diesem einen zusätzlichen Wert. Daher aktualisiert Python einfach das originale Objekt. Aus Effizienzgründen für weitere Berechnungen werden diese Objekte nicht kopiert, wenn du sie einer anderen Variablen zuweist oder als Parameterwert verwendest, sondern <em>per Referenz übergeben</em>. Das bedeutet, dass die Variable nicht mehr ein “Kasten”, in den du Werte hineinlegst, sondern ein “Aufkleber”, den du auf ein Objekt (eine Liste, ein Wörterbuch) klebst. Und du kannst so viele Aufkleber auf ein Objekt kleben, wie du willst, doch <em>es bleibt immer noch dasselbe Objekt</em>!</p>
+<p>Was soll das denn jetzt? Wenn du bedenkst, dass eine Variable nur ein Aufkleber (von vielen) auf einem veränderlichen Objekt ist, versuche rauszufinden, was der folgende Code ausgeben wird:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y.append(<span class="dv">4</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #1</p>
+</div>
+<p>Hä? Genau das meine ich mit “Sticker auf demselben Objekt”. Erstellen wir eine Liste und kleben ein <code>x</code>-Sticker darauf. Dann weisen wir <em>die gleiche Liste</em> <code>y</code> zu, d.h. wir kleben ein <code>y</code>-Sticker <em>auf dieselbe Liste</em>. Da sowohl <code>x</code> als auch <code>y</code> Sticker auf dem <em>gleichen</em> Objekt sind, sind sie effektiv Synonyme. In diesem speziellen Fall spielt es keine Rolle, welchen Variablennamen du verwendest, um <em>das</em> Objekt zu ändern, sie sind einfach zwei Sticker, die nebeneinander auf der <em>gleichen</em> Liste hängen. Nochmals, nur zur Erinnerung, das wäre nicht der Fall für <em>unveränderliche</em> Werte wie Zahlen, wo sich die Dinge so verhalten würden, wie du es erwarten würdest.</p>
+<p>Dieser “Variable-als-Aufkleber”, auch bekannt als “Wertübergabe per Referenz”, hat wichtige Auswirkungen auf Funktionsaufrufe, da er deinen Gültigkeitsbereich bricht, ohne je eine Warnung auszugeben. Schau dir den folgenden Code an und versuche herauszufinden, was die Ausgabe sein wird.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ändere_es(y):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    y.append(<span class="dv">4</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ändere_es(x)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #2.</p>
+</div>
+<p>Wie haben wir es geschafft, eine <em>globale</em> Variable von innerhalb der Funktion zu ändern? Haben wir nicht den <em>lokalen</em> Parameter der Funktion verändert? Ja, genau das ist das Problem beim Übergeben per Referenz. Dein Funktionsparameter ist nur ein weiteres Etikett auf dem <em>gleichen</em> Objekt, also musst du dir immer noch Sorgen um globale Variablen machen (deshalb hast du die Funktion geschrieben und über Bereiche gelernt!), auch wenn es so aussieht, als bräuchtest du das nicht. Wenn du verwirrt bist, bist du in guter Gesellschaft. Das ist einer der überraschendsten und verwirrendsten Aspekte in Python, der Menschen<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> immer wieder auf die Füße fällt. Lass uns noch ein paar Übungen machen, bevor ich dir zeige, wie man das Problem der Gültigkeitsbereiche für veränderliche Objekte löst.</p>
+<div class="practice">
+<p>Mach Übung #3.</p>
+</div>
+</section><section id="tuple" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="tuple">
+<span class="header-section-number">7.4</span> Tuple: eine gefrorene Liste</h2>
+<p>Die weisen Leute, die Python geschaffen haben, waren sich des Problems bewusst, das die <em>Variable-als-Aufkleber</em>-Problematik verursacht. Daher haben sie eine <strong>unveränderliche</strong> Version einer Liste hinzugefügt, die als <a href="https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple">Tuple</a> bezeichnet wird. Es handelt sich um eine “gefrorene” Liste von Werten, die du durchlaufen, auf deren Elemente per Index zugreifen oder herausfinden kannst, wie viele Elemente sie hat, aber du <em>kannst sie nicht ändern</em>. Kein Hinzufügen, Entfernen, Ersetzen von Werten usw. Für dich bedeutet das, dass eine Variable mit einer gefrorenen Liste eine Schachtel und nicht ein Aufkleber ist und dass sie sich wie jedes andere “normale” <strong>unveränderliche</strong> Objekt verhält. Du kannst ein <code>tuple</code> durch die Verwendung von runden Klammern erstellen.</p>
+<div id="5f12aeb1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ich_bin_ein_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Du kannst es durchlaufen, z.B.,</p>
+<div id="633fcd98" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ich_bin_ein_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> zahl <span class="kw">in</span> ich_bin_ein_tuple:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(zahl)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1
+2
+3</code></pre>
+</div>
+</div>
+<p>Aber wie ich schon sagte, das Anhängen wird einen Fehler werfen</p>
+<div id="cb0dbc5b" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>i_am_a_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># wirft einen AttributeError: 'tuple' Objekt hat keine 'append' Eigenschaft</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>i_am_a_tuple.append(<span class="dv">4</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[3], line 4</span>
+<span class="ansi-green-fg">      1</span> i_am_a_tuple <span style="color:rgb(98,98,98)">=</span> (<span style="color:rgb(98,98,98)">1</span>, <span style="color:rgb(98,98,98)">2</span>, <span style="color:rgb(98,98,98)">3</span>)
+<span class="ansi-green-fg">      3</span> <span style="font-style:italic;color:rgb(95,135,135)"># wirft einen AttributeError: 'tuple' Objekt hat keine 'append' Eigenschaft</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 4</span> <span class="ansi-yellow-bg">i_am_a_tuple</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">append</span>(<span style="color:rgb(98,98,98)">4</span>)
+
+<span class="ansi-red-fg ansi-bold">AttributeError</span>: 'tuple' object has no attribute 'append'</pre>
+</div>
+</div>
+</div>
+<p>Gleiches gilt für das Versuchen, es zu ändern</p>
+<div id="54f5d637" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>i_am_a_tuple <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># wirft einen TypeError: 'tuple' Objekt unterstützt keine Elementzuweisung</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>i_am_a_tuple[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[4], line 4</span>
+<span class="ansi-green-fg">      1</span> i_am_a_tuple <span style="color:rgb(98,98,98)">=</span> (<span style="color:rgb(98,98,98)">1</span>, <span style="color:rgb(98,98,98)">2</span>, <span style="color:rgb(98,98,98)">3</span>)
+<span class="ansi-green-fg">      3</span> <span style="font-style:italic;color:rgb(95,135,135)"># wirft einen TypeError: 'tuple' Objekt unterstützt keine Elementzuweisung</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 4</span> <span class="ansi-yellow-bg">i_am_a_tuple</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">1</span><span class="ansi-yellow-bg">]</span> <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">1</span>
+
+<span class="ansi-red-fg ansi-bold">TypeError</span>: 'tuple' object does not support item assignment</pre>
+</div>
+</div>
+</div>
+<p>Das bedeutet, dass wenn du eine Liste von Werten an eine Funktion übergeben musst und keine Verbindung zum ursprünglichen Variablen haben möchtest, du stattdessen <em>ein Tupel von Werten</em> an die Funktion übergeben solltest. Die Funktion hat immer noch eine Liste von Werten, aber die Verbindung zum ursprünglichen Listenobjekt ist jetzt unterbrochen. Du kannst eine Liste in ein Tupel mit <code>tuple()</code> umwandeln. Behalte im Hinterkopf, dass <code>tuple()</code> eine gefrorene Kopie der Liste erstellt. Was wird unten passieren?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bu">tuple</span>(x)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x.append(<span class="dv">4</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mache Übung #4.</p>
+</div>
+<p>Also, wie du sicher schon gemerkt hast, wenn <code>y = tuple(x)</code>, erstellt Python <strong>eine Kopie</strong> der Listenwerte, friert sie ein (sie sind jetzt unveränderlich) und packt sie in das “y”-Fach. Daher hat alles, was du mit der ursprünglichen Liste machst, keine Auswirkung auf das unveränderliche “y”.</p>
+<p>Ganz im Gegenteil, du “taust” ein Tuple auf, indem du es mit <code>list()</code> in eine Liste verwandelst. Bitte beachte, dass es <strong>eine neue Liste</strong> erstellt, die keine Beziehung zu jeder anderen existierenden Liste hat, selbst wenn die Werte gleich sind oder ursprünglich aus einer von ihnen stammten!</p>
+<div class="practice">
+<p>Mach Übung #5.</p>
+</div>
+<p>Okay, ich hab doch gesagt, dass <code>list()</code> eine neue Liste erstellt, oder? Das bedeutet, du kannst es verwenden, um eine Kopie einer Liste direkt zu erstellen, ohne einen Zwischenschritt über ein Tupel. Auf diese Weise kannst du zwei <em>unterschiedliche</em> Listen mit <em>identischen</em> Werten haben. Du kannst das gleiche Ergebnis auch erreichen, indem du eine gesamte Liste schneidest, z. B. <code>list(x)</code> ist das gleiche wie <code>x[:]</code>.</p>
+<div class="practice">
+<p>Mach Übung #6.</p>
+</div>
+<p>Hier hat <code>y = list(x)</code> eine neue Liste erstellt (die ein exaktes Abbild der mit dem “x”-Etikett versehenen war) und das “y”-Etikett wurde auf dieser neuen Liste angebracht, während das “x” weiterhin an der ursprünglichen hing.</p>
+<p>Wenn dir schwindelig wird, tut es mir leid, aber es wird noch schlimmer. Der folgende Absatz behandelt ein relativ fortgeschrittenes Szenario, aber ich möchte, dass du darüber Bescheid weißt, denn die Dinge verhalten sich extrem entgegen der Intuition und ich bin selbst ein paar Mal darauf hereingefallen und es hat jedes Mal ewig gedauert, das Problem zu lösen. Also, was passiert, wenn du ein Tupel (unveränderlich!) hast, das eine Liste (veränderbar) enthält? Wie ich bereits erwähnt habe, kannst du das Element selbst nicht ändern, aber dieses Element ist lediglich ein Verweis auf die Liste (ein Aufkleber auf einem <em>veränderbaren</em> Objekt!), also kannst du trotzdem mit der Liste selbst herumspielen, obwohl das Tupel unveränderlich ist. Außerdem macht das Erstellen einer Kopie eines Tupels lediglich eine Kopie des Verweises, der immer noch auf dieselbe Liste zeigt! Also könntest du denken, dass alles in Ordnung ist, weil es sich ja um Tupel handelt, und dann von genau diesem Umstand überrascht werden. Hier ist ein Beispiel für ein solches Durcheinander:</p>
+<div id="82b73030" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tuple_1 <span class="op">=</span> <span class="bu">tuple</span>([<span class="dv">1</span>, [<span class="st">"A"</span>, <span class="st">"B"</span>], <span class="dv">2</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tuple_2 <span class="op">=</span> tuple_1</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Das funktioniert (richtig) nicht</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>tuple_1[<span class="dv">0</span>] <span class="op">=</span> [<span class="st">"C"</span>, <span class="st">"D"</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aber wir können das erste Element der Liste in "C" und das zweite in "D" ändern</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Der Verweis auf die Liste ist eingefroren, aber die Liste selbst ist veränderbar!</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>tuple_1[<span class="dv">1</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="st">"C"</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>tuple_2[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> <span class="st">"D"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuple_1)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuple_2)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[5], line 5</span>
+<span class="ansi-green-fg">      2</span> tuple_2 <span style="color:rgb(98,98,98)">=</span> tuple_1
+<span class="ansi-green-fg">      4</span> <span style="font-style:italic;color:rgb(95,135,135)"># Das funktioniert (richtig) nicht</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 5</span> <span class="ansi-yellow-bg">tuple_1</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span><span class="ansi-yellow-bg">]</span> <span style="color:rgb(98,98,98)">=</span> [<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">C</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">D</span><span style="color:rgb(175,0,0)">"</span>]
+<span class="ansi-green-fg">      7</span> <span style="font-style:italic;color:rgb(95,135,135)"># Aber wir können das erste Element der Liste in "C" und das zweite in "D" ändern</span>
+<span class="ansi-green-fg">      8</span> <span style="font-style:italic;color:rgb(95,135,135)"># Der Verweis auf die Liste ist eingefroren, aber die Liste selbst ist veränderbar!</span>
+<span class="ansi-green-fg">      9</span> tuple_1[<span style="color:rgb(98,98,98)">1</span>][<span style="color:rgb(98,98,98)">0</span>] <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">C</span><span style="color:rgb(175,0,0)">"</span>
+
+<span class="ansi-red-fg ansi-bold">TypeError</span>: 'tuple' object does not support item assignment</pre>
+</div>
+</div>
+</div>
+<p>Verwirrend? Aber sowas von! Wenn du das Gefühl hast, von diesem ganzen immutabel/mutabel, Tuple/Liste, Kopie/Referenz-Konfusion überfordert zu sein, bist du einfach nur ein normaler Mensch. Ich verstehe die (rechnerischen) Gründe dafür, auf diese Weise vorzugehen, ich bin mir dieser Unterschiede bewusst und weiß, wie nützlich sie sein können, aber es erwischt mich immer noch hin und wieder auf dem falschen Fuß! Also, mein Rat: sei vorsichtig und überprüfe deinen Code mit einem Debugger, wann immer du Listen oder Dictionaries zuweist, sie an Funktionen übergibst, Kopien erstellst, Listen in Listen hast, usw. Sei dir bewusst, dass Dinge vielleicht nicht so funktionieren, wie du denkst, dass sie sollten!</p>
+</section><section id="minimaler-code" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="minimaler-code">
+<span class="header-section-number">7.5</span> Minimaler Code</h2>
+<p>Jetzt aber genug mit der Theorie, lass uns das Spiel programmieren. Wie immer fangen wir mit einem minimalen Code an (versuche es selbst zu schreiben, anstatt es von dem letzten Spiel zu kopieren):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Importiere die benötigten PsychoPy<span class="op">-</span>Module.</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Erstelle ein Fenster <span class="kw">in</span> einer nützlichen Größe und mit nützlichen Einheiten.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Warte auf einen Tastendruck.</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Schließe das Fenster.</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Das erste, was du entscheiden musst, ist die Fenstergröße <em>in Pixeln</em> und welche Einheiten das Größen- und Platzieren von Karten einfacher machen. Jedes Hühnerbild ist 240×400 Pixel groß und für das Spiel benötigen wir Platz für <em>genau</em> 4×2 Bilder, d.h. unser Fenster muss 4 Karten breit und 2 Karten hoch sein. Vergiss nicht, die Datei zu dokumentieren!</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="bildzeichnen" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="bildzeichnen">
+<span class="header-section-number">7.6</span> Ein Bild zeichnen</h2>
+<p>Heute werden wir keine abstrakten und langweiligen Kreise mehr verwenden, um Maulwürfe darzustellen, sondern echte Hühnerbilder verwenden (siehe Anweisungen oben zum Herunterladen). Das Verwenden eines <a href="https://psychopy.org/api/visual/imagestim.html">Bildreizes</a> in PsychoPy ist sehr einfach, da es sich wie andere visuelle Reize verhält, die du bereits kennst. Zunächst musst du ein neues Objekt erstellen, indem du <code>visual.ImageStim(...)</code> aufrufst. Du kannst die vollständige Liste der Parameter in der <a href="(https://psychopy.org/api/visual/imagestim.html)">Dokumentation</a> finden, aber für unsere ursprünglichen Absichten müssen wir nur drei davon übergeben:</p>
+<ul>
+<li>unsere Fenster-Variable: <code>win</code>.</li>
+<li>Dateiname des Bildes: <code>image="Images/r01.png"</code> (Bilder befinden sich in einem Unterordner, daher müssen wir einen <em>relativen</em> Pfad verwenden).</li>
+<li>Größe: <code>size=(???,???)</code>. Das musst du selbst berechnen. Wenn du <a href="05-psychopy.de.html#psychopy-einheiten-norm">norm</a> Einheiten gewählt hast, wie ich, dann ist das Fenster 2 Einheiten breit und 2 Einheiten hoch, aber für <a href="#psychopy-einheiten-h%C3%B6he">höhe</a> ist es 1 Einheit hoch und <em>aspekt-verhältnis</em> Einheiten breit. Wir möchten ein 4×2 Bild haben, welche Größe (beide Breite und Höhe) hat jedes Bild in den Einheiten deiner Wahl?</li>
+</ul>
+<p>Zeichne das Huhn (es sollte in der Mitte des Bildschirms erscheinen).</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="bild-plazieren-index-zur-position" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="bild-plazieren-index-zur-position">
+<span class="header-section-number">7.7</span> Bild plazieren (Index zur Position)</h2>
+<p>Standardmäßig wird unser Bild in der Mitte des Bildschirms platziert, was für einen typischen psychophysikalischen Versuch, der Stimuli auf der Fixierung zeigt (die sich auch typischerweise in der Mitte des Bildschirms befindet), überraschenderweise nützlich ist. Allerdings müssen wir acht Bilder an ihren bestimmten Positionen zeichnen. Du musst eine Funktion erstellen, die einen Bildindex (der von 0 bis 7 geht) entgegennimmt und eine Liste mit einem Paar von Werten mit seiner Position auf dem Bildschirm zurückgibt. Unten siehst du eine Skizze, wie der Index der Position entspricht. Beachte, dass die Bildposition (<a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim.pos%20attribute">pos</a>) der <em>Mitte</em> des Bildes entspricht.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/memory-location-index.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Kartenstandort-Index</figcaption></figure>
+</div>
+<p>Nenn die Funktion <code>position_from_index</code>. Sie sollte einen Argument (<code>index</code>) entgegennehmen und eine Liste mit <code>[&lt;x&gt;, &lt;y&gt;]</code> Koordinaten in den PsychoPy-Einheiten (ab jetzt nehme ich an, dass diese <a href="#psychopy-units-norm">norm</a> sind) zurückgeben. Du kannst dann diesen Wert für das Argument <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim.pos">pos</a> der <a href="https://psychopy.org/api/visual/imagestim.html#imagestim">ImageStim()</a> verwenden.</p>
+<p>Die Berechnung könnte kompliziert aussehen, also lass mich dir helfen loszulegen. Wie kannst du die <em>x</em>-Koordinate für die <em>oberste</em> Reihe berechnen? Wenn du dich nur auf die oberste Reihe konzentrierst, wird es einfacher, weil hier der <em>Spaltenindex</em> gleich dem Gesamtindex ist: Die linke Spalte ist 0, die nächste ist 1 usw. Du brauchst eine einfache Algebra von <span class="math inline">\(x = a_x + b_x \cdot Spalte\)</span>. Du kannst beide <span class="math inline">\(a_x\)</span> und <span class="math inline">\(b_x\)</span> leicht ableiten, wenn du die Positionen der ersten und zweiten Karten von Hand berechnest. Das Gleiche gilt für die <em>y</em>-Koordinate. Angenommen, du weißt die <em>Reihe</em>, die entweder 0 (oberste Reihe) oder 1 (unterste Reihe) ist, kannst du <span class="math inline">\(y = a_y + b_y \cdot Reihe\)</span> berechnen (beachte, dass die Reihen von oben nach unten gehen, aber die PsychoPy-Koordinaten von unten nach oben gehen).</p>
+<p>Aber, höre ich dich sagen, du hast keine Zeilen- und Spaltenindizes, sondern nur den Gesamtindex? Um diese zu berechnen, musst du nur im Kopf behalten, dass jede Zeile <em>vier</em> Karten hat. Dann kannst du zwei spezielle Divisionsoperatoren verwenden: den <a href="https://python-reference.readthedocs.io/en/latest/docs/operators/floor_division.html">Bodenschneide-Operator <code>//</code></a> und die <a href="https://python-reference.readthedocs.io/en/latest/docs/operators/modulus.html">Modulo-Operatoren <code>%</code></a>. Der erstere gibt nur den ganzzahligen Teil der Division zurück, also ist <code>4 // 3</code> ist <code>1</code> (weil 4/3 1,33333 ist) und <code>1 // 4</code> ist <code>0</code> (weil 1/4 0,25 ist). Letzterer gibt die verbleibenden Ganzzahlen zurück, also <code>4 % 3</code>ist <code>1</code> und <code>1 % 4</code> ist <code>0</code>. Diese beiden Operatoren reichen aus, um die Zeilen- und Spaltenindizes zu berechnen.</p>
+<p>Meine Empfehlung wäre erstmal, mit einzelnen Formeln in Jupyter Notebook rumzuspielen. Das macht es einfacher, Dinge auszuprobieren und das Ergebnis zu sehen, verschiedene Werte in Formeln einzugeben usw. Wenn du dir sicher bist, dass der Code funktioniert, verwandle ihn in eine Funktion, dokumentiere ihn und pack ihn in eine separate Datei (<em>utilities.py</em>, vergiss nicht, einen Kommentar oben in der Datei zu hinterlassen!). Dann kannst du ihn in das Hauptskript einbinden und damit die Karte plazieren. Versuche verschiedene Indizes und stell sicher, dass die Karte an der richtigen Stelle erscheint. Und wenn was nicht so läuft wie erwartet, setz einen Breakpoint und gehe Schritt für Schritt durch das Programm, während du die Variablen im Auge behältst.</p>
+<div class="program">
+<p>Füge <strong>position_from_index</strong> in <span class="program-filename">utilities.py</span> ein. Füge aktualisierten Code in <span class="program-filename">code03.py</span> ein.</p>
+</div>
+</section><section id="rückseite-der-karte" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="rückseite-der-karte">
+<span class="header-section-number">7.8</span> Rückseite der Karte</h2>
+<p>Ein Hühnerbild ist die <em>Vorderseite</em> einer Karte, aber das Spiel beginnt mit den Karten verdeckt, also sollte der Spieler ihre Rückseiten sehen. Wir werden ein einfaches <a href="https://psychopy.org/api/visual/rect.html">Rechteck</a> als Rückseite verwenden. Wähle eine schöne Kombination aus <code>fillColor</code> (Innen) und <code>lineColor</code> (Umrandung) Farben, das einzige Requirement ist, dass sie unterschiedlich sind, da man sie sonst nicht auseinanderhalten kann. Ändere deinen Code, um das Bild (Vorderseite der Karte) und das Rechteck (Rückseite der Karte) nebeneinander zu zeichnen (<em>z.B.</em>, wenn das Bild an der Position mit Index 0 ist, sollte das Rechteck an der Position 1 oder 4 sein). So kannst du überprüfen, ob die Größen übereinstimmen und ob sie korrekt positioniert sind.</p>
+<div class="program">
+<p>Füge deinen Code in <span class="program-filename">code04.py</span> ein.</p>
+</div>
+</section><section id="wörterbücher" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="wörterbücher">
+<span class="header-section-number">7.9</span> Wörterbücher</h2>
+<p>Jede Karte, die wir verwenden, hat viele Eigenschaften: Eine Vorderseite (Bild), eine Rückseite (Rechteck) und andere Eigenschaften wie z.B. welche Seite gezeigt werden soll oder ob die Karte bereits vom Bildschirm entfernt wurde. Das erfordert einen Container, damit wir all diese relevanten Informationen in einer einzigen Variablen speichern können. Wir <em>könnten</em> diese Werte in einer Liste speichern und numerische Indizes verwenden, um auf einzelne Elemente zuzugreifen (z.B. <code>karte[0]</code> wäre das Vorderseitenbild, aber <code>karte[2]</code> würde die aktive Seite angeben), aber Indizes haben an sich keine Bedeutung, also wäre es schwierig herauszufinden, was <code>karte[0]</code> von <code>karte[2]</code> unterscheidet. Python hat eine Lösung für solche Fälle: <a href="https://docs.python.org/3/library/stdtypes.html#dict">Wörterbücher</a>.</p>
+<p>Ein Dictionary ist ein Container, der Informationen mit <em>Schlüssel : Wert</em>-Paaren speichert. Das ist ähnlich wie beim Nachschlagen einer Bedeutung oder Übersetzung (Wert) eines Wortes (Schlüssel) in einem echten Dictionary, daher der Name. Um ein Dictionary zu erstellen, verwendest du <em>geschweifte</em> Klammern <code>{&lt;Schlüssel1&gt; : &lt;Wert1&gt;}, {&lt;Schlüssel2&gt; : &lt;Wert2&gt;,...}</code> oder erstellst es über <code>dict(&lt;Schlüssel1&gt;=&lt;Wert1&gt;, &lt;Schlüssel2&gt;=&lt;Wert2&gt;,...)</code>. Beachte, dass die zweite Version strenger ist, da Schlüssel den Regeln für Variablennamen folgen müssen, während bei der Version mit geschweiften Klammern Schlüssel beliebige Zeichenfolgen sein können.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>buch <span class="op">=</span> {<span class="st">"Autor"</span> : <span class="st">"Walter Moers"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Titel"</span>: <span class="st">"Die 13½ Leben des Käpt'n Blaubär"</span>}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># oder, äquivalent</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>buch <span class="op">=</span> <span class="bu">dict</span>(Autor<span class="op">=</span><span class="st">"Walter Moers"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            Titel<span class="op">=</span><span class="st">"Die 13½ Leben des Käpt'n Blaubär"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Sobald du ein Dictionary erstellt hast, kannst du auf jedes Feld zugreifen oder es ändern, indem du seinen Schlüssel verwendest, z.B. <code>print(book["Autor"])</code> oder <code>book["Autor"] = "Moers, W."</code>. Du kannst auch neue Felder hinzufügen, indem du ihnen Werte zuweist, z.B., <code>book["Veröffentlichung Jahr"] = 1999</code>. Kurz gesagt, du kannst eine Kombination aus <code>&lt;dictionary-variable&gt;[&lt;key&gt;]</code> verwenden, genau wie du eine normale Variable verwenden würdest. Das ist ähnlich wie die Verwendung von <code>list[index]</code>, der Unterschied besteht darin, dass <code>index</code> eine ganze Zahl sein muss, während <code>key</code> jeder hashable Wert sein kann.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+</section><section id="eine-karte-mit-einem-dictionary-darstellen" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="eine-karte-mit-einem-dictionary-darstellen">
+<span class="header-section-number">7.10</span> Eine Karte mit einem Dictionary darstellen</h2>
+<p>Deine Karte hat folgende Eigenschaften, also werden diese als Key-Value-Einträge in einem Dictionary gespeichert.</p>
+<ol type="1">
+<li>
+<code>"front"</code>: Vorderseite (Bild einer Henne).</li>
+<li>
+<code>"back"</code>: Rückseite (Rechteck).</li>
+<li>
+<code>"filename"</code>: Identität auf der Karte, die wir später verwenden werden, um zu überprüfen, ob der Spieler zwei identische Karten (ihre Dateinamen stimmen überein) oder zwei verschiedene geöffnet hat.</li>
+<li>
+<code>"side"</code>: kann entweder <code>"front"</code> oder <code>"back"</code> sein, Informationen darüber, welche Seite oben ist (auf dem Bildschirm gezeichnet). Setze es auf <code>"back"</code>, da initially alle Karten mit der Rückseite nach oben liegen. Du kannst es jedoch jederzeit temporär auf <code>"front"</code> setzen, um zu sehen, wie die Karten verteilt sind.</li>
+<li>
+<code>"show"</code>: ein logischer Wert, setze ihn auf <code>True</code>. Wir werden ihn später verwenden, um Karten zu markieren, die vom Tisch entfernt sind und daher nicht angezeigt werden. Initially sind alle Karten gezeigt, also sollten alle Karten mit <code>"show"</code> gleich <code>True</code> erstellt werden.</li>
+</ol>
+<p>Erstelle eine Dictionary-Variable (nenn sie <code>card</code>) und fülle sie mit relevanten Werten (verwende entweder <code>"front"</code> und <code>"back"</code> für den <code>"side"</code>-Schlüssel) und Reizen (du kannst PsychoPy-Reize in ein Dictionary packen, genau wie wir sie zuvor in eine Liste gepackt haben). Ändere deinen Code so, dass er das richtige Bild basierend auf dem Wert des <code>"side"</code>-Eintrags zeichnet. Beachte, dass <strong>du keinen if-Ausschnitt dafür benötigst</strong>! Denke über einen Schlüssel nach, den du benötigst, um auf diese beiden Seiten zuzugreifen, und den Wert, den du für den <code>"side"</code>-Schlüssel hast.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code05.py</span>.</p>
+</div>
+</section><section id="die-kartenfabrik" class="level2" data-number="7.11"><h2 data-number="7.11" class="anchored" data-anchor-id="die-kartenfabrik">
+<span class="header-section-number">7.11</span> Die Kartenfabrik</h2>
+<p>Du hast den Code, um eine Karte zu erstellen, aber wir brauchen acht davon. Das erfordert definitiv eine Funktion. Schreibe eine Funktion (setze sie in <span class="filename">utilities.py</span>, um die Hauptdatei aufzuräumen), die drei Parameter annimmt.</p>
+<ol type="1">
+<li>ein Fenster-Variable (die brauchst du, um PsychoPy-Stimuli zu erstellen),</li>
+<li>ein Dateiname,</li>
+<li>Karten-Positionsindex.</li>
+</ol>
+<p>Und zurück gibt’s ein Dictionary, genau wie das, das du erstellt hast. Du hast den Code schon, musst ihn nur in eine Funktion packen und dokumentieren. Ruf die Funktion <code>create_card_path</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> auf und nutz sie im Hauptskript, um das <code>card</code>-Dictionary zu erstellen. Überleg dir jetzt, welche Bibliotheken du in <span class="filename">utilities.py</span> importieren musst.</p>
+<div class="program">
+<p>Füge <span class="program-function">create_card_path</span> in <span class="program-filename">utilities.py</span> ein. Füge den Code in <span class="program-filename">code06.py</span> ein.</p>
+</div>
+</section><section id="dateiliste-abrufen" class="level2" data-number="7.12"><h2 data-number="7.12" class="anchored" data-anchor-id="dateiliste-abrufen">
+<span class="header-section-number">7.12</span> Dateiliste abrufen</h2>
+<p>Für eine einzelne Karte haben wir einfach den Namen einer Bilddatei sowie ihren Speicherort hartcodiert. Allerdings möchten wir für ein richtiges Spiel (oder ein Experiment) flexibler sein und automatisch bestimmen, welche Dateien sich im Ordner <em>Bilder</em> befinden. Dies wird von der <a href="https://docs.python.org/3/library/os.html">os</a> Bibliothek abgedeckt, die verschiedene Hilfsmittel für die Arbeit mit deinem Betriebssystem und insbesondere mit Dateien und Verzeichnissen enthält. Speziell gibt <a href="https://docs.python.org/3/library/os.html#os.listdir">os.listdir(path=“.”)</a> eine Liste mit den Dateinamen aller Dateien in einem durch den Pfad angegebenen Ordner zurück. Standardmäßig ist es der aktuelle Pfad (<code>path="."</code>). Du kannst jedoch auch einen relativen Pfad verwenden - <code>os.listdir("Bilder")</code>, vorausgesetzt, dass <em>Bilder</em> ein Unterordner in deinem aktuellen Verzeichnis ist - oder einen absoluten Pfad <code>os.listdir("E:/Lehre/Python/MemoryGame/Bilder")</code> (in meinem Fall)<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>.</p>
+<p>Versuchs das mal in einem Jupyter Notebook (vergiss nicht, die <a href="https://docs.python.org/3/library/os.html#module-os">os</a> Bibliothek zu importieren). Du solltest eine Liste von 8 Dateien erhalten, die als <span class="filename">[r|l][index].png</span> codiert sind, wobei <em>r</em> oder <em>l</em> die Richtung angeben, in die das Huhn schaut. Allerdings benötigen wir für unser Spiel nur vier Bilder (4 × 2 = 8 Karten). Daher müssen wir eine Teilmenge davon auswählen, z.B. nur Hühner, die nach links oder rechts schauen. Hier werden wir uns auf Hühner konzentrieren, die nach links schauen, was bedeutet, dass wir nur Dateien auswählen müssen, die mit “l” beginnen. Um diese Filterung zu erleichtern, werden wir einen coolen Python-Trick namens <a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List Comprehensions</a> verwenden.</p>
+</section><section id="list-comprehension" class="level2" data-number="7.13"><h2 data-number="7.13" class="anchored" data-anchor-id="list-comprehension">
+<span class="header-section-number">7.13</span> List comprehension</h2>
+<p>List comprehension bietet eine elegante und leicht lesbare Möglichkeit, Elemente einer Liste zu erstellen, zu ändern und/oder zu filtern und eine neue Liste zu erstellen. Die allgemeine Struktur ist</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>neue_liste <span class="op">=</span> [<span class="op">&lt;</span>Transformation<span class="op">-</span>des<span class="op">-</span>Elements<span class="op">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>              <span class="cf">for</span> element <span class="kw">in</span> alte_liste </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>              <span class="cf">if</span> <span class="op">&lt;</span>Bedingung<span class="op">-</span>gegebenes<span class="op">-</span>Element<span class="op">&gt;</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lassen wir uns Beispiele anschauen, um zu verstehen, wie es funktioniert. Stell dir vor, du hast eine Liste <code>zahlen = [1, 2, 3]</code> und du musst jede Zahl um 1 erhöhen<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. Du kannst dies tun, indem du eine neue Liste erstellst und in der <transformation-des-elements>-Teil zu jedem Element 1 addierst.</transformation-des-elements></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>zahlen_plus_1 <span class="op">=</span> [element <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> element <span class="kw">in</span> zahlen]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Das ist äquivalent zu:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>zahlen_plus_1 <span class="op">=</span> []</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> zahlen:</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    zahlen_plus_1.append(element <span class="op">+</span> <span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Oder, stell dir vor, du musst jeden Eintrag in einen String umwandeln. Das kannst du einfach so machen:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>zahlen_als_zeichenketten <span class="op">=</span> [<span class="bu">str</span>(element) <span class="cf">for</span> element <span class="kw">in</span> zahlen]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Und hier ist die äquivalente Form mit einer normalen for-Schleife:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>zahlen_als_zeichenketten <span class="op">=</span> []</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> zahlen:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    zahlen_als_zeichenketten.append(<span class="bu">str</span>(element))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Beide Versionen kannst du in Jupyter-Zellen schreiben und überprüfen, ob die Ergebnisse gleich sind.</p>
+<div class="practice">
+<p>Mach Übung #7.</p>
+</div>
+<p>Jetzt implementiere den folgenden Code mithilfe von List Comprehension. Überprüfe, ob die Ergebnisse stimmen.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>zeichenketten <span class="op">=</span> [<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> []</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> zeichenkette <span class="kw">in</span> zeichenketten:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    zahlen.append(<span class="bu">int</span>(zeichenkette) <span class="op">+</span> <span class="dv">10</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="practice">
+<p>Mach Übung #8 im Jupyter-Notizbuch.</p>
+</div>
+<p>Wie oben erwähnt, kannst du auch eine bedingte Anweisung verwenden, um zu filtern, welche Elemente an die neue Liste übergeben werden. In unserem Zahlenbeispiel können wir Zahlen, die größer als 1 sind, beibehalten:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>zahlen_größer_als_1 <span class="op">=</span> [element <span class="cf">for</span> element <span class="kw">in</span> zahlen <span class="cf">if</span> element <span class="op">&gt;</span> <span class="dv">1</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Manchmal wird dieselbe Anweisung in drei Zeilen geschrieben, anstatt in einer, um das Lesen zu erleichtern:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>zahlen_größer_als_1 <span class="op">=</span> [element</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                       <span class="cf">for</span> element <span class="kw">in</span> zahlen</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                       <span class="cf">if</span> element <span class="op">&gt;</span> <span class="dv">1</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Du kannst natürlich die Transformation und die Filterung in einer einzigen Anweisung kombinieren. Erstell einen Code, der alle Elemente unter 2 herausfiltert und ihnen 4 hinzufügt.</p>
+<div class="practice">
+<p>Mach Übung #9 im Jupyter-Notizbuch.</p>
+</div>
+</section><section id="liste-der-relevanten-dateien-abrufen" class="level2" data-number="7.14"><h2 data-number="7.14" class="anchored" data-anchor-id="liste-der-relevanten-dateien-abrufen">
+<span class="header-section-number">7.14</span> Liste der relevanten Dateien abrufen</h2>
+<p>Verwende List Comprehension, um eine Liste von Dateien zu erstellen, auf denen das Huhn nach links schaut, d.h. Dateien mit Dateinamen, die mit “l” beginnen. Verwende <a href="https://docs.python.org/3/library/stdtypes.html#str.startswith"><dein-string>.startswith()</dein-string></a>, um zu überprüfen, ob es mit “l” beginnt, und speichere die Liste in der <code>filenames</code>-Variablen. Teste deinen Code in einem Jupyter Notebook. Du solltest eine Liste von vier Dateien erhalten.</p>
+</section><section id="listen-operationen" class="level2" data-number="7.15"><h2 data-number="7.15" class="anchored" data-anchor-id="listen-operationen">
+<span class="header-section-number">7.15</span> Listen-Operationen</h2>
+<p>Unsere Liste besteht aus vier eindeutigen Dateinamen, aber im Spiel sollte jede Karte zweimal auftreten. Es gibt mehrere Möglichkeiten, Listen zu duplizieren. Hier nutzen wir dies als Gelegenheit, um über Listen-Operationen zu lernen. Python-Listen implementieren zwei Operationen:</p>
+<ul>
+<li>Listen zusammenfügen: <code>&lt;list1&gt; + &lt;list2&gt;</code>.</li>
+</ul>
+<div id="1c74b0ab" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>[1, 2, 3, 4, 5, 6]</code></pre>
+</div>
+</div>
+<p>Beachte, dass dies eine <em>neue</em> Liste produziert und dass dies daher nicht äquivalent ist zur <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">extend</a>-Methode <code>a.extend(b)</code>! Das <code>+</code> erstellt eine <em>neue</em> Liste, <code>.extend()</code> erweitert die ursprüngliche Liste <code>a</code>.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<ul>
+<li>Listen-Vervielfältigung: <code>&lt;list&gt; * &lt;integer-value&gt;</code> erstellt eine <em>neue</em> Liste, indem sie die ursprüngliche Liste <code>&lt;integer-value&gt;</code>-mal kopiert. Zum Beispiel:</li>
+</ul>
+<div id="56bccca7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">*</span> b</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]</code></pre>
+</div>
+</div>
+<p>Nutze entweder die Operation oder die <code>.extend()</code> Methode, um eine Liste zu erstellen, in der jeder Dateiname zweimal vorkommt. Tipp: Du kannst die Listendarstellung direkt auf die Dateinamen-Liste anwenden, die du über List Comprehension erstellt hast (also repliziere es in derselben Zeile). Versuche diesen Code in einem Jupyter Notebook auszuführen.</p>
+</section><section id="enumerate" class="level2" data-number="7.16"><h2 data-number="7.16" class="anchored" data-anchor-id="enumerate">
+<span class="header-section-number">7.16</span> Schleifen über Index und Element mit Listenummerierung</h2>
+<p>Da wir nun eine Liste von Dateinamen haben, können wir daraus eine Liste von Karten erstellen. Unsere Wörterbuchfunktion benötigt sowohl den Index als auch den Dateinamen. Letzterer ist das <em>Element</em> der Liste, ersterer ist der <em>Index</em> dieses Elements. Du könntest den Index mit der <a href="06-whack-a-mole.de.html#range">range()</a>-Funktion aufbauen, aber Python hat eine bessere Lösung dafür: die <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate()</a>-Funktion! Wenn du statt über eine Liste über <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate(<liste>)</liste></a> iterierst, bekommst du ein Tupel mitboth <code>(index, value)</code>. Hier ist ein Beispiel:</p>
+<div id="e34677e8" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>buchstaben <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, buchstabe <span class="kw">in</span> <span class="bu">enumerate</span>(buchstaben):</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="sc">%d</span><span class="st">: </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(index, buchstabe))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0: a
+1: b
+2: c</code></pre>
+</div>
+</div>
+<p>Und so kannst du <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate()</a> für List Comprehension verwenden.</p>
+<div id="df2efb60" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>buchstaben <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>[<span class="st">"</span><span class="sc">%d</span><span class="st">: </span><span class="sc">%s</span><span class="st">"</span><span class="op">%</span>(index, buchstabe) <span class="cf">for</span> index, buchstabe <span class="kw">in</span> <span class="bu">enumerate</span>(buchstaben)]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>['0: a', '1: b', '2: c']</code></pre>
+</div>
+</div>
+</section><section id="os-bibliothek" class="level2" data-number="7.17"><h2 data-number="7.17" class="anchored" data-anchor-id="os-bibliothek">
+<span class="header-section-number">7.17</span> Pfad berechnen</h2>
+<p>Ursprünglich haben wir den Dateinamen als <code>"Images/r01.png"</code> angegeben. Das hat funktioniert, aber jetzt haben wir viele Dateinamen, die wir mit dem Ordnernamen verbinden müssen, um eine Pfadzeichenfolge zu bilden. Dazu kommt, dass die meisten Betriebssysteme mit Windows uneins sind, wo <code>/</code> (Vorwärtsschslash) oder <code>\</code> (Backslash) für Pfade verwendet werden sollten. Um deinen Code plattformunabhängig und damit robuster zu gestalten, musst du eine Dateinamenzeichenfolge mit der <a href="https://docs.python.org/3/library/os.path.html#os.path.join">join</a>-Funktion im <a href="https://docs.python.org/3/library/os.path.html">path</a>-Submodul erstellen. Du kannst dazu die <em>os</em>-Bibliothek importieren und <code>os.path.join(...)</code> aufrufen (das ist meine persönliche Vorliebe). Oder du kannst den gleichen Ansatz wie bei PsychoPy-Modulen verwenden und <code>path</code> aus <em>os</em> importieren, um den Code zu verkürzen. Oder natürlich kannst du auch <em>join</em> direkt importieren, aber ich finde, dass das Fehlen von Bibliotheksinformationen während der Verwendung die Verständlichkeit erschwert (auch wenn der Code noch kürzer ist).</p>
+<p><a href="https://docs.python.org/3/library/os.path.html#os.path.join">join</a> nimmt Pfadkomponenten als Parameter und fügt sie zusammen, um das OS-Format zu entsprechen. Zum Beispiel würde <code>os.path.join("Python seminar", "Memory game", "memory01.py")</code> unter Windows <code>'Python seminar\\Memory game\\memory01.py'</code> zurückgeben. Da wir mehrere Dateien laden müssen, wird sich der <em>Dateiname</em> ändern. Der <em>Ordner</em>, in dem sich die Bilder befinden, wird jedoch gleich bleiben und es wäre, wie üblich, eine gute Idee, ihn in eine formal erklärte <a href="#constants">CONSTANTE</a> zu verwandeln.</p>
+<p>Erstelle die Funktion <code>create_card</code> auf der Grundlage von <code>create_card_path</code>, so dass sie annimmt, dass der Parameter <code>filename</code> nur der Dateiname ohne die Ordnerinformationen ist und daher den Pfad durch <a href="https://docs.python.org/3/library/os.path.html#os.path.join">join</a> mit dem Ordnernamen (definiert als Konstante in diesem Modul!) erstellt. Du musst nun das <code>"Images/"</code> in dem Wert, den du übergibst, weglassen. Teste, dass der Code wie zuvor funktioniert!</p>
+<div class="program">
+<p>Erstelle <span class="program-function">create_card</span> in <span class="program-filename">utilities.py</span>. Füge aktualisierten Code in <span class="program-filename">code07.py</span> ein.</p>
+</div>
+</section><section id="ein-kartenspiel" class="level2" data-number="7.18"><h2 data-number="7.18" class="anchored" data-anchor-id="ein-kartenspiel">
+<span class="header-section-number">7.18</span> Ein Kartenspiel</h2>
+<p>Lass uns alle Codeschnipsel zusammenfügen, die wir brauchen, um die Dateinamen von Karten herauszufinden, sie zu duplizieren und die Karten mithilfe von Dateinamen und Index zu erstellen.</p>
+<p>Kopier den Code zum Erstellen einer duplizierten Liste von Dateinamen, die du in deinem Jupyter-Notizbuch getestet hast, in dein Hauptskript (<span class="filename">code08.py</span>). Verwende dann <code>enumerate</code> und List Comprehension über die enumerierten duplizierten Dateinamen, um <code>cards</code> (Mehrzahl, ersetzt deine Singular <code>card</code>-Variable) mit der <code>create_card</code>-Funktion zu erstellen, die du zuvor geschrieben hast. Aktualisiere deinen Zeichencode, um alle Karten zu durchlaufen und zu zeichnen. Wenn deine Standard-“seite” auf “rückseite” eingestellt ist, sieht das alles pretty langweilig aus. Ändere das auf “vorderseite”, um ihre Gesichter zu sehen.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="mischen" class="level2" data-number="7.19"><h2 data-number="7.19" class="anchored" data-anchor-id="mischen">
+<span class="header-section-number">7.19</span> Karten mischen</h2>
+<p>Wenn du Karten ziehst, wirst du feststellen, dass das Duplizieren der Dateinamenliste eine sehr ordentliche Reihenfolge produziert, die das Spielspielen einfach (und langweilig) macht. Wir müssen die Dateinamenliste <em>vor</em> der Erstellung von <code>cards</code> <a href="https://docs.python.org/3/library/random.html#random.shuffle">shuffle()</a> <em>mischen</em>. Beachte, dass <a href="https://docs.python.org/3/library/random.html#random.shuffle">shuffle()</a> die Listenelemente <em>an Ort und Stelle</em> mischt, indem es die Tatsache nutzt, dass die Liste <a href="#ver%C3%A4nderbare-Objekte">veränderbar</a> ist. Das bedeutet, du rufst einfach die Funktion auf und übergibst die Liste als Argument. Die Liste wird verändert, nichts wird zurückgegeben und nichts muss der <code>filenames</code>-Variablen zugewiesen werden.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="lass-uns-eine-pause-machen" class="level2" data-number="7.20"><h2 data-number="7.20" class="anchored" data-anchor-id="lass-uns-eine-pause-machen">
+<span class="header-section-number">7.20</span> Lass uns eine Pause machen!</h2>
+<p>Wir haben viel geschafft, also könnte es ein guter Zeitpunkt sein, um eine Pause einzulegen und deinen Code für meine Überprüfung einzureichen.</p>
+</section><section id="hauptschleife-hinzufügen" class="level2" data-number="7.21"><h2 data-number="7.21" class="anchored" data-anchor-id="hauptschleife-hinzufügen">
+<span class="header-section-number">7.21</span> Hauptschleife hinzufügen</h2>
+<p>Jetzt haben wir einen gemischten Kartensatz, den wir anzeigen, bis ein Spieler eine Taste drückt. Ändere den Code, um eine Hauptpräsentationsschleife zu haben, ähnlich wie die, die wir hatten, als wir mit <a href="05-psychopy.de.html">PsychoPy</a>-Reizen experimentiert haben. Zuvor haben wir eine logische <code>gameover</code>-Variable verwendet, um die <a href="##while-Schleife">while</a>-Schleife zu steuern. Hier werden wir zwei Gründe haben, die Schleife zu beenden: Der Spieler hat die <strong>Escape</strong>-Taste gedrückt oder er hat das Spiel gewonnen. Daher lass uns eine <em>Zeichenfolge</em>-Variable <code>game_state</code> verwenden, die auf <code>"laufend"</code> initialisiert wird. Wiederhole die Schleife, solange <code>game_state</code> gleich <code>"laufend"</code> ist, aber ändere es auf <code>"abbruch"</code>, wenn ein Spieler die <strong>Escape</strong>-Taste drückt. Du musst auch <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> durch <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">getKeys()</a> ersetzen.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code10.py</span>.</p>
+</div>
+</section><section id="psychopy-mouse" class="level2" data-number="7.22"><h2 data-number="7.22" class="anchored" data-anchor-id="psychopy-mouse">
+<span class="header-section-number">7.22</span> Mausklick erkennen</h2>
+<p>Im Spiel wird der Spieler einzelne Karten anklicken, um sie umzudrehen. Bevor du eine <a href="https://psychopy.org/api/event.html#psychopy.event.Mouse">Maus</a> in PsychoPy verwenden kannst, musst du sie über den Aufruf <code>mouse = event.Mouse(visible=True, win=win)</code> erstellen, wobei <code>win</code> das PsychoPy-Fenster ist, das du bereits erstellt hast. Dieser Code sollte direkt unter der Zeile appear, in der du das Fenster selbst erstellst.</p>
+<p>Jetzt kannst du mit der Methode <a href="https://psychopy.org/api/event.html#psychopy.event.Mouse.getPressed">mouse.getPressed()</a> überprüfen, ob die linke Maustaste gedrückt wurde. Sie gibt ein Dreier-Tupel zurück mit <code>True</code>/<code>False</code>-Werten, die angeben, ob jede der drei Tasten <em>momentan gedrückt</em> wird. Verwende es in der Hauptschleife, damit, wenn der Spieler die <em>linke</em> Taste drückt (ihr Index in der zurückgegebenen Liste ist 0), du die <code>"seite"</code> der ersten Karte (also die Karte mit Index 0 in der Liste) auf <code>"vorderseite"</code> änderst. Dies setzt voraus, dass du die Karte mit ihrer <code>"rückseite"</code> initialisiert hast, natürlich. Wenn du den Code ausführst und <em>irgendwo</em> klickst, sollte die erste Karte umgedreht werden.</p>
+<p>Leg deinen Mausklick-Code <em>vor</em> das Ziehen von Karten. Im Moment macht es keinen Unterschied, aber es wird später nützlich sein, da es uns ermöglichen wird, den aktuellen Zustand der Karte (also direkt nachdem sie von einem Spieler umgedreht wurde) zu ziehen.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code11.py</span>.</p>
+</div>
+</section><section id="position-zu-index" class="level2" data-number="7.23"><h2 data-number="7.23" class="anchored" data-anchor-id="position-zu-index">
+<span class="header-section-number">7.23</span> Position zu Index</h2>
+<p>Momentan wird die erste Karte umgedreht, wenn du <em>irgendwo</em> klickst. Aber die Karte, die du umdrehst, sollte die Karte sein, auf die der Spieler geklickt hat. Dafür müssen wir eine Funktion <code>index_from_position</code> implementieren, die das Gegenteil von <code>position_from_index</code> ist. Sie sollte ein Argument <code>pos</code> entgegennehmen, das ein Tupel aus <code>(&lt;x&gt;, &lt;y&gt;)</code>-Werten ist (eine Mausposition innerhalb des Fensters), und eine <em>ganzzahlige Kartenindex</em> zurückgeben. Du hast Float-Werte (mit Dezimalpunkten) im <code>pos</code>-Argument (weil es sich von -1 bis 1 für <a href="05-psychopy.de.html#psychopy-einheiten-norm">norm</a> Einheiten bewegt) und standardmäßig werden die Werte, die du daraus berechnest, auch Float sein. Allerdings <em>muss</em> ein Index ganzzahlig sein, also musst du ihn in einen <a href="https://docs.python.org/3/library/functions.html#int">int()</a>-Aufruf einwickeln, bevor du ihn zurückgibst.</p>
+<p>Gehen wir rückwärts — von Position zu Index — finde ich (IMHO) es einfacher. Zuerst musst du darüber nachdenken, wie du eine <em>x</em>-Koordinate (die von -1 bis 1 geht) in einen Spaltenindex (der von 0 bis 3 geht) umwandeln kannst, wenn du 4 Spalten hast (zeichne es auf Papier, um die Mathematik einfacher zu verstehen). Ähnlich übersetzt du <em>y</em> (von -1 bis 1) in einen Zeilenindex, wenn es nur zwei Zeilen gibt. Sobald du den Zeilen- und Spaltenindex kennst, kannst du den Index selbst berechnen, wobei du im Hinterkopf behältst, dass es vier Karten in einer Zeile gibt. Wie bei <code>position_from_index</code> denke ich, dass es einfacher ist, erst mit den Formeln in einem Jupyter Notebook zu spielen, bevor du den Code in eine Funktion umwandelst, dokumentierst und ihn in <code>utilities.py</code> aufnimmst.</p>
+<div class="program">
+<p>Füge <span class="program-function">index_from_position</span> in <span class="program-filename">utilities.py</span> ein.</p>
+</div>
+</section><section id="klicke-auf-eine-ausgewählte-karte-um-sie-umzudrehen" class="level2" data-number="7.24"><h2 data-number="7.24" class="anchored" data-anchor-id="klicke-auf-eine-ausgewählte-karte-um-sie-umzudrehen">
+<span class="header-section-number">7.24</span> Klicke auf eine ausgewählte Karte, um sie umzudrehen</h2>
+<p>Jetzt, wo du eine Funktion hast, die einen Index aus einer Position zurückgibt (vergiss nicht, sie zu importieren), kannst du die Karte umdrehen, auf die der Spieler geklickt hat. Dazu musst du den Code zum Umdrehen der Karte innerhalb des Codes <em>wenn die linke Maustaste gedrückt wurde</em> erweitern. Hol dir die Position der Maus innerhalb des Fensters, indem du <a href="https://psychopy.org/api/event.html#psychopy.event.Mouse.getPos">mouse.getPos()</a> aufrufst. Dies wird ein Paar <code>(x, y)</code>-Werte zurückgeben, das du an deine <code>index_from_position()</code>-Funktion übergeben kannst. Diese wird ihrerseits den Index der Karte zurückgeben, auf die der Spieler geklickt hat. Ändere die <code>"seite"</code> einer Karte mit diesem Index auf <code>"vorderseite"</code>. Teste den Code, indem du verschiedene Karten umdrehst und stelle sicher, dass es die Karte ist, auf die du geklickt hast, die sich umdreht. Und wie immer, zögere nicht, einen Breakpoint innerhalb der if-Anweisung zu setzen, um die tatsächlichen Mauspositionswerte und wie sie in den Index übersetzt werden zu überprüfen, wenn etwas nicht funktioniert.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code12.py</span>.</p>
+</div>
+</section><section id="offene-karten-im-auge-behalten" class="level2" data-number="7.25"><h2 data-number="7.25" class="anchored" data-anchor-id="offene-karten-im-auge-behalten">
+<span class="header-section-number">7.25</span> Offene Karten im Auge behalten</h2>
+<p>Im eigentlichen Spiel darf ein Spieler nur <em>zwei</em> Karten gleichzeitig umdrehen. Wenn sie übereinstimmen, werden sie entfernt. Wenn nicht, werden sie wieder auf ihre Rückseiten gedreht. Das bedeutet, wir müssen aufzeichnen, welche und wie viele Karten oben liegen. Wir können das immer durch eine List Comprehension herausfinden, indem wir nach Karten suchen, deren <code>"seite"</code> <code>"vorderseite"</code> ist. Aber das veränderliche Wesen von Dictionaries bietet uns eine einfachere Lösung. Wir erstellen eine neue Liste (nennen wir sie <code>face_up</code>) und fügen Karten hinzu. Dictionaries sind veränderlich, also wird eine Referenz auf das gleiche Dictionary-Objekt in beiden Listen vorhanden sein (die gleiche Kartendictionary hat zwei Sticker darauf, einen von der <code>cards</code>-Liste und einen von der <code>face_up</code>-Liste). Auf diese Weise wissen wir, <em>welche</em> Karten oben liegen (jene, die in der Liste sind) und wir wissen, wie viele (Länge der <code>face_up</code>-Liste).</p>
+<p>Aber pass auf, dass du keine Karte zweimal hinzufügst (das würde unsere “wie viele Karten sind oben” Zahl durcheinanderbringen). Es gibt mehrere Möglichkeiten, das zu verhindern. Angenommen, <code>icard</code> ist der Index der Karte, den du über <code>position_to_index()</code> aus der Mausposition berechnet hast, du kannst einfach überprüfen, ob diese Karte <code>"seite"</code> <code>"vorderseite"</code> ist. Alternativ kannst du überprüfen, ob diese Karte bereits <a href="https://docs.python.org/3/reference/expressions.html?highlight=list%20dictionary#in">in</a> der <code>face_up</code>-Liste ist. Auf jeden Fall wird dir das sagen, ob die Karte oben ist. Wenn sie es nicht ist, solltest du ihre <code>"seite"</code> auf <code>"vorderseite"</code> setzen und sie zur <code>face_up</code>-Liste hinzufügen.</p>
+<p>Mach das hier, öffne ein paar Karten. Dann setz einen Breakpoint, um das Programm anzuhalten und zu überprüfen, ob die <code>face_up</code>-Liste genau diese (diese Anzahl) Karten enthält. Wenn es <em>mehr</em> hat, funktionieren deine face-up-Prüfungen nicht. Setz einen Breakpoint darauf und gehe durch den Code, um zu sehen, was passiert.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code13.py</span>.</p>
+</div>
+</section><section id="nur-zwei-karten-aufdecken" class="level2" data-number="7.26"><h2 data-number="7.26" class="anchored" data-anchor-id="nur-zwei-karten-aufdecken">
+<span class="header-section-number">7.26</span> Nur zwei Karten aufdecken</h2>
+<p>Jetzt müssen wir überprüfen, ob ein Spieler genau zwei Karten aufgedeckt hat. In deinem Code sollten die Mausprüfungen <em>vor</em> dem Zeichencode sein. Das bedeutet, dass die Karten sofort nach einem Klick mit der Vorderseite nach oben gezogen werden. Sobald sie gezogen wurden, überprüfe die Länge von <code>face_up</code>, ob sie gleich 2 ist:</p>
+<ul>
+<li>Mach eine Pause von ~0.5 s<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> mit <a href="https://psychopy.org/api/clock.html#psychopy.clock.wait">wait</a>, damit der Spieler beide Karten sehen kann.</li>
+<li>Klapp beide Karten um (d.h. setze ihre <code>"seite"</code> auf <code>"rückseite"</code>).</li>
+<li>Nimm sie aus der <code>face_up</code>-Liste raus (siehe <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">.clear()</a> Methode).</li>
+</ul>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code14.py</span>.</p>
+</div>
+</section><section id="ein-passendes-paar-vom-tisch-nehmen" class="level2" data-number="7.27"><h2 data-number="7.27" class="anchored" data-anchor-id="ein-passendes-paar-vom-tisch-nehmen">
+<span class="header-section-number">7.27</span> Ein passendes Paar vom Tisch nehmen</h2>
+<p>Unser Code dreht die Karten wieder um, selbst wenn du ein passendes Paar gefunden hast, aber wir müssen sie vom Tisch nehmen. Sobald du zwei Karten in der <code>face_up</code>-Liste hast, musst du überprüfen, ob sie das gleiche Huhn haben, d.h., ihre Dateinamen sind gleich. Wenn ja, setzt du das <code>"show"</code>-Feld auf <code>False</code>. Wenn nicht, setzt du ihre <code>"seite"</code> auf <code>"rückseite"</code> (was dein Code bereits tut). Auf jeden Fall musst du das Programm pausieren, damit der Spieler sie sehen und die <code>face_up</code>-Liste löschen kann (sie sind entweder vom Tisch oder mit der Rückseite nach oben, definitiv nicht mit der Vorderseite nach oben).</p>
+<p>Wir müssen unseren Code anpassen, auch um das <code>"show"</code>-Feld korrekt zu verarbeiten. Zunächst musst du deinen Zeichencode anpassen, um nur die Karten zu zeichnen, die gezeigt werden sollen. Zweitens, beim Verarbeiten des Mausklicks musst du überprüfen, ob die Karte nicht bereits oben liegt und ob sie gezeigt wird (ansonsten könntest du unsichtbare Karten “öffnen”).</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code15.py</span>.</p>
+</div>
+</section><section id="das-spiel-ist-vorbei-wenn-alle-karten-vom-tisch-sind" class="level2" data-number="7.28"><h2 data-number="7.28" class="anchored" data-anchor-id="das-spiel-ist-vorbei-wenn-alle-karten-vom-tisch-sind">
+<span class="header-section-number">7.28</span> Das Spiel ist vorbei, wenn alle Karten vom Tisch sind</h2>
+<p>Wenn dein Code korrekt funktioniert, kannst du alle Karten vom Tisch nehmen, sodass nur noch der graue Bildschirm übrig bleibt. Aber das sollte der Punkt sein, an dem das Spiel endet und dich zu deinem Erfolg gratuliert. Schreibe eine Funktion <code>remaining_cards</code>, die die Liste mit Karten (also unsere <code>cards</code>-Liste) entgegennimmt und zurückgibt, wie viele Karten noch gezeigt werden (ihr <code>"show"</code>-Feld ist <code>True</code>). Du brauchst auf jeden Fall eine <a href="#for-Schleife">for-Schleife</a> dafür, aber die Implementierung kann sehr unterschiedlich sein. Du könntest eine zusätzliche Zählervariable verwenden, die du auf 0 initialisierst und dann um eins erhöhst (siehe <a href="https://docs.python.org/3/reference/simple_stmts.html#augmented-assignment-statements">+=</a> für eine Abkürzung). Alternativ kannst du <a href="l#list-comprehension">List Comprehensions</a> verwenden, um alle Karten herauszufiltern, die nicht gezeigt werden, und die Länge dieser Liste zurückzugeben (eine einzeilige Lösung). Implementiere diese Funktion in <span class="filename">utilities.py</span> und beende die Schleife, indem du <code>game_state</code> auf <code>"victory"</code> setzt. Nach der Schleife kannst du die <code>game_state</code>-Variable überprüfen und wenn der Spieler gewonnen hat, eine Gratulationsnachricht anzeigen (<a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>, beachte, dass du nicht einmal eine Variable dafür erstellen musst, du kannst ein Objekt erstellen und <code>draw()</code> darauf aufrufen, also z.B. <code>visual.TextStim(...).draw()</code>) und auf eine Tasteneingabe warten, bevor du das Fenster schließt.</p>
+<div class="program">
+<p>Implementiere <span class="program-function">remaining_cards</span> in <span class="program-filename">utilities.py</span>. Füge deinen Code in <span class="program-filename">code16.py</span> ein.</p>
+</div>
+</section><section id="machs-schnell" class="level2" data-number="7.29"><h2 data-number="7.29" class="anchored" data-anchor-id="machs-schnell">
+<span class="header-section-number">7.29</span> Mach’s schnell!</h2>
+<p>Es gibt verschiedene Möglichkeiten, um die Geschwindigkeit in diesem Spiel zu quantifizieren. Du könntest die Anzahl der Paare betrachten, die der Spieler öffnen musste, bis sie alle gelöst hat (je weniger, desto besser). Oder du könntest messen, wie schnell der Spieler es in Sekunden geschafft hat. Oder du könntest eine Kombination aus diesen beiden Maßnahmen verwenden. Lassen wir uns die zweite Option - die gesamte benötigte Zeit - als Gelegenheit nutzen, um PsychoPy <a href="https://psychopy.org/api/clock.html">Uhren</a> kennenzulernen.</p>
+<p>Die beiden Klassen, die dich am meisten interessieren werden, sind <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a> und <a href="https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer">CountdownTimer</a>. Der einzige Unterschied zwischen den beiden ist, dass <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a> bei 0 startet und die verstrichene Zeit zählt, sodass seine <a href="https://psychopy.org/api/clock.html#psychopy.clock.MonotonicClock.getTime">getTime()</a>-Methode nur positive Werte zurückgibt. Im Gegensatz dazu startet der <a href="https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer">CountdownTimer</a> mit einem von dir initialisierten Wert und zählt die verbleibende Zeit herunter. Wichtig ist, dass er nicht stoppt, wenn er 0 erreicht, also wirst du schließlich mit negativer verbleibender Zeit enden. Daher überprüfst du bei <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a>, ob die verstrichene Zeit länger als ein vordefinierter Wert ist, während du beim <a href="https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer">CountdownTimer</a> mit einem vordefinierten Wert startest und überprüfst, ob die verbleibende Zeit über Null liegt. Beachte, dass es nicht garantiert ist, dass die verbleibende Zeit genau Null ist. Im Gegenteil, es ist sehr unwahrscheinlich, dass dies jemals passiert, also vergleiche nie Float-Werte mit exakten Zahlen<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>.</p>
+<p>Hier interessieren wir uns für die <em>verstrichene</em> Zeit, also ist <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a> die offensichtliche Wahl. Erstelle eine Uhr vor der Spielschleife und verwende die verstrichene Zeit in der Glückwunschnachricht.</p>
+<div class="program">
+<p>Mach weiter mit <span class="program-filename">code17.py</span>.</p>
+</div>
+</section><section id="wie-kannst-du-es-verbessern" class="level2" data-number="7.30"><h2 data-number="7.30" class="anchored" data-anchor-id="wie-kannst-du-es-verbessern">
+<span class="header-section-number">7.30</span> Wie kannst du es verbessern?</h2>
+<p>Super Spiel, aber du kannst es immer verbessern: Highscore, mehrere Runden, usw. Der Himmel ist die Grenze!</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Die Bilder stammen von <a href="https://openclipart.org/artist/Firkin">Kevin David Pointon</a> und wurden von <a href="https://openclipart.org/">OpenClipart</a> heruntergeladen. Sie sind <a href="https://creativecommons.org/publicdomain/zero/1.0/">Public Domain</a> und können frei verwendet und verbreitet werden.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Nicht wirklich, aber das erleichtert das Verständnis.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Ein Metaphernversuch: Du kannst verschiedene Hemden tragen, also verändert sich dein <em>Aussehen</em> (Variable), aber jedes einzelne Hemd (mögliche Werte) bleibt gleich (wir ignorieren hier den Verschleiß), unabhängig davon, ob du es trägst (der Wert wird einer Variable zugewiesen) oder nicht.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Kommen bald!<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Verwende das Metapher des Aussehens: Du kannst dein Aussehen ändern, indem du ein anderes (immutables) Hemd trägst oder indem du deine Frisur änderst. Dein Haar ist mutabel, du trägst nicht an verschiedenen Tagen ein anderes, um anders auszusehen, du musst es ändern, um anders auszusehen.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Na ja, zumindest mich!<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Unveränderliche Werte sind <a href="https://docs.python.org/3/glossary.html#term-hashable">hashable</a>, während veränderliche wie Dictionaries und Listen nicht sind. Das liegt daran, dass veränderliche Objekte während der Ausführung des Programms verändert werden können und daher als Schlüssel unbrauchbar sind. Das bedeutet, es ist schwierig, auf ein Dictionary zuzugreifen, wenn der Schlüssel sich ändern kann, wenn du darauf zugreifen musst.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Diese Funktion geht davon aus, dass du einen vollständigen relativen Pfad zu der Datei angibst. Später werden wir eine Version dieser Funktion erstellen, die die Ordnerinformationen selbst anhängen wird.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Verwende einen absoluten Pfad nur, wenn es die einzige Option ist, da er fast sicherlich auf einem anderen Rechner deinen Code unterbrechen wird.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Ein sehr willkürlich gewähltes Beispiel!<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Du wirst später über praktische Auswirkungen davon lernen. Vorerst behalte im Kopf, dass scheinbar identische Ausgaben fundamental unterschiedlich sein können.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Wähle die Dauer, die du magst!<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Allgemeiner gesagt, vergleiche nie Float-Werte mit exakten Zahlen. Sie sind <a href="http://www.lahey.com/float.htm">tricky</a>, da die darunterliegende Darstellung nicht garantiert, dass die Berechnung genau die Zahl produziert, die sie sollte: <code>.1 +.1 +.1 ==.3</code> ist überraschend <code>False</code>, probiere es selbst!<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./06-whack-a-mole.de.html" class="pagination-link" aria-label="Whack-a-Mole">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-christmas.de.html" class="pagination-link" aria-label="Weihnachts-Spezial">
+        <span class="nav-page-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+</body>
+</html>

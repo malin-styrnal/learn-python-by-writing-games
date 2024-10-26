@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/01-basics.html" id="language-link-en">English</a></li></ul>
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/01-basics.html" id="language-link-en">English</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -174,6 +174,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -208,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch <a href="001-software.de.html#files-folder">erstellt</a>. Lade das <a href="notebooks/Basics.ipynb">Übungsheft</a> herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe <a href="001-software.de.html#jupyter-notebooks">relevante Anweisungen</a>. Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.</p>
+</header><p>Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch <a href="001-software.de.html#files-folder">erstellt</a>. Lade das <a href="notebooks/01-Basics-de.ipynb">Übungsheft</a> herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe <a href="001-software.de.html#jupyter-notebooks">relevante Anweisungen</a>. Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.</p>
 <section id="kapitelkonzepte" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="kapitelkonzepte">
 <span class="header-section-number">1.1</span> Kapitelkonzepte</h2>
 <ul>
@@ -222,13 +246,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></section><section id="variablen" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="variablen">
 <span class="header-section-number">1.2</span> Variablen</h2>
 <p>Der erste grundlegende Begriff, den wir uns aneignen müssen, ist die <strong>Variable</strong>. Variablen werden verwendet, um Informationen zu speichern, und man kann sie sich als Kiste mit einem Namensschild vorstellen, damit man etwas darin unterbringen kann. Das Namensschild auf dieser Kiste ist der Name der Variablen und ihr Wert ist das, was man darin speichert. Zum Beispiel können wir eine Variable erstellen, die die Anzahl der Beine eines Spielcharakters speichert. Wir beginnen mit einer für einen Menschen typischen Zahl.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/variable-as-box.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
-</figure>
-</div>
-</div>
+<figure class="figure"><p><img src="images/variable-as-box.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Variable als Kasten</figcaption></figure>
 </div>
 <p>In Python, du würdest schreiben:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -236,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>variablenname<span class="op">&gt;</span> <span class="op">=</span> <span class="op">&lt;</span>wert<span class="op">&gt;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Der Variablenname (Name-Tag auf der Box) sollte sinnvoll sein, er kann mit Buchstaben oder _ beginnen und Buchstaben, Zahlen und das _-Zeichen enthalten, aber keine Leerzeichen, Tabulatoren, Sonderzeichen usw. Python empfiehlt<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, dass du <strong>snake_case</strong> (alles Kleinbuchstaben, Unterstrich für Leerzeichen) für die Formatierung deiner Variablennamen verwendest. Der <code>&lt;wert&gt;</code> auf der rechten Seite ist eine komplexere Geschichte, da er hartcodiert sein kann (wie im obigen Beispiel), unter Verwendung anderer Variablen oder der gleichen Variable berechnet werden kann, von einer Funktion zurückgegeben werden kann, usw.</p>
 <p>Verwende Variablen, damit du dich auf das konzentrieren kannst, was die entsprechenden Werte <strong>bedeuten</strong>, anstatt darüber nachzudenken, was diese Werte sind. Zum Beispiel: Nächstes Mal, wenn du etwas basierend auf der Anzahl der Beine eines Charakters berechnen musst (z.B. wie viele Schuhpaare braucht ein Charakter), kannst du es basierend auf dem aktuellen Wert der <code>number_of_legs</code>-Variablen berechnen, anstatt davon auszugehen, dass es <code>1</code> ist.</p>
-<div class="cell">
+<div id="2121e686" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SCHLECHT: warum 1? Ist es, weil der Charakter zwei Beine hat oder</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># weil wir unabhängig von der tatsächlichen Anzahl der Beine</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pro Charakter ein Schuhpaar ausgeben?</span></span>
@@ -246,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>pairs_of_shoes <span class="op">=</span> number_of_legs <span class="op">/</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Variablen bieten dir auch Flexibilität. Ihre Werte können sich während der Programmausführung ändern: Der Punktestand des Spielers steigt, die Anzahl der Leben sinkt, die Anzahl der Zauber, die er wirken kann, wächst oder fällt je nach Verwendung usw. Aber du kannst immer den Wert in der Variablen verwenden, um notwendige Berechnungen durchzuführen. Zum Beispiel hier ein etwas erweitertes <code>number_of_shoes</code>-Beispiel.</p>
-<div class="cell">
+<div id="116e56c9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#...</span></span>
@@ -259,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>pairs_of_shoes <span class="op">=</span> number_of_legs <span class="op">/</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Okay, also hier oben erwähnt, kannst du dir eine Variable wie eine beschriftete Kiste vorstellen, in der du etwas aufbewahren kannst. Das bedeutet, dass du immer das alte Wert “wegwerfen” und einen neuen reinsetzen kannst. Bei Variablen passiert das “wegwerfen” automatisch, weil ein neuer Wert den alten überschreibt. Überprüfe doch mal, welchen Wert die Variable am Ende im folgenden Code hat:</p>
-<div class="cell">
+<div id="eb03db1e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">1</span></span>
@@ -269,32 +289,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mach Übung #1.</p>
 </div>
 <p>Achtung, eine Variable (“ein Kasten mit einem Namensschild”) existiert erst, wenn du ihr etwas zuweist. Also wird der folgende Code einen <code>NameError</code> erzeugen, eine Art von Python, um dir mitzuteilen, dass es die Variable <code>number_of_hands</code> nicht kennt.</p>
-<div class="cell">
+<div id="c10b4a75" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>number_of_gloves <span class="op">=</span> number_of_hands <span class="op">/</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NameError: name 'number_of_hands' is not defined</code></pre>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
+<span class="ansi-green-fg">      1</span> number_of_legs <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">2</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 2</span> number_of_gloves <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">number_of_hands</span> <span style="color:rgb(98,98,98)">/</span> <span style="color:rgb(98,98,98)">2</span>
+
+<span class="ansi-red-fg ansi-bold">NameError</span>: name 'number_of_hands' is not defined</pre>
+</div>
 </div>
 </div>
 <p>Aber du kannst auch eine Variable erstellen, die keinen <em>bestimmten</em> Wert enthält, indem du ihr <code>None</code> zuweist. <code>None</code> wurde speziell hinzugefügt, um <em>keinen Wert</em> oder <em>nichts</em> zu bedeuten.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_hände <span class="op">=</span> <span class="va">None</span> <span class="co"># Variable existiert jetzt, enthält aber keinen bestimmten Wert.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_hände <span class="op">=</span> <span class="va">None</span> <span class="co"># Variable existiert jetzt, enthält aber keinen bestimmten Wert.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Als du das schon gesehen hast, kannst du einen Wert <em>berechnen</em> anstatt ihn festzulegen. Was wäre hier die Antwort?</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine <span class="op">=</span> <span class="dv">7</span> <span class="op">-</span> <span class="dv">2</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine <span class="op">=</span> <span class="dv">7</span> <span class="op">-</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>anzahl_der_beine</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #2.</p>
 </div>
 </section><section id="du-solltest-assignments-nicht-mit-gleichungen-verwechseln" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="du-solltest-assignments-nicht-mit-gleichungen-verwechseln">
 <span class="header-section-number">1.3</span> Du solltest Assignments nicht mit Gleichungen verwechseln!</h2>
 <p><strong>Sehr wichtig</strong>: obwohl Zuweisungen <em>ähnlich</em> wie mathematische Gleichungen aussehen, sind sie <strong>keine Gleichungen!</strong> Sie befolgen eine <strong>sehr wichtige</strong> Regel, die du im Kopf behalten musst, wenn du Zuweisungen verstehst: Die rechte Seite eines Ausdrucks wird <em>erst</em> ausgewertet, bis der endgültige Wert berechnet wurde, erst dann wird dieser endgültige Wert der Variable zugewiesen, die auf der linken Seite angegeben ist (in die Kiste gelegt). Das bedeutet, dass du dieselbe Variable auf <em>beiden</em> Seiten verwenden kannst! Schauen wir uns diesen Code an:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> y <span class="op">-</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> y <span class="op">-</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Was passiert, wenn der Computer die letzte Zeile auswertet? Zuerst nimmt er die <em>aktuellen</em> Werte aller Variablen (also <code>2</code> für <code>x</code> und <code>5</code> für <code>y</code>) und setzt sie in den Ausdruck ein. Danach sieht der Ausdruck so aus:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">-</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">-</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Dann berechnet es den Ausdruck auf der rechten Seite und speichert, <strong>sobald die Berechnung abgeschlossen ist</strong>, diesen neuen Wert in <code>x</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #3, um sicherzustellen, dass du das verstanden hast.</p>
 </div>
@@ -302,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">1.4</span> Konstanten</h2>
 <p>Obwohl die wahre Kraft von Variablen darin besteht, dass du ihren Wert ändern kannst, solltest du sie auch verwenden, wenn der Wert während des entire Programms konstant bleibt. Es gibt keine echten Konstanten in Python, sondern eine Übereinkunft, dass ihre Namen vollständig in <code>GROSSBUCHSTABEN</code> geschrieben werden sollten. Entsprechend weißt du, dass du den Wert nicht ändern solltest, wenn du <code>EINE_DERSELBE_VARIABLE</code> siehst. Technisch gesehen ist dies nur eine Empfehlung, da niemand dich daran hindern kann, den Wert einer <code>KONSTANTE</code> zu ändern. Allerdings stammt ein großer Teil der Leichtigkeit von Python aus solchen Übereinkünften (wie die <code>schreibweise_mit_unterstrichen</code> oben). Wir werden später auf mehr solcher Übereinkünfte stoßen, zum Beispiel beim Erlernen von Objekten.</p>
 <p>Okay, wenn die Anzahl der Beine während des Spiels konstant bleibt, solltest du diese Konstanz hervorheben und folgendes in Python schreiben:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ANZAHL_DER_BEINE <span class="op">=</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ANZAHL_DER_BEINE <span class="op">=</span> <span class="dv">2</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ich empfehle dir dringend, Konstanten zu verwenden und Hardcoden von Werten zu vermeiden. Erstens, wenn du mehrere identische Werte hast, die unterschiedliche Dinge bedeuten (2 Beine, 2 Augen, 2 Ohren, 2 Fahrzeuge pro Charakter usw.), wird ein <code>2</code> im Code nicht verraten, was dieses <code>2</code> bedeutet (die Beine? die Ohren? der Punktemultiplikator?). Natürlich kannst du das basierend auf dem Code, der diese Zahl verwendet, herausfinden, aber du könntest dir diese zusätzliche Arbeit sparen und stattdessen eine entsprechend benannte Konstante verwenden. Dann musst du nur noch ihren Namen lesen und der Sinn des Wertes wird offensichtlich, und es ist der Sinn, nicht der tatsächliche Wert, an dem du am meisten interessiert bist. Zweitens, wenn du entscheidest, diesen Wert dauerhaft zu <em>ändern</em> (sagen wir, unser Hauptcharakter ist jetzt ein Tripod), bedeutet das Verwenden einer Konstante, dass du dich nur um eine Stelle sorgen musst, der Rest des Codes bleibt unverändert. Wenn du diesen Wert hartcodiert hast, steht dir ein aufregender<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> und auf jeden Fall langer Suchen- und Ersetzen-Vorgang durch den gesamten Code bevor.</p>
 <div class="practice">
 <p>Mach Übung #4.</p>
@@ -317,39 +345,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Logische / boolesche Werte, die entweder <code>True</code> oder <code>False</code> sind.</li>
 </ul>
 <p>Wenn du eine Variable verwendest, ist es wichtig, dass du weißt, welchen Wertstyp sie speichert. Das liegt meist an dir. In manchen Fällen wird Python einen Fehler auswerfen, wenn du eine Berechnung mit inkompatiblen Wertstypen versuchst. In anderen Fällen konvertiert Python automatisch Werte zwischen bestimmten Typen, z.B. ist jeder Integer-Wert auch ein Realwert, so dass die Konvertierung von <code>1</code> in <code>1.0</code> meist trivial und automatisch ist. Allerdings musst du in anderen Fällen eine explizite Konvertierung verwenden. Geh zu Übung #5 und versuche zu erraten, welcher Code ausgeführt wird und welcher aufgrund von inkompatiblen Typen einen Fehler wirft.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">+</span> <span class="fl">2.0</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="st">'2'</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="va">True</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">+</span> <span class="va">True</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">+</span> <span class="fl">2.0</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="st">'2'</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">'5'</span> <span class="op">+</span> <span class="va">True</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">+</span> <span class="va">True</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #5.</p>
 </div>
 <p>Erstaunt über den letzten? Das liegt daran, dass <code>True</code> intern auch <code>1</code> ist und <code>False</code> <code>0</code>!</p>
 <p>Du kannst explizit von einem Typ in einen anderen konvertieren, indem du spezielle Funktionen verwendest. Zum Beispiel kannst du eine Zahl oder einen logischen Wert in einen String umwandeln, indem du einfach <a href="https://docs.python.org/3/library/functions.html#func-str">str(<wert>)</wert></a> schreibst. Was wäre das Ergebnis in den folgenden Beispielen?</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="fl">2.5</span> <span class="op">+</span> <span class="va">True</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="va">True</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="fl">2.5</span> <span class="op">+</span> <span class="va">True</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(<span class="va">True</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #6.</p>
 </div>
 <p>Gleiches gilt für die Umwandlung in eine logische/Boolesche Variable mit der Funktion <a href="https://docs.python.org/3/library/functions.html#bool">bool(<wert>)</wert></a>. Die Regeln sind einfach: Für numerische Werte ist <code>0</code> <code>False</code>, jeder andere Wert ungleich Null wird zu <code>True</code> umgewandelt. Für Strings wird ein leerer String <code>''</code> als <code>False</code> ausgewertet und ein nicht leerer String zu <code>True</code> umgewandelt. Was wäre das Ergebnis in den folgenden Beispielen?</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="op">-</span><span class="dv">10</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="fl">0.0</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>secret_message <span class="op">=</span> <span class="st">''</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(secret_message)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="st">'False'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="op">-</span><span class="dv">10</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="fl">0.0</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>secret_message <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(secret_message)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="st">'False'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #7.</p>
 </div>
 <p>Die Umwandlung in Ganzzahl- oder Fließkommazahlen mit <a href="https://docs.python.org/3/library/functions.html#int">int(&lt;Wert&gt;)</a> bzw. <a href="https://docs.python.org/3/library/functions.html#float">float(&lt;Wert&gt;)</a> ist schwieriger. Der einfachste Fall ist von logisch zu ganzzahlig/Gleitkomma, da <code>True</code> dir <code>int(True)</code> als <code>1</code> und <code>float(True)</code> als <code>1.0</code> gibt und <code>False</code> dir <code>0</code>/<code>0.0</code> gibt. Beim Umwandeln von Gleitkommazahl zu Ganzzahl lässt Python einfach den Bruchteil weg (es macht keine richtige Rundung!). Beim Umwandeln eines Strings muss es eine gültige Zahl des entsprechenden Typs sein, andernfalls wird ein Fehler generiert. Also, du kannst einen String wie <code>"123"</code> in eine Ganzzahl oder eine Gleitkommazahl umwandeln, aber das funktioniert nicht für <code>"a123"</code>. Außerdem kannst du <code>"123.4"</code> in eine Gleitkommazahl umwandeln, aber nicht in eine Ganzzahl, da sie einen Bruchteil enthält. Angesichts all dessen, welche Zellen würden funktionieren und welches Ergebnis würden sie produzieren?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="va">False</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="op">-</span><span class="fl">3.3</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">"67.8"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">"123+3"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2bcb1f4b" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="va">False</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="op">-</span><span class="fl">3.3</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">"67.8"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">"123+3"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="practice">
 <p>Mach Übung #8.</p>
@@ -357,57 +385,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="print" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="print">
 <span class="header-section-number">1.6</span> Ausgabe drucken</h2>
 <p>Um den Wert auszugeben, musst du die <a href="https://docs.python.org/3/library/functions.html#print">print()</a>-Funktion verwenden (wir werden später über Funktionen im Allgemeinen sprechen). Im einfachsten Fall gibst du den Wert an und er wird ausgegeben.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3a3332f3" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>oder</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"fünf"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0ba7ab53" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"fünf"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>fünf</code></pre>
 </div>
 </div>
 <p>Klar, du weißt ja schon über Variablen Bescheid, also musst du den Wert nicht direkt einfügen. Du kannst stattdessen eine Variable übergeben und ihr <em>Wert</em> wird ausgegeben.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_pfannkuchen <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anzahl_der_pfannkuchen)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3016d59a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>anzahl_der_pfannkuchen <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anzahl_der_pfannkuchen)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>10</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>frühstück <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frühstück)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="32dbab11" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>frühstück <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frühstück)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pfannkuchen</code></pre>
 </div>
 </div>
 <p>Du kannst auch mehr als einen Wert/Variable an die print-Funktion übergeben und alle Werte werden nacheinander gedruckt. Zum Beispiel, wenn wir dem Benutzer sagen wollen, was ich zum Frühstück hatte, können wir das so machen:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>frühstück <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_artikeln <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frühstück, anzahl_der_artikeln)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4818db8c" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>frühstück <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_artikeln <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(frühstück, anzahl_der_artikeln)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pfannkuchen 10</code></pre>
 </div>
 </div>
 <p>Was wird von folgendem Code ausgegeben?</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>abendessen <span class="op">=</span> <span class="st">"steak"</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_artikeln <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>nachtisch <span class="op">=</span> <span class="st">"cupcakes"</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anzahl_der_artikeln, abendessen, anzahl_der_artikeln, nachtisch)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>abendessen <span class="op">=</span> <span class="st">"steak"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>anzahl_der_artikeln <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>nachtisch <span class="op">=</span> <span class="st">"cupcakes"</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anzahl_der_artikeln, abendessen, anzahl_der_artikeln, nachtisch)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #9.</p>
 </div>
 <p>Aber du möchtest wahrscheinlich expliziter sein, wenn du die Informationen ausgibst. Stell dir zum Beispiel vor, du hast diese drei Variablen:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>meal <span class="op">=</span> <span class="st">"Frühstück"</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dish <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">10</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c1dc391f" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>meal <span class="op">=</span> <span class="st">"Frühstück"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dish <span class="op">=</span> <span class="st">"Pfannkuchen"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">10</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Du könntest natürlich <code>print(meal, dish, count)</code> machen, aber es wäre netter, “<em>Ich hatte <strong>10 Pfannkuchen</strong> zum <strong>Frühstück</strong></em>” auszugeben, wobei die fett gedruckten Elemente die Werte der eingefügten Variablen sind. Dafür müssen wir String-Formatierung verwenden. Bitte beachte, dass die String-Formatierung nicht spezifisch für das Ausgeben ist, du kannst einen neuen String-Wert über die Formatierung erstellen und ihn in einer Variablen speichern, ohne ihn auszugeben oder ihn ausgeben, ohne ihn zu speichern.</p>
 </section><section id="string-formatting" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="string-formatting">
@@ -426,16 +454,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <code>g</code> für einen “optimal” gedruckten Float-Wert, damit wissenschaftliche Schreibweise für große Werte verwendet wird (<em>z.B.</em> <code>10e5</code> statt <code>100000</code>).</li>
 </ul>
 <p>Hier ist ein Beispiel für das Formatieren einer Zeichenkette unter Verwendung einer Ganzzahl:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen zum Frühstück"</span><span class="op">%</span>(<span class="dv">10</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="14f65197" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen zum Frühstück"</span><span class="op">%</span>(<span class="dv">10</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ich hatte 10 Pfannkuchen zum Frühstück</code></pre>
 </div>
 </div>
 <p>Du bist nicht auf einen einzelnen Wert beschränkt, den du in einen String packen kannst. Du kannst mehr Orte über <code>%</code> angeben, aber du musst sicherstellen, dass du die richtige Anzahl an Werten in der richtigen Reihenfolge übergibst. Kannst du herausfinden, welcher Aufruf tatsächlich funktionieren wird (und welches die Ausgabe sein wird) und welcher einen Fehler produzieren wird, bevor du ihn ausführst?</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und entweder </span><span class="sc">%d</span><span class="st"> oder </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">2</span>))</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">7</span>, <span class="dv">10</span>))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">10</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und entweder </span><span class="sc">%d</span><span class="st"> oder </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">2</span>))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">7</span>, <span class="dv">10</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ich hatte </span><span class="sc">%d</span><span class="st"> Pfannkuchen und </span><span class="sc">%d</span><span class="st"> Steaks zum Abendessen'</span><span class="op">%</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">10</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="practice">
 <p>Mach Übung #10.</p>
 </div>

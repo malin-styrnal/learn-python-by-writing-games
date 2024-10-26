@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/08-christmas.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/08-christmas.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>8  Christmas special – Learn Python by Writing Games</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./09-flappy-bird.html" rel="next">
+<link href="./07-memory.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script><link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-christmas.html"><span class="chapter-number">8</span>  <span class="chapter-title">Christmas special</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Learn Python by Writing Games</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/08-christmas.de.html" id="language-link-de">Deutsch</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming tips and tricks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Guess the Number: a single round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Guess the Number: a multi round edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Guess the Number: AI takes a turn</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Gettings started with PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Christmas special</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#chapter-concepts" id="toc-chapter-concepts" class="nav-link active" data-scroll-target="#chapter-concepts"><span class="header-section-number">8.1</span> Chapter concepts</a></li>
+  <li><a href="#christmas-tree" id="toc-christmas-tree" class="nav-link" data-scroll-target="#christmas-tree"><span class="header-section-number">8.2</span> Christmas tree</a></li>
+  <li><a href="#christmas-tree-decoration" id="toc-christmas-tree-decoration" class="nav-link" data-scroll-target="#christmas-tree-decoration"><span class="header-section-number">8.3</span> Christmas tree decoration</a></li>
+  <li><a href="#twinkle-twinkle-little-star" id="toc-twinkle-twinkle-little-star" class="nav-link" data-scroll-target="#twinkle-twinkle-little-star"><span class="header-section-number">8.4</span> Twinkle, twinkle, little star</a></li>
+  <li><a href="#lets-make-some-noise" id="toc-lets-make-some-noise" class="nav-link" data-scroll-target="#lets-make-some-noise"><span class="header-section-number">8.5</span> Let’s make some noise!</a></li>
+  <li>
+<a href="#settings-files" id="toc-settings-files" class="nav-link" data-scroll-target="#settings-files"><span class="header-section-number">8.6</span> Settings file formats</a>
+  <ul class="collapse">
+<li><a href="#xml" id="toc-xml" class="nav-link" data-scroll-target="#xml"><span class="header-section-number">8.6.1</span> XML</a></li>
+  <li><a href="#ini" id="toc-ini" class="nav-link" data-scroll-target="#ini"><span class="header-section-number">8.6.2</span> INI</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="header-section-number">8.6.3</span> JSON</a></li>
+  <li><a href="#yaml" id="toc-yaml" class="nav-link" data-scroll-target="#yaml"><span class="header-section-number">8.6.4</span> YAML</a></li>
+  </ul>
+</li>
+  <li><a href="#using-settings" id="toc-using-settings" class="nav-link" data-scroll-target="#using-settings"><span class="header-section-number">8.7</span> Using settings</a></li>
+  <li><a href="#merry-christmas-and-a-happy-new-year" id="toc-merry-christmas-and-a-happy-new-year" class="nav-link" data-scroll-target="#merry-christmas-and-a-happy-new-year">Merry Christmas and a Happy New Year!</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">8</span>  <span class="chapter-title">Christmas special</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Today we are going to program a Christmas-special. However, this is still an opportunity to learn something new. You will learn about zipping lists and we will start offloading settings into a separate file. Here is how the Christmas tree looks for me:</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="videos/christmas.m4v"></source></video></div>
+<section id="chapter-concepts" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="chapter-concepts">
+<span class="header-section-number">8.1</span> Chapter concepts</h2>
+<ul>
+<li>Building Christmas spirit</li>
+<li>Zipping over lists</li>
+<li>Loading setting from JSON or YAML file.</li>
+</ul></section><section id="christmas-tree" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="christmas-tree">
+<span class="header-section-number">8.2</span> Christmas tree</h2>
+<p>Let us start our Christmas decoration with a Christmas tree. You can download <a href="material/pine-tree.png">the one I’ve found</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> or find an image that you like. Create your basic PsychoPy code to create a window (we will be using <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> later, so think about suitable units), an <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> with a tree, draw it and wait for any key press.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="christmas-tree-decoration" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="christmas-tree-decoration">
+<span class="header-section-number">8.3</span> Christmas tree decoration</h2>
+<p>For the decoration, let us use <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> objects of various sizes and color. We could create each one separately with its own custom hard-coded values, but let us instead create three constants that are lists of equal length that describe, respectively position of each ball (<code>BALL_POS</code> would be a good name, each entry should be a tuple of <code>(x, y)</code>), size (<code>BALL_SIZE</code>), and color (<code>BALL_COLOR</code>, stick to <code>"red"</code>, <code>"blue"</code>, and <code>"yellow"</code>, this limited selection of specific colors will be important later when we animate them).</p>
+<p>Create a list of balls by iterating over these three lists. You have two choices, you can either use an index variable, building an index via <a href="https://docs.python.org/3/library/functions.html#func-range">range()</a> using <a href="https://docs.python.org/3/library/functions.html#len">len()</a> of one of the lists (they should all be of the same length). But let’s use a cool trick of iterating over a <a href="https://docs.python.org/3/library/functions.html#zip">zip()</a> of lists. <a href="https://docs.python.org/3/library/functions.html#zip">zip()</a> gives you a tuple combining one element from each list that you can unpack on the fly as in the example below (note that loop variables will receive values in the order that you used for lists).</p>
+<div id="3fc5215f" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>  a_number, a_letter <span class="kw">in</span>  <span class="bu">zip</span>(numbers, letters):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="sc">%d</span><span class="st">: </span><span class="sc">%s</span><span class="st">"</span><span class="op">%</span>(a_number, a_letter))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1: A
+2: B
+3: C</code></pre>
+</div>
+</div>
+<p>You can zip as many lists as you want. We, obviously, want three. Decide on whether you want to create <code>balls</code> as an empty list and then append each newly created <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> to it in the loop or use <a href="07-memory.html#list-comprehension">list comprehension</a>. Do not forget to draw the balls and think about what you should draw first: the tree or the balls. Experiment with position and sizes to makes it look just perfect.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="twinkle-twinkle-little-star" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="twinkle-twinkle-little-star">
+<span class="header-section-number">8.4</span> Twinkle, twinkle, little star</h2>
+<p>Now let us make our Christmas balls twinkle, as in the video. The idea is that only one color is “active” at a time. The balls of that color are “on” and balls of other color are “off” (white or gray, or some other color of your liking). Now our display becomes dynamic, so you need to have a game loop and with an opportunity to exit the program by pressing <em>escape</em>.</p>
+<p>For this, we need to define a list of colors (“red”, “blue”, “yellow”) that we can cycle through and an variable that hold the index of the currently active color (I’ve called it <code>icolor</code>). Every X seconds (I do it every 0.5 seconds, define this as a constant, e.g., <code>TWINKLE_DURATION</code>), increment this index, so that the next color in the list becomes active. Note that you have an out-of-range problem: When you initialize <code>icolor</code> to 0 and increment it by 1 three times, your index is already too large (3, the length of our <code>colors</code> list is 3, so the maximal index is 2). You can either use an <code>if</code> to check for that or you can use a remainder operator <code>%</code> (think about the remainder if you divide <em>any</em> positive value by the length of the <code>colors</code> list).</p>
+<p>Once you need to update whether balls are “on” or “off”, you need to loop both through the balls and their colors in the original <code>BALLS_COLOR</code> list (when you use a string with color name, it gets translated into an RGB value, so we cannot compare it directly). Again, you can use <a href="https://docs.python.org/3/library/functions.html#zip">zip()</a> to loop simultaneously through Christmas balls and their color. If their color matches the active one, their <code>fillColor</code> should be that color. If not, their <code>fillColor</code> should be some “neutral” / “off” color (white? gray?).</p>
+<p>To keep track of time, you will need a timer variable, use either <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a> or <a href="https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer">CountdownTimer</a>. Once the <code>TWINKLE_DURATION</code> elapsed, update the active color, all the balls, and do not forget to reset the timer.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code03.py</span>.</p>
+</div>
+</section><section id="lets-make-some-noise" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="lets-make-some-noise">
+<span class="header-section-number">8.5</span> Let’s make some noise!</h2>
+<p>Let add some Christmas music! Download <a href="material/Deck%20the%20Halls%20B.ogg">Deck the Halls version by Kevin MacLeod</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. For this, we will use <a href="https://psychopy.org/api/sound.html">sound</a> module of PsychoPy library that generates sounds on the fly and also play audio files in various format such as wav or ogg (but not mp3!). Unfortunately, sound is surprisingly tricky, there are many libraries that might be used by PsychoPy (as of 2023 PsychoPy lists four backends that it might use), and things sometimes break. Thus, if the music does not play for you, ask me and we will try to set your sound libraries up.</p>
+<p>Using sound is very simple. First, you need to import the <code>Sound</code> class as suggested in the manual:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> psychopy.sound <span class="im">import</span> Sound</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, you need a new object of <code>Sound</code> class supplying the file name as the first parameter (I called the variable <code>song</code>). Right before start the loop, you <code>.play()</code> the sound. Note, if you want to play the same sound again, you need to “rewind” it by explicitly calling its <code>.stop()</code> method. For some reason, the sound stops at the end but does not gets “rewind” back, so when you try to play it again and notices that it is already at the end and stops without playing anything.</p>
+<div class="program">
+<p>Put your code into <span class="program-filename">code04.py</span>.</p>
+</div>
+</section><section id="settings-files" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="settings-files">
+<span class="header-section-number">8.6</span> Settings file formats</h2>
+<p>So far, we either hard-coded specific values or defined them as constants (a better of these two approaches). However, this means that if you want to run your game with different settings, you need to modify the program itself. And if you want to have two versions of the game (two experimental conditions), you would need to have two programs with all the problems of maintaining virtually identical code in several places at once.</p>
+<p>A better approach is to have separate files with settings, so you can keep the code constant and alter specific parameters by specifying which settings file the program should use. This is helpful even if you plan to have a single set of setting as it separates code from constants, puts the latter all in one place and makes it easier to edit and check them. There are multiple formats for settings files: XML, INI, JSON, YAML, etc. Our format of the choice for today will be JSON. However, this is a question of taste. Personally, I like YAML for subjective reasons (fewer curly brackets and quotation marks), but you are free to use any format you like. As you will see, this makes little difference for the actual Python code.</p>
+<section id="xml" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="xml">
+<span class="header-section-number">8.6.1</span> XML</h3>
+<p><a href="https://en.wikipedia.org/wiki/XML">XML</a> — an Extensible Markup Language — looks similar to HTML (HyperText Markup Language). Experiments designed using PsychoPy Builder interface are stored using XML files but with <a href="https://www.psychopy.org/psyexp.html">.psyexp extension</a>. A settings file for our Christmas programin XML could look like this</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">Balls</span>&gt;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Ball</span>&gt;</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Position</span>&gt;</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">x</span>&gt;0.1&lt;/<span class="kw">x</span>&gt;</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">y</span>&gt;0.2&lt;/<span class="kw">y</span>&gt;</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">Position</span>&gt;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Size</span>&gt;0.01&lt;/<span class="kw">Size</span>&gt;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Color</span>&gt;red&lt;/<span class="kw">Color</span>&gt;</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">Ball</span>&gt;</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Ball</span>&gt;</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Position</span>&gt;</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">x</span>&gt;0.2&lt;/<span class="kw">x</span>&gt;</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">y</span>&gt;0.1&lt;/<span class="kw">y</span>&gt;</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">Position</span>&gt;</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Size</span>&gt;0.02&lt;/<span class="kw">Size</span>&gt;</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">Color</span>&gt;yellow&lt;/<span class="kw">Color</span>&gt;</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">Ball</span>&gt;</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">Balls</span>&gt;</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">Timing</span>&gt;</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">Twinkle</span><span class="ot"> duration</span><span class="er">&gt;0.5&lt;/Twinkle</span> <span class="er">duration&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;/Timing&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The advantage of XML is that it is very flexible yet structured and you can use <a href="https://docs.python.org/3/library/xml.html">native Python interface</a> to work with it. However, XML is not easy for humans to read, it is overpowered for our purposes of having a simple set of unique constants and its power means that using it is fairly cumbersome (I use <code>\</code> to split a single line into many lines).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xml.dom <span class="im">import</span> minidom</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> minidom.parse(<span class="st">'settings.xml'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this will give you size of the first ball</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> settings.getElementsByTagName(<span class="st">"Balls"</span>)[<span class="dv">0</span>]. <span class="op">\</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                getElementsByTagName(<span class="st">"Ball"</span>)[<span class="dv">0</span>]. <span class="op">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                getElementsByTagName(<span class="st">"Size"</span>)[<span class="dv">0</span>].firstChild.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="ini" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="ini">
+<span class="header-section-number">8.6.2</span> INI</h3>
+<p>This is a format with a structure similar to that found in MS Windows INI files.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Balls]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">    x </span><span class="ot">=</span><span class="st"> 0.1, 0.2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">    y </span><span class="ot">=</span><span class="st"> 0.2, 0.1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">    size </span><span class="ot">=</span><span class="st"> 0.01, 0.02</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">    color </span><span class="ot">=</span><span class="st"> red, yellow</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[Timing]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">    TwinkleDuration </span><span class="ot">=</span><span class="st"> </span><span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As you can see it is easier to read and Python has a special <a href="https://docs.python.org/3/library/configparser.html">configparser</a> library to work with them. The object you get is, effectively, a dictionary with additional methods and attributes. However <code>ConfigParser</code> does not try to guess the type of data, so all values are stored as <em>strings</em> and it is your job to convert them to whatever type you need, e.g., integer, list, etc.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> configparser</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> configparser.ConfigParser()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>settings.read(<span class="st">'settings.ini'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>settings[<span class="st">'Balls'</span>][<span class="st">'size'</span>] <span class="co"># this will give you a string '0.01, 0.02'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="json" class="level3" data-number="8.6.3"><h3 data-number="8.6.3" class="anchored" data-anchor-id="json">
+<span class="header-section-number">8.6.3</span> JSON</h3>
+<p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) is a popular format to serialize data for web applications that use it to exchange data between a server and a client.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"Balls"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"position"</span><span class="fu">:</span> <span class="ot">[[</span><span class="dv">0</span><span class="er">.</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">0</span><span class="er">.</span><span class="dv">2</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">0</span><span class="er">.</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">0</span><span class="er">.</span><span class="dv">1</span><span class="ot">]]</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"size"</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">0</span><span class="er">.01</span><span class="ot">,</span> <span class="dv">0</span><span class="er">.02</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"color"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"red"</span><span class="ot">,</span> <span class="st">"yellow"</span><span class="ot">]</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"Timing"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Twinkle duration"</span> <span class="fu">:</span> <span class="dv">0</span><span class="er">.</span><span class="dv">5</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can parse any <em>string</em> in JSON format into a dictionary in Python using <a href="https://docs.python.org/3/library/json.html">json</a> module. Its advantage over INI files is that JSON explicitly specifies data type (i.e., strings are in quotation marks), so it converts it automatically. Note that unlike configparse, json module does not work with files directly, so you need to open it manually (ignore the <code>with</code> magic for a moment, you will learn about it in detail when we will talk about context managers).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'settings.json'</span>) <span class="im">as</span> json_file:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    settings <span class="op">=</span> json.load(json_file)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>settings[<span class="st">"Balls"</span>][<span class="st">"size"</span>] <span class="co"># this will give a list [0.01, 0.02]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="yaml" class="level3" data-number="8.6.4"><h3 data-number="8.6.4" class="anchored" data-anchor-id="yaml">
+<span class="header-section-number">8.6.4</span> YAML</h3>
+<p><a href="https://en.wikipedia.org/wiki/YAML">YAML</a> (YAML Ain’t Markup Language, rhymes with camel) is very similar to JSON but its config files are more human-readable. It has fewer special symbols and curly brackets but, as in Python, you must watch the indentations as they determine the hierarchy.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Balls</span><span class="kw">:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">position</span><span class="kw">:</span><span class="at"> </span><span class="kw">[[</span><span class="fl">0.1</span><span class="kw">,</span><span class="at"> </span><span class="fl">0.2</span><span class="kw">],</span><span class="at"> </span><span class="kw">[</span><span class="fl">0.2</span><span class="kw">,</span><span class="at"> </span><span class="fl">0.1</span><span class="kw">]]</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">size</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="fl">0.01</span><span class="kw">,</span><span class="at"> </span><span class="fl">0.02</span><span class="kw">]</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"red"</span><span class="kw">,</span><span class="at"> </span><span class="st">"yellow"</span><span class="kw">]</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Timing</span><span class="kw">:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">Twinkle duration </span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will need to install a third-party library <a href="https://pyyaml.org/">pyyaml</a> to work with YAML files. You get the same dictionary as for the JSON</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"settings.yaml"</span>) <span class="im">as</span> yaml_stream:</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    settings <span class="op">=</span> yaml.safe_load(yaml_stream)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>settings[<span class="st">"Balls"</span>][<span class="st">"size"</span>] <span class="co"># this will give a list [0.01, 0.02]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="using-settings" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="using-settings">
+<span class="header-section-number">8.7</span> Using settings</h2>
+<p>Look at your <span class="filename">code04.py</span> and identify constants and hard-coded values that you should put into a settings file. E.g., definitely constants that describes Christmas balls and twinkle duration but, possibly, also the size of the window, name of the Christmas tree and song files, etc. In general, I put every such value into settings even if it used only once (as with the size of the window) because then I know that <em>all</em> constants are the settings file. This way there is a single, nicely organized place to check and I do not need to search through the code to figure a specific value out.</p>
+<p>Once you transferred all your constants into the settings file (use either JSON or YAML), add the code that loads it at the very beginning and use settings dictionary in place of constants.</p>
+<div class="program">
+<p>Put your code into <code>code05.py</code>.</p>
+</div>
+</section><section id="merry-christmas-and-a-happy-new-year" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="merry-christmas-and-a-happy-new-year">Merry Christmas and a Happy New Year!</h2>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Created by <a href="https://openclipart.org/artist/isaiah658">isaiah658</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Deck the Halls B by Kevin MacLeod http://incompetech.com Creative Commons — Attribution 4.0 International — CC BY 4.0 Free Download / Stream: https://bit.ly/deck-the-halls-b Music promoted by Audio Library https://youtu.be/RzjZ-WdVeyk<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./07-memory.html" class="pagination-link" aria-label="Memory game">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./09-flappy-bird.html" class="pagination-link" aria-label="Flappy Bird">
+        <span class="nav-page-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+</body>
+</html>

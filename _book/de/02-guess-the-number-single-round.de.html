@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/02-guess-the-number-single-round.html" id="language-link-en">English</a></li></ul>
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/02-guess-the-number-single-round.html" id="language-link-en">English</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -174,6 +174,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -216,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Im vorherigen Kapitel haben wir die Grundlagen von Python behandelt, also bist du jetzt bereit, dein erstes Spiel zu entwickeln! Wir werden es Schritt für Schritt aufbauen, da es viel zu lernen gibt über Eingaben, Bibliotheken, bedingte Anweisungen und Einrückungen.</p>
-<p>Bevor du anfängst, erstelle einen neuen Ordner (innerhalb deines <a href="001-software.de.html#files-folder">Kursordners</a>) namens “guess-the-number” zum Beispiel, lade das <a href="notebooks/Guess%20the%20number%20-%20single%20round.ipynb">Übungsheft</a> herunter, kopiere es in den neu erstellten Ordner und öffne es in <a href="001-software.de.html#jupyter-notebooks">Jupyter Notebook</a>. Wie im Kapitel zuvor wird es Übungen zum Lesen und Verständnis des Codes enthalten.</p>
+<p>Bevor du anfängst, erstelle einen neuen Ordner (innerhalb deines <a href="001-software.de.html#files-folder">Kursordners</a>) namens “guess-the-number” zum Beispiel, lade das <a href="notebooks/02-Guess%20the%20number%20-%20single%20round-de.ipynb">Übungsheft</a> herunter, kopiere es in den neu erstellten Ordner und öffne es in <a href="001-software.de.html#jupyter-notebooks">Jupyter Notebook</a>. Wie im Kapitel zuvor wird es Übungen zum Lesen und Verständnis des Codes enthalten.</p>
 <p>Wir werden jedoch <a href="001-software.de.html#install-vs-code">VS Code</a> verwenden, um Skripte für das eigentliche Spiel zu programmieren. Du musst für jede Code-Übung eine separate Datei erstellen<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (z.B. <span class="filename">code01.py</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, <span class="filename">code02.py</span>, usw.). Das ist nicht die effizienteste Implementierung einer Versionskontrolle und es wird der Ordner sicherlich überladen. Aber es ermöglicht mir, deine Lösungen für jeden Schritt zu sehen, was das Geben von Feedback einfacher macht. Zum Einreichen der Aufgabe musst du einfach den Ordner zippen und die zip-Datei einreichen.</p>
 <section id="kapitelkonzepte" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="kapitelkonzepte">
 <span class="header-section-number">2.1</span> Kapitelkonzepte</h2>
@@ -366,14 +390,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mach die Übungen #3 und #4.</p>
 </div>
 <p>Kleiner aber wichtiger Punkt: Bedingungen werden von links nach rechts ausgewertet, bis der gesamte Ausdruck auf eine Weise oder andere aufgelöst ist. Das bedeutet, wenn der erste Ausdruck in einem <code>and</code> <code>False</code> ist, wird der zweite (und alle folgenden) <strong>niemals ausgewertet</strong>. Also, wenn <code>first and second</code> Ausdrücke beide <code>True</code> sein müssen und du weißt, dass der <code>first</code> Ausdruck bereits <code>False</code> ist, wird der gesamte Ausdruck in jedem Fall <code>False</code> sein. Das bedeutet, dass im folgenden Code kein Fehler auftreten wird, obwohl das Auswerten von <code>int("e123")</code> alleine einen <code>ValueError</code> auslösen würde.</p>
-<div id="168fd7bb" class="cell" data-execution_count="1">
+<div id="39973b05" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">5</span> <span class="kw">and</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>Kehrt man jedoch die Reihenfolge um, so dass <code>int(„e123“) == 123</code> zuerst ausgewertet werden muss, erhält man die Fehlermeldung</p>
-<div id="a39d483a" class="cell" data-execution_count="2">
+<div id="10155308" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span> <span class="kw">and</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">4</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -387,14 +411,14 @@ Cell <span class="ansi-green-fg ansi-bold">In[2], line 1</span>
 </div>
 </div>
 <p>Gleiches gilt, wenn <em>irgendein</em> Ausdruck in <code>or</code> <code>True</code> ist, musst du den Rest nicht überprüfen.</p>
-<div id="7115a17b" class="cell" data-execution_count="3">
+<div id="1cb96fe3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">4</span> <span class="kw">or</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Aber wenn die erste Bedingung <code>False</code> ist, müssen wir weiter machen (und landen in einem Fehler):</p>
-<div id="f9af8d58" class="cell" data-execution_count="4">
+<div id="9e64dec9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">5</span> <span class="kw">or</span> <span class="bu">int</span>(<span class="st">"e123"</span>) <span class="op">==</span> <span class="dv">123</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -472,7 +496,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[4], line 1</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>computer_pick <span class="op">=</span> randint(<span class="dv">1</span>, <span class="dv">5</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Du kannst auch eine Bibliothek oder eine Funktion beim Importieren über <code>as</code> umbenennen. Kurz gesagt, du solltest das nicht tun, da das Verwenden eines anderen Namens für eine Bibliothek oder eine Funktion es für andere (und sogar für deine zukünftige Version) schwieriger machen würde, deinen Code zu verstehen. Es gibt jedoch einige “Standard”-Umbenennungsmuster, die universell verwendet werden und auf die du wahrscheinlich stoßen wirst.</p>
-<div id="efd3bd69" class="cell" data-execution_count="5">
+<div id="d3904e03" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># das ist eine Standardmethode, um diese beiden Bibliotheken zu importieren</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>

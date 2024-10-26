@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/10-guitar-hero.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/10-guitar-hero.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>10  Guitar Hero – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./09-flappy-bird.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script><link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-guitar-hero.de.html"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/10-guitar-hero.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">10.1</span> Kapitelkonzepte</a></li>
+  <li><a href="#schwierigkeit-auf-den-punkt-bringen-treppenprozedur" id="toc-schwierigkeit-auf-den-punkt-bringen-treppenprozedur" class="nav-link" data-scroll-target="#schwierigkeit-auf-den-punkt-bringen-treppenprozedur"><span class="header-section-number">10.2</span> Schwierigkeit auf den Punkt bringen: Treppenprozedur</a></li>
+  <li><a href="#guitar-hero" id="toc-guitar-hero" class="nav-link" data-scroll-target="#guitar-hero"><span class="header-section-number">10.3</span> Guitar Hero</a></li>
+  <li><a href="#boilerplate" id="toc-boilerplate" class="nav-link" data-scroll-target="#boilerplate"><span class="header-section-number">10.4</span> Boilerplate</a></li>
+  <li><a href="#ziel--und-timedresponsetask-klassen" id="toc-ziel--und-timedresponsetask-klassen" class="nav-link" data-scroll-target="#ziel--und-timedresponsetask-klassen"><span class="header-section-number">10.5</span> Ziel- und TimedResponseTask-Klassen</a></li>
+  <li><a href="#zielklasse-ein-statisches-ziel" id="toc-zielklasse-ein-statisches-ziel" class="nav-link" data-scroll-target="#zielklasse-ein-statisches-ziel"><span class="header-section-number">10.6</span> Zielklasse: ein statisches Ziel</a></li>
+  <li><a href="#zielklasse-ein-sich-bewegendes-ziel" id="toc-zielklasse-ein-sich-bewegendes-ziel" class="nav-link" data-scroll-target="#zielklasse-ein-sich-bewegendes-ziel"><span class="header-section-number">10.7</span> Zielklasse: ein sich bewegendes Ziel</a></li>
+  <li><a href="#iteratorgenerator-funktionen" id="toc-iteratorgenerator-funktionen" class="nav-link" data-scroll-target="#iteratorgenerator-funktionen"><span class="header-section-number">10.8</span> Iterator/Generator-Funktionen</a></li>
+  <li><a href="#timedresponsetask-klasse" id="toc-timedresponsetask-klasse" class="nav-link" data-scroll-target="#timedresponsetask-klasse"><span class="header-section-number">10.9</span> TimedResponseTask-Klasse</a></li>
+  <li><a href="#ziele-entsorgen" id="toc-ziele-entsorgen" class="nav-link" data-scroll-target="#ziele-entsorgen"><span class="header-section-number">10.10</span> Ziele entsorgen</a></li>
+  <li><a href="#zielgerade" id="toc-zielgerade" class="nav-link" data-scroll-target="#zielgerade"><span class="header-section-number">10.11</span> Zielgerade</a></li>
+  <li><a href="#antwort" id="toc-antwort" class="nav-link" data-scroll-target="#antwort"><span class="header-section-number">10.12</span> Antwort</a></li>
+  <li><a href="#punkte" id="toc-punkte" class="nav-link" data-scroll-target="#punkte"><span class="header-section-number">10.13</span> Punkte</a></li>
+  <li><a href="#treppe" id="toc-treppe" class="nav-link" data-scroll-target="#treppe"><span class="header-section-number">10.14</span> Treppe</a></li>
+  <li><a href="#zeitlimit" id="toc-zeitlimit" class="nav-link" data-scroll-target="#zeitlimit"><span class="header-section-number">10.15</span> Zeitlimit</a></li>
+  <li><a href="#psychopys-stairhandler-verwenden" id="toc-psychopys-stairhandler-verwenden" class="nav-link" data-scroll-target="#psychopys-stairhandler-verwenden"><span class="header-section-number">10.16</span> PsychoPy’s StairHandler verwenden</a></li>
+  <li><a href="#das-ist-erst-der-anfang" id="toc-das-ist-erst-der-anfang" class="nav-link" data-scroll-target="#das-ist-erst-der-anfang"><span class="header-section-number">10.17</span> Das ist erst der Anfang!</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="kapitelkonzepte" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">10.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>Treppenprozedur</li>
+<li>Iterator / Generator-Funktionen</li>
+<li>Spezielle Klassenmethoden</li>
+</ul></section><section id="schwierigkeit-auf-den-punkt-bringen-treppenprozedur" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="schwierigkeit-auf-den-punkt-bringen-treppenprozedur">
+<span class="header-section-number">10.2</span> Schwierigkeit auf den Punkt bringen: Treppenprozedur</h2>
+<p>In der Spielentwicklung ist es einer der schwierigsten Aspekte, die Schwierigkeit richtig hinzubekommen. Mach dein Spiel zu einfach und es wird langweilig. Mach es zu schwer und nur die hartgesottenen Fans werden spielen und das nur für eine <a href="https://www.imdb.com/title/tt4975856/">Leistung</a>. Du möchtest also, dass dein Spiel schwer genug ist, um den Spieler an seine Grenzen zu bringen, aber nicht viel schwerer, damit er nicht frustriert wird. Eine Möglichkeit, dieses Dilemma zu lösen, ist die Schaffung verschiedener voreingestellter Schwierigkeitsgrade. Eine alternative Möglichkeit ist die Erstellung eines Spiels, das seine Schwierigkeit an den Spieler anpasst.</p>
+<p>Gleiches gilt für psychophysikalische Experimente. Du möchtest die Fähigkeit deiner Teilnehmer, eine bestimmte Aufgabe an ihrer Grenze durchzuführen, testen, und das aus einem einfachen Grund: An diesem Schwellenpunkt ist der Einfluss jedes zusätzlichen Faktors, ob positiv oder negativ, am deutlichsten. Zum Beispiel: Verwende eine ungewöhnliche Reizkonfiguration oder erhöhe die Aufmerksamkeitslast, und die Leistung wird wahrscheinlich sinken. Lasse die Aufmerksamkeit durch Hinweise vorab zuweisen oder verwende einen Priming-Stimulus, der mit einem Ziel übereinstimmt, und die Leistung wird sich wahrscheinlich verbessern. Natürlich werden diese Manipulationen auch dann den gleichen Gesamt Effekt haben, wenn die Aufgabe besonders einfach oder frustrierend schwer ist, aber es wird viel schwieriger sein, diesen Effekt zu messen. Es ist etwas anderes, wenn die Leistung von 75% auf 65% sinkt, als wenn sie von 98% auf 95% oder von 53% auf 52% sinkt oder umgekehrt.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Das Dümmste, was du tun kannst, ist zu hoffen, dass die Leistung den Effekt der Faktoren, die du manipuliert hast, erkennen lässt. In solchen Dingen ist Wissen und sorgfältige Planung definitiv besser als Hoffnung.</p>
+<p>Also, du möchtest die Leistung deiner Teilnehmer ungefähr in der Mitte zwischen der Decke (100% Leistung, schnellste Reaktionszeiten, super einfach) und dem Boden (Zufallslevel-Leistung, langsamste Reaktionszeiten, super schwer oder sogar unmöglich) haben. Aber wie weißt du, wo dieser magische Punkt für eine <em>bestimmte</em> Person ist? Besonders, wenn die Aufgabe neu ist und du wenig Informationen hast, um dich zu orientieren<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Die Lösung besteht darin, die Schwierigkeit basierend auf den Antworten des Teilnehmers dynamisch anzupassen. Zum Beispiel kannst du bei einer Aufgabe mit zwei Alternativen eine Zwei-auf-eins-abwärts-Treppe verwenden (die Schwierigkeit erhöht sich nach zwei richtigen Antworten und verringert sich nach einem Fehler), die auf eine 70,7%ige Leistung abzielt. Es gibt verschiedene Methoden und sogar verschiedene Möglichkeiten, die gleiche Kernmethode zu verwenden (z. B. bleibt der Schritt konstant oder ändert er sich, was sind die Abbruchkriterien für den Lauf usw.), daher ist es immer eine gute Idee, dein Wissen aufzufrischen und über <a href="https://doi.org/10.3758/BF03194543">adaptive Verfahren</a> zu lesen, wenn du dein nächstes Experiment planst.</p>
+<p>In unserem Spiel verwenden wir eine sehr einfache 3-auf-1-abwärts Treppe: drei richtige Antworten hintereinander und das Spiel wird schneller, ein Fehler und das Spiel wird langsamer. Mal sehen, wie schnell du es schaffst! Zuerst implementierst du es selber und dann verwenden wir eine <a href="https://psychopy.org/api/data.html#stairhandler">PsychoPy-Implementierung</a>.</p>
+</section><section id="guitar-hero" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="guitar-hero">
+<span class="header-section-number">10.3</span> Guitar Hero</h2>
+<p>Heute programmieren wir das Guitar Hero Spiel. Im Original musst du auf einem gitarrenförmigen Controller Knöpfe zur richtigen Zeit drücken, genau wie beim richtigen Gitarrenspiel. Einerseits ist es eine einfache und repetitive Bewegung. Andererseits kann es Minuten oder sogar Stunden dauern, um ein schnelles und kompliziertes Musikstück richtig zu spielen. Es macht unglaublich viel Spaß, da die Musik deine Reaktionen antreibt. Die gleiche Idee von musik-synchronisierten-Aktionen wurde in <em>Rayman Legends</em> Musiklevels verwendet, bei denen Sprünge und Treffer auf Drums oder Bass abgestimmt sind. Es ist eine merkwürdig coole tanzähnliche Abfolge und ein sehr befriedigendes Erlebnis, auch wenn man Profis dabei zuschaut (ich hatte zufällig ein paar in meinem Haushalt).</p>
+<p>Wir programmieren dieses Spiel (aber ohne Guitar und Hero) und du kannst es im Video unten sehen. Der Spieler muss eine korrekte Taste (<em>links</em>, <em>unten</em> oder <em>rechts</em>) drücken, sobald das Ziel die Linie überquert. Drücken zu früh oder zu spät zählt als Fehler. Natürlich wird es immer schwieriger, auf die Ziele zu reagieren, je schneller sie vorbeilaufen. Wie ich oben geschrieben habe, werden wir das 3-up-1-down-Verfahren verwenden, um dies auszugleichen.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="videos/guitar-hero.m4v"></source></video></div>
+<p>Wie immer gehen wir Schritt für Schritt vor:</p>
+<ul>
+<li>Boilerplate-Code</li>
+<li>Erstelle eine Klasse für einzelne bewegliche Ziele</li>
+<li>Erstelle eine zeitgesteuerte Aufgabenklasse, die sie (mit coolen Generatoren) erstellt, entsorgt, die Antwort überprüft und die Treppe anpasst.</li>
+<li>Füge nette Extras wie Punkte und zeitlich begrenzte Läufe hinzu.</li>
+</ul></section><section id="boilerplate" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="boilerplate">
+<span class="header-section-number">10.4</span> Boilerplate</h2>
+<p>Erstelle unser übliches Boilerplate-Code in <span class="filename">code01.py</span>:</p>
+<ul>
+<li>Erstelle eine Datei mit grundlegenden Einstellungen (z.B. Fenstergröße, ich habe 640×480 gewählt, aber du kannst jede Größe wählen, die auf deinem Bildschirm gut aussieht), die du später erweitern kannst.</li>
+<li>Importiere das Notwendige aus PsychoPy.</li>
+<li>Erstelle ein Fenster.</li>
+<li>Erstelle unsere übliche Hauptspielschleife mit der <code>gamover</code>-Variablen, dem Umblättern des Fensters und der Überprüfung auf eine <em>Escape</em>-Tastendruck.</li>
+</ul>
+<div class="program">
+<p>Leg deinen Boilerplate-Code in <span class="program-filename">code01.py</span> ab.</p>
+</div>
+</section><section id="ziel--und-timedresponsetask-klassen" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="ziel--und-timedresponsetask-klassen">
+<span class="header-section-number">10.5</span> Ziel- und TimedResponseTask-Klassen</h2>
+<p>Unser Hauptarbeitsgerät wird die <code>TimedResponseTask</code>-Klasse sein. Sie wird ein neues zufälliges <code>Ziel</code> in zufälligen Intervallen erzeugen (die von der Geschwindigkeit abhängen), die Geschwindigkeitsinformationen an die sich bewegenden Ziele weitergeben und Ziele entfernen, sobald sie unterhalb des Bildschirms verschwinden. Die <code>Ziel</code>-Klasse wird von der <a href="https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect">visual.rect.Rect</a>-Klasse erben und hat einige zusätzliche Funktionen, um es an der richtigen Stelle erscheinen zu lassen, sich mit der richtigen Geschwindigkeit zu bewegen, seine Linienfarbe zu ändern (die eine korrekte Antwort anzeigt) und zu berechnen, ob es bereits vom Bildschirm verschwunden ist. Wir werden zunächst mit einem einzigen Ziel beginnen.</p>
+</section><section id="zielklasse-ein-statisches-ziel" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="zielklasse-ein-statisches-ziel">
+<span class="header-section-number">10.6</span> Zielklasse: ein statisches Ziel</h2>
+<p>Erstelle zuerst eine <code>Ziel</code> Klasse: ein farbiger Rechteck in einer von drei Positionen, der oben im Fenster beginnt und sich mit einer bestimmten Geschwindigkeit nach unten bewegt. Ihr Konstruktor sollte ein PsychoPy-Fenster als Parameter entgegennehmen (das brauchst du, um das Rechteck zu erstellen), den Positionsindex (<code>ipos</code>, von 0 bis 2), die Geschwindigkeit (<code>speed</code>, in <code>"norm"</code>-Einheiten <em>pro Sekunde</em>) und gemeinsame Einstellungen (<code>settings</code>, ein Zielspezifisches Dictionary aus unserer Einstellungsdatei). Im Moment müssen wir im Konstruktor nur den Konstruktor der Vorfahrklasse <code>Rect()</code> über den Aufruf <code>super().__init__(...)</code> verwenden, ähnlich wie du die <code>FlappyBird</code>-Klasse initialisiert hast. Überlege dir, welche Parameter du übergeben musst, da du über die Position, Größe und Farbe des Rechtecks nachdenken musst. Speichere sowohl <code>ipos</code> als auch <code>speed</code> als Attribute für spätere Verwendung. Definiere außerdem ein <code>score</code>-Attribut und setze es auf <code>None</code>. Das wird die Punkte halten, die der Teilnehmer für dieses Ziel erzielt hat, und <code>None</code> bedeutet, dass noch nicht darauf reagiert wurde.</p>
+<p>Der zweite Parameter — die Positionsindex — bestimmt die horizontale Position des Ziels und dessen Farbe (um Ziele lustiger und unterscheidbarer zu machen). In meinem Code habe ich mich dafür entschieden, das Rechteck 0.4 Norm-Einheiten breit und 0.1 Norm-Einheiten hoch zu machen. Das ganz linke <em>rote</em> Rechteck (für <code>ipos</code> 0) ist bei -0,5 zentriert, das mittlere <em>grüne</em> ist genau in der Mitte und das ganz rechte <em>blaue</em> Rechteck ist bei 0,5 zentriert. Ich habe all das in meiner <code>settings.json</code> Datei unter der <code>Target</code> Gruppe definiert. Überlege dir, wie du sowohl die Farbe als auch die Position für ein Ziel aus <code>ipos</code> und <code>settings</code> berechnen kannst, ohne if-else-Anweisungen zu verwenden. Überlege auch die y-Position des Rechtecks, damit es genau oben im Fenster erscheint.</p>
+<p>Mach es aus, indem du ein Ziel an einer der Positionen (oder drei Ziele an allen drei Positionen) erstellst und sie in der Hauptschleife zeichnest. Du solltest schöne, aber statische Rechteck(e) erhalten.</p>
+<div class="program">
+<p>Leg deinen aktualisierten Code in <span class="program-filename">code02.py</span> und erstelle die Klasse <span class="program-class">Target</span> in einer separaten Datei.</p>
+</div>
+</section><section id="zielklasse-ein-sich-bewegendes-ziel" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="zielklasse-ein-sich-bewegendes-ziel">
+<span class="header-section-number">10.7</span> Zielklasse: ein sich bewegendes Ziel</h2>
+<p>Unsere Ziele fallen mit einer Geschwindigkeit herab, die von ihrem <code>Geschwindigkeit</code>-Attribut definiert wird. Später werden wir dieses Attribut dynamisch ändern, um ihre Fallgeschwindigkeit zu beschleunigen oder zu verlangsamen.</p>
+<p>Für das eigentliche Fallen, implementierst du eine neue Methode, nenn sie <code>fall()</code>, die die Position des Ziels auf jedem Frame aktualisiert. Die Geschwindigkeit ist in <code>norm-Einheiten pro Sekunde</code>, also brauchst du auch die vergangene Zeit <em>in Sekunden</em> seit der letzten Positionsaktualisierung, um die Änderung der vertikalen Position zu berechnen. Die einfachste Möglichkeit ist, die <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a>-Klasse zu verwenden. Du erstellst sie als Attribut im Konstruktor und verwendest dann in der <code>fall()</code>-Methode ihre aktuelle Zeit, um eine Änderung der vertikalen Position des Rechtecks zu berechnen und anzuwenden. Vergiss nicht, die Uhr danach zurückzusetzen! (Gleiche Logik wie bei dem Flappy Bird, das du bereits programmiert hast.)</p>
+<p>Mach mal <code>fall()</code> aufrufen in der Hauptschleife und schau zu, wie das Ziel fällt. Experimentier doch mal mit der Fallgeschwindigkeit!</p>
+<div class="program">
+<p>Füge den aktualisierten Code in <span class="program-filename">code03.py</span> ein und aktualisiere die Klasse <span class="progam-class">Target</span>.</p>
+</div>
+</section><section id="iteratorgenerator-funktionen" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="iteratorgenerator-funktionen">
+<span class="header-section-number">10.8</span> Iterator/Generator-Funktionen</h2>
+<p>Im nächsten Abschnitt werden wir eine <code>TimedResponseTask</code>-Klasse erstellen, die Ziele an einem zufälligen Ort und nach einem zufälligen Intervall generiert. Natürlich könnten wir das direkt in der Klasse machen, aber wo bleibt da der Spaß? Stattdessen nutzen wir diese Gelegenheit, um Iterator/Generator-Funktionen kennenzulernen. Ein Iterator ist eine <em>Funktion</em>, die <code>yield</code> statt <code>return</code> verwendet, um, na ja, <em>einen Wert zu liefern</em>. Sie liefert ihn, weil die Funktion selbst ein Iterator-Objekt zurückgibt, das du in einer for-Schleife oder über die <code>next()</code>-Funktion durchlaufen kannst. Wichtig ist, dass <code>yield</code> die Ausführung der Funktion “einfriert” und beim nächsten Aufruf der Funktion <em>von diesem Punkt</em> weiterläuft, anstatt von Anfang an. Sobald du das Ende der Funktion erreichst, wird automatisch eine <code>StopIteration()</code>-Ausnahme ausgelöst, sodass du dir keine Gedanken darüber machen musst, wie du mitteilen kannst, dass du keine Items mehr hast. Es mag verwirrend klingen, aber es ist wirklich einfach. Hier ein Beispiel, um dies zu veranschaulichen:</p>
+<div id="e59cc4d0" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterator_fun():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">3</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="st">"wow!"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Die Funktion gibt einen Iterator zurück, keinen Wert!</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iterator_fun())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;generator object iterator_fun at 0x0000021057359380&gt;</code></pre>
+</div>
+</div>
+<div id="a4921bd7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterieren mit einer for-Schleife</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> elem <span class="kw">in</span> iterator_fun():</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(elem)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+1
+wow!</code></pre>
+</div>
+</div>
+<div id="bc650dde" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterieren mit next(), beachte, dass du ein Iterator-Objekt verwendest,</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># das die Funktion zurückgibt, nicht die Funktion selbst!</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>an_iterator <span class="op">=</span> iterator_fun()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># jetzt kannst du an_iterator verwenden, um ein nächstes Element davon zu erhalten</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(an_iterator))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(an_iterator))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(an_iterator))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+1
+wow!</code></pre>
+</div>
+</div>
+<div id="2645d9dc" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beim nächsten Aufruf wird eine Ausnahme StopIteration() ausgelöst</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(iterator_var))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[4], line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># beim nächsten Aufruf wird eine Ausnahme StopIteration() ausgelöst</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 2</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(0,135,0)">next</span>(<span class="ansi-yellow-bg">iterator_var</span>))
+
+<span class="ansi-red-fg ansi-bold">NameError</span>: name 'iterator_var' is not defined</pre>
+</div>
+</div>
+</div>
+<p>Dieses Format erleichtert das Schreiben von Iteratoren sehr, du musst nur <code>yield</code> geben, was und in welcher Reihenfolge du willst, und Python erledigt den Rest. Du kannst auch in einer Schleife, in einer if-else-Anweisung usw. <code>yield</code> geben. Schau dir den folgenden Code an und versuche herauszufinden, was gedruckt wird, bevor du ihn ausführst.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterator_fun():</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> e <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> e <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">yield</span> e</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> iterator_fun():</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(element)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Für unsere <code>TimedResponseTask</code>-Klasse benötigen wir zwei <em>Generatoren</em>. Sie sind <em>Generatoren</em> und keine <em>Iteratoren</em>, weil beide endlos sind (Iteratoren durchlaufen eine endliche Menge von Elementen). Einen, der eine zufällige Verzögerung bis zum nächsten Ziel generiert, und einen, der eine zufällige Zielposition (0, 1 oder 2) generiert. Implementiere beide in einer separaten Datei (ich habe sie <span class="filename">generators.py</span> genannt).</p>
+<p>Die Funktion <code>time_to_next_target_generator()</code> sollte ein Tupel aus zwei Float-Werten als Parameter entgegennehmen, die die kürzeste und längste erlaubte Verzögerung definieren, und innerhalb dieses Bereichs eine <a href="https://docs.python.org/3/library/random.html#random.uniform">zufällige Zahl</a> liefern. Wir benötigen eine endlose Schleife (<code>while True:</code> tut’s), weil wir nicht wissen, wie viele Werte wir benötigen werden, also erzeugen wir einfach so viele wie benötigt auf Abruf.</p>
+<p>Die <code>next_target_generator()</code> wird ein bisschen interessanter. Es könnte einfach ein <a href="https://docs.python.org/3/library/random.html#random.choice">random.choice</a> aus 0, 1 und 2 zurückgeben, aber wo bleibt da der Spaß? Stattdessen machen wir es ein bisschen komplizierter, um sicherzustellen, dass alle drei Ziele innerhalb von <em>3N</em> Versuchen gleich oft auftreten, wobei <em>N</em> ein Parameter der Generatorfunktion sein wird. Dies würde sicherstellen, dass die Ziele in der kurzen Laufzeit zufällig, relativ unvorhersehbar aber ausgewogen sind. Denk daran, dass die zufällige Wahl in der langen Laufzeit immer eine ausgewogene gleichmäßige Verteilung liefern wird, aber es gibt keine solche Garantie für die kürzeren Laufzeiten von wenigen Versuchen. Zunächst solltest du eine Liste erstellen, in der jedes Ziel <em>N</em>-mal vorkommt (denk darüber nach, wie du das mit <a href="https://docs.python.org/3/library/functions.html#func-range">range()</a>, <a href="https://docs.python.org/3/library/functions.html#func-list">list()</a> und <a href="https://docs.python.org/3/library/stdtypes.html#common-sequence-operations">*</a> machen kannst). Dann erstellst du eine endlose Schleife (wieder wissen wir nicht, wie viele Werte wir benötigen), in der du 1) die Elemente der Liste mischst, 2) jeweils ein Element über eine for-Schleife ausgibst. Wenn du alle Elemente aufgebraucht hast, mischst du sie erneut und gibst sie wieder eins nach dem anderen aus. Dann wiederholst du das Ganze. Und wieder. Endlose Schleife!</p>
+<p>Ich würde vorschlagen, zuerst beide Funktionen in einem Jupyter-Notizbuch zu erstellen und zu testen und sie dann in eine separate Datei (z.B. <span class="filename">generators.py</span>) zu packen. Sei vorsichtig, wenn du entscheidest, eine for-Schleife anstelle von <code>next()</code> zum Testen zu verwenden. Denk dran, sowohl Generatoren als auch werden nie ausgehen und haben immer Items, die sie für eine for-Schleife ausgeben können!</p>
+<div class="program">
+<p>Leg beide Generatoren in <span class="program-filename">generators.py</span> ab.</p>
+</div>
+</section><section id="timedresponsetask-klasse" class="level2" data-number="10.9"><h2 data-number="10.9" class="anchored" data-anchor-id="timedresponsetask-klasse">
+<span class="header-section-number">10.9</span> TimedResponseTask-Klasse</h2>
+<p>Jetzt sind wir bereit, die <code>TimedResponseTask</code>-Klasse zu erstellen. Zunächst wird sie Ziele an einer zufälligen Position (<code>next_target_generator()</code>) nach einem zufälligen Intervall (<code>time_to_next_target_generator()</code>) erzeugen und sich um das Bewegen und Zeichnen aller kümmern. Später kommen noch mehr Features dazu (Ziele entfernen, die den Bildschirm verlassen, Geschwindigkeit ändern, Antwortvalidität überprüfen usw.).</p>
+<p><strong>Für den Konstruktor</strong>, brauchen wir auf jeden Fall ein PsychoPy-Fenster als Parameter, weil wir es jedes Mal brauchen, wenn wir ein neues Ziel erstellen. Außerdem müssen wir ein Dictionary mit Einstellungen für die Aufgabe (Anfangsgeschwindigkeit, ein Tupel mit Bereich für Zeitintervalle zwischen Zielen für <code>time_to_next_target_generator()</code> und Anzahl der Zielwiederholungen für <code>next_target_generator()</code>) und ein Dictionary mit Einstellungen für die <code>Target</code>-Klasse (wir brauchen es jedes Mal, wenn wir ein neues Ziel erstellen) übergeben. Wir werden diese Parameter auch außerhalb des Konstruktors verwenden, also speichere sie als Attribute. Erstelle außerdem ein Attribut <code>targets</code> und initialisiere es mit einer leeren Liste (dort werden wir <code>Target</code>-Objekte speichern), und erstelle Attribute für beide Generator-Objekte unter Verwendung der entsprechenden Parameter. Erstelle auch ein Attribut <code>speed_factor</code> und setze es auf 1. Wir werden es später verwenden, um die Bewegungsgeschwindigkeit und die Häufigkeit der Zielgenerierung zu steuern. Je höher der Faktor ist, desto schneller bewegen sich die Ziele und desto kürzer ist das Intervall zum Ziel und umgekehrt. Schließlich benötigen wir eine <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Uhr</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, die die Zeit bis zum Zeitpunkt zählt, an dem wir ein neues Ziel generieren müssen (<code>new_target_timer</code>), und ein Attribut, das diese Zeit speichern wird (<code>time_till_next_target</code>). Initialisiere Letzteres mit dem <code>next()</code>-Element aus dem Zeit-zu-nächstem-Ziel-Generator (erinnere dich, du musst das Attribut verwenden, das das von der Funktion zurückgegebene Generator-Objekt ist, nicht die Funktion selbst).</p>
+<p>Jetzt müssen wir drei Methoden hinzufügen: <code>draw</code>, <code>update</code> und <code>add_next_target</code>. Die erste ist einfach, sie zeichnet alle <code>targets</code> in einer Schleife. Die zweite ist auch einfach, sie lässt alle Ziele <code>fallen</code> und ruft nach der Schleife die <code>add_next_target</code>-Methode auf. Die <code>add_next_target</code>-Methode sollte überprüfen, ob die verstrichene Zeit für <code>new_target_timer</code> <strong>mal den <code>speed_factor</code></strong> (je höher die Geschwindigkeit, desto schneller geht die Zeit bis zum nächsten Ziel) die <code>time_till_next_target</code> überschritten hat. Wenn dies der Fall ist, erstelle ein neues zufälliges Ziel (hole die <code>next()</code>-Position aus dem Positionsgenerator und vergiss nicht, <code>speed</code> <em>mal</em> <code>speed_factor</code> zu übergeben!), füge es der Liste der Ziele hinzu, setze den Timer zurück und hole die neue <code>time_till_next_target</code> mithilfe des <code>next()</code>-Elements aus dem Zeitgenerator.</p>
+<p>In der Hauptdatei, erstell ein <code>TimedResponsTask</code>-Objekt (nenn es, wie du möchtest) und ruf seine <code>draw</code> und <code>update</code>-Methoden im Hauptschleife auf. Du solltest sehen, wie Ziele zufällig erscheinen und regelmäßig nach unten fallen.</p>
+<div class="program">
+<p>Leg deinen aktualisierten Code in <span class="program-filename">code04.py</span> und erstelle die Klasse <span class="program-class">TimedResponseTask</span>.</p>
+</div>
+</section><section id="ziele-entsorgen" class="level2" data-number="10.10"><h2 data-number="10.10" class="anchored" data-anchor-id="ziele-entsorgen">
+<span class="header-section-number">10.10</span> Ziele entsorgen</h2>
+<p>Momentan fallen unsere Ziele immer noch runter, auch wenn sie schon unter dem Bildschirm sind. Das wird die Performance <em>erstmal</em> nicht beeinflussen, aber es belastet sowohl den Speicher als auch den CPU, also sollten wir sie entsorgen. In der <code>Target</code>-Klasse erstellst du eine neue schreibgeschützte (berechnete) <code>@property</code> namens <code>is_below_the_screen</code>, die <code>True</code> zurückgibt, wenn die obere Kante des Ziels unter der unteren Kante des Bildschirms ist, ansonsten <code>False</code>. Natürlich brauchst du kein if-else dafür!</p>
+<p>Nächster Schritt: Füge in der <code>update</code>-Methode von <code>TimedResponseTask</code> eine zweite Schleife hinzu (oder ändere die bestehende Schleife), um alle Objekte zu löschen, die <code>is_below_the_screen</code> sind.</p>
+<p>Für das Debuggen, führe den Hauptcode aus, warte bis mindestens ein Ziel unter den Bildschirm fällt, setze einen Breakpoint und prüfe das <code>targets</code>-Attribut. Seine Länge sollte der Anzahl der sichtbaren Ziele entsprechen, nicht der insgesamt generierten Ziele.</p>
+<div class="[.program]">
+<p>Aktualisiere die Klassen <span class="program-class">Target</span> und <span class="program-class">TimedResponseTask</span>.</p>
+</div>
+</section><section id="zielgerade" class="level2" data-number="10.11"><h2 data-number="10.11" class="anchored" data-anchor-id="zielgerade">
+<span class="header-section-number">10.11</span> Zielgerade</h2>
+<p>Füge dem <code>TimedResponseTask</code> ein neues visuelles Attribut hinzu, das eine horizontale <a href="https://psychopy.org/api/visual/line.html#psychopy.visual.Line">Linie</a> ist. Die Aufgabe des Spielers wird es sein, eine entsprechende Taste zu drücken, sobald ein Ziel die Linie kreuzt (mit ihr überlappt). Erstelle es zunächst als Attribut im Konstruktor (wähle die vertikale Position, die dir gefällt) und zeichne es innerhalb der <code>draw()</code>-Methode.</p>
+<div class="program">
+<p>Update die Klasse <span class="program-class">TimedResponseTask</span>.</p>
+</div>
+</section><section id="antwort" class="level2" data-number="10.12"><h2 data-number="10.12" class="anchored" data-anchor-id="antwort">
+<span class="header-section-number">10.12</span> Antwort</h2>
+<p>Jetzt wird’s erst richtig spaßig! Wir lassen einen Spieler Tasten drücken und überprüfen, ob ein entsprechendes Ziel auf der Linie ist. Dafür benötigen wir neue Methoden für sowohl die <code>Target</code>- als auch die <code>TimedResponseTask</code>-Klassen. Für das <code>Target</code> implementierst du eine neue Methode namens <code>overlaps()</code>, die eine vertikale Position (der Ziellinie) als einzigen Float-Parameter entgegennimmt. In der Methode überprüfst du zuerst, ob das <code>score</code>-Attribut <code>None</code> ist. Wenn es nicht <code>None</code> ist, bedeutet das, dass der Spieler bereits auf das Ziel reagiert hat und sie dürfen nicht zweimal auf dasselbe Ziel reagieren. Wenn es <code>None</code> ist, berechnest du einen Score mithilfe der folgenden Formel: <span class="math display">\[score = int \left(10 - 10 \cdot \frac{|y_{target} - y_{line}|}{h_{target} / 2} \right)\]</span> wobei <span class="math inline">\(y_{target}\)</span> die vertikale Mitte des Ziels ist, <span class="math inline">\(y_{line}\)</span> die vertikale Position der Linie (die bekommst du als Funktionsparameter), <span class="math inline">\(h_{target}\)</span> die Höhe des Ziels ist, <span class="math inline">\(|x|\)</span> den absoluten Wert von <span class="math inline">\(x\)</span> bedeutet (nutze die <a href="https://docs.python.org/3/library/math.html#math.fabs">fabs</a>-Funktion aus der <em>math</em>-Bibliothek dafür) und <code>10</code> ein beliebiger Skalierungsfaktor ist (du kannst jede ganze Zahl verwenden und in den Einstellungen speichern). Studiere die Formel und du wirst sehen, dass der Score 10 ist, wenn die Mitte des Ziels genau auf der Linie ist, aber linear mit jeder Verschiebung für sowohl frühe (die Mitte des Ziels ist über der Linie) als auch späte (die Mitte des Ziels ist bereits unter der Linie) Reaktionen abnimmt. Sobald das Ziel nicht mehr auf der Linie ist, wird der Score negativ. Wir konvertieren ihn in <code>int</code>, weil wir einfache Scores (Fließkommazahlen sehen hier unordentlich aus) möchten. Berechne den Score und speichere ihn in einer <em>vorübergehenden lokalen Variablen</em>. Wenn der Wert <em>positiv</em> ist, bedeutet das Erfolg, also solltest du diesen Wert permanent im <code>score</code>-Attribut speichern, die Linienfarbe des Rechtecks in Weiß ändern (um dem Spieler zu zeigen, dass sie es richtig gemacht haben) und <code>True</code> zurückgeben (ja, das Ziel überschneidet sich mit der Linie!). Für alle anderen Ergebnisse gibst du <code>False</code> zurück. Das bedeutet, dass entweder die Reaktion bereits erfolgte oder das Ziel sich zum Zeitpunkt des Tastendrucks nicht mit der Linie überschneidet.</p>
+<p>In der <code>TimerResponseTask</code>-Klasse benötigen wir eine neue Methode <code>check()</code>, die die Position des Ziels basierend auf der Tasteneingabe bestimmt (also wenn ein Spieler die <em>linke</em> Taste gedrückt hat, ist die Position <span class="math inline">\(0\)</span>, <em>unten</em> ist <span class="math inline">\(1\)</span> und <em>rechts</em> ist <span class="math inline">\(2\)</span>). Durchlaufe die Ziele und wenn die Position des Ziels (<code>ipos</code>-Attribut) mit der Position der Tasteneingabe (Parameter der Funktion) <em>und</em> das Ziel die Linie überschneidet (die <code>overlaps()</code>-Methode gibt <code>True</code> zurück), gib den <code>score</code>-Attribut des Ziels zurück. Beachte, dass die Reihenfolge der Bedingungen hier wichtig ist! Du musst nur dann auf die Überschneidung prüfen, wenn die Zielposition mit der Taste übereinstimmt. Wenn du alle Ziele durchgelaufen hast und keines passt, bedeutet das, dass der Spieler eine falsche Taste oder zur falschen Zeit gedrückt hat, also solltest du <code>0</code> (bedeutet “Fehler”) zurückgeben.</p>
+<p>Im Hauptschleifen-Code, fügst du <code>"left"</code>, <code>"down"</code> und <code>"right"</code> der Key-Liste des <a href="https://psychopy.org/api/event.html#psychopy.event.getKeys">getKeys()</a>-Aufrufs hinzu. Wenn dann eine dieser drei Tasten gedrückt wird, übersetzt du das in eine Position, also 0, 1 oder 2 (überlege dir, wie du das ohne if-else mit einem Dictionary machen kannst), und rufst die neue <code>check</code>-Methode der <code>TimedResponseClass</code> auf. Teste den Code, die Ränder der Ziele sollten weiß werden, wenn du den Tastendruck richtig zeitest!</p>
+<div class="progam">
+<p>Füge den aktualisierten Code in <span class="program-filename">code05.py</span> ein und aktualisiere die Klassen <span class="program-class">Target</span> und <span class="program-class">TimedResponseTask</span>.</p>
+</div>
+</section><section id="punkte" class="level2" data-number="10.13"><h2 data-number="10.13" class="anchored" data-anchor-id="punkte">
+<span class="header-section-number">10.13</span> Punkte</h2>
+<p>Spielen macht mehr Spaß, wenn du sehen kannst, wie gut du bist. Lass uns einen simplen Punkteanzeiger hinzufügen, der sich mit der Antwortpunktzahl aktualisiert. Du weißt bereits, wie du das über den <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>-Stimulus machen kannst, aber du weißt auch, wie du von einer Basisklasse erben und ihre Funktionalität erweitern kannst. Das werden wir hier machen, da die Klasse die Punkte aufzeichnet und anzeigt (diesen Teil übernimmt die Vererbung).</p>
+<p>Erstelle eine neue Klasse (ich habe sie <code>ScoreText</code> genannt), die von <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">visual.text.TextStim</a> erbt. Im Konstruktor musst du ein ganzzahliges Attribut erstellen, das den aktuellen <code>score</code> speichern wird, und es auf 0 initialisieren. Außerdem rufst du den Konstruktor des Vorfahren über <code>super().__init__(...)</code> auf, um den Textstimulus zu initialisieren und zu positionieren (ich habe die linke obere Ecke gewählt). Denk daran, welche Parameter der Konstruktor und der Konstruktor des Vorfahren benötigen.</p>
+<p>Als nächstes müssen wir den Score (sowohl seine numerische Form als auch den Text, den wir zeichnen) jedes Mal aktualisieren, wenn ein Teilnehmer eine Taste drückt. Wir könnten den Code außerhalb der Klasse implementieren, aber das ist keine so gute Idee, da es class-bezogenen Code woanders hinstellt. Wir könnten auch eine “normale” Methode implementieren, z.B. <code>add()</code>, die das übernimmt. Stattdessen werden wir eine <em>spezielle</em> Methode <a href="https://docs.python.org/3/reference/datamodel.html#object.__iadd__"><strong>iadd</strong></a> implementieren, die es ermöglicht, “zu dem Objekt hinzuzufügen”. Sie nimmt einen einzelnen Parameter (neben dem obligatorischen <code>self</code>) entgegen, führt die “Hinzufügung zu self” durch (was auch immer das in Bezug auf dein Objekt bedeutet, kann mathematische Addition für ein Attribut, Konkatenation der Zeichenkette, Hinzufügen zu der Liste sein, etc.) und <strong>gibt die Referenz auf sich selbst zurück</strong>, d.h., es gibt <code>self</code> zurück, nicht den Wert eines beliebigen Attributs! So funktioniert es:</p>
+<div id="fdb8a244" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AddIt():</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iadd__</span>(<span class="va">self</span>, addendum):</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number <span class="op">+=</span> addendum</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="co"># wichtig!!!</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>adder <span class="op">=</span> AddIt()</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(adder.number)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0</code></pre>
+</div>
+</div>
+<div id="df32721f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adder <span class="op">+=</span> <span class="dv">10</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(adder.number)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>Mach das spezielle Method für deine Klasse, damit wir <code>score_stim += timed_task.check(...)</code> machen können. Vergiss nicht, sowohl numerische als auch visuelle Darstellungen des Scores in dieser Methode zu aktualisieren! Füge den Score in den Hauptcode ein.</p>
+<div class="program">
+<p>Aktualisiere deinen Code in <span class="program-filename">code06.py</span>. Erstelle eine <span class="program-class">ScoreText</span>-Klasse.</p>
+</div>
+</section><section id="treppe" class="level2" data-number="10.14"><h2 data-number="10.14" class="anchored" data-anchor-id="treppe">
+<span class="header-section-number">10.14</span> Treppe</h2>
+<p>Wir werden die Treppe als Teil der <code>TimerResponseTask</code>-Klasse implementieren, damit sie sich selbst beschleunigen und verlangsamen kann. Dafür benötigen wir einen Attribut, der die Anzahl der <em>konsekutiven</em> richtigen Antworten zählt (ich nenne es typischerweise <code>correct_in_a_row</code> oder so etwas). Erstelle und initialisiere es auf null im Konstruktor.</p>
+<p>Nächster Schritt: Erstelle eine neue Methode <code>staircase()</code>, die einen einzelnen Parameter (außer <code>self</code>) benötigt, um festzustellen, ob die Antwort <code>correct</code> oder nicht war. Wenn ja, erhöhe <code>correct_in_a_row</code> um eins und überprüfe, ob es 3 erreicht hat. Wenn ja, erhöhe den <code>speed_factor</code> indem du ihn mit einem gewählten Faktor multiplizierst (ich habe 1.3 gewählt) und setze <code>correct_in_a_row</code> auf 0 zurück. Das ist äquivalent dazu, einen logarithmischen Schritt zu verwenden, da unser <code>speed_factor</code> als Bruchteil seiner Größe angepasst wird. Andernfalls, wenn die Antwort nicht korrekt war, teile den <code>speed_factor</code> durch dieselbe Zahl (z.B. 1.3, um die Dinge zu verlangsamen) und setze erneut <code>correct_in_a_row</code> auf 0 zurück. Danach durchlaufe alle Ziele und aktualisiere ihre Geschwindigkeit basierend auf den <code>speed</code> und <code>speed_factor</code>-Attributen.</p>
+<p>Du musst diese Methode innerhalb der <code>check</code>-Methode aufrufen, überleg dir wann und wie.</p>
+<div class="program">
+<p>Aktualisiere die Klasse <span class="program-class">TimedTaskResponse</span>.</p>
+</div>
+</section><section id="zeitlimit" class="level2" data-number="10.15"><h2 data-number="10.15" class="anchored" data-anchor-id="zeitlimit">
+<span class="header-section-number">10.15</span> Zeitlimit</h2>
+<p>Mach es interessanter, indem du die Laufzeit auf 20 Sekunden beschränkst (du kannst natürlich deine eigene Dauer wählen und solltest definitiv eine Einstellung dafür festlegen). Füge eine zusätzliche äußere Schleife hinzu, damit das Spiel mehrfach gespielt werden kann. Sobald die Runde vorbei ist, zeige den aktuellen Zustand (zeichne alle Spielobjekte neu) sowie das “Runde vorbei”-Zeichen an und warte darauf, dass der Spieler entweder die <em>Escape</em>-Taste drückt (dann verlässt du das Spiel) oder die <em>Leertaste</em> drückt (um die nächste Runde zu starten). Vergiss nicht, alle Spielobjekte für die nächste Runde neu zu erstellen (oder eine <code>reset</code>-Methode für alle zu erstellen).</p>
+<div class="program">
+<p>Füge aktualisierten Code in <span class="program-filename">code07.py</span> ein.</p>
+</div>
+</section><section id="psychopys-stairhandler-verwenden" class="level2" data-number="10.16"><h2 data-number="10.16" class="anchored" data-anchor-id="psychopys-stairhandler-verwenden">
+<span class="header-section-number">10.16</span> PsychoPy’s StairHandler verwenden</h2>
+<p>Jetzt, wo du weißt, wie man eine sehr grundlegende Treppe programmiert, lass uns die viel flexiblere Implementierung von PsychoPy über die <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a>-Klasse verwenden. Wir werden sie verwenden, um die Treppe zu replizieren, die wir bereits implementiert haben. Allerdings ist sie zu viel mehr fähig und PsychoPy hat Implementierungen für andere adaptive Methoden, wie die parametrische <a href="https://psychopy.org/api/data.html#psychopy.data.PsiHandler">Psi</a>- oder <a href="https://psychopy.org/api/data.html#questhandler">Quest</a>-Ansatz. Ich empfehle dir dringend, die Literatur zu konsultieren, um zu entscheiden, welche Methode am besten für dein Experiment geeignet ist, und dann auf die PsychoPy-Implementierung in deinem Code zu vertrauen.</p>
+<p>Okay, wir müssen unser <code>TimedResponseTask</code> anpassen, also lass uns eine Kopie namens <code>TimedResponseTask2</code> (oder <code>TimedResponseTaskPsychoPy</code>, wenn dir das mehr Sinn ergibt) erstellen. Kopier einfach den gesamten Code, ändere den Namen und importiere ihn in deinem <span class="filename">code08.py</span>. Achte darauf, dass alles genau so funktioniert wie vorher (weil du ja nichts weiter gemacht hast, als eine Kopie zu erstellen).</p>
+<p>Jetzt nutzen wir den <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> in <code>TimedResponseTask2</code>. Wir entfernen das <code>correct_on_a_row</code>-Attribut und erstellen stattdessen einen <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> als <code>stairhandler</code>-Attribut. Du musst den <code>startVal</code> angeben, der der Anfangswert für den <code>speed_factor</code> ist, also verwende einfach den Wert, den du vorher verwendet hast. Der <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> verwendet standardmäßig <code>nUp=1</code> und <code>nDown=3</code>. Das entspricht unserer benutzerdefinierten Treppe, also könntest du theoretisch die Standardwerte verwenden, indem du diese Parameter weglässt. Aber zum Zwecke der Lesbarkeit des Codes solltest du sie explizit angeben. Unsere Schritte waren logarithmisch, also verwende <code>stepType="log"</code> und eine einzelne feste <code>stepSizes=-0.1</code>. Die Größe von <code>-0.1</code> entspricht ungefähr dem Schritt, den wir in der benutzerdefinierten Treppe verwendet haben, und wir benötigen das negative Vorzeichen, weil der <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> den Treppenlevel nach einer falschen Antwort erhöht. In unserem Fall möchten wir jedoch das genaue Gegenteil, nämlich die Verringerung des <code>speed_factor</code>, um die Ziele zu verlangsamen. Daher das negative Vorzeichen, das die Erhöhung in eine Verringerung verwandelt. Schließlich wird der <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> nach Erreichen entweder der gewünschten Anzahl von Versuchen (<code>nTrial</code>) oder Wendepunkten (<code>nReversals</code>, Änderungen von korrekt zu falsch oder umgekehrt) beendet. Das sind normalerweise die Einstellungen, die die Länge eines einzelnen Blocks/Laufs im realen Experiment bestimmen würden. Da wir unsere Runden jedoch nach <em>Zeit</em> begrenzen, müssen wir nur sicherstellen, dass der <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> nicht vor Ablauf der Spielrunde die Versuche ausreizt. Gib also eine sehr große Zahl (z. B. 1000) für beide Parameter an.</p>
+<p>Sobald du das Attribut <code>stairhandler</code> erstellt hast, ist es bereit für die Verwendung über <code>next(self.stairhandler)</code>. Rufe es das erste Mal im Konstruktor auf undweise den Wert, den es zurückgibt, dem Attribut <code>speed_factor</code> zu (es sollte immer noch der Wert von <code>startVal</code> sein, den du ihm zugewiesen hast, aber leg besser einen Breakpoint und überprüfe es nochmal!).</p>
+<p>Jetzt müssen wir unsere <code>staicase()</code> Methode vereinfachen. Zunächst entfernen wir den <code>if correct:... else:...</code> Code, aber wir lassen den Geschwindigkeitsanpassungscode für die Ziele intakt (den brauchen wir immer noch!). Dann lässt sich <code>stairhandler</code> selbst über die <a href="https://psychopy.org/api/data.html#psychopy.data.StairHandler.addResponse">addResponse()</a> Methode anpassen, indem es Informationen darüber verwendet, ob die Antwort richtig war (du hast bereits einen Parameter mit genau dieser Information). Zum Schluss holen wir den nächsten <code>speed_factor</code> genau auf die gleiche Weise wie im Konstruktor. Fertig!</p>
+<div class="program">
+<p>Füge aktualisierten Code in <span class="program-filename">code08.py</span> unter Verwendung von <span class="program-class">TimedResponseTask2</span> ein.</p>
+</div>
+<p>Dein Programm sollte jetzt ähnlich wie zuvor laufen, aber du hast jetzt viele mehr Möglichkeiten, es flexibler zu gestalten, und das fast ohne zusätzlichen Aufwand für dich (schau dir die Einstellungen von <a href="https://psychopy.org/api/data.html#stairhandler">StairHandler</a> an) und es via einer der <code>saveAs</code>-Methoden zu protokollieren. Lass uns das Letztere machen, speichere die Stufenprotokolle via <a href="https://psychopy.org/api/data.html#psychopy.data.StairHandler.saveAsText">saveAsText()</a>, wenn ein Lauf beendet ist. Finde einen Weg, um einen eindeutigen Dateinamen für jeden Lauf zu erzeugen, damit die Protokolle nicht überschrieben werden.</p>
+<div class="program">
+<p>Speichere die Treppenprotokolle in <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="das-ist-erst-der-anfang" class="level2" data-number="10.17"><h2 data-number="10.17" class="anchored" data-anchor-id="das-ist-erst-der-anfang">
+<span class="header-section-number">10.17</span> Das ist erst der Anfang!</h2>
+<p>Wie immer, überlege dir, wie du das Spiel erweitern kannst. Eine Uhr, die die verbleibende Zeit anzeigt, fehlt definitiv. Akustische Rückmeldung wäre cool. Mehr Positionen? Zufällige Farben, um einen Spieler zu verwirren?</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Hier nehme ich an, dass 50% die Zufallsleistung ist.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Es ist das übliche Paradoxon, dass du, um eine Schwellenbedingung für eine bestimmte Aufgabe optimal zu messen, in der Nähe der Schwelle messen solltest. Aber wenn du bereits weißt, wo du messen sollst, musst du nicht messen.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Warum nicht der CountdownTimer? Weil wir, wie du unten sehen wirst, die Zeit <em>mit</em> dem Geschwindigkeitsfaktor zählen, so dass wir die Uhr “beschleunigen” können, was für den Timer etwas schwieriger zu implementieren ist.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./09-flappy-bird.de.html" class="pagination-link" aria-label="Flappy Bird">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+</body>
+</html>

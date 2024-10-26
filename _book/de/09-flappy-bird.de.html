@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+<link rel="alternate" hreflang="en" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/09-flappy-bird.html">
+<link rel="alternate" hreflang="de" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/de/09-flappy-bird.de.html">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>9  Flappy Bird – Lerne Python, indem du Spiele schreibst.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./10-guitar-hero.de.html" rel="next">
+<link href="./08-christmas.de.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script><link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-flappy-bird.de.html"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Lerne Python, indem du Spiele schreibst.</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/09-flappy-bird.html" id="language-link-en">English</a></li></ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-software.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-programming-tips.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipps und Tricks fürs Programmieren</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Python Grundlagen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-guess-the-number-single-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Rate die Zahl: die Ein-Runden-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-guess-the-number-multi-round.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Rate das Zahl: die Multi-Runde-Edition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-guess-the-number-ai.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Errate die Zahl: Der Computer ist dran</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-psychopy.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
+  </div>
+</li>
+        
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">9.1</span> Kapitelkonzepte</a></li>
+  <li>
+<a href="#objektorientierte-programmierung" id="toc-objektorientierte-programmierung" class="nav-link" data-scroll-target="#objektorientierte-programmierung"><span class="header-section-number">9.2</span> Objektorientierte Programmierung</a>
+  <ul class="collapse">
+<li><a href="#klassen-und-objekte-instanzen-von-klassen" id="toc-klassen-und-objekte-instanzen-von-klassen" class="nav-link" data-scroll-target="#klassen-und-objekte-instanzen-von-klassen"><span class="header-section-number">9.2.1</span> Klassen und Objekte (Instanzen von Klassen)</a></li>
+  <li><a href="#kapselung" id="toc-kapselung" class="nav-link" data-scroll-target="#kapselung"><span class="header-section-number">9.2.2</span> Kapselung</a></li>
+  <li><a href="#vererbung-verallgemeinerung" id="toc-vererbung-verallgemeinerung" class="nav-link" data-scroll-target="#vererbung-verallgemeinerung"><span class="header-section-number">9.2.3</span> Vererbung / Verallgemeinerung</a></li>
+  <li><a href="#polymorphismus" id="toc-polymorphismus" class="nav-link" data-scroll-target="#polymorphismus"><span class="header-section-number">9.2.4</span> Polymorphismus</a></li>
+  <li><a href="#ein-minimaler-klassenbeispiel" id="toc-ein-minimaler-klassenbeispiel" class="nav-link" data-scroll-target="#ein-minimaler-klassenbeispiel"><span class="header-section-number">9.2.5</span> Ein minimaler Klassenbeispiel</a></li>
+  <li><a href="#add-methode" id="toc-add-methode" class="nav-link" data-scroll-target="#add-methode"><span class="header-section-number">9.2.6</span> <code>add</code>-Methode</a></li>
+  <li><a href="#flexibler-akkumulator-mit-einer-subtrahiere-methode" id="toc-flexibler-akkumulator-mit-einer-subtrahiere-methode" class="nav-link" data-scroll-target="#flexibler-akkumulator-mit-einer-subtrahiere-methode"><span class="header-section-number">9.2.7</span> Flexibler Akkumulator mit einer <code>subtrahiere</code> Methode</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#methoden-argumente" id="toc-methoden-argumente" class="nav-link" data-scroll-target="#methoden-argumente"><span class="header-section-number">9.3</span> Methoden-Argumente</a>
+  <ul class="collapse">
+<li><a href="#konstruktor-argumente" id="toc-konstruktor-argumente" class="nav-link" data-scroll-target="#konstruktor-argumente"><span class="header-section-number">9.3.1</span> Konstruktor-Argumente</a></li>
+  <li><a href="#methoden-aus-anderen-methoden-aufrufen" id="toc-methoden-aus-anderen-methoden-aufrufen" class="nav-link" data-scroll-target="#methoden-aus-anderen-methoden-aufrufen"><span class="header-section-number">9.3.2</span> Methoden aus anderen Methoden aufrufen</a></li>
+  <li><a href="#lokale-variablen" id="toc-lokale-variablen" class="nav-link" data-scroll-target="#lokale-variablen"><span class="header-section-number">9.3.3</span> Lokale Variablen</a></li>
+  </ul>
+</li>
+  <li><a href="#flappy-bird-der-einfache-anfang" id="toc-flappy-bird-der-einfache-anfang" class="nav-link" data-scroll-target="#flappy-bird-der-einfache-anfang"><span class="header-section-number">9.4</span> Flappy Bird: der einfache Anfang</a></li>
+  <li><a href="#flappy-bird-klasse" id="toc-flappy-bird-klasse" class="nav-link" data-scroll-target="#flappy-bird-klasse"><span class="header-section-number">9.5</span> Flappy Bird Klasse</a></li>
+  <li><a href="#ein-bird-in-passender-gr%C3%B6%C3%9Fe" id="toc-ein-bird-in-passender-größe" class="nav-link" data-scroll-target="#ein-bird-in-passender-größe"><span class="header-section-number">9.6</span> Ein Bird in passender Größe</a></li>
+  <li><a href="#flappy-bird-f%C3%A4llt-runter-meine-liebe" id="toc-flappy-bird-fällt-runter-meine-liebe" class="nav-link" data-scroll-target="#flappy-bird-fällt-runter-meine-liebe"><span class="header-section-number">9.7</span> Flappy Bird fällt runter (meine Liebe)</a></li>
+  <li><a href="#den-fall-timen" id="toc-den-fall-timen" class="nav-link" data-scroll-target="#den-fall-timen"><span class="header-section-number">9.8</span> Den Fall timen</a></li>
+  <li><a href="#das-ist-alles-newtons-schuld" id="toc-das-ist-alles-newtons-schuld" class="nav-link" data-scroll-target="#das-ist-alles-newtons-schuld"><span class="header-section-number">9.9</span> Das ist alles Newtons Schuld</a></li>
+  <li><a href="#flatter-vogel-flatter" id="toc-flatter-vogel-flatter" class="nav-link" data-scroll-target="#flatter-vogel-flatter"><span class="header-section-number">9.10</span> Flatter Vogel, flatter!</a></li>
+  <li><a href="#bleib-in-der-luft" id="toc-bleib-in-der-luft" class="nav-link" data-scroll-target="#bleib-in-der-luft"><span class="header-section-number">9.11</span> Bleib in der Luft</a></li>
+  <li><a href="#computed-attribute-property" id="toc-computed-attribute-property" class="nav-link" data-scroll-target="#computed-attribute-property"><span class="header-section-number">9.12</span> Computed attribute <code>@property</code></a></li>
+  <li><a href="#eine-l%C3%BCcke-im-hindernis" id="toc-eine-lücke-im-hindernis" class="nav-link" data-scroll-target="#eine-lücke-im-hindernis"><span class="header-section-number">9.13</span> Eine Lücke im Hindernis</a></li>
+  <li><a href="#ein-hindernis" id="toc-ein-hindernis" class="nav-link" data-scroll-target="#ein-hindernis"><span class="header-section-number">9.14</span> Ein Hindernis</a></li>
+  <li><a href="#ein-sich-bewegendes-hindernis" id="toc-ein-sich-bewegendes-hindernis" class="nav-link" data-scroll-target="#ein-sich-bewegendes-hindernis"><span class="header-section-number">9.15</span> Ein sich bewegendes Hindernis</a></li>
+  <li><a href="#an-der-wand-angelangt" id="toc-an-der-wand-angelangt" class="nav-link" data-scroll-target="#an-der-wand-angelangt"><span class="header-section-number">9.16</span> An der Wand angelangt</a></li>
+  <li><a href="#hindernismanager" id="toc-hindernismanager" class="nav-link" data-scroll-target="#hindernismanager"><span class="header-section-number">9.17</span> Hindernismanager</a></li>
+  <li><a href="#eine-menge-hindernisse" id="toc-eine-menge-hindernisse" class="nav-link" data-scroll-target="#eine-menge-hindernisse"><span class="header-section-number">9.18</span> Eine Menge Hindernisse</a></li>
+  <li><a href="#redundante-hindernisse-entfernen" id="toc-redundante-hindernisse-entfernen" class="nav-link" data-scroll-target="#redundante-hindernisse-entfernen"><span class="header-section-number">9.19</span> Redundante Hindernisse entfernen</a></li>
+  <li><a href="#punkte-z%C3%A4hlen" id="toc-punkte-zählen" class="nav-link" data-scroll-target="#punkte-zählen"><span class="header-section-number">9.20</span> Punkte zählen</a></li>
+  <li><a href="#eine-grundlage" id="toc-eine-grundlage" class="nav-link" data-scroll-target="#eine-grundlage"><span class="header-section-number">9.21</span> Eine Grundlage</a></li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Heute werden wir ein <em>Flappy Bird</em> Spiel entwickeln. Du steuerst einen Vogel, der durch die Öffnungen in den Hindernissen fliegen muss, aber deine einzige Aktion ist es, mit den Flügeln zu schlagen, um der Schwerkraft entgegenzuwirken. So wird das Spiel am Ende aussehen.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="videos/flappy-bird.m4v"></source></video></div>
+<section id="kapitelkonzepte" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="kapitelkonzepte">
+<span class="header-section-number">9.1</span> Kapitelkonzepte</h2>
+<ul>
+<li>Objektorientierte Programmierung</li>
+<li>Berechnete Eigenschaften von Objekten: <code>@property</code>
+</li>
+</ul>
+<p>Wir nutzen dieses Spiel, um mehr über die objektorientierte Programmierung zu lernen. Du weißt bereits, wie man Klassen verwendet, jetzt ist es an der Zeit, sie zu erstellen und zu sehen, wie es dein Leben erleichtert.</p>
+</section><section id="objektorientierte-programmierung" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="objektorientierte-programmierung">
+<span class="header-section-number">9.2</span> Objektorientierte Programmierung</h2>
+<p>Die Kernidee steckt im Namen: Statt separate Variablen/Daten und Funktionen zu haben, kombinierst du sie in einem Objekt, das Attribute/Eigenschaften (seine eigenen Variablen) und Methoden (Funktionen) hat. Diese Herangehensweise nutzt unsere natürliche Neigung, die Welt als Sammlung von interagierenden Objekten wahrzunehmen, und hat mehrere Vorteile, über die ich unten sprechen werde.</p>
+<section id="klassen-und-objekte-instanzen-von-klassen" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="klassen-und-objekte-instanzen-von-klassen">
+<span class="header-section-number">9.2.1</span> Klassen und Objekte (Instanzen von Klassen)</h3>
+<p>Bevor wir weitermachen, muss ich eine wichtige Unterscheidung zwischen <em>Klassen</em> und <em>Objekten</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> treffen. Eine <em>Klasse</em> ist sozusagen ein “Bauplan”, das die Eigenschaften und das Verhalten (Methoden) von Objekten dieser Klasse beschreibt. Diese “Bauplan” wird verwendet, um eine <em>Instanz</em> dieser Klasse zu erstellen, die als <em>Objekt</em> bezeichnet wird. Zum Beispiel ist <em>Homo sapiens</em> eine <em>Klasse</em>, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine <em>Idee</em> von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen “Wie groß ist Homo sapiens?”, sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten mit solchen realen Handlungen. Stattdessen ist Alexander Pastukhov eine <em>Instanz</em> der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Die Klasse beschreibt also, welche Art von Eigenschaften und Methoden Objekte haben. Wenn du also einen Homo sapiens triffst, kannst du sicher sein, dass er groß ist. Einzelne Objekte haben jedoch unterschiedliche Werte für verschiedene Eigenschaften, so dass der Aufruf ihrer Methoden (d. h. die Aufforderung, bestimmte Aktionen durchzuführen) zu unterschiedlichen Ergebnissen führen kann.</p>
+<p>Ein weiteres, praktischeres Beispiel wäre deine Verwendung der <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a>-Klasse, um mehrere Instanzen der Vorderseite einer Karte in einem <a href="memory-game">Memory</a>-Spiel zu erstellen. Wieder definiert die Klasse Eigenschaften (<code>image</code>, <code>pos</code>, <code>size</code>, etc.) und Methoden (z.B. die Methode <code>draw()</code>), die individuelle Objekte haben werden. Du hast diese Objekte erstellt, um als Vorderseite der Karten zu dienen. Du hast unterschiedliche Werte für dieselben Eigenschaften (<code>image</code>, <code>pos</code>) festgelegt und so sichergestellt, dass beim Aufrufen ihrer Methode <code>draw()</code> jede Karte an ihrer eigenen Position und mit ihrem eigenen Bild gezeichnet wird.</p>
+</section><section id="kapselung" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="kapselung">
+<span class="header-section-number">9.2.2</span> Kapselung</h3>
+<p>All deine Daten (Eigenschaften) und Verhaltensweisen (Methoden) in die Klasse zu packen, erleichtert das Programmieren, indem sichergestellt wird, dass alle relevanten Informationen in ihrer Definition zu finden sind. So hast du einen einzigen Ort, an dem <em>alles</em> enthalten sein sollte, was das Verhalten deines Objekts definiert. Im Gegensatz dazu war unser Ansatz in vorherigen Seminaren, Karten als Dictionaries von den Funktionen zu trennen, die sie erstellten. Heute wirst du sehen, wie das Einpacken von allem in Klassen dieses Durcheinander in einen einfacheren und leichter verständlichen Code verwandelt.</p>
+</section><section id="vererbung-verallgemeinerung" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="vererbung-verallgemeinerung">
+<span class="header-section-number">9.2.3</span> Vererbung / Verallgemeinerung</h3>
+<p>In der objektorientierten Programmierung kann eine Klasse von einer <em>Vorfahren</em>-Klasse abgeleitet werden und so deren Eigenschaften und Methoden <em>erben</em>. Außerdem können mehrere Klassen von einem einzelnen Vorfahren abgeleitet werden, was eine Mischung aus einzigartigen und gemeinsamen Funktionen ergibt. Das bedeutet, dass du statt denselben Code für jede Klasse neu zu schreiben, einen gemeinsamen Code in einer Vorfahren-Klasse definieren und dich auf Unterschiede oder zusätzliche Methoden und Eigenschaften in Nachkommen konzentrieren kannst.</p>
+<p>Verwende das Beispiel von Homo sapiens aus oben. Menschen, Schimpansen und Gorillas sind alle verschiedene Arten, aber wir teilen einen gemeinsamen Vorfahren. Daher sind wir in vielen Hinsichten unterschiedlich, aber du könntest uns alle als “Affen” betrachten, die gemeinsame Eigenschaften wie binokulare Trichromasie haben. Mit anderen Worten: Wenn du dich für die Farbwahrnehmung interessierst, spielt es keine Rolle, welche spezifische Art du betrachtest, da alle Affen in dieser Hinsicht (ungefähr) gleich sind. Oder du kannst weiter unten an der Evolutionsleiter bleiben und uns als “Säuger” betrachten, die wiederum gemeinsame Eigenschaften und Verhaltensweisen wie Thermoregulation und Laktation haben. Wiederum, wenn du <em>nur</em> wissen möchtest, ob ein Tier Thermoregulation hat, reicht es aus zu wissen, dass es ein Säuger ist.</p>
+<p>In PsychoPy, die verschiedenen visuellen Reize, die wir verwendet haben (<a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a>, <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>, <a href="https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect">Rect</a>), haben dieselben Eigenschaften (z.B. <code>pos</code>, <code>size</code>, etc.) und Methoden (vor allem <code>draw()</code>). Das liegt daran, dass sie alle von einem gemeinsamen Vorfahren <code>BaseVisualStim</code> abstammen, der ihre gemeinsamen Eigenschaften und Methoden definiert<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Das bedeutet, dass du davon ausgehen kannst, dass <em>jeder</em> visuelle Reiz (solange er von <code>BaseVisualStim</code> abstammt) <code>size</code>, <code>pos</code>, <code>ori</code> hat und gezeichnet werden kann. Das bedeutet wiederum, dass du eine Liste verschiedener PsychoPy-visueller Reize haben kannst und alle in einer Schleife bewegen oder zeichnen kannst, ohne darüber nachzudenken, welchen <em>spezifischen</em> visuellen Reiz du bewegst oder zeichnest. Beachte auch, dass du diese gleichen Eigenschaften nicht für <em>Ton</em>-Reize voraussetzen kannst, da sie nicht von <code>BaseVisualStim</code>, sondern von der Klasse <code>_SoundBase</code> abstammen.</p>
+<p>Es gibt auch andere Möglichkeiten, um in Python gemeinsame Verhaltensweisen (Verallgemeinerung) ohne geordnete Vererbung zu erreichen, wie zum Beispiel “duck typing”<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> oder Mixins, aber das wird ein Thema eines anderen Kapitels sein.</p>
+</section><section id="polymorphismus" class="level3" data-number="9.2.4"><h3 data-number="9.2.4" class="anchored" data-anchor-id="polymorphismus">
+<span class="header-section-number">9.2.4</span> Polymorphismus</h3>
+<p>Wie du im vorherigen Abschnitt gelernt hast, ermöglicht Vererbung verschiedenen Nachkommen, gemeinsame Eigenschaften und Verhalten zu teilen, sodass sie in bestimmten Fällen als äquivalent zu einem Vorfahren betrachtet werden können. Zum Beispiel kann jeder visuelle Reiz (ein Nachkomme der <code>BaseVisualStim</code>-Klasse) gezeichnet werden, also rufst du einfach seine <code>draw()</code>-Methode auf. Es ist jedoch klar, dass diese verschiedenen Reize das Zeichnen <em>unterschiedlich</em> implementieren, da der <a href="https://psychopy.org/api/visual/rect.html#psychopy.visual.rect.Rect">Rect</a>-Reiz anders aussieht als der <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> oder <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>. Dies wird als “Polymorphismus” bezeichnet und die Idee besteht darin, die gemeinsame Schnittstelle (gleicher <code>draw()</code>-Aufruf) beizubehalten, während die tatsächliche Implementierung abstrahiert wird. Dies ermöglicht es dir, darüber nachzudenken, was du mit einem Objekt tun möchtest (oder was ein Objekt tun soll), anstatt darüber nachzudenken, wie es genau implementiert ist.</p>
+</section><section id="ein-minimaler-klassenbeispiel" class="level3" data-number="9.2.5"><h3 data-number="9.2.5" class="anchored" data-anchor-id="ein-minimaler-klassenbeispiel">
+<span class="header-section-number">9.2.5</span> Ein minimaler Klassenbeispiel</h3>
+<p>Jetzt aber genug mit der Theorie, schauen wir uns mal an, wie man Klassen in Python umsetzt. Hier ist eine sehr einfache Klasse, die nur die <em>Konstruktor</em>-Methode <code>__init__()</code> hat, die aufgerufen wird, wenn ein neues Objekt (Klasseninstanz) erstellt wird, und eine einzelne Eigenschaft/Attribut <code>total</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Accumulator:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Einfache Klasse, die Werte akkumuliert (aufsummiert).</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Attributes</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    total : float</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Kumulierter Gesamtwert</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Konstruktor, initialisiert den Gesamtwert auf Null.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Hier erstellen wir ein Objekt number_sum, das eine Instanz der Klasse Accumulator ist.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>number_sum <span class="op">=</span> Accumulator()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(number_sum.total)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lass uns das Zeug Zeile für Zeile durchgehen. Die erste Zeile <code>class Accumulator:</code> zeigt, dass dies eine Deklaration einer <code>class</code> ist, deren Name <code>Accumulator</code> ist. Beachte, dass der erste Buchstabe großgeschrieben ist. Das ist nicht zwingend erforderlich, also wird der Python-Polizei nicht an deine Tür klopfen, wenn du alles in Klein- oder Großbuchstaben schreibst. Allerdings wird empfohlen, dass <strong>Klassen</strong> Namen mit <code>UpperCaseCamelCase</code> und <strong>Objekte</strong> (Instanzen der Klasse) mit <code>lower_case_snake_case</code> geschrieben werden. Das erleichtert das Unterscheiden zwischen Klassen und Objekten (Instanzen von Klassen), also solltest du dieser Konvention folgen.</p>
+<p>Die Definition der Klasse sind die restlichen <em>einrückenden</em> Zeilen. Wie bei Funktionen oder Schleifen ist es die Einrückung, die definiert, was innerhalb und was außerhalb der Klasse ist. Die einzige Methode, die wir definiert haben, ist <code>def __init__(self):</code>. Das ist eine <em>spezielle</em> Methode<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, die aufgerufen wird, wenn ein Objekt (Instanz der Klasse) erstellt wird. Das ermöglicht es dir, das Objekt basierend auf Parametern zu initialisieren, die an diese Funktion übergeben wurden (falls vorhanden). Du rufst diese Funktion nicht direkt auf, sondern sie wird immer dann aufgerufen, wenn ein Objekt erstellt wird, z.B. <code>number_sum = Accumulator()</code> (letzte Zeile). Es wird auch kein Wert explizit über <code>return</code> zurückgegeben. Stattdessen wird <code>self</code> (der erste Parameter, mehr dazu unten) automatisch zurückgegeben.</p>
+<p>Alle Methoden einer Klasse (außer den speziellen Fällen, mit denen wir uns momentan nicht beschäftigen) müssen einen speziellen ersten Parameter haben, der <em>das Objekt</em> selbst ist. Üblicherweise wird er <code>self</code> genannt.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Er wird automatisch an die Methode übergeben, also bekommst du immer einen Parameter, wenn du <code>square.draw()</code> aufrufst (keine expliziten Parameter im Funktionsaufruf), der eine <em>Referenz</em> auf die <code>square</code>-Variable ist, deren Methode du aufgerufen hast. Innerhalb einer Methode verwendest du diese Variable, um auf das Objekt selbst zu verweisen.</p>
+<p>Lass uns zurück zum Konstruktor <code>__init()__</code> gehen, um zu sehen, wie du <code>self</code> verwenden kannst. Hier fügen wir eine neue <em>persistente</em> Eigenschaft/Attribut zum Objekt hinzu und weisen ihr einen Wert zu: <code>self.total = 0</code>. Es ist <em>persistent</em>, weil wir es zwar innerhalb der Methode erstellt haben, aber das veränderliche Objekt per Referenz übergeben wird und daher dem Objekt selbst zugewiesen wird. Jetzt kannst du diese Eigenschaft entweder von innen <code>self.total</code> oder von außen <code>number_sum.total</code> verwenden. Du kannst dir Eigenschaften wie Feld/Wert-Paare im Wörterbuch vorstellen, das wir beim Memory-Spiel verwendet haben, aber mit anderer Syntax: <code>objekt.eigenschaft</code> gegenüber <code>dictionary["feld"]</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Technisch gesehen kannst du neue Eigenschaften in jeder Methode oder sogar von außen erstellen (z.B. hindert nichts daran, <code>number_sum.farbe = "rot"</code> zu schreiben). Allerdings macht das Verständnis des Codes viel schwieriger, daher wird empfohlen, <em>alle</em> Eigenschaften innerhalb des Konstruktors <code>__init()__</code>-Verfahrens zu erstellen, sogar wenn dies bedeutet, ihnen <code>None</code> zuzuweisen<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+</section><section id="add-methode" class="level3" data-number="9.2.6"><h3 data-number="9.2.6" class="anchored" data-anchor-id="add-methode">
+<span class="header-section-number">9.2.6</span> <code>add</code>-Methode</h3>
+<p>Lass uns eine Methode hinzufügen, die 1 zur <code>total</code>-Eigenschaft addiert.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Accumulator:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   ... <span class="co"># Ich überspringe hier den gesamten vorherigen Code</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Addiere 1 zu total</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.total <span class="op">+=</span> <span class="dv">1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Sie hat als erstes spezielles Argument <code>self</code>, das das Objekt selbst ist, und wir addieren einfach 1 zu seiner Eigenschaft <code>Total</code>. Nochmals: Denk daran, dass <code>self</code> automatisch übergeben wird, wenn du die Methode aufrufst, was bedeutet, dass ein tatsächlicher Aufruf wie <code>number_sum.add()</code> aussieht.</p>
+<p>Erstelle ein Jupyter-Notizbuch (das musst du als Teil der Aufgabe abgeben) und kopiere den Code für die <code>Accumulator</code>-Klasse, einschließlich der <code>.add()</code>-Methode. Erstelle <strong>zwei</strong> Objekte, nenne sie <code>counter1</code> und <code>counter2</code>. Rufe die <code>.add()</code>-Methode zweimal für <code>counter2</code> und dreimal für <code>counter1</code> auf (Bonus: mache es mit einer <code>for</code>-Schleife). Was ist der Wert der <code>.total</code>-Eigenschaft jedes Objekts? Überprüfe es, indem du es ausgibst.</p>
+<div class="practice">
+<p>Kopier den Code der <span class="program-function">Accumulator</span>-Klasse und teste ihn in einem Jupyter-Notizbuch.</p>
+</div>
+</section><section id="flexibler-akkumulator-mit-einer-subtrahiere-methode" class="level3" data-number="9.2.7"><h3 data-number="9.2.7" class="anchored" data-anchor-id="flexibler-akkumulator-mit-einer-subtrahiere-methode">
+<span class="header-section-number">9.2.7</span> Flexibler Akkumulator mit einer <code>subtrahiere</code> Methode</h3>
+<p>Jetzt erstellen wir eine neue Klasse, die ein <em>Nachfahre</em> der <code>Akkumulator</code> ist. Wir nennen sie <code>FlexiblerAkkumulator</code>, da sie es dir auch ermöglicht, von der Gesamtzahl <em>abzuziehen</em>. Du spezifizierst die Vorfahren (es können mehr als einen geben!) in runden Klammern nach dem Klassennamen.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FlexibleAccumulator(Accumulator):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span> <span class="co"># Du musst mindestens eine nicht-leere Zeile haben, und pass bedeutet "tu nichts"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Jetzt hast du eine neue Klasse, die von <code>Accumulator</code> abstammt, aber bisher eine perfekte Kopie davon ist. Füge eine <code>subtract</code>-Methode zu der Klasse hinzu. Sie sollte <code>1</code> von der <code>.total</code>-Eigenschaft abziehen (vergiss nicht, sie zu <em>dokumentieren</em>!). Überprüfe, ob es funktioniert. Erstelle eine Instanz von <code>Accumulator</code> und eine weitere von der <code>FlexibleAccumulator</code>-Klasse und überprüfe, dass du <code>add()</code> auf beiden aufrufen kannst, aber <code>subtract()</code> nur auf der letzteren.</p>
+<div class="practice">
+<p>Füge die <span class="program-function">subtract</span>-Methode zur <span class="program-function">FlexibleAccumulator</span>-Klasse in einem Jupyter-Notizbuch hinzu. Füge Tests hinzu.</p>
+</div>
+</section></section><section id="methoden-argumente" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="methoden-argumente">
+<span class="header-section-number">9.3</span> Methoden-Argumente</h2>
+<p>Jetzt erstelle eine neue Klasse <code>SuperFlexibleAccumulator</code>, die sowohl <code>add()</code> als auch <code>subtract()</code> einen <em>beliebigen</em> Wert hinzufügen kann. Überlege, von welcher Klasse sie erben sollte. Überarbeite beide <code>.add()</code> und <code>.subtract()</code> Methoden in dieser neuen Klasse, indem du einen <code>value</code>-Argument hinzufügst und diesen Wert hinzufügst oder abziehst, anstatt <code>1</code>. Beachte, dass du jetzt <em>zwei</em> Argumente in jeder Methode <code>(self, value)</code> hast, aber du musst nur das letztere übergeben (wiederum wird <code>self</code> automatisch übergeben). Vergiß nicht, das <code>value</code>-Argument zu dokumentieren (aber du musst nicht <code>self</code> dokumentieren, da dessen Bedeutung feststeht).</p>
+<div class="practice">
+<p>Erstelle die <span class="program-function">SuperFlexibleAccumulator</span>-Klasse und definiere super flexible <span class="program-function">add</span>- und <span class="program-function">subtract</span>-Methoden mit einem <span class="program-function">value</span>-Parameter in einem Jupyter-Notizbuch. Teste sie!</p>
+</div>
+<section id="konstruktor-argumente" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="konstruktor-argumente">
+<span class="header-section-number">9.3.1</span> Konstruktor-Argumente</h3>
+<p>Obwohl <code>__init(...)__</code> ein spezieller Konstruktor ist, ist es immer noch eine Methode. Daher kannst du ihm Argumente übergeben, genau wie du es bei anderen Methoden tun würdest. Du übergibst diese Argumente, wenn du ein Objekt erstellst, also in unserem Fall innerhalb der Klammer für <code>counter = SuperFlexibleAccumulator(...)</code>.</p>
+<p>Mach den Code so um, dass du den Anfangswert übergibst, auf den total gesetzt wird, anstatt null.</p>
+<div class="practice">
+<p>Füge den Parameter <span class="program-function">initial_value</span> zum Konstruktor der <span class="program-function">SuperFlexibleAccumulator</span>-Klasse in einem Jupyter-Notizbuch hinzu. Test es!</p>
+</div>
+</section><section id="methoden-aus-anderen-methoden-aufrufen" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="methoden-aus-anderen-methoden-aufrufen">
+<span class="header-section-number">9.3.2</span> Methoden aus anderen Methoden aufrufen</h3>
+<p>Du kannst eine Funktion oder ein Objekt-Methode jederzeit aufrufen, also kannst du Methoden in Methoden verwenden. Lass uns unseren Code ändern, indem wir <em>Subtrahieren</em> als <em>Hinzufügen eines negativen Werts</em> betrachten. Ändere deinen Code so, dass <code>.subtract()</code> den Wert nur negiert, bevor er an <code>.add()</code> für die tatsächliche Verarbeitung übergeben wird. Dadurch wird <code>total</code> <em>nur</em> innerhalb der <code>add()</code>-Methode verändert.</p>
+<div class="practice">
+<p>Ändere die <span class="program-function">subtract()</span>-Methode von <span class="program-function">SuperFlexibleAccumulator</span> damit du <span class="program-function">add()</span> in einem Jupyter-Notizbuch nutzen kannst. Teste es!</p>
+</div>
+</section><section id="lokale-variablen" class="level3" data-number="9.3.3"><h3 data-number="9.3.3" class="anchored" data-anchor-id="lokale-variablen">
+<span class="header-section-number">9.3.3</span> Lokale Variablen</h3>
+<p>Genauso wie bei normalen Funktionen können Methoden auch lokale Variablen haben. Sie sind lokal (nur innerhalb der Methode sichtbar und zugänglich) und nicht persistent (ihre Werte überleben nicht zwischen den Aufrufen). Konzeptionell trennst du Variablen, die persistent sein müssen (ihren Wert die ganze Zeit behalten, wenn das Objekt existiert), als Attribute/Properties und temporäre Variablen, die nur für die Berechnung selbst benötigt werden, als lokale Methoden-Variablen. Welten Wert hätte die Eigenschaft <code>.total</code> in diesem Beispiel:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Accumulator:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, initial):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> initial <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.total <span class="op">=</span> initial</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Accumulator(<span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Und was ist hier los?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Accumulator:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, initial):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> initial <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.total <span class="op">=</span> temp</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Accumulator(<span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="flappy-bird-der-einfache-anfang" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="flappy-bird-der-einfache-anfang">
+<span class="header-section-number">9.4</span> Flappy Bird: der einfache Anfang</h2>
+<p>Wir fangen mit einer grundlegenden Gerüst für unser Programm an. Lade das <a href="material/Blue-Bird.png">Vogelbild</a><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> herunter und speichere es in einem Ordner, in dem du den Code aufbewahren wirst. Erstelle einen grundlegenden Code, der eine <a href="settings-files">Einstellungsdatei</a> verwendet, die minimale Einstellungen für ein Fenster (Größe) und einen Vogel (Bilddatei) definiert. Organisiere es hierarchisch wie folgt, da dies uns helfen wird, die Einstellungen für verschiedene Klassen ordentlich zu halten.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"Vogel"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Bild"</span><span class="fu">:</span> <span class="st">"Blue-Bird.png"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"Fenster"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Größe"</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">800</span><span class="ot">,</span> <span class="dv">600</span><span class="ot">]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Erstelle ein <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">Fenster</a> mit dieser angegebenen Größe und einen <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> mithilfe des Dateinamens aus der Einstellungsdatei. Füge eine grundlegende Spielschleife ein, in der du den Vogel (der genau in der Mitte des Bildschirms erscheinen sollte) wiederholt zeichnest und auf eine Tasteneingabe (<em>Escape</em> sollte das Spiel beenden) überprüfst.</p>
+<div class="program">
+<p>Schreib deinen Code in <span class="program-filename">code01.py</span>.</p>
+</div>
+</section><section id="flappy-bird-klasse" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="flappy-bird-klasse">
+<span class="header-section-number">9.5</span> Flappy Bird Klasse</h2>
+<p>Unser Flappy Bird ist im Grunde genommen ein Bild, aber wir möchten ihm zusätzliche Verhaltensweisen verleihen, wie zum Beispiel automatisch nach unten zu fallen aufgrund der Schwerkraft oder nach oben zu fliegen aufgrund des Flügelschlagens usw. Es gibt mehrere Möglichkeiten, dies zu tun. Wir können das Bild in <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> speichern und zusätzliche Funktionen schreiben, um es zu handhaben (wie wir es zuvor gemacht haben). Wir könnten eine neue Klasse <code>FlappyBird</code> erstellen, die <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> als ihr Attribut hat. Oder, wir könnten die Kraft der Vererbung nutzen und die <code>FlappyBird</code> Klasse auf der Grundlage von <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> aufbauen. Das bedeutet weniger Arbeit für uns, also ist das der Weg, den wir einschlagen werden.</p>
+<p>Erstelle eine neue Datei, die deine <code>FlappyBird</code>-Klasse enthalten wird. So sollte sie aussehen:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Dein Kommentar, worum es in dieser Datei geht.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># importiere Bibliotheken, welche brauchst du?</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FlappyBird(visual.image.ImageStim):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">  FlappyBird-Klasse basierend auf ImageStim</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, win, settings):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Konstruktor.</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>(win, image<span class="op">=</span>settings[<span class="st">"Image"</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In dem obigen Code habe ich <code>FlappyBird</code> als Nachfolger von <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> definiert<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Damit das Letztere funktioniert, müssen wir es richtig initialisieren, indem wir seinen Konstruktor aufrufen. Das tut der Aufruf von <code>super().__init__(...)</code>: Ruft den Konstruktor der Vorfahrklasse auf (<code>super()</code> bezieht sich auf den direkten Vorfahren), um all die Magie zu aktivieren, die wir wiederverwenden möchten. Beachte, dass <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> mindestens zwei Parameter benötigt: ein PsychoPy <a href="(https://psychopy.org/api/visual/window.html#psychopy.visual.Window)">Fenster</a>, dem der Reiz angehört, und ein Bild (ein Dateiname in diesem Fall). Hier nehme ich an, dass ich, wenn ich ein Vogel-Objekt erstelle (den Konstruktor aufrufe), <em>zwei</em> Parameter übergebe (wieder kommt <code>self</code> “umsonst”, also musst du es nicht explizit übergeben, aber du gehst davon aus, dass es das <em>erste</em> Argument ist, das du bekommst): das [Fenster]((https://psychopy.org/api/visual/window.html#psychopy.visual.Window), das wir erstellt haben, plus ein Dictionary mit Einstellungen für den Vogel (es wird mehr Einstellungen geben, daher wäre es praktischer, das ganze Dictionary zu übergeben, anstatt einen Parameter nach dem anderen zu übergeben).</p>
+<p>Kopier und einfüg den Code (mit passenden Imports und Kommentaren) und verwende die <code>FlappyBird</code>-Klasse anstelle von <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a>. Beachte, dass <code>FlappyBird</code> <em>alle</em> Funktionalitäten von <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> erbt, also kannst du es auf die gleiche Weise verwenden, abgesehen davon, wie du es erstellst. Das bedeutet, du musst nichts anderes in deinem Code ändern (hab ich doch gesagt, das würde uns Zeit und Aufwand sparen!).</p>
+<div class="program">
+<p>Leg den Code der <span class="program-function">FlappyBird</span>-Klasse in eine separate Datei. Verwende ihn stattdessen für <span class="program-function">ImageStim</span> in <span class="program-filename">code02.py</span>.</p>
+</div>
+</section><section id="ein-bird-in-passender-größe" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="ein-bird-in-passender-größe">
+<span class="header-section-number">9.6</span> Ein Bird in passender Größe</h2>
+<p>Unser Vogel ist total niedlich, aber viel zu groß. Füge eine neue Einstellung für ihn hinzu (ich schlage vor, sie <code>Größe</code> zu nennen und auf 0.1 zu setzen) und verwende sie im Konstruktor, indem du <code>size=...</code> zum Aufruf von <code>super().__init__</code> hinzufügst. Musst du etwas im Hauptcode ändern?</p>
+<div class="program">
+<p>Füge eine Einstellung für die Vogelhohe hinzu. Verwende sie im Konstruktor der <span class="program-function">FlappyBird</span>-Klasse.</p>
+</div>
+</section><section id="flappy-bird-fällt-runter-meine-liebe" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="flappy-bird-fällt-runter-meine-liebe">
+<span class="header-section-number">9.7</span> Flappy Bird fällt runter (meine Liebe)</h2>
+<p>Bevor unser Vogel fliegt, muss es lernen, wie man runterfällt. Runterfallen ist einfach nur eine Änderung der vertikalen Position des Vogels basierend auf seiner vertikalen Geschwindigkeit. Wir haben bereits eine Eigenschaft für die (horizontale und) vertikale Position: <code>self.pos</code>, ein Tupel mit der <code>(x, y)</code>-Position des Bildschirmzentrums. Aber wir brauchen ein zusätzliches neues Attribut, das die vertikale Geschwindigkeit des Vogels codiert. Erstelle es im Konstruktor (wenn du vergessen hast, wie das geht, schau oben nach, wie wir das <code>total</code>-Attribut für die <code>Accumulator</code>-Klasse erstellen) und nenne es <code>vspeed</code>. Erstelle auch eine neue Einstellung (ich würde sie <code>"Anfangliche vertikale Geschwindigkeit"</code> nennen) und setze sie auf <code>-0.01</code>. Verwende diese Einstellung im Konstruktor, um <code>vspeed</code> zu initialisieren.</p>
+<p>Jetzt brauchen wir auch noch eine Methode, die den Standort des Vogels basierend auf seiner (aktuellen) Geschwindigkeit aktualisiert. Erstelle diese Methode unter dem Konstruktor (braucht sie neben dem obligatorischen <code>self</code> noch weitere Parameter?). Sie sollte einfach <span class="math inline">\(y_{new} = y + vspeed\)</span> berechnen und <span class="math inline">\(y_{new}\)</span> zurück an den <code>pos</code>-Attribut zuweisen ( beachte, dass du nicht nur die y-Koordinate zuweisen kannst, du musst das Tupel <code>(x, y)</code> verwenden, indem du den ursprünglichen x-Wert aus <code>pos</code> wiederverwendest). Vergesse nicht, die neue Methode zu dokumentieren!</p>
+<p>Jetzt musst du <code>update_per_frame()</code> auf <em>jedem</em> Frame aufrufen, bevor du den Vogel zeichnest. Das sollte dafür sorgen, dass dein Vogel vom Bildschirm fällt! (Experimentiere mit der Einstellung <code>"Anfangliche vertikale Geschwindigkeit"</code> um ihn schneller oder langsamer oder sogar nach oben fallen zu lassen!)</p>
+<div class="program">
+<p>Aktualisiere die <span class="program-function">FlappyBird</span>-Klasse. Benutze die <span class="program-function">update_per_frame</span>-Methode in <span class="program-filename">code03.py</span>.</p>
+</div>
+</section><section id="den-fall-timen" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="den-fall-timen">
+<span class="header-section-number">9.8</span> Den Fall timen</h2>
+<p>Momentan wird die Geschwindigkeit unseres Vogels beim Fallen in Norm-Einheiten pro <em>Frame</em> gemessen. Das funktioniert, aber diese Einheiten sind nicht die bequemsten zum Nachdenken. Außerdem hängt es davon ab, dass PsychoPy (und der Rest unseres Codes) sicherstellt, dass die Zeit zwischen einzelnen Frames genau gleich ist. Das ist <em>meistens</em> der Fall und ein gelegentlich langsamer Vogel ist kein großes Problem für ein Spiel. Allerdings könnte das ein Problem für ein echtes Experiment sein, das eine genaue Zeitmessung der Bewegung erfordert. Daher müssen wir über die vertikale Geschwindigkeit in Einheiten von Norm-Einheiten pro <em>Sekunde</em> nachdenken und die Zeit zwischen Aufrufen selbst messen.</p>
+<p>Erstelle ein neues <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Clock</a>-Attribut, das die seit dem letzten Reset verstrichene Zeit zählt (ich würde es <code>frame_timer</code> nennen). Erstelle eine Methode <code>update()</code>, um <span class="math inline">\(y_{new} = y + vspeed * T_{elapsed}\)</span> zu berechnen, wobei <span class="math inline">\(T_{elapsed}\)</span> die zwischen den Bildern verstrichene Zeit ist. Vergiss nicht, den Timer zurückzusetzen! (Was passiert, wenn du es doch vergisst?)?)</p>
+<p>Jetzt setz du deine <code>"Anfangliche vertikale Geschwindigkeit"</code> auf einen vernünftigen Wert (z.B. 0.5) und überprüf, ob die Zeit, die der Vogel braucht, um vom Bildschirm zu fallen, vernünftig aussieht (bei 0.5 Norm-Einheiten pro Sekunde sollte er in zwei Sekunden vom Bildschirm fallen).</p>
+<div class="program">
+<p>Aktualisiere die <span class="program-function">FlappyBird</span> Klasse mit einem Timer und der <span class="progam-function">update</span> Methode. Verwende <span class="progam-function">update</span> anstelle von <span class="progam-function">update_per_frame</span> in <span class="program-filename">code04.py</span>.</p>
+</div>
+</section><section id="das-ist-alles-newtons-schuld" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="das-ist-alles-newtons-schuld">
+<span class="header-section-number">9.9</span> Das ist alles Newtons Schuld</h2>
+<p>Jetzt fügen wir Schwerkraft hinzu, damit die Fallgeschwindigkeit ständig verändert wird. Erstelle eine neue Einstellung und nenne sie <code>"Schwerkraft"</code>. Setze es auf <code>-0.5</code> (Einheiten sind <code>normale Einheiten pro Sekundequadrat</code>), aber experimentiere später mit verschiedenen Werten. Die Beschleunigung aufgrund der Schwerkraft verändert die vertikale Geschwindigkeit genauso wie die Geschwindigkeit selbst die vertikale Position verändert<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. Aktualisiere deine <code>update</code>-Methode, um die Geschwindigkeit basierend auf der Beschleunigung und der vergangenen Zeit zu ändern. Was musst du zuerst aktualisieren, die Geschwindigkeit oder den Standort? Und überlege auch, wie du die Beschleunigung speichern wirst: Sie befindet sich im Settings-Parameter, der nur im Konstruktor existiert. Du kannst entweder einen neuen Attribut speichern oder alle Einstellungen in einem Attribut für spätere Verwendung speichern.</p>
+<div class="program">
+<p>Aktualisiere die <span class="program-function">FlappyBird</span>-Klasse mit der Beschleunigung aufgrund der Schwerkraft.</p>
+</div>
+</section><section id="flatter-vogel-flatter" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="flatter-vogel-flatter">
+<span class="header-section-number">9.10</span> Flatter Vogel, flatter!</h2>
+<p>Mach den Vogel “flattern” lassen, damit er in der Luft bleibt. Erstelle eine neue Einstellung <code>Flattergeschwindigkeit</code> und setze sie auf <code>0.4</code> (wie immer, experimentier’ ruhig rum!). Füge eine neue Methode <code>.flap(self)</code> hinzu und setze darin einfach <code>vspeed</code> auf <code>Flattergeschwindigkeit</code>. So setzt ein einzelner Flatterschlag den Vogel mit <code>Flattergeschwindigkeit</code> nach oben, was jedoch durch die Schwerkraft ständig reduziert wird, sodass der Vogel schließlich wieder nach unten fällt.</p>
+<p>Im Hauptcode auf „Escape“- und „Space“-Tasten prüfen. Wenn die Leertaste gedrückt wird, rufe die Methode <code>.flap()</code> des Vogels auf. Prüfe, ob du den Vogel auf dem Bildschirm halten kannst, indem du das Drücken der Leertaste zeitlich abstimmst, oder ob du ihn nach oben vom Bildschirm wegfliegen lassen kannst.</p>
+<div class="program">
+<p>Füge die <span class="program-function">flap</span>-Methode zur <span class="program-function">FlappyBird</span>-Klasse hinzu. Verwende sie in <span class="program-filename">code05.py</span>, wann immer der Spieler die <em>Leertaste</em> drückt.</p>
+</div>
+</section><section id="bleib-in-der-luft" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="bleib-in-der-luft">
+<span class="header-section-number">9.11</span> Bleib in der Luft</h2>
+<p>In unserem Spiel verliert der Spieler entweder, wenn er auf ein Hindernis trifft (das wir noch nicht haben) oder wenn der Vogel unter die Bodenhöhe fällt, d.h. die untere Kante des Fensters. Erstelle eine neue Methode <code>is_airborne()</code>, die <code>True</code> zurückgibt, wenn die <code>y</code>-Position des Vogels über <code>-1</code> liegt (denke daran, du brauchst kein explizites <code>if</code> dafür und musst auch nicht <code>True</code> oder <code>False</code> irgendwo schreiben, überlege, wie das ohne diese gemacht werden kann).</p>
+<p>In der Hauptschleife fügst du die Überprüfung der Bedingung <code>bird.is_airborne()</code> hinzu, damit sie weiterläuft, bis der Spieler <code>"escape"</code> drückt oder der Vogel auf den Boden auftrifft.</p>
+<div class="program">
+<p>Füge die <span class="program-function">is_airborne</span>-Methode zur <span class="program-function">FlappyBird</span>-Klasse hinzu. Verwende sie in <span class="program-filename">code06.py</span> als zusätzliche Bedingung für die Game-Schleife.</p>
+</div>
+</section><section id="computed-attribute-property" class="level2" data-number="9.12"><h2 data-number="9.12" class="anchored" data-anchor-id="computed-attribute-property">
+<span class="header-section-number">9.12</span> Computed attribute <code>@property</code>
+</h2>
+<p>Wie im Abschnitt “Objektorientierte Programmierung” oben erklärt, beschreiben Properties den Zustand eines Objekts, während Methoden beschreiben, was ein Objekt tun kann oder was du mit einem Objekt machst. Unser <code>is_airborne()</code>-Methoden bricht diese Logik: Es beschreibt den <em>Zustand</em> des Vogels, aber wir <em>rufen</em> es (nutzen es) wie eine Methode. Was wir hier haben, ist eine <em>berechnete</em> Property, die aus anderen Eigenschaften eines Objekts abgeleitet wird. In unserem Fall leiten wir die Eigenschaft <code>is_airborne</code> von <code>y</code> ab. Natürlich könnten wir <code>is_airborne</code> in den Konstruktor einbauen und es dann innerhalb der <code>update()</code>-Methode aktualisieren. Stattdessen werden wir jedoch ein cooles Feature namens <a href="https://www.python.org/dev/peps/pep-0318/">Decorators</a> verwenden, um eine Methode in eine schreibgeschützte Property zu verwandeln. Das Einzige, was du tun musst, ist, den <code>@property</code>-Decorator direkt über der <code>def is_airborne(self):</code>-Zeile hinzuzufügen und die Klammern wegzulassen, wenn du ihn in der Hauptschleife verwendest (also nur <code>bird.is_airborne</code> statt <code>bird.is_airborne()</code>).</p>
+<p><code>@property</code> sagt Python, dass die Methode direkt darunter <strong>wird</strong> (muss!) einen Wert zurückgeben und dass die Außenwelt sie nicht als Methode, sondern als <em>Eigenschaft</em> sehen sollte. Du kannst es verwenden, um Eigenschaften nur lesbar zu machen, damit sie von außen nicht (einfach) verändert werden können, oder um Eigenschaften zu erstellen, die auf der Stelle berechnet werden, wie in unserem Beispiel.</p>
+<p>Beachte, dass der Unterschied nicht so sehr auf der praktischen Umsetzung (die Änderungen, die wir am Code vorgenommen haben, waren minimal) liegt, sondern auf konzeptioneller Ebene: Die Zustände von Objekten sollten Eigenschaften und keine Methoden sein. In unserem kleinen Beispiel mag dies übertrieben wirken, aber in einem mittelgroßen Projekt könnten selbst kleine konzeptionelle Unklarheiten das Verständnis des Codes erschweren.</p>
+<div class="program">
+<p>Mach aus <span class="program-function">is_airborne</span> eine Eigenschaft. Benutz es als Eigenschaft in <span class="program-filename">code07.py</span>.</p>
+</div>
+</section><section id="eine-lücke-im-hindernis" class="level2" data-number="9.13"><h2 data-number="9.13" class="anchored" data-anchor-id="eine-lücke-im-hindernis">
+<span class="header-section-number">9.13</span> Eine Lücke im Hindernis</h2>
+<p>Unser Ziel im Spiel ist es, dass der Vogel fliegt und Hindernisse vermeidet. Ein Hindernis besteht aus zwei Rechtecken, einem, das von oben herausragt, und einem anderen von unten. Die Lücke zwischen ihnen gibt dem Vogel die Möglichkeit hindurchzufliegen. Also lass uns damit beginnen, einen Code zu schreiben (im Jupyter-Notizbuch), der eine zufällige Lücke generiert, die durch <code>y_bottom</code> und <code>y_top</code> gekennzeichnet ist, basierend auf vier Parametern:</p>
+<ul>
+<li>
+<code>lower_margin</code> : der niedrigste mögliche Standpunkt des Bodens der Öffnung relativ zum Boden des Bildschirms, d.h. <code>y_bottom</code> kann nicht näher an -1 als dieser sein.</li>
+<li>
+<code>upper_margin</code> : der höchste mögliche Standpunkt der Oberseite der Öffnung relativ zur Oberseite des Bildschirms, d.h. <code>y_top</code> kann nicht näher an 1 als dieser sein.</li>
+<li>
+<code>min_size</code> : die minimale Größe der Öffnung, d.h. der minimale Abstand zwischen <code>y_top</code> und <code>y_bottom</code>.</li>
+<li>
+<code>max_size</code> : die maximale Größe der Öffnung, d.h. der maximale Abstand zwischen <code>y_top</code> und <code>y_bottom</code>.</li>
+</ul>
+<p>Schreibe einen Code, der bestimmte Werte für jeden Parameter annimmt (z.B. <code>lower_margin = 0.2</code>, <code>upper_margin = 0.2</code>, <code>min_size = 0.2</code>, <code>max_size = 0.4</code>) und ein zufälliges Paar <code>(y_bottom, y_top)</code> generiert, das die Bedingungen erfüllt.</p>
+<div class="practice">
+<p>Schreibe einen zufälligen Öffnungscode in ein Jupyter-Notizbuch.</p>
+</div>
+</section><section id="ein-hindernis" class="level2" data-number="9.14"><h2 data-number="9.14" class="anchored" data-anchor-id="ein-hindernis">
+<span class="header-section-number">9.14</span> Ein Hindernis</h2>
+<p>Jetzt erstellen wir eine <code>Obstacle</code>-Klasse (setze sie in eine separate Datei). Sie besteht aus zwei Rechtecken, eines ragt von oben und das andere von unten, mit einer zufälligen Öffnung dazwischen. Im Moment benötigst du sechs Einstellungen, um ein <code>Obstacle</code> zu beschreiben: Die vier Parameter, die eine zufällige Öffnung definieren, plus die Breite der Rechtecke und ihre Farbe. Beschreibe sie als separate Gruppe in den Einstellungsdateien (wahrscheinlich unter <code>"Obstacles"</code>) und übergebe sie an den Konstruktor der <code>Obstacle</code>-Klasse.</p>
+<p>Im Konstruktor, erzeuge eine zufällige Öffnung (du hast den Code dafür bereits) und erstelle die beiden Rechtecke, beide <code>width</code> breit, eines von oben bis <code>y_top</code>, das andere von unten bis <code>y_bottom</code>. Platziere beide horizontal am rechten Rand des Fensters, aber so, dass man sie sehen kann. Entscheide, wie du die beiden Rechtecke speichern wirst, du kannst sie in zwei verschiedene Attribute (z.B. <code>upper_rect</code> und <code>lower_rect</code>) oder in einer Liste unterbringen. Ich würde Letzteres vorschlagen, da es deinen zukünftigen Code vereinfachen wird. Überlege, welche Parameter du für die <code>__init__()</code>-Konstruktorfunktion benötigst.</p>
+<p>Du benötigst auch eine <code>draw()</code> Methode, die einfach beide Rechtecke zeichnet. Implementiere die Klasse in einer separaten Datei, dann erstelle und zeichne ein einzelnes Hindernis im Hauptcode, um zu prüfen, ob es richtig aussieht.</p>
+<div class="program">
+<p>Erstelle die <span class="program-function">Obstacle</span>-Klasse in einer separaten Datei. Verwende sie in <span class="program-filename">code08.py</span>.</p>
+</div>
+</section><section id="ein-sich-bewegendes-hindernis" class="level2" data-number="9.15"><h2 data-number="9.15" class="anchored" data-anchor-id="ein-sich-bewegendes-hindernis">
+<span class="header-section-number">9.15</span> Ein sich bewegendes Hindernis</h2>
+<p>Konzepuell fliegt unser Vogel auf ein Hindernis zu, aber stattdessen werden wir die Wahrnehmung seiner Bewegung erzeugen, indem wir die Hindernisse von rechts nach links bewegen. Definiere eine neue <code>Geschwindigkeitseinstellung</code> für eine <code>Obstacle</code>-Klasse, sie sollte in <code>normaleinheiten pro Sekunde</code> sein und erstelle ein <code>update</code>-Verfahren, das die horizontale Position beider Rechtecke basierend auf der vergangenen Zeit zwischen den Aufrufen ändern würde. Dies ist ähnlich wie wir die Position des Vogels basierend auf seiner Geschwindigkeit aktualisiert haben, folge also der gleichen Logik und denke darüber nach, welche zusätzlichen Attribute du benötigst und wie du relevante Informationen speicherst und verwendest.</p>
+<p>Mach <code>update()</code> genau an der Stelle, wo du den Standort des Vogels im Hauptschleife aktualisierst und prüfe, ob das Hindernis von rechts nach links bewegt wird.</p>
+<div class="program">
+<p>Füge die <span class="program-function">update</span>-Methode zur <span class="program-function">Obstacle</span>-Klasse hinzu. Verwende sie in <span class="program-filename">code09.py</span>.</p>
+</div>
+</section><section id="an-der-wand-angelangt" class="level2" data-number="9.16"><h2 data-number="9.16" class="anchored" data-anchor-id="an-der-wand-angelangt">
+<span class="header-section-number">9.16</span> An der Wand angelangt</h2>
+<p>Im Moment fliegt unser Vogel durch das Hindernis, als ob es nicht da wäre. Aber es ist da! Zum Glück für uns macht PsychoPy das Implementieren davon sehr einfach, da es überprüfen kann, ob sich zwei Stimuli überlappen, indem es die Methode <a href="https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps">overlaps()</a> eines von ihnen verwendet (und der zweite Stimulus wird als Argument übergeben).</p>
+<p>Also, um zu prüfen, ob der Vogel die Wand getroffen hat, müssen wir einfach nur eine Methode (nennen wir sie <code>check_if_hit</code>) in einer <code>Obstacle</code>-Klasse erstellen, die ein Vogel-Objekt entgegennimmt und prüft, ob es mit einem der Rechtecke <a href="https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps">overlaps()</a> überlappt. Beachte, dass unser <code>FlappyBird</code> ein Nachfolger von <a href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim">ImageStim</a> ist, also können wir es direkt an die <a href="https://psychopy.org/api/visual/shapestim.html#psychopy.visual.ShapeStim.overlaps">overlaps()</a>-Methode übergeben (Vorteile der Vererbung!).</p>
+<p>Im Hauptspielschleife, fügst du die Überprüfung hinzu, ob der Vogel das Hindernis <em>nicht</em> trifft, zur Hauptbedingung hinzu (jetzt solltest du also drei Dinge überprüfen). Teste deinen Code, indem du den Vogel in die Wand fliegen lässt. Auch indem du deinen Vogel durch die Öffnung fliegen lässt. Beachte, dass du, wenn unsere Einstellungen zu schwierig sind, sie ändern kannst, um die Öffnung größer zu machen.</p>
+<div class="program">
+<p>Füge die <span class="program-function">check_if_hit</span>-Methode zur <span class="program-function">Obstacle</span>-Klasse hinzu. Verwende sie in <span class="program-filename">code10.py</span>.</p>
+</div>
+</section><section id="hindernismanager" class="level2" data-number="9.17"><h2 data-number="9.17" class="anchored" data-anchor-id="hindernismanager">
+<span class="header-section-number">9.17</span> Hindernismanager</h2>
+<p>Ein Spiel mit nur einem Hindernis ist langweilig, aber bevor wir mehr hinzufügen, brauchen wir eine Klasse, die sie für uns verwaltet. Lassen wir sie <code>ObstaclesManager</code> nennen. Im Moment wird sie einfach alle Funktionalität einwickeln, die wir im Hauptskript implementiert haben. Im Konstruktor sollte sie ein <em>Listen</em>-Attribut für Hindernisobjekte erstellen und ein erstes hinzufügen, und sie sollte Methoden <code>draw()</code>, <code>update()</code> und <code>check_if_hit()</code> implementieren, die für <em>alle</em> Hindernisse auf der Liste gezeichnet, aktualisiert und auf eine Überlappung mit einem Vogel überprüft. Im Moment werden wir immer noch nur eines davon in der Liste haben, aber das Implementieren von Dingen in der Schleife bedeutet, dass es einfacher sein wird, mehr hinzuzufügen. Erstelle die Klasse und verwende sie dann im Hauptskript.</p>
+<p>Keine tatsächlichen Änderungen am Spielverlauf, nur eine Code-Umgestaltung. Aber es hilft uns, den Verwaltungsanteil vom Hauptskript zu verstecken (macht es einfacher zu verstehen) und wenn du alles richtig gemacht hast, sollte der Code “einfach funktionieren”, sobald du <code>Obstacle</code> durch ein <code>ObstaclesManager</code>-Objekt ersetzt hast.</p>
+<div class="program">
+<p>Erstelle die <span class="program-function">ObstaclesManager</span>-Klasse. Verwende sie in <span class="program-filename">code11.py</span>.</p>
+</div>
+</section><section id="eine-menge-hindernisse" class="level2" data-number="9.18"><h2 data-number="9.18" class="anchored" data-anchor-id="eine-menge-hindernisse">
+<span class="header-section-number">9.18</span> Eine Menge Hindernisse</h2>
+<p>Jetzt sind wir bereit, weitere Hindernisse hinzuzufügen. Du musst die <code>update</code>-Methode des <code>ObstaclesManager</code> aktualisieren, damit sie nach einem zufälligen Zeitintervall ein neues Hindernis zur Liste hinzufügt. Definiere eine neue Einstellung <code>Zeit bis zum Erscheinen</code>, eine Liste mit zwei Werten, die die minimale und maximale Zeit zwischen den Erscheinungen definieren, und erstelle einen <a href="https://psychopy.org/api/clock.html#psychopy.clock.CountdownTimer">CountdownTimer</a> (oder eine <a href="https://psychopy.org/api/clock.html#psychopy.clock.Clock">Uhr</a>, erinnere dich, dass sie sich nur darin unterscheiden, ob die Zeit subtrahiert oder addiert wird). Sobald der Timer abgelaufen ist, füge ein neues Hindernis zur Liste hinzu, generiere eine neue Verzögerung und setze den Timer erneut. Beachte, dass du jetzt Einstellungen und ein Fenster im <code>update</code> benötigst, da sie zum Erstellen eines neuen Hindernisses erforderlich sind. Überlege dir, wie du sie später im Konstruktor speichern kannst.</p>
+<p>Hast du was im Hauptskript ändern müssen? Achte drauf, dass im Laufe der Zeit mehr Hindernisse auftauchen!</p>
+<div class="program">
+<p>Aktualisiere <span class="program-function">update</span> der Klasse <span class="program-function">ObstaclesManager</span>.</p>
+</div>
+</section><section id="redundante-hindernisse-entfernen" class="level2" data-number="9.19"><h2 data-number="9.19" class="anchored" data-anchor-id="redundante-hindernisse-entfernen">
+<span class="header-section-number">9.19</span> Redundante Hindernisse entfernen</h2>
+<p>Sobald das Hindernis den linken Bildschirmrand passiert hat (seine x-Achsen-Position ist kleiner als <code>-1</code>), müssen wir es aus der Liste entfernen. Andernfalls verschwenden wir viel Zeit und Speicher, indem wir Hindernisse verfolgen und zeichnen, die weder relevant noch sichtbar sind. Überlege dir, wie du das umsetzen würdest, bevor du weiterliest.</p>
+<p>Erstmal müssen wir die horizontale Position eines Hindernisses berechnen. Du kannst sie aus dem <code>pos</code>-Attribut eines der Rechtecke ableiten und die Verwendung dieses Attributs (<code>pos</code> von <code>Obstacle</code>) eines Attributs (<code>obstacles</code> von <code>ObstaclesManager</code>) direkt umsetzen. Aber das Arbeiten mit Attributen von Attributen macht den Code schwerer lesbar und wartbar. Stattdessen füge eine neue berechnete Eigenschaft <code>x</code> zur <code>Obstacle</code>-Klasse hinzu, die eine einzelne Zahl (horizontale Position) zurückgibt, indem du den <code>@property</code>-Dekorator verwendest, den wir für das <code>is_airborne</code>-Dynamikattribut des Vogels verwendet haben.</p>
+<p>Aktualisiere die <code>update</code>-Methode des <code>ObstaclesManager</code>, um die Position des <strong>ersten</strong> Hindernisses in der Liste zu überprüfen. Wenn es kleiner als -1 ist, einfach <a href="https://docs.python.org/3.1/tutorial/datastructures.html">pop</a> es aus der Liste. Warum das erste? Weil jedes andere Hindernis in der Liste später hinzugefügt wurde und daher weiter rechts sein muss. Warum <strong>nur</strong> das erste? Wenn wir eine vernünftige Bewegungsgeschwindigkeit und eine vernünftige Erzeugungsverzögerung voraussetzen, ist es sehr unwahrscheinlich, dass mehr als eines Hindernisses gleichzeitig die linke Kante erreicht.</p>
+<p>Achte drauf, dass du zuerst prüfst, ob das <code>obstacles</code>-Attribut nicht leer ist! Tipp: Eine leere Liste wird direkt in einer bedingten Anweisung als <code>False</code> ausgewertet. Debugge den Code, um sicherzustellen, dass die Hindernisse tatsächlich entfernt werden. Du kannst entweder einen anderen Abbruchpunkt verwenden (z.B. -0.25), um es einfacher zu machen, oder eine Unterbrechung an der Zeile einrichten, an der das überflüssige Hindernis entfernt wird (noch besser, mache beides!).</p>
+<div class="program">
+<p>Aktualisiere <span class="program-function">update</span> der Klasse <span class="program-function">ObstaclesManager</span>.</p>
+</div>
+</section><section id="punkte-zählen" class="level2" data-number="9.20"><h2 data-number="9.20" class="anchored" data-anchor-id="punkte-zählen">
+<span class="header-section-number">9.20</span> Punkte zählen</h2>
+<p>Es ist schwer, mit deinen Vogel-Flugkünsten anzugeben, wenn du nicht weißt, wie viele Hindernisse du durchflogen hast. Lass uns die Punkte hinzufügen! Erstelle eine <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> (nenn sie <code>score_text</code>) und platziere sie irgendwo auf dem Bildschirm, z.B. in der oberen linken oder rechten Ecke. Initialisiere den Text auf <code>"0"</code>. Zeichne sie in der Hauptschleife. Stelle sicher, dass es funktioniert, bevor du fortfährst.</p>
+<p>Um den Score zu halten, müssen wir die Anzahl der Hindernisse zählen, die der Vogel auf jedem Frame überwindet, und sie zum Gesamt-Score hinzufügen. Wie beim Entfernen überflüssiger Hindernisse wird es entweder null oder ein Hindernis sein, das die Mitte des Bildschirms überquert. Aber in diesem Fall müssen wir nicht das linksseitige Hindernis überprüfen, sondern das <em>linksseitige</em> unter denen, die die Mittellinie noch nicht überquert haben. Es gibt verschiedene Wege, wie du das angehen kannst, also denk erstmal darüber nach, wie du es angehen würdest, bevor du weiterliest. Und wenn du eine andere Lösung gefunden hast, nur zu - implementier es!</p>
+<p>Mein Ansatz ist, dem <code>Obstacle</code>-Klass eine neue Eigenschaft <code>scored = False</code> und eine Methode <code>score()</code> hinzuzufügen. In der <code>score()</code>-Methode wird überprüft, ob das Objekt die <code>0</code>-Linie überquert hat <em>und</em> noch nicht bewertet wurde. Wenn ja, wird es als <code>scored</code> markiert und die Methode gibt <code>1</code> zurück. Andernfalls wurde das Objekt entweder bereits bewertet oder hat die Mittellinie noch nicht überquert, also gibt es <code>0</code> zurück. Anschließend habe ich eine <code>score()</code>-Methode für den <code>ObstaclesManager</code> hinzugefügt, die einfach die Gesamtpunktzahl (Summe der Punkte) aller Hindernisse in der Liste berechnet. In dem Hauptskript wird diese Punktzahl einer <code>score</code>-Variablen hinzugefügt, die wiederum verwendet wird, um <code>score_text</code> zu aktualisieren.</p>
+<div class="program">
+<p>Aktualisiere deinen Code und nutze ihn in <span class="program-filename">code12.py</span>.</p>
+</div>
+</section><section id="eine-grundlage" class="level2" data-number="9.21"><h2 data-number="9.21" class="anchored" data-anchor-id="eine-grundlage">
+<span class="header-section-number">9.21</span> Eine Grundlage</h2>
+<p>Das ist nur die Grundlage eines Spiels, also fühle dich frei, es zu erweitern. Animierter Vogel? Schwierigkeitsstufen? Verschiedene Arten von Hindernissen? Highscore-Tabelle?</p>
+
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Nein, das ist kein Déjà-vu, ich wiederhole mich, um dich an die Unterscheidung zu erinnern.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><code>BaseVisualStim</code> definiert tatsächlich nicht die <code>draw()</code>-Methode, sondern nur, dass sie vorhanden sein muss.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Ja, es heißt wirklich “duck typing”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Es gibt mehr spezielle Methoden, die du später lernen wirst, sie alle folgen dem <code>__methodname__()</code>-Konvention.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Wieder kannst du jeden Namen für diesen Parameter verwenden, aber das wird sicherlich alle verwirren.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Tatsächlich werden alle Eigenschaften und Methoden in einem <code>__dict__</code>-Attribut gespeichert, also kannst du <code>number_sum.__dict__["total"]</code> schreiben, um darauf zuzugreifen.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Wenn du einen Linter verwendest, wird er jedes Mal protestieren, wenn er eine Eigenschaft sieht, die nicht im Konstruktor definiert ist<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Erstellt von <a href="https://openclipart.org/artist/Scout">Madison Kingsford</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Beachte, dass du <code>ImageStim</code> zwar aus <code>visual</code> importieren kannst, es ist jedoch besser, seinen Untermodul für die Vererbung anzugeben: <code>visual.image.ImageStim</code>. Die Vererbung funktioniert für <code>ImageStim</code> sogar ohne diesen extra <code>.image</code>-Teil, wird jedoch für einige andere Reize aufgrund des sogenannten “lazy loading” von Klassen nicht funktionieren. Bei diesen anderen Klassen, wie <code>Rect</code>, bekommst du eine sehr mysteriöse Fehlermeldung, daher ist es besser, immer die vollständigen Pfade zur Klasse bei der Vererbung zu verwenden. Du kannst den vollständigen Pfad in der “Details”-Abschnitt der Dokumentation finden. Zum Beispiel ist der vollständige Pfad für die <code>Rect</code>-Klasse <a href="https://psychopy.org/api/visual/rect.html#details">psychopy.visual.rect.Rect</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>D.h., Geschwindigkeit ist eine Ableitung der Position und Beschleunigung ist eine Ableitung der Geschwindigkeit<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/alexander-pastukhov\.github\.io\/learn-python-by-writing-games");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./08-christmas.de.html" class="pagination-link" aria-label="Weihnachts-Spezial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-guitar-hero.de.html" class="pagination-link" aria-label="Guitar Hero">
+        <span class="nav-page-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+</body>
+</html>

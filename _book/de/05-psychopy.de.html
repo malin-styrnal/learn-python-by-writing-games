@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
         </div>
     <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/05-psychopy.html" id="language-link-en">English</a></li></ul>
+<button class="btn btn-primary dropdown-toggle language-selector" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i></button><ul class="dropdown-menu" id="languages-links"><li><a class="dropdown-item" href="https://alexander-pastukhov.github.io/learn-python-by-writing-games/05-psychopy.html" id="language-link-en">English</a></li></ul>
 </div>
 <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
@@ -172,6 +172,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./06-whack-a-mole.de.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Whack-a-Mole</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-memory.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Memory game</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-christmas.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Weihnachts-Spezial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-flappy-bird.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Flappy Bird</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-guitar-hero.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
         
@@ -258,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="klassen-und-objekte" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="klassen-und-objekte">
 <span class="header-section-number">5.3</span> Klassen und Objekte</h2>
 <p>Die PsychoPy-Bibliothek ist eine Sammlung von <em>Klassen</em>, die du verwendest, um <em>Objekte</em> zu erstellen, eine Methode, die als <em>objektorientierte Programmierung</em> bekannt ist. Die Kernidee steckt im Namen: Statt Variablen (Daten) und Funktionen (Aktionen) getrennt zu halten, kombinierst du sie in einem Objekt, das eigene Attribute (Variablen) und Methoden (Funktionen) hat. Diese Methode nutzt unsere natürliche Neigung, die Welt als Sammlung von interagierenden Objekten wahrzunehmen.</p>
-<p>Erstmal musst du den Unterschied zwischen <em>Klassen</em> und <em>Objekten</em> verstehen. Eine <em>Klasse</em> ist sozusagen eine “Bauplan”, das die Eigenschaften und das Verhalten aller Objekte dieser Klasse beschreibt. Dieser “Bauplan” wird verwendet, um ein <em>Exemplar</em> dieser Klasse zu erstellen, das ein <em>Objekt</em> genannt wird. Zum Beispiel ist <em>Homo sapiens</em> eine <em>Klasse</em>, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine <em>Idee</em> von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen “Wie groß ist Homo sapiens?”, sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten, solche realen Handlungen auszuführen. Stattdessen ist Alexander Pastuchow eine <em>Instanz</em> der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Eine Klasse beschreibt also alle gemeinsamen Eigenschaften und Methoden, die alle <em>Instanzen</em> der Klasse (alle Objekte) haben werden. Aber ein einzelnes Objekt wird sich aufgrund der unterschiedlichen Werte seiner Eigenschaften unterschiedlich verhalten. Wenn Sie also einen Homo sapiens treffen, können Sie sicher sein, dass er per se groß ist, aber Sie müssen sich eine individuelle <em>Instanz</em> ansehen, um herauszufinden, welche Größe er hat.</p>
+<p>Erstmal musst du den Unterschied zwischen <em>Klassen</em> und <em>Objekten</em> verstehen. Eine <em>Klasse</em> ist sozusagen eine “Bauplan”, das die Eigenschaften und das Verhalten aller Objekte dieser Klasse beschreibt. Dieser “Bauplan” wird verwendet, um ein <em>Exemplar</em> dieser Klasse zu erstellen, das ein <em>Objekt</em> genannt wird. Zum Beispiel ist <em>Homo sapiens</em> eine <em>Klasse</em>, die Arten beschreibt, die bestimmte Eigenschaften wie Größe haben und bestimmte Dinge tun können, wie zum Beispiel Laufen. Allerdings hat Homo sapiens als Klasse nur eine <em>Idee</em> von Größe, aber keine spezifische Größe selbst. Du kannst also nicht fragen “Wie groß ist Homo sapiens?”, sondern nur, welche durchschnittliche (mittlere, mediane usw.) Größe die Individuen dieser Klasse haben. Genauso wenig kann man sagen: „Lauf, Homo sapiens! Lauf!“, denn abstrakte Konzepte haben Schwierigkeiten, solche realen Handlungen auszuführen. Stattdessen ist Alexander Pastukhov eine <em>Instanz</em> der Klasse Homo sapiens mit einer bestimmten (durchschnittlichen) Größe und einer bestimmten (unterdurchschnittlichen) Fähigkeit zu laufen. Andere Instanzen von Homo sapiens (andere Menschen) haben eine andere Größe und eine andere (typischerweise bessere) Fähigkeit zu laufen. Eine Klasse beschreibt also alle gemeinsamen Eigenschaften und Methoden, die alle <em>Instanzen</em> der Klasse (alle Objekte) haben werden. Aber ein einzelnes Objekt wird sich aufgrund der unterschiedlichen Werte seiner Eigenschaften unterschiedlich verhalten. Wenn Sie also einen Homo sapiens treffen, können Sie sicher sein, dass er per se groß ist, aber Sie müssen sich eine individuelle <em>Instanz</em> ansehen, um herauszufinden, welche Größe er hat.</p>
 <p><code>Window</code> ist eine Klasse, die Eigenschaften beschreibt, die ein PsychoPy-Fenster haben muss, und Aktionen, die es ausführen kann (du kannst die vollständige Liste in <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">der Dokumentation</a> sehen). Um ein Objekt zu erstellen, verwenden wir seine Klassendefinition und speichern das Ergebnis in einer Variablen. Im obigen Code rufen wir die <code>Window</code>-Klasse<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> auf, während wir ihr personalisierte Parameter übergeben (<code>size=(800, 600)</code>) und speichern ein Objekt, das sie zurückgibt, in der Variablen <code>win</code>.</p>
 <p>Attributes sind im Grunde genommen Variablen, die zur Klasse gehören und somit Variablen, die jedes Objekt besitzen wird. Zum Beispiel hat eine <code>Window</code>-Klasse ein <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.size">size</a>-Attribut, das seine Bildschirmgröße in Pixeln bestimmt. Es hat auch (Hintergrund-) <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.color">color</a>, ein Attribut, das bestimmt, ob es im <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.fullscr">Vollbildmodus</a> angezeigt werden soll, usw. Also wird ein <code>win</code>-Objekt alle diese Attribute haben und sie werden spezifische Werte haben.</p>
 <p>Um die Eigenschaften und die Unterscheidung zwischen Klasse/Objekt besser zu verstehen, setze einen Breakpoint auf der dritten Codezeile (<code>event.waitKeys()</code>) und starte den Debugger über <strong>F5</strong>. Sobald das Fenster erstellt wurde, wird die Ausführung pausieren und du wirst ein <code>win</code>-Objekt in <em>Variables/Locals</em> finden. Klicke darauf und es wird sich erweitern, um alle Attribute und ihre Werte anzuzeigen, einschließlich <code>size</code> (stelle sicher, dass es <code>[800, 600]</code> ist). Beachte, dass du <code>Window</code> selbst nicht in der gleichen Liste sehen wirst. Dies liegt daran, dass es eine Klasse ist, ein abstraktes Konzept, während <code>win</code> ihr Instanz und Objekt dieser Klasse ist.</p>
@@ -267,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="arguments-by-position-or-name-de" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="arguments-by-position-or-name-de">
 <span class="header-section-number">5.4</span> Funktionsparameter: Standardwerte, Position oder Name</h2>
 <p>In der <code>visual.Window(size=(800, 600))</code>-Aufrufzeile gibt es noch ein paar interessante Dinge, über die wir sprechen müssen. Diese Merkwürdigkeiten beziehen sich auf Funktionen (und damit auf Methoden, die Funktionen sind, die zu einer Klasse gehören) und nicht auf Klassen an sich. Erstens hat die Konstruktor-Methode der Window-Klasse <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">viele Argumente</a> (wenn wir ein Objekt konstruieren, rufen wir eine Konstruktor-Methode der Klasse auf, deshalb sprechen wir über Funktionen). Und doch haben wir nur eines davon übergeben. Das liegt daran, dass du für einzelne Parameter <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values">Standardwerte</a> festlegen kannst. In diesem Fall wird, wenn ein Parameter weggelassen wird, ein Standardwert verwendet.</p>
-<div id="fe9bf585" class="cell" data-execution_count="1">
+<div id="d98fcbbc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divide(x1, x2<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Teilt Zahlen, verwendet 2 als zweiten Wert, wenn ein zweiter Term weggelassen wird.</span></span>
@@ -292,28 +316,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Wenn du die <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">Dokumentation</a> ansiehst, wirst du sehen, dass für den Window-Klassen-Konstruktor <em>alle</em> Parameter einen Standardwert haben. Das ist ein Teil der PsychoPy-Philosophie, die reichhaltige Anpassungsfähigkeit (schau dir nur die Anzahl der Parameter an!) mit Einfachheit der Benutzung durch sinnvolle Standardwerte verbindet (spezifiziere nichts und das Fenster funktioniert trotzdem).</p>
 <p>Zweitens, wir haben den Wert nicht nur übergeben, sondern auch angegeben, für welchen Parameter dieser Wert bestimmt ist, und zwar über <code>size=(800, 600)</code>. Diese Schreibweise nennt sich <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">Schlüsselwortargumente</a>. Der Vorteil besteht darin, dass es eindeutiger macht, welchen Parameter du einem Wert zuweist. Außerdem kannst du die Parameter in beliebiger Reihenfolge angeben, solange es im Kontext sinnvoll ist<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Wenn du keine Namen verwendest, werden die Werte den einzelnen Parametern basierend auf ihrer <em>Position</em> (auch bekannt als Positionsparameter) zugewiesen. Du kannst sogar beides mischen, aber Positionsparameter müssen zuerst kommen, siehe <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">Dokumentation</a>, wenn du mehr erfahren möchtest.</p>
-<div id="ffdbc958" class="cell" data-execution_count="2">
+<div id="e5bdd7a1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verwendung von Positionsparametern</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, <span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="d06c3afc" class="cell" data-execution_count="3">
+<div id="c3a2ec42" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mit Keyword-Argumenten</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(x2<span class="op">=</span><span class="dv">4</span>, x1<span class="op">=</span><span class="dv">2</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="fb6459a3" class="cell" data-execution_count="4">
+<div id="66bcc1cf" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixen von Positions- und Keyword-Argumenten</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x2<span class="op">=</span><span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="fc186901" class="cell" data-execution_count="5">
+<div id="7fc6ca11" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x1<span class="op">=</span><span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
