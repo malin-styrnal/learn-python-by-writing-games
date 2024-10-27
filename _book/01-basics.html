@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -240,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <a href="#constants">Constants</a>.</li>
 <li>Basic <a href="#value-types">value types</a>.</li>
-<li>Dinge <a href="#print">ausdrucken</a>.</li>
+<li>[Print] things(#print).</li>
 <li>Putting values <a href="#string-formatting">into strings</a>.</li>
 </ul></section><section id="variables" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="variables">
 <span class="header-section-number">1.2</span> Variables</h2>
@@ -281,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do exercise #1.</p>
 </div>
 <p>Note that a variable (“a box with a name tag”) exists only after you assign something to it. So, the following code will generate a <code>NameError</code>, a Python’s way to tell that you it never heard of variable <code>number_of_hands</code>.</p>
-<div id="18cbed44" class="cell" data-execution_count="1">
+<div id="a4985a26" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>number_of_legs <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>number_of_gloves <span class="op">=</span> number_of_hands <span class="op">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -375,21 +381,21 @@ Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
 </section><section id="print" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="print">
 <span class="header-section-number">1.6</span> Printing output</h2>
 <p>To print the value, you need to use <a href="https://docs.python.org/3/library/functions.html#print">print()</a> function (we will talk about functions in general later). In the simplest case, you pass the value and it will be printed out.</p>
-<div id="e64be0d0" class="cell" data-execution_count="2">
+<div id="6bc4e8b0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>or</p>
-<div id="4a32c918" class="cell" data-execution_count="3">
+<div id="4d152c91" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"five"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>five</code></pre>
 </div>
 </div>
 <p>Of course, you already know about the variables, so rather than putting a value directly, you can pass a variable instead and its <em>value</em> will be printed out.</p>
-<div id="2dfe925c" class="cell" data-execution_count="4">
+<div id="bd165027" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>number_of_pancakes <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(number_of_pancakes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -397,7 +403,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
 </div>
 </div>
 <p>or</p>
-<div id="4d84c147" class="cell" data-execution_count="5">
+<div id="7e8e2e4b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>breakfast <span class="op">=</span> <span class="st">"pancakes"</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(breakfast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -405,7 +411,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
 </div>
 </div>
 <p>You can also pass more than one value/variable to the print function and all values will be printed one after another. For example, if we want to tell the user what did I had for breakfast, we can do</p>
-<div id="03a38fa4" class="cell" data-execution_count="6">
+<div id="10784664" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>breakfast <span class="op">=</span> <span class="st">"pancakes"</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>number_of_items <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(breakfast, number_of_items)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -423,7 +429,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
 <p>Do exercise #9.</p>
 </div>
 <p>However, you probably would want to be more explicit, when you print out the information. For example, imagine you have these three variables:</p>
-<div id="34aba451" class="cell" data-execution_count="7">
+<div id="78bae822" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>meal <span class="op">=</span> <span class="st">"breakfast"</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dish <span class="op">=</span> <span class="st">"pancakes"</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -445,7 +451,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[1], line 2</span>
 <code>g</code> for an “optimally” printed float value, so that scientific notation is used for large values (<em>e.g.</em>, <code>10e5</code> instead of <code>100000</code>).</li>
 </ul>
 <p>Here is an example of formatting a string using an integer:</p>
-<div id="053e0cdc" class="cell" data-execution_count="8">
+<div id="6afe7c73" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"I had </span><span class="sc">%d</span><span class="st"> pancakes for breakfast"</span><span class="op">%</span>(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>I had 10 pancakes for breakfast</code></pre>

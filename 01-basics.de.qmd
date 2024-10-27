@@ -1,15 +1,15 @@
-# Python Grundlagen {#python-basics}
+# Python Grundlagen {#python-basics-de}
 Ich hoffe, du hast bereits einen speziellen Ordner für dieses Buch [erstellt](#files-folder). Lade das [Übungsheft](notebooks/01-Basics-de.ipynb) herunter (Alt+Klick sollte es herunterladen statt zu öffnen), lege es in einen Kapitelordner und öffne es, siehe [relevante Anweisungen](#jupyter-notebooks). Du wirst zwischen Erklärungen hier und den Übungen im Heft hin- und herspringen müssen, also halte beide offen.
 
 ## Kapitelkonzepte
 
-* [Variablen](#variablen).
-* [Konstanten](#konstanten).
-* Grundlegende [Werttypen](#werttypen).
-* Dinge [ausgeben](#printen).
-* Werte [in Strings einfügen](#string-formatierung).
+* [Variablen](#variables-de).
+* [Konstanten](#constants-de).
+* Grundlegende [Werttypen](#value-types-de).
+* Dinge [ausgeben](#print-de).
+* Werte [in Strings einfügen](#string-formating-de).
 
-## Variablen {#variablen}
+## Variablen {#variables-de}
 Der erste grundlegende Begriff, den wir uns aneignen müssen, ist die **Variable**. Variablen werden verwendet, um Informationen zu speichern, und man kann sie sich als Kiste mit einem Namensschild vorstellen, damit man etwas darin unterbringen kann. Das Namensschild auf dieser Kiste ist der Name der Variablen und ihr Wert ist das, was man darin speichert. Zum Beispiel können wir eine Variable erstellen, die die Anzahl der Beine eines Spielcharakters speichert. Wir beginnen mit einer für einen Menschen typischen Zahl.
 
 
@@ -113,7 +113,7 @@ x = 3
 Mach Übung #3, um sicherzustellen, dass du das verstanden hast.
 :::
 
-## Konstanten {#konstanten}
+## Konstanten {#constants-de}
 Obwohl die wahre Kraft von Variablen darin besteht, dass du ihren Wert ändern kannst, solltest du sie auch verwenden, wenn der Wert während des entire Programms konstant bleibt. Es gibt keine echten Konstanten in Python, sondern eine Übereinkunft, dass ihre Namen vollständig in `GROSSBUCHSTABEN` geschrieben werden sollten. Entsprechend weißt du, dass du den Wert nicht ändern solltest, wenn du `EINE_DERSELBE_VARIABLE` siehst. Technisch gesehen ist dies nur eine Empfehlung, da niemand dich daran hindern kann, den Wert einer `KONSTANTE` zu ändern. Allerdings stammt ein großer Teil der Leichtigkeit von Python aus solchen Übereinkünften (wie die `schreibweise_mit_unterstrichen` oben). Wir werden später auf mehr solcher Übereinkünfte stoßen, zum Beispiel beim Erlernen von Objekten.
 
 Okay, wenn die Anzahl der Beine während des Spiels konstant bleibt, solltest du diese Konstanz hervorheben und folgendes in Python schreiben:
@@ -127,7 +127,7 @@ Ich empfehle dir dringend, Konstanten zu verwenden und Hardcoden von Werten zu v
 Mach Übung #4.
 :::
 
-## Werttypen {#werttypen}
+## Werttypen {#value-types-de}
 Bisher haben wir nur ganze numerische Werte verwendet (1, 2, 5, 1000...). Obwohl Python [viele verschiedene Werttypen](https://docs.python.org/3/library/stdtypes.html) unterstützt, werden wir uns zunächst auf eine kleine Teilmenge davon konzentrieren:
 
 * Ganze Zahlen, die wir bereits verwendet haben, z.B. `-1`, `100000`, `42`.
@@ -190,7 +190,7 @@ int("123+3")
 Mach Übung #8.
 :::
 
-## Ausgabe drucken {#print}
+## Ausgabe drucken {#print-de}
 Um den Wert auszugeben, musst du die [print()](https://docs.python.org/3/library/functions.html#print)-Funktion verwenden (wir werden später über Funktionen im Allgemeinen sprechen). Im einfachsten Fall gibst du den Wert an und er wird ausgegeben.
 ```{python}
 print(5)
@@ -241,7 +241,7 @@ count = 10
 
 Du könntest natürlich `print(meal, dish, count)` machen, aber es wäre netter, "_Ich hatte **10 Pfannkuchen** zum **Frühstück**_" auszugeben, wobei die fett gedruckten Elemente die Werte der eingefügten Variablen sind. Dafür müssen wir String-Formatierung verwenden. Bitte beachte, dass die String-Formatierung nicht spezifisch für das Ausgeben ist, du kannst einen neuen String-Wert über die Formatierung erstellen und ihn in einer Variablen speichern, ohne ihn auszugeben oder ihn ausgeben, ohne ihn zu speichern.
 
-## Zeichenkettenformatierung {#string-formatting}
+## Zeichenkettenformatierung {#string-formatting-de}
 Eine super Ressource zum Thema Zeichenkettenformatierung in Python ist [pyformat.info](https://pyformat.info/). Da sich Python ständig weiterentwickelt, gibt es jetzt mehr als eine Möglichkeit, Zeichenketten zu formatieren. Im Folgenden werde ich das „alte“ Format vorstellen, das auf der klassischen String-Formatierung basiert, die in der Funktion `sprintf` in C, Matlab, R und vielen anderen Programmiersprachen verwendet wird. Es ist etwas weniger flexibel als die neueren Formate, aber für einfache Aufgaben ist der Unterschied vernachlässigbar. Die Kenntnis des alten Formats ist wegen seiner Allgemeingültigkeit nützlich. Wenn du Alternativen kennenlernen willst, lies den Link oben.
 
 Der allgemeine Aufruf lautet: `„eine Zeichenkette mit Formatierung“%(Tupel von Werten, die bei der Formatierung verwendet werden sollen)`. Du wirst später etwas über Tupel lernen. Für den Moment nehmen wir an, dass es sich nur um eine kommagetrennte Liste von Werten handelt, die in runden Klammern eingeschlossen sind: `(1, 2, 3)`.

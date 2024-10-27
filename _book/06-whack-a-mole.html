@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -209,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#chapter-concepts" id="toc-chapter-concepts" class="nav-link active" data-scroll-target="#chapter-concepts"><span class="header-section-number">6.1</span> Chapter concepts</a></li>
   <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="header-section-number">6.2</span> Lists</a></li>
-  <li><a href="#basic-game-scaffolding" id="toc-basic-game-scaffolding" class="nav-link" data-scroll-target="#basic-game-scaffolding"><span class="header-section-number">6.3</span> Basic game scaffolding</a></li>
+  <li><a href="#psychopy-scaffolding" id="toc-psychopy-scaffolding" class="nav-link" data-scroll-target="#psychopy-scaffolding"><span class="header-section-number">6.3</span> Basic game scaffolding</a></li>
   <li><a href="#three-moles" id="toc-three-moles" class="nav-link" data-scroll-target="#three-moles"><span class="header-section-number">6.4</span> Three moles</a></li>
   <li><a href="#for-loop" id="toc-for-loop" class="nav-link" data-scroll-target="#for-loop"><span class="header-section-number">6.5</span> For loop</a></li>
   <li><a href="#drawing-in-a-loop" id="toc-drawing-in-a-loop" class="nav-link" data-scroll-target="#drawing-in-a-loop"><span class="header-section-number">6.6</span> Drawing in a loop</a></li>
@@ -218,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#clock-wait" id="toc-clock-wait" class="nav-link" data-scroll-target="#clock-wait"><span class="header-section-number">6.9</span> Random time</a></li>
   <li><a href="#repeating-trials" id="toc-repeating-trials" class="nav-link" data-scroll-target="#repeating-trials"><span class="header-section-number">6.10</span> Repeating trials</a></li>
   <li><a href="#waitKeys-maxwait" id="toc-waitKeys-maxwait" class="nav-link" data-scroll-target="#waitKeys-maxwait"><span class="header-section-number">6.11</span> Exit strategy</a></li>
-  <li><a href="#whacking-that-mole" id="toc-whacking-that-mole" class="nav-link" data-scroll-target="#whacking-that-mole"><span class="header-section-number">6.12</span> Whacking that mole</a></li>
+  <li><a href="#whack-mole" id="toc-whack-mole" class="nav-link" data-scroll-target="#whack-mole"><span class="header-section-number">6.12</span> Whacking that mole</a></li>
   <li><a href="#you-did-it" id="toc-you-did-it" class="nav-link" data-scroll-target="#you-did-it"><span class="header-section-number">6.13</span> You did it!</a></li>
   </ul></nav>
 </div>
@@ -269,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do exercise #4.</p>
 </div>
 <p>Slicing can be extended by specifying a <code>step</code> via <code>start:stop:step</code> notation. <code>step</code> can be negative, allowing you to build indexes in the reverse order:</p>
-<div id="c34229af" class="cell" data-execution_count="1">
+<div id="ae291321" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -277,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>However, you must pay attention to the sign of the step. If it goes in the wrong direction then <code>stop</code> cannot be reached, Python will return an empty list.</p>
-<div id="2d12b506" class="cell" data-execution_count="2">
+<div id="146e3182" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[<span class="dv">4</span>:<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -285,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Steps can be combined with omitted and negative indexes. To get every <em>odd</em> element of the list, you write <code>my_pretty_numbers[::2]</code>:</p>
-<div id="6a21fe59" class="cell" data-execution_count="3">
+<div id="58617223" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers[::<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -300,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do exercise #6.</p>
 </div>
 <p>In Python lists are dynamic, so you can always add or remove elements to it, see <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">the list of methods</a>. You can add a new item to the of the end of the list via <code>.append(&lt;new_value&gt;)</code> method</p>
-<div id="20e634e1" class="cell" data-execution_count="4">
+<div id="e86c2a17" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.append(<span class="dv">10</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -309,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Or, you can <code>insert(&lt;index&gt;, &lt;new_value&gt;)</code> <em>before</em> an element with that index. Unfortunately, this means that you can use an arbitrary large index and it will insert a new value as a <em>last</em> element without generating an error.</p>
-<div id="f55f31e7" class="cell" data-execution_count="5">
+<div id="fc2d62a0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">2</span>, <span class="dv">10</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.insert(<span class="dv">500</span>, <span class="dv">20</span>)</span>
@@ -319,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>You can remove an item using its index via <code>pop(&lt;index&gt;)</code>, note that the item is <em>returned</em> as well. If you omit the index, <code>pop()</code> removes the <em>last</em> element of the list. Here, you can only use valid indexes.</p>
-<div id="42f1eaca" class="cell" data-execution_count="6">
+<div id="f4a417c4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>my_pretty_numbers.pop(<span class="dv">3</span>)</span>
@@ -331,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="practice">
 <p>Do exercise #7.</p>
 </div>
-</section><section id="basic-game-scaffolding" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="basic-game-scaffolding">
+</section><section id="psychopy-scaffolding" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="psychopy-scaffolding">
 <span class="header-section-number">6.3</span> Basic game scaffolding</h2>
 <p>Phew that was <em>a lot</em> about lists<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. However, <a href="https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy">All work and no play makes Jack a dull boy</a>! So let us start with a basic PsychoPy scaffolding. Here the code structure:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> libraries (<span class="im">from</span> psychopy)</span>
@@ -353,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="for-loop" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="for-loop">
 <span class="header-section-number">6.5</span> For loop</h2>
 <p>In the code above, we needed to iterate over three moles (circles) that we had in a list. Python has a tool just for that: a <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements">for loop</a> that iterates over the items in any sequence (our list is a sequence!). Here is an example:</p>
-<div id="3c3fac34" class="cell" data-execution_count="7">
+<div id="fdee4238" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">42</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a_number <span class="kw">in</span> numbers:</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of a_number variable on this iteration is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(a_number))</span>
@@ -386,7 +392,7 @@ Value of a_number variable on this iteration is 42
 </section><section id="range" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="range">
 <span class="header-section-number">6.7</span> range() function: Repeating code N times</h2>
 <p>Sometimes, you might need to repeat the code several times. For example, imagine that you have 40 trials in an experiment. Thus, you need to repeat a trial-related code 40 times. You can, of course, build a list 40 items long by hand and iterate over it but Python has a handy <a href="https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#the-range-function">range()</a> function for that. <code>range(N)</code> yields N integers from 0 to N-1 (same up-to-but-not-including rule as for slicing) that you can iterate over in a for loop.</p>
-<div id="1494024e" class="cell" data-execution_count="8">
+<div id="0a374f13" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Value of x is </span><span class="sc">%d</span><span class="st">"</span><span class="op">%</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -396,7 +402,7 @@ Value of x is 2</code></pre>
 </div>
 </div>
 <p>You can modify <a href="https://docs.python.org/3/library/stdtypes.html#range">range()</a> function behavior by providing a starting value and a step size. But in its simplest form <code>range(N)</code> is a handy tool to repeat the code that many times. Note that while you always need to have a temporary variable in a <code>for</code> loop, sometimes you may not use it at all. In cases like this, you should use <code>_</code> (underscore symbol) as a variable name to indicate the lack of use.</p>
-<div id="e435b7a2" class="cell" data-execution_count="9">
+<div id="740d4cf0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I will be repeated twice!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -427,7 +433,7 @@ I will be repeated twice!</code></pre>
 <p>However, Python has a nifty trick called <a href="https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments">Unpacking Argument Lists</a>: You can pass a list of arguments prepended by an asterisk and Python will unpack the list into arguments in the same order they are in the list: first value goes to the parameter, second value to the second parameter, etc. So, in our case, the code can be simplified to</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>random.uniform(<span class="op">*</span>TIME_UNTIL_BEEP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that it is on you to make sure that the number and the order of elements in the list match function parameters!</p>
-<div id="63383646" class="cell" data-execution_count="10">
+<div id="0d078c68" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_parameter_function(x):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Do nothing but require a single paramter</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
@@ -489,7 +495,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[10], line 8</span>
 <div class="program">
 <p>Put your code into <span class="program-filename">code08.py</span>.</p>
 </div>
-</section><section id="whacking-that-mole" class="level2" data-number="6.12"><h2 data-number="6.12" class="anchored" data-anchor-id="whacking-that-mole">
+</section><section id="whack-mole" class="level2" data-number="6.12"><h2 data-number="6.12" class="anchored" data-anchor-id="whack-mole">
 <span class="header-section-number">6.12</span> Whacking that mole</h2>
 <p>We have moles that appear at a random location after a random delay for a random period of time. Now we just need to add an ability to whack ’em! You whack a mole only when it is present. Thus, we only need to modify and handle the <a href="https://psychopy.org/api/event.html#psychopy.event.waitKeys">waitKeys()</a> call for the presentation interval.</p>
 <p>First, create a new constant with three keys that correspond to three locations. I would suggest using <code>["left", "down", "right"]</code>, which are cursor keys<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. Next, you need to use them for the <code>keyList</code> parameter. However, we cannot use this list directly, as we also need the <strong>escape</strong> key. The simplest way is to put “escape” into its own list and concatenate the two lists via <code>+</code>: <code>["escape"] + YOUR_CONSTANT_WITH_KEYS</code>. Do this concatenation directly when you set a value to the <code>keyList</code> in the function call. Before we continue, run the code and test that you can abort the program during the presentation (but not during the blank interval) by pressing any of these three keys. Also check that <strong>escape</strong> still works!</p>

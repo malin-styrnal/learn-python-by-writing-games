@@ -6,7 +6,7 @@ Hopefully, you already [created a special folder](#files-folder) for this book. 
 * [Variables](#variables).
 * [Constants](#constants).
 * Basic [value types](#value-types).
-* Dinge [ausdrucken](#print).
+* [Print] things(#print).
 * Putting values [into strings](#string-formatting).
 
 ## Variables {#variables}

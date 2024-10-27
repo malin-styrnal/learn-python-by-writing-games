@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -261,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">8.3</span> Christmas tree decoration</h2>
 <p>For the decoration, let us use <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> objects of various sizes and color. We could create each one separately with its own custom hard-coded values, but let us instead create three constants that are lists of equal length that describe, respectively position of each ball (<code>BALL_POS</code> would be a good name, each entry should be a tuple of <code>(x, y)</code>), size (<code>BALL_SIZE</code>), and color (<code>BALL_COLOR</code>, stick to <code>"red"</code>, <code>"blue"</code>, and <code>"yellow"</code>, this limited selection of specific colors will be important later when we animate them).</p>
 <p>Create a list of balls by iterating over these three lists. You have two choices, you can either use an index variable, building an index via <a href="https://docs.python.org/3/library/functions.html#func-range">range()</a> using <a href="https://docs.python.org/3/library/functions.html#len">len()</a> of one of the lists (they should all be of the same length). But let’s use a cool trick of iterating over a <a href="https://docs.python.org/3/library/functions.html#zip">zip()</a> of lists. <a href="https://docs.python.org/3/library/functions.html#zip">zip()</a> gives you a tuple combining one element from each list that you can unpack on the fly as in the example below (note that loop variables will receive values in the order that you used for lists).</p>
-<div id="3fc5215f" class="cell" data-execution_count="1">
+<div id="26ccad10" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>  a_number, a_letter <span class="kw">in</span>  <span class="bu">zip</span>(numbers, letters):</span>

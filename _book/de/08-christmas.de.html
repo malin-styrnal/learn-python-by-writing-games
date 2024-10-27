@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -263,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">8.3</span> Weihnachtsbaumschmuck</h2>
 <p>Für den Schmuck verwenden wir <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a>-Objekte in verschiedenen Größen und Farben. Wir könnten jedes separat mit eigenen festcodierten Werten erstellen, aber lass uns stattdessen drei Konstanten erstellen, die Listen gleicher Länge sind, die jeweils die Position jeder Kugel (<code>BALL_POS</code> wäre ein guter Name, jeder Eintrag sollte ein Tupel aus <code>(x, y)</code> sein), die Größe (<code>BALL_SIZE</code>) und die Farbe (<code>BALL_COLOR</code>, bleib bei <code>"rot"</code>, <code>"blau"</code> und <code>"gelb"</code>) beschreiben. Diese begrenzte Auswahl an bestimmten Farben wird später wichtig, wenn wir sie animieren.</p>
 <p>Erstelle eine Liste von Bällen, indem du über diese drei Listen iterierst. Du hast zwei Möglichkeiten: Du kannst entweder eine Indexvariable verwenden und einen Index mit <code>range()</code> mithilfe von <code>len()</code> einer der Listen erstellen (sie sollten alle die gleiche Länge haben). Aber lass uns einen coolen Trick verwenden, indem wir über ein <code>zip()</code> der Listen iterieren. <code>zip()</code> gibt dir ein Tupel, das ein Element aus jeder Liste kombiniert, das du auf der Stelle entpacken kannst, wie im folgenden Beispiel gezeigt (beachte, dass die Schleifenvariablen Werte in der Reihenfolge erhalten, in der du die Listen verwendet hast).</p>
-<div id="945667a6" class="cell" data-execution_count="1">
+<div id="3b770004" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>zahlen <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>buchstaben <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eine_zahl, ein_buchstabe <span class="kw">in</span> <span class="bu">zip</span>(zahlen, buchstaben):</span>
@@ -274,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3: C</code></pre>
 </div>
 </div>
-<p>Du kannst so viele Listen zusammenfassen, wie du willst. Wir wollen natürlich drei. Entscheide dich dafür, ob du <code>balls</code> als leere Liste erstellen und dann jeden neu erstellten <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> in der Schleife hinzufügen möchtest oder <a href="07-memory.de.html#list-comprehension">List Comprehension</a> verwendest. Vergesse nicht, die Bälle zu zeichnen und überlege dir, was du zuerst zeichnen solltest: den Baum oder die Bälle. Experimentiere mit der Position und den Größen, um es perfekt aussehen zu lassen.</p>
+<p>Du kannst so viele Listen zusammenfassen, wie du willst. Wir wollen natürlich drei. Entscheide dich dafür, ob du <code>balls</code> als leere Liste erstellen und dann jeden neu erstellten <a href="https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle">Circle</a> in der Schleife hinzufügen möchtest oder <a href="#list-comprehension">List Comprehension</a> verwendest. Vergesse nicht, die Bälle zu zeichnen und überlege dir, was du zuerst zeichnen solltest: den Baum oder die Bälle. Experimentiere mit der Position und den Größen, um es perfekt aussehen zu lassen.</p>
 <div class="program">
 <p>Mach weiter mit <span class="program-filename">code02.py</span>.</p>
 </div>

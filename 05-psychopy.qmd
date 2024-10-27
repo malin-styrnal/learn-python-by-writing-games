@@ -100,7 +100,7 @@ print(divide(2, x2=4))
 print(divide(2, x1=4))
 ```
 
-## Adding main loop
+## Adding main loop {#psychopy-main-loop}
 Currently, not much is happening in our program. One thing we need to add is a loop in which we can repeatedly draw in a window (and update it via its [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) method), check user input, and perform any other necessary actions.
 
 First, let us add the loop and handling of user inputs (the fun drawing part will be next). The loop goes between opening and closing the window:
@@ -119,7 +119,7 @@ The loop should be repeated until the user presses an _escape_ key and, therefor
 Put your code into [code02.py]{.program-filename}.
 :::
 
-## Adding text message
+## Adding text message {#psychopy-textstim}
 Although we are now running a nice game loop, we still have only a boring gray window to look at. Let us create a text stimulus, which would say "Press escape to exit" and display it during the loop. For this we will use [visual.TextStim](https://psychopy.org/api/visual/textstim.html) class from PsychoPy library.
 
 First, you need to create the `press_escape_text` object (instance of the [TextStim](https://psychopy.org/api/visual/textstim.html class)) before the main loop. There are quite a few parameters that you can play with but minimally, you need to pass the window the text should be displayed in (our `win` variable) and the actual text you want to display (`text="Press escape to exit"`). For all other settings PsychoPy will use its [defaults](#arguments-by-position-or-name) (default font family, color and size, placed right at the windows' center).
@@ -137,7 +137,7 @@ Put your code into [code03.py]{.program-filename}.
 
 Now, you should have a nice, although static, message positioned at the window's center that tells you how you can exit the game. Check out the manual page for [visual.TextStim](https://psychopy.org/api/visual/textstim.html) and try changing it by passing additional parameters to the class call. For example you can change its `color`,  whether text is **bold** and/or _italic_, how it is aligned, etc. However, if you want to change _where_ the text is displayed, read on below.
 
-## Adding a square and placing it _not_ at the center of the window
+## Adding a square and placing it _not_ at the center of the window {#psychopy-rect}
 Now, let us figure out how create and move visuals to an arbitrary location on the screen. In principle, this is very straightforward as every visual stimulus (including [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) we just used) has [pos](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos) property that specifies (you guessed it!) its position within a window. However, to make your life easier, PsychoPy first complicates it by having [**five** (5!) different position units systems](https://psychopy.org/general/units.html).
 
 Before we start exploring the units, let us create a simple white square. The visual class we need is [visual.Rect](https://psychopy.org/api/visual/rect.html). Just like the [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) above, it requires `win` variable (so it knows which window it belongs to), `width` (defaults to 0.5 of those mysterious units), `height` (also defaults to 0.5), `pos` (defaults to (0,0)), `lineColor` (defaults to `white`) and `fillColor` (defaults to `None`). Thus, to get a "standard" white outline square with size of `(0.5, 0.5)` units at `(0, 0)` location you only need pass the `win` variable: `white_square = visual.Rect(win)`. However, on _some_ computers a curious bug prevents PsychoPy from drawing the outline correctly. If you end up staring at an empty screen^[This sometimes was an issue with Intel graphic cards.], add `fillColor="white"` to the call and you should see a filled white square.

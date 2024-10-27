@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -208,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">3.1</span> Kapitelkonzepte</a></li>
-  <li><a href="#while-loop" id="toc-while-loop" class="nav-link" data-scroll-target="#while-loop"><span class="header-section-number">3.2</span> While-Schleife</a></li>
+  <li><a href="#while-loop-de" id="toc-while-loop-de" class="nav-link" data-scroll-target="#while-loop-de"><span class="header-section-number">3.2</span> While-Schleife</a></li>
   <li><a href="#versuche-z%C3%A4hlen" id="toc-versuche-zählen" class="nav-link" data-scroll-target="#versuche-zählen"><span class="header-section-number">3.3</span> Versuche zählen</a></li>
-  <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break"><span class="header-section-number">3.4</span> Abbrechen (und Beenden)</a></li>
+  <li><a href="#break-de" id="toc-break-de" class="nav-link" data-scroll-target="#break-de"><span class="header-section-number">3.4</span> Abbrechen (und Beenden)</a></li>
   <li><a href="#anzahl-der-versuche-begrenzen-via-break" id="toc-anzahl-der-versuche-begrenzen-via-break" class="nav-link" data-scroll-target="#anzahl-der-versuche-begrenzen-via-break"><span class="header-section-number">3.5</span> Anzahl der Versuche begrenzen via break</a></li>
   <li><a href="#richtige-endnachricht" id="toc-richtige-endnachricht" class="nav-link" data-scroll-target="#richtige-endnachricht"><span class="header-section-number">3.6</span> Richtige Endnachricht</a></li>
   <li><a href="#anzahl-der-versuche-begrenzen-ohne-break" id="toc-anzahl-der-versuche-begrenzen-ohne-break" class="nav-link" data-scroll-target="#anzahl-der-versuche-begrenzen-ohne-break"><span class="header-section-number">3.7</span> Anzahl der Versuche begrenzen ohne Break</a></li>
@@ -243,9 +249,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="kapitelkonzepte" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="kapitelkonzepte">
 <span class="header-section-number">3.1</span> Kapitelkonzepte</h2>
 <ul>
-<li>Wiederholenden Code mit einer <a href="#while-schleife">while-Schleife</a>.</li>
-<li>Machen eines <a href="#break">Notausstiegs</a> aus einer Schleife.</li>
-</ul></section><section id="while-loop" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="while-loop">
+<li>Wiederholenden Code mit einer <a href="#while-loop-de">while-Schleife</a>.</li>
+<li>Machen eines <a href="#break-de">Notausstiegs</a> aus einer Schleife.</li>
+</ul></section><section id="while-loop-de" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="while-loop-de">
 <span class="header-section-number">3.2</span> While-Schleife</h2>
 <p>Wenn du etwas wiederholen möchtest, musst du Schleifen verwenden. Es gibt zwei Arten von Schleifen: die <a href="https://docs.python.org/3/reference/compound_stmts.html#the-while-statement">while</a>-Schleife, die <em>solange</em> eine Bedingung wahr ist, wiederholt wird, und die <a href="https://docs.python.org/3/reference/compound_stmts.html#the-for-statement">for</a>-Schleife, die über Elemente iteriert (dazu kommen wir später).</p>
 <p>Die Grundstruktur einer <em>while</em>-Schleife ist</p>
@@ -282,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="program">
 <p>Füge deinen Code in <span class="progam-filename">code02.py</span> ein.</p>
 </div>
-</section><section id="break" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="break">
+</section><section id="break-de" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="break-de">
 <span class="header-section-number">3.4</span> Abbrechen (und Beenden)</h2>
 <p>Der Code innerhalb der <em>while</em>-Schleife wird so lange ausgeführt, wie die Bedingung <code>True</code> ist, und wichtig ist, dass der gesamte Code innerhalb ausgeführt wird, bevor die Bedingung erneut ausgewertet wird. Manchmal möchtest du jedoch früher abbrechen, ohne den restlichen Code auszuführen. Dafür hat Python einen <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">break</a>-Befehl, der das Programm dazu veranlasst, die Schleife sofort zu verlassen, ohne den restlichen Code innerhalb der Schleife auszuführen, damit das Programm mit dem Code <em>nach</em> der Schleife fortfährt.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dieser Code wird vor der Schleife ausgeführt.</span></span>

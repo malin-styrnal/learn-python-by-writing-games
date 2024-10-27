@@ -1,15 +1,15 @@
-# Los geht's mit PsychoPy {#psychopy-basics}
+# Los geht's mit PsychoPy {#psychopy-basics-de}
 
 Bevor wir unser erstes Spiel mit [PsychoPy](https://psychopy.org/) programmieren, müssen wir uns erstmal mit den Grundlagen vertraut machen. Es ist nicht die beste Wahl für die Entwicklung von Spielen, dafür eignen sich [Python Arcade](https://arcade.academy/) oder [PyGame](https://www.pygame.org/) besser. Aber es ist die beste Python-Bibliothek für die Entwicklung psychophysischer Experimente (und das ist es, was wir wollen).
 
 ## Kapitelkonzepte
 
-* Verstehen, wie man [Klassen und Objekte](#klassen-und-objekte) verwendet.
+* Verstehen, wie man [Klassen und Objekte](#classes-and-objects-de) verwendet.
 * Verwenden von [benannten Parametern](#position-oder-name) in Funktionen.
 * Verstehen des PsychoPy [Einheitensystems](#psychopy-einheiten).
 * Verwenden grundlegender Psycho [visueller Reize](#text-nachricht-hinzufügen) und Verwalten von [Benutzereingaben](#lasse-den-quadrat-springen-bei-deinem-befehl).
 
-## Minimal PsychoPy-Code {#minimal-psychopy}
+## Minimal PsychoPy-Code {#minimal-psychopy-de}
 Kopier den folgenden Code in die Datei [code01.py]{.filename} (du hast doch eine neue Mappe für das Kapitel erstellt, oder?):
 ```python
 """
@@ -100,7 +100,7 @@ print(divide(2, x2=4))
 print(divide(2, x1=4))
 ```
 
-## Hauptschleife hinzufügen
+## Hauptschleife hinzufügen {#psychopy-main-loop-de}
 Momentan passiert in unserem Programm nicht viel. Eine Sache, die wir hinzufügen müssen, ist eine Schleife, in der wir wiederholt in ein Fenster zeichnen (und es über seine [flip()](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip)-Methode aktualisieren) können, die Benutzereingabe überprüfen und andere notwendige Aktionen durchführen.
 
 Okay, dann fangen wir mal damit an, die Schleife und die Verarbeitung von Benutzereingaben hinzuzufügen (das lustige Zeichenteil kommt als nächstes). Die Schleife befindet sich zwischen dem Öffnen und Schließen des Fensters:
@@ -119,7 +119,7 @@ Die Schleife sollte wiederholt werden, bis der Benutzer die _Escape_-Taste drüc
 Schreib deinen Code in [code02.py]{.program-filename}.
 :::
 
-## Textnachricht hinzufügen
+## Textnachricht hinzufügen {#psychopy-textstim-de}
 Obwohl wir jetzt eine nette Game-Loop laufen haben, haben wir immer noch nur ein langweiliges graues Fenster, auf das wir schauen können. Lass uns eine Textstimulanz erstellen, die "Escape drücken zum Beenden" sagt und sie während der Schleife anzeigt. Dafür werden wir die [visual.TextStim](https://psychopy.org/api/visual/textstim.html)-Klasse aus der PsychoPy-Bibliothek verwenden.
 
 Erstmal musst du das `press_escape_text`-Objekt (Instanz der [TextStim](https://psychopy.org/api/visual/textstim.html-Klasse)) vor der Hauptschleife erstellen. Es gibt einige Parameter, mit denen du herumspielen kannst, aber mindestens musst du das Fenster, in dem der Text angezeigt werden soll (unsere `win`-Variable), und den tatsächlichen Text, den du anzeigen möchtest (`text="Escape drücken, um zu beenden"`), übergeben. PsychoPy wird für alle anderen Einstellungen seine [Voreinstellungen](#arguments-by-position-or-name) verwenden (Standard-Schriftfamilie, -farbe und -größe, mittig im Fenster platziert).
@@ -138,7 +138,7 @@ Schreib deinen Code in [code03.py]{.program-filename}.
 
 Jetzt solltest du eine nette, wenn auch statische, Nachricht in der Mitte des Fensters haben, die dir zeigt, wie du das Spiel beenden kannst. Schau dir die Handbuchseite für [visual.TextStim](https://psychopy.org/api/visual/textstim.html) an und versuche, es zu ändern, indem du zusätzliche Parameter an den Klassenaufruf übergibst. Zum Beispiel kannst du seine `Farbe`, ob der Text **fett** und/oder _kursiv_ ist, wie er ausgerichtet ist, usw. ändern. Aber wenn du ändern möchtest, _wo_ der Text angezeigt wird, lies weiter unten.
 
-## Ein Quadrat hinzufügen und es _nicht_ in die Mitte des Fensters setzen
+## Ein Quadrat hinzufügen und es _nicht_ in die Mitte des Fensters setzen {#psychopy-rect-de}
 Jetzt müssen wir rausfinden, wie man visuelle Elemente an eine beliebige Stelle auf dem Bildschirm bewegt. Im Grunde ist das sehr einfach, denn jeder visuelle Stimulus (inklusive [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim), das wir gerade verwendet haben) hat eine [pos](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos)-Eigenschaft, die seine Position innerhalb eines Fensters angibt. Aber PsychoPy macht es erstmal komplizierter, indem es **fünf** (5!) verschiedene Positionseinheiten-Systeme hat.
 
 Bevor wir mit den Einheiten loslegen, lass uns ein einfaches weißes Quadrat erstellen. Die Klasse, die wir dafür brauchen, ist [visual.Rect](https://psychopy.org/api/visual/rect.html). Genau wie [TextStim](https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim) benötigt es die `win`-Variable (damit es weiß, zu welchem Fenster es gehört), `width` (standardmäßig 0,5 dieser mysteriösen Einheiten), `height` (auch standardmäßig 0,5), `pos` (standardmäßig (0,0)), `lineColor` (standardmäßig `white`) und `fillColor` (standardmäßig `None`). Also, um ein "standardmäßiges" weißes Quadrat mit der Größe `(0,5, 0,5)` Einheiten an der Position `(0, 0)` zu erhalten, musst du nur die `win`-Variable übergeben: `white_square = visual.Rect(win)`. Allerdings kann es auf _einigen_ Computern zu einem seltsamen Fehler kommen, der PsychoPy daran hindert, den Rahmen korrekt zu zeichnen. Wenn du also auf einen leeren Bildschirm starrst^[Dies war manchmal ein Problem bei Intel-Grafikkarten.], füge `fillColor="white"` zum Aufruf hinzu und du solltest ein ausgefülltes weißes Quadrat sehen.
@@ -151,9 +151,9 @@ Schreib deinen Code in [code04.py]{.program-filename}.
 
 Na, dein Quadrat ist kein richtiges Quadrat? Ich hab's dir ja gesagt: [Fünf Einheitensysteme](https://psychopy.org/general/units.html#units)!
 
-## Fünf Einheitensysteme {#psychopy-einheiten}
+## Fünf Einheitensysteme {#psychopy-units-de}
 
-### Height units {#psychopy-units-height}
+### Height units {#psychopy-units-height-de}
 Mit [height units](https://psychopy.org/general/units.html#height-units) wird alles in den Einheiten der Fensterhöhe angegeben. Die Mitte des Fensters befindet sich bei `(0,0)` und das Fenster verläuft vertikal von `-0.5` bis `0.5`. Die horizontalen Grenzen hängen jedoch vom Seitenverhältnis ab. Für unser 800×600-Fenster (Seitenverhältnis 4:3) verläuft es von -0.666 bis 0.666 (das Fenster ist 1.3333 Fensterhöhen breit). Für ein 600×800-Fenster (Seitenverhältnis 3:4) von -0.375 bis 0.375 (das Fenster ist 0.75 Fensterhöhen breit), für ein quadratisches Fenster 600×600 (Seitenverhältnis 1:1) von -0.5 bis 0.5 (in allen diesen Fällen verläuft es von -0.5 bis 0.5 vertikal). Das bedeutet, dass der tatsächliche Bildschirmabstand für die Einheiten auf beiden Achsen gleich ist. Daher ist ein Quadrat mit `size=(0.5, 0.5)` tatsächlich ein Quadrat (es spannt den gleichen Abstand vertikal und horizontal). Dadurch erleichtern height units das _Größenfestlegen_ von Objekten, machen das _korrekte Platzieren auf der horizontalen Achse_ jedoch schwieriger (da du das Seitenverhältnis kennen musst).
 
 Mach dein Code besser, indem du das Einheitensystem beim Erstellen des Fensters festlegst: `win = visual.Window(..., units="height")`. Spiele mit deinem Code, indem du die Position des Quadrats beim Erstellen festlegst. Du musst nur einen zusätzlichen Parameter `pos=(<x>, <y>)` übergeben.

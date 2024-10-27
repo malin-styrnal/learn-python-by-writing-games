@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -230,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#debugging-a-function" id="toc-debugging-a-function" class="nav-link" data-scroll-target="#debugging-a-function"><span class="header-section-number">4.6</span> Debugging a function</a></li>
   <li><a href="#numpy-docstring" id="toc-numpy-docstring" class="nav-link" data-scroll-target="#numpy-docstring"><span class="header-section-number">4.7</span> Documenting your function</a></li>
   <li><a href="#using-prompt" id="toc-using-prompt" class="nav-link" data-scroll-target="#using-prompt"><span class="header-section-number">4.8</span> Using prompt</a></li>
-  <li><a href="#splitting-interval-in-the-middle" id="toc-splitting-interval-in-the-middle" class="nav-link" data-scroll-target="#splitting-interval-in-the-middle"><span class="header-section-number">4.9</span> Splitting interval in the middle</a></li>
+  <li><a href="#round-function" id="toc-round-function" class="nav-link" data-scroll-target="#round-function"><span class="header-section-number">4.9</span> Splitting interval in the middle</a></li>
   <li><a href="#single-round" id="toc-single-round" class="nav-link" data-scroll-target="#single-round"><span class="header-section-number">4.10</span> Single round</a></li>
   <li><a href="#multiple-rounds" id="toc-multiple-rounds" class="nav-link" data-scroll-target="#multiple-rounds"><span class="header-section-number">4.11</span> Multiple rounds</a></li>
   <li><a href="#playing-again" id="toc-playing-again" class="nav-link" data-scroll-target="#playing-again"><span class="header-section-number">4.12</span> Playing again</a></li>
@@ -258,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><p>Let us program Guess the Number game <em>again</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> but <em>reverse</em> the roles. Now <em>you</em> will pick a number and the computer will guess. Think about the algorithm that a computer could use for this before reading the next paragraph<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>The optimal way to do this is to use the middle of the interval for a guess. This way you rule out <em>half</em> the numbers that are either greater or smaller than your guess (or you guess the number correctly, of course). So, if you know that the number is between 1 and 10, you should split things in the middle, that is picking 5 or 6, as you cannot pick 5.5 (we assume that you can use only integers). If your opponent tells that their number is greater than your pick, you know that it must be somewhere between your guess and the original upper limit, e.g., between 5 and 10. Conversely, if the opponent responds “lower”, the number is the lower limit and your guess, e.g., between 1 and 5. On your next attempt, you pick split the new interval and repeat this until you either guess the number correctly or end up with an interval that contains just one number. Then you do not need to guess anymore.</p>
-<p>To implement this program, you will need to learn about functions, how to document them, and how to use your own libraries. Grab the <a href="notebooks/Guess%20the%20number%20-%20AI.ipynb">exercise notebook</a> before we start!</p>
+<p>To implement this program, you will need to learn about functions, how to document them, and how to use your own libraries. Grab the <a href="notebooks/04-Guess%20the%20number%20-%20AI.ipynb">exercise notebook</a> before we start!</p>
 <section id="chapter-concepts." class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="chapter-concepts.">
 <span class="header-section-number">4.1</span> Chapter concepts.</h2>
 <ul>
@@ -541,7 +547,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="program">
 <p>Put your code into <span class="program-filename">code03.py</span>.</p>
 </div>
-</section><section id="splitting-interval-in-the-middle" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="splitting-interval-in-the-middle">
+</section><section id="round-function" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="round-function">
 <span class="header-section-number">4.9</span> Splitting interval in the middle</h2>
 <p>Let us practice writing functions a bit more. Recall that the computer should use the middle of the interval as a guess. Create a function (let us call it <code>split_interval()</code> or something like that) that takes two parameters — <code>lower_limit</code> and <code>upper_limit</code> — and returns <em>an integer</em> that is closest to the middle of the interval. The only tricky part is how you convert a potentially float number (e.g, when you are trying to find it for the interval 1..10) to an integer. You can use function <a href="https://docs.python.org/3/library/functions.html#int">int()</a> for that. However, read the documentation carefully, as it <em>does not</em> perform a proper rounding (what does it do? read the docs!). Thus, you should <a href="https://docs.python.org/3/library/functions.html#round">round()</a> the number to the closest integer before converting it.</p>
 <p>Write a function, document it, and test it by checking that numbers are correct.</p>

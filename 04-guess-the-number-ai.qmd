@@ -3,7 +3,7 @@ Let us program Guess the Number game _again_^[This is the last time, I promise!]
 
 The optimal way to do this is to use the middle of the interval for a guess. This way you rule out _half_ the numbers that are either greater or smaller than your guess (or you guess the number correctly, of course). So, if you know that the number is between 1 and 10, you should split things in the middle, that is picking 5 or 6, as you cannot pick 5.5 (we assume that you can use only integers). If your opponent tells that their number is greater than your pick, you know that it must be somewhere between your guess and the original upper limit, e.g., between 5 and 10. Conversely, if the opponent responds "lower", the number is the lower limit and your guess, e.g., between 1 and 5. On your next attempt, you pick split the new interval and repeat this until you either guess the number correctly or end up with an interval that contains just one number. Then you do not need to guess anymore.
 
-To implement this program, you will need to learn about functions, how to document them, and how to use your own libraries. Grab the [exercise notebook](notebooks/Guess the number - AI.ipynb) before we start!
+To implement this program, you will need to learn about functions, how to document them, and how to use your own libraries. Grab the [exercise notebook](notebooks/04-Guess the number - AI.ipynb) before we start!
 
 ## Chapter concepts.
 
@@ -334,7 +334,7 @@ In the future, we will be asking about a specific number that is a current guess
 Put your code into [code03.py]{.program-filename}.
 :::
 
-## Splitting interval in the middle
+## Splitting interval in the middle {#round-function}
 Let us practice writing functions a bit more. Recall that the computer should use the middle of the interval as a guess. Create a function (let us call it `split_interval()` or something like that) that takes two parameters --- `lower_limit` and `upper_limit` --- and returns _an integer_ that is closest to the middle of the interval. The only tricky part is how you convert a potentially float number (e.g, when you are trying to find it for the interval 1..10) to an integer. You can use function [int()](https://docs.python.org/3/library/functions.html#int) for that. However, read the documentation carefully, as it _does not_ perform a proper rounding (what does it do? read the docs!). Thus, you should [round()](https://docs.python.org/3/library/functions.html#round) the number to the closest integer before converting it.
 
 Write a function, document it, and test it by checking that numbers are correct.

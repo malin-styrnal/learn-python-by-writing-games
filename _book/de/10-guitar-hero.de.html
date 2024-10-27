@@ -56,6 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./references.de.html" rel="next">
 <link href="./09-flappy-bird.de.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
@@ -223,6 +224,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -326,7 +333,7 @@ window.Quarto = {
 </section><section id="iteratorgenerator-funktionen" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="iteratorgenerator-funktionen">
 <span class="header-section-number">10.8</span> Iterator/Generator-Funktionen</h2>
 <p>Im nächsten Abschnitt werden wir eine <code>TimedResponseTask</code>-Klasse erstellen, die Ziele an einem zufälligen Ort und nach einem zufälligen Intervall generiert. Natürlich könnten wir das direkt in der Klasse machen, aber wo bleibt da der Spaß? Stattdessen nutzen wir diese Gelegenheit, um Iterator/Generator-Funktionen kennenzulernen. Ein Iterator ist eine <em>Funktion</em>, die <code>yield</code> statt <code>return</code> verwendet, um, na ja, <em>einen Wert zu liefern</em>. Sie liefert ihn, weil die Funktion selbst ein Iterator-Objekt zurückgibt, das du in einer for-Schleife oder über die <code>next()</code>-Funktion durchlaufen kannst. Wichtig ist, dass <code>yield</code> die Ausführung der Funktion “einfriert” und beim nächsten Aufruf der Funktion <em>von diesem Punkt</em> weiterläuft, anstatt von Anfang an. Sobald du das Ende der Funktion erreichst, wird automatisch eine <code>StopIteration()</code>-Ausnahme ausgelöst, sodass du dir keine Gedanken darüber machen musst, wie du mitteilen kannst, dass du keine Items mehr hast. Es mag verwirrend klingen, aber es ist wirklich einfach. Hier ein Beispiel, um dies zu veranschaulichen:</p>
-<div id="e59cc4d0" class="cell" data-execution_count="1">
+<div id="90ceb2f6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterator_fun():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">3</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">1</span></span>
@@ -335,10 +342,10 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Die Funktion gibt einen Iterator zurück, keinen Wert!</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iterator_fun())</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;generator object iterator_fun at 0x0000021057359380&gt;</code></pre>
+<pre><code>&lt;generator object iterator_fun at 0x0000025263375380&gt;</code></pre>
 </div>
 </div>
-<div id="a4921bd7" class="cell" data-execution_count="2">
+<div id="99d26f30" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterieren mit einer for-Schleife</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> elem <span class="kw">in</span> iterator_fun():</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(elem)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -348,7 +355,7 @@ window.Quarto = {
 wow!</code></pre>
 </div>
 </div>
-<div id="bc650dde" class="cell" data-execution_count="3">
+<div id="2b34a7df" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterieren mit next(), beachte, dass du ein Iterator-Objekt verwendest,</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># das die Funktion zurückgibt, nicht die Funktion selbst!</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>an_iterator <span class="op">=</span> iterator_fun()</span>
@@ -363,7 +370,7 @@ wow!</code></pre>
 wow!</code></pre>
 </div>
 </div>
-<div id="2645d9dc" class="cell" data-execution_count="4">
+<div id="01a38d8b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beim nächsten Aufruf wird eine Ausnahme StopIteration() ausgelöst</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(iterator_var))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -429,7 +436,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[4], line 2</span>
 <p>Spielen macht mehr Spaß, wenn du sehen kannst, wie gut du bist. Lass uns einen simplen Punkteanzeiger hinzufügen, der sich mit der Antwortpunktzahl aktualisiert. Du weißt bereits, wie du das über den <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>-Stimulus machen kannst, aber du weißt auch, wie du von einer Basisklasse erben und ihre Funktionalität erweitern kannst. Das werden wir hier machen, da die Klasse die Punkte aufzeichnet und anzeigt (diesen Teil übernimmt die Vererbung).</p>
 <p>Erstelle eine neue Klasse (ich habe sie <code>ScoreText</code> genannt), die von <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">visual.text.TextStim</a> erbt. Im Konstruktor musst du ein ganzzahliges Attribut erstellen, das den aktuellen <code>score</code> speichern wird, und es auf 0 initialisieren. Außerdem rufst du den Konstruktor des Vorfahren über <code>super().__init__(...)</code> auf, um den Textstimulus zu initialisieren und zu positionieren (ich habe die linke obere Ecke gewählt). Denk daran, welche Parameter der Konstruktor und der Konstruktor des Vorfahren benötigen.</p>
 <p>Als nächstes müssen wir den Score (sowohl seine numerische Form als auch den Text, den wir zeichnen) jedes Mal aktualisieren, wenn ein Teilnehmer eine Taste drückt. Wir könnten den Code außerhalb der Klasse implementieren, aber das ist keine so gute Idee, da es class-bezogenen Code woanders hinstellt. Wir könnten auch eine “normale” Methode implementieren, z.B. <code>add()</code>, die das übernimmt. Stattdessen werden wir eine <em>spezielle</em> Methode <a href="https://docs.python.org/3/reference/datamodel.html#object.__iadd__"><strong>iadd</strong></a> implementieren, die es ermöglicht, “zu dem Objekt hinzuzufügen”. Sie nimmt einen einzelnen Parameter (neben dem obligatorischen <code>self</code>) entgegen, führt die “Hinzufügung zu self” durch (was auch immer das in Bezug auf dein Objekt bedeutet, kann mathematische Addition für ein Attribut, Konkatenation der Zeichenkette, Hinzufügen zu der Liste sein, etc.) und <strong>gibt die Referenz auf sich selbst zurück</strong>, d.h., es gibt <code>self</code> zurück, nicht den Wert eines beliebigen Attributs! So funktioniert es:</p>
-<div id="fdb8a244" class="cell" data-execution_count="5">
+<div id="66de7053" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AddIt():</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number <span class="op">=</span> <span class="dv">0</span></span>
@@ -445,7 +452,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[4], line 2</span>
 <pre><code>0</code></pre>
 </div>
 </div>
-<div id="df32721f" class="cell" data-execution_count="6">
+<div id="ab053d60" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adder <span class="op">+=</span> <span class="dv">10</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(adder.number)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -919,6 +926,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./references.de.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

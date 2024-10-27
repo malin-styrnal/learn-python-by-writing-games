@@ -1,5 +1,8 @@
 project:
   type: book
+  resources:
+    - references.xlsx
+    - _utils.R
 
 book:
   site-url: https://alexander-pastukhov.github.io/learn-python-by-writing-games
@@ -20,6 +23,7 @@ book:
     - 08-christmas.qmd
     - 09-flappy-bird.qmd
     - 10-guitar-hero.qmd
+    - references.qmd
 
 # bibliography: references.bib
 

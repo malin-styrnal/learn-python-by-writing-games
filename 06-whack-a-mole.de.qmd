@@ -8,10 +8,10 @@ Hol' dir das [Übungsheft](notebooks/06-Whack-a-mole-de.ipynb), bevor wir losleg
 
 ## Kapitelkonzepte
 
-* Viele Dinge in [Listen](#listen) speichern.
-* Über Dinge mit einer [for-Schleife](#for-schleife) iterieren.
-* Eine Reihe von Zahlen mit [range()](#range) erzeugen.
-* [Pause machen](#uhr-warten) und die [Wartezeit auf eine Taste begrenzen](#warteTasten-maxwarten).
+* Viele Dinge in [Listen](#lists-de) speichern.
+* Über Dinge mit einer [for-Schleife](#for-loop-de) iterieren.
+* Eine Reihe von Zahlen mit [range()](#range-de) erzeugen.
+* [Pause machen](#clock-wait-de) und die [Wartezeit auf eine Taste begrenzen](#waitKeys-maxwait-de).
 
 ## Listen {#listen}
 Bis jetzt haben wir Variablen verwendet, um einzelne Werte zu speichern: die Wahl des Computers, die Vermutung des Spielers, die Anzahl der Versuche, das PsychoPy-Fenster-Objekt usw. Aber manchmal müssen wir mehr als einen Wert verwalten. Wir hatten dieses Problem bereits im [Computer-basierten Ratespiel](#guess-the-number-ai), als wir den verbleibenden Zahlenbereich speichern mussten. Wir kamen damit davon, indem wir zwei Variablen verwendeten, eine für die untere und eine für die obere Grenze. Allerdings skaliert dieser Ansatz nicht gut und manchmal wissen wir nicht einmal, wie viele Werte wir speichern müssen. Python's [Listen](https://docs.python.org/3/library/stdtypes.html#lists) sind die Lösung für dieses Problem.
@@ -98,7 +98,7 @@ meine_nette_zahlen
 Mach Übung #7.
 :::
 
-## Grundlegendes Spielgerüst
+## Grundlegendes Spielgerüst {#psychopy-scaffolding-de}
 Puh, das war _eine Menge_ über Listen^[Und wir haben noch nicht einmal an der Oberfläche gekratzt!]. Aber [Arbeit ohne Spiel macht Jack langweilig](https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy)! Also lass uns mit einem grundlegenden PsychoPy-Gerüst beginnen. Hier der Code-Aufbau:
 ```python
 importiere Bibliotheken (von psychopy)
@@ -114,7 +114,7 @@ Versuch's mal von vorne. Ich habe dir ein paar Hinweise hinterlassen, die dir da
 Schreib deinen Code in [code01.py]{.program-filename}.
 :::
 
-## Drei Maulwürfe
+## Drei Maulwürfe {#three-moles-de}
 Lass uns drei Maulwürfe erstellen, die durch [Kreise](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle) dargestellt werden. Erstelle eine neue Liste-Variable `moles` und füge drei Kreise hinein. Einer sollte links sein, einer in der Mitte und einer rechts. Schau dir das Video oben an, um zu sehen, was ich meine. Denke an eine vernünftige Größe (welche [Einheiten](#psychopy-einheiten) erleichtern das Beibehalten des Kreises als Kreis?) und Position. Du kannst auch unterschiedliche Farben für sie verwenden, wie ich es gemacht habe.
 
 Du kannst entweder eine leere Liste erstellen und dann `.append()` verwenden, um Kreise nacheinander hinzuzufügen, oder du kannst eckige Klammern verwenden, um alle drei auf einmal in die Liste zu packen. Dann [draw()](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle.draw) die Kreise, bevor du das Fenster [flippt](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) und auf eine Tasteneingabe wartest. Beachte, dass du sie nacheinander zeichnen musst. Daher benötigst du drei Zeilen für dies, aber der nächste Abschnitt zeigt dir eine einfachere Methode.
@@ -123,7 +123,7 @@ Du kannst entweder eine leere Liste erstellen und dann `.append()` verwenden, um
 Schreib deinen Code in [code02.py]{.program-filename}.
 :::
 
-## For-Schleife{#for-loop}
+## For-Schleife{#for-loop-de}
 In dem obigen Code mussten wir über drei Kreise (Kreise) iterieren, die wir in einer Liste hatten. Python hat genau das richtige Werkzeug dafür: eine
 [For-Schleife](https://docs.python.org/3/tutorial/controlflow.html?highlight=loop#for-statements), die über die Elemente in jeder Sequenz iteriert (unsere Liste ist eine Sequenz!). Hier ist ein Beispiel:
 ```{python}
@@ -257,7 +257,7 @@ Ich hoffe, du hast nicht zu viele Versuche verwendet, denn (auf meinen Rat hin, 
 Schreib deinen Code in [code08.py]{.program-filename}.
 :::
 
-## Maul den Maulwurf
+## Maul den Maulwurf {#whack-mole-de}
 Wir haben Maulwürfe, die an einer zufälligen Stelle nach einer zufälligen Verzögerung für eine zufällige Dauer auftauchen. Jetzt müssen wir nur noch die Fähigkeit hinzufügen, sie zu verprügeln! Du verprügelst einen Maulwurf nur, wenn er da ist. Daher müssen wir nur den Aufruf von [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) für das Präsentationsintervall modifizieren und handhaben.
 
 Erstmal musst du eine neue Konstante mit drei Schlüsseln erstellen, die drei verschiedenen Orten entsprechen. Ich würde vorschlagen, `["left", "down", "right"]` zu verwenden, das sind die Cursortasten^[Willst du dir sicher sein, welche Tasten es sind? Schreib ein kleines Programm, das ein Fenster öffnet und dann immer wieder auf eine Tasteneingabe wartet und die Taste in der Konsole ausgibt.]. Als nächstes musst du sie für den `keyList`-Parameter verwenden. Allerdings können wir diese Liste nicht direkt verwenden, da wir auch die **Escape**-Taste benötigen. Die einfachste Lösung ist, "escape" in eine eigene Liste zu packen und die beiden Listen über `+` zu verketten: `["escape"] + DEINE_KONSTANTE_MIT_TASTEN`. Führe diese Verknüpfung direkt durch, wenn du einen Wert für `keyList` im Funktionsaufruf festlegst. Bevor wir weitermachen, führe den Code aus und teste, ob du das Programm während der Präsentation (aber nicht während der Pause) durch Drücken einer dieser drei Tasten abbrechen kannst. Überprüfe auch, ob **Escape** immer noch funktioniert!

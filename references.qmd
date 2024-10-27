@@ -1,0 +1,35 @@
+# References {-}
+
+```{r get references}
+#| echo: false
+#| warning: false
+#| message: false
+
+source("_utils.R")
+references <- get_references()
+```
+
+## Concepts
+```{r list concepts}
+#| echo: false
+#| warning: false
+#| message: false
+list_references(references, "Concept", TRUE)
+```
+
+## Functions and statements
+```{r list functions and statements}
+#| echo: false
+#| warning: false
+#| message: false
+list_references(references, "Function", FALSE)
+```
+
+## PsychoPy
+```{r list psychopy}
+#| echo: false
+#| warning: false
+#| message: false
+list_references(references, "PsychoPy", FALSE)
+```
+

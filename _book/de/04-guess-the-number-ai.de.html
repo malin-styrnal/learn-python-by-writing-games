@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -263,10 +269,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="kapitelbegriffe." class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="kapitelbegriffe.">
 <span class="header-section-number">4.1</span> Kapitelbegriffe.</h2>
 <ul>
-<li>Schreibe deine eigenen <a href="#funktion">Funktionen</a>.</li>
-<li>Verstehe die <a href="#g%C3%BCltigkeitsbereiche-f%C3%BCr-unver%C3%A4nderliche-werte">Gültigkeitsbereiche</a> von Variablen.</li>
-<li>Verwende <a href="#numpy-dokumentation">Standardmethoden</a> zur Dokumentation deines Codes.</li>
-<li>Verwende deine eigenen <a href="#nutze-deine-eigenen-bibliotheken">Bibliotheken</a>.</li>
+<li>Schreibe deine eigenen <a href="#function-de">Funktionen</a>.</li>
+<li>Verstehe die <a href="#scopes-for-immutable-values-de">Gültigkeitsbereiche</a> von Variablen.</li>
+<li>Verwende <a href="#numpy-docstring-de">Standardmethoden</a> zur Dokumentation deines Codes.</li>
+<li>Verwende deine eigenen <a href="#using-you-own-libraries">Bibliotheken</a>.</li>
 </ul></section><section id="guess-the-number-players-response" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="guess-the-number-players-response">
 <span class="header-section-number">4.2</span> Spielerantwort</h2>
 <p>Lassen wir uns aufwärmen, indem wir einen Code schreiben, der es einem Spieler ermöglicht, auf die Vermutung des Computers zu reagieren. Denke daran, dass es nur drei Optionen gibt: deine Zahl ist größer, kleiner oder gleich der Vermutung des Computers. Ich würde vorschlagen, die Symbole <code>&gt;</code>, <code>&lt;</code> und <code>=</code> zu verwenden, um dies mitzuteilen. Du musst den Code schreiben, der den Spieler nach seiner Antwort fragt, bis er eines dieser Symbole eingibt. D.h., die Eingabeaufforderung sollte wiederholt werden, wenn er etwas anderes eingibt. Also brauchst du auf jeden Fall die <a href="https://docs.python.org/3/library/functions.html#input">input([prompt])</a>-Funktion und eine <a href="#while-schleife">while</a>-Schleife. Denke dir eine nützliche und informative Promptnachricht dafür aus. Teste, ob es funktioniert. Das Setzen von Breakpoints kann hier sehr nützlich sein.</p>
@@ -556,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="mehrere-runden" class="level2" data-number="4.11"><h2 data-number="4.11" class="anchored" data-anchor-id="mehrere-runden">
 <span class="header-section-number">4.11</span> Mehrere Runden</h2>
-<p>Erweitere das Spiel, damit der Computer immer weiter rät, bis er schließlich gewinnt. Du weißt bereits, wie man die <a href="03-guess-the-number-multi-round.de.html#while-loop">while-Schleife</a> verwendet, überlege dir nur, wie man die Antwort des Teilnehmers als Bedingungsvariable für die Schleife verwenden kann. Denke auch über den Anfangswert dieser Variablen nach und wie man ihn verwendet, damit man <code>input_response()</code> nur an einer Stelle aufruft.</p>
+<p>Erweitere das Spiel, damit der Computer immer weiter rät, bis er schließlich gewinnt. Du weißt bereits, wie man die <a href="#while-loop">while-Schleife</a> verwendet, überlege dir nur, wie man die Antwort des Teilnehmers als Bedingungsvariable für die Schleife verwenden kann. Denke auch über den Anfangswert dieser Variablen nach und wie man ihn verwendet, damit man <code>input_response()</code> nur an einer Stelle aufruft.</p>
 <div class="program">
 <p>Schreib den aktualisierten Code in <span class="program-filename">code06.py</span>.</p>
 </div>

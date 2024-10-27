@@ -56,6 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
 <link href="./09-flappy-bird.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
@@ -223,6 +224,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -325,7 +332,7 @@ window.Quarto = {
 </section><section id="iteratorgenerator-functions" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="iteratorgenerator-functions">
 <span class="header-section-number">10.8</span> Iterator/Generator functions</h2>
 <p>In the next section, we will create a <code>TimedResponseTask</code> class that will generate targets at a random location and after a random interval. We can, of course, do it directly in the class but where’s fun in that?! Instead, we will use this as an opportunity to learn about iterator/generator functions. An iterator is a <em>function</em> that uses <code>yield</code> instead of <code>return</code> statement to, well, <em>yield</em> a value. It <em>yields</em> it, because the function itself <em>returns</em> an iterator object that you can iterate over in a for loop or via <code>next()</code> function. Importantly, <code>yield</code> “freezes” execution of the function and the next time you call the function <em>it continues from that point</em> rather than from the start of the function. Once you reach the end of the function, it automatically raises <code>StopIteration()</code> exception, so you don’t need to worry about how to communicate that you ran out of items. It may sound confusing but it is really simple. Here an example to illustrate this:</p>
-<div id="eb37ea63" class="cell" data-execution_count="1">
+<div id="6bdbdcf7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterator_fun():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">3</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> <span class="dv">1</span></span>
@@ -334,10 +341,10 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># function returns an iterator, not a value!</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iterator_fun())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;generator object iterator_fun at 0x0000018ED6195590&gt;</code></pre>
+<pre><code>&lt;generator object iterator_fun at 0x0000021DD9609590&gt;</code></pre>
 </div>
 </div>
-<div id="b719f3ee" class="cell" data-execution_count="2">
+<div id="376b798c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterating via for loop</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> elem <span class="kw">in</span> iterator_fun():</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(elem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -347,7 +354,7 @@ window.Quarto = {
 wow!</code></pre>
 </div>
 </div>
-<div id="d7c4b3b1" class="cell" data-execution_count="3">
+<div id="7db719d4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterating via next(), note you use an iterator object </span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># that function returned, not the function itself!</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>an_iterator <span class="op">=</span> iterator_fun()  </span>
@@ -362,7 +369,7 @@ wow!</code></pre>
 wow!</code></pre>
 </div>
 </div>
-<div id="78be291a" class="cell" data-execution_count="4">
+<div id="af9f5b52" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># next call will raise an exception StopIteration()</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(iterator_var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -428,7 +435,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[4], line 2</span>
 <p>Playing is more fun when you can see how well you are doing. Let us add a simple score indicator that is updated with response score. You already know how you can do it via <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> stimulus but you also already know how you can inherit from a base class and extend its functionality. This is what we will do here, as the class will record and draw the score (that part is covered by the inheritance).</p>
 <p>Create a new class (I have called it <code>ScoreText</code>) that inherits from <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>. In the constructor, you need to create an integer attribute that will hold current <code>score</code> and initialize it 0. Plus, call ancestor’s constructor via <code>super().__init__(...)</code> to initialize and place the text stimulus (I’ve picked top left corner). Think about parameters that the constructor and ancestor’s constructor need.</p>
 <p>Next, we need to update the score (both its numeric form <em>and</em> the text that we draw) every time participant presses a key. We could implement the code <em>outside</em> of the class but that is a fairly bad idea, as it puts class-related code elsewhere. We could also implement a “normal” method, e.g., <code>add()</code> that will take care of that. Instead, we will implement a <em>special</em> method <a href="https://docs.python.org/3/reference/datamodel.html#object.__iadd__"><strong>iadd</strong></a> that allows to “add to” the object. It takes a single parameter (in addition to the compulsory <code>self</code>, of course), performs “adding to the self” operation (whatever that means with respect to your object, can be mathematical addition for an attribute, concatenation of the string, adding to the list, etc.), and <strong>returns back the reference to itself</strong>, i.e., returns <code>self</code> not a value of any attribute! Here’s how it works:</p>
-<div id="98f26395" class="cell" data-execution_count="5">
+<div id="fae4c12a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AddIt():</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number <span class="op">=</span> <span class="dv">0</span></span>
@@ -444,7 +451,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[4], line 2</span>
 <pre><code>0</code></pre>
 </div>
 </div>
-<div id="2e87a0d0" class="cell" data-execution_count="6">
+<div id="1608539f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adder <span class="op">+=</span> <span class="dv">10</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(adder.number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -918,6 +925,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

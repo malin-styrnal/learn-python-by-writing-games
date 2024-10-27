@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -210,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#minimal-psychopy" id="toc-minimal-psychopy" class="nav-link" data-scroll-target="#minimal-psychopy"><span class="header-section-number">5.2</span> Minimal PsychoPy code</a></li>
   <li><a href="#classes-and-objects" id="toc-classes-and-objects" class="nav-link" data-scroll-target="#classes-and-objects"><span class="header-section-number">5.3</span> Classes and objects</a></li>
   <li><a href="#arguments-by-position-or-name" id="toc-arguments-by-position-or-name" class="nav-link" data-scroll-target="#arguments-by-position-or-name"><span class="header-section-number">5.4</span> Function parameters: default values, passing by position or by name</a></li>
-  <li><a href="#adding-main-loop" id="toc-adding-main-loop" class="nav-link" data-scroll-target="#adding-main-loop"><span class="header-section-number">5.5</span> Adding main loop</a></li>
-  <li><a href="#adding-text-message" id="toc-adding-text-message" class="nav-link" data-scroll-target="#adding-text-message"><span class="header-section-number">5.6</span> Adding text message</a></li>
-  <li><a href="#adding-a-square-and-placing-it-not-at-the-center-of-the-window" id="toc-adding-a-square-and-placing-it-not-at-the-center-of-the-window" class="nav-link" data-scroll-target="#adding-a-square-and-placing-it-not-at-the-center-of-the-window"><span class="header-section-number">5.7</span> Adding a square and placing it <em>not</em> at the center of the window</a></li>
+  <li><a href="#psychopy-main-loop" id="toc-psychopy-main-loop" class="nav-link" data-scroll-target="#psychopy-main-loop"><span class="header-section-number">5.5</span> Adding main loop</a></li>
+  <li><a href="#psychopy-textstim" id="toc-psychopy-textstim" class="nav-link" data-scroll-target="#psychopy-textstim"><span class="header-section-number">5.6</span> Adding text message</a></li>
+  <li><a href="#psychopy-rect" id="toc-psychopy-rect" class="nav-link" data-scroll-target="#psychopy-rect"><span class="header-section-number">5.7</span> Adding a square and placing it <em>not</em> at the center of the window</a></li>
   <li>
 <a href="#psychopy-units" id="toc-psychopy-units" class="nav-link" data-scroll-target="#psychopy-units"><span class="header-section-number">5.8</span> Five unit systems</a>
   <ul class="collapse">
@@ -290,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="arguments-by-position-or-name" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="arguments-by-position-or-name">
 <span class="header-section-number">5.4</span> Function parameters: default values, passing by position or by name</h2>
 <p>There are a few more curious bits in the <code>visual.Window(size=(800, 600))</code> call above that we need to discuss. These curiosities are related to functions (and, therefore, methods that are functions that belong to a class) not classes per se. First, constructor method of the Window class has <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">a lot of arguments</a> (when we construct an object, we call a constructor <em>method</em> of the class, which is why we are talking about functions). And yet, we only passed one of them. This is because you can specify <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values">default values</a> for individual parameters. In this case, if a parameter is omitted, a default value is used instead</p>
-<div id="cf2dba3d" class="cell" data-execution_count="1">
+<div id="eb8524cc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divide(x1, x2<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Divides numbers, uses 2 as a second value if a second term is omitted.</span></span>
@@ -315,28 +321,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>If you look at <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">documentation</a>, you will see that for the Window class constructor <em>all</em> parameters have a default value. This is a part of PsychoPy’s philosophy of combining rich customization (just look at the sheer number of parameters!) with simplicity of use through sensible defaults (specify nothing and the window will still work).</p>
 <p>Second, we did not just pass the value but specified which parameter this value is for via <code>size=(800, 600)</code>. This notation is called <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">keyword arguments</a>. The advantage is in making it more explicit which parameter you are passing a value through. Plus, it allows you to put parameters any order, if that is more relevant given the context<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. If you do not use names, the values are assigned to individual parameters based on their <em>position</em> (a.k.a. positional parameters). You can even mix the two, but positional parameters must come first, see <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">documentation</a> if you want to know more.</p>
-<div id="64692e7c" class="cell" data-execution_count="2">
+<div id="df5b4217" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using positional parameters</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="4aa22b9b" class="cell" data-execution_count="3">
+<div id="75e3f073" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using keyword arguments</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(x2<span class="op">=</span><span class="dv">4</span>, x1<span class="op">=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="67d6df81" class="cell" data-execution_count="4">
+<div id="496c2036" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mixing positional and keyword arguments</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x2<span class="op">=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="514aec7c" class="cell" data-execution_count="5">
+<div id="343b75b6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x1<span class="op">=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -349,7 +355,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 </div>
 </div>
 </div>
-</section><section id="adding-main-loop" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="adding-main-loop">
+</section><section id="psychopy-main-loop" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="psychopy-main-loop">
 <span class="header-section-number">5.5</span> Adding main loop</h2>
 <p>Currently, not much is happening in our program. One thing we need to add is a loop in which we can repeatedly draw in a window (and update it via its <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip()</a> method), check user input, and perform any other necessary actions.</p>
 <p>First, let us add the loop and handling of user inputs (the fun drawing part will be next). The loop goes between opening and closing the window:</p>
@@ -363,7 +369,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <div class="program">
 <p>Put your code into <span class="program-filename">code02.py</span>.</p>
 </div>
-</section><section id="adding-text-message" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="adding-text-message">
+</section><section id="psychopy-textstim" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="psychopy-textstim">
 <span class="header-section-number">5.6</span> Adding text message</h2>
 <p>Although we are now running a nice game loop, we still have only a boring gray window to look at. Let us create a text stimulus, which would say “Press escape to exit” and display it during the loop. For this we will use <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a> class from PsychoPy library.</p>
 <p>First, you need to create the <code>press_escape_text</code> object (instance of the <a href="https://psychopy.org/api/visual/textstim.html%20class">TextStim</a>) before the main loop. There are quite a few parameters that you can play with but minimally, you need to pass the window the text should be displayed in (our <code>win</code> variable) and the actual text you want to display (<code>text="Press escape to exit"</code>). For all other settings PsychoPy will use its <a href="#arguments-by-position-or-name">defaults</a> (default font family, color and size, placed right at the windows’ center).</p>
@@ -374,7 +380,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <p>Put your code into <span class="program-filename">code03.py</span>.</p>
 </div>
 <p>Now, you should have a nice, although static, message positioned at the window’s center that tells you how you can exit the game. Check out the manual page for <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a> and try changing it by passing additional parameters to the class call. For example you can change its <code>color</code>, whether text is <strong>bold</strong> and/or <em>italic</em>, how it is aligned, etc. However, if you want to change <em>where</em> the text is displayed, read on below.</p>
-</section><section id="adding-a-square-and-placing-it-not-at-the-center-of-the-window" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="adding-a-square-and-placing-it-not-at-the-center-of-the-window">
+</section><section id="psychopy-rect" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="psychopy-rect">
 <span class="header-section-number">5.7</span> Adding a square and placing it <em>not</em> at the center of the window</h2>
 <p>Now, let us figure out how create and move visuals to an arbitrary location on the screen. In principle, this is very straightforward as every visual stimulus (including <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> we just used) has <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos">pos</a> property that specifies (you guessed it!) its position within a window. However, to make your life easier, PsychoPy first complicates it by having <a href="https://psychopy.org/general/units.html"><strong>five</strong> (5!) different position units systems</a>.</p>
 <p>Before we start exploring the units, let us create a simple white square. The visual class we need is <a href="https://psychopy.org/api/visual/rect.html">visual.Rect</a>. Just like the <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> above, it requires <code>win</code> variable (so it knows which window it belongs to), <code>width</code> (defaults to 0.5 of those mysterious units), <code>height</code> (also defaults to 0.5), <code>pos</code> (defaults to (0,0)), <code>lineColor</code> (defaults to <code>white</code>) and <code>fillColor</code> (defaults to <code>None</code>). Thus, to get a “standard” white outline square with size of <code>(0.5, 0.5)</code> units at <code>(0, 0)</code> location you only need pass the <code>win</code> variable: <code>white_square = visual.Rect(win)</code>. However, on <em>some</em> computers a curious bug prevents PsychoPy from drawing the outline correctly. If you end up staring at an empty screen<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, add <code>fillColor="white"</code> to the call and you should see a filled white square.</p>

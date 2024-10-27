@@ -97,7 +97,7 @@ my_pretty_numbers
 Do exercise #7.
 :::
 
-## Basic game scaffolding
+## Basic game scaffolding {#psychopy-scaffolding}
 Phew that was _a lot_ about lists^[And we barely scratched the surface!]. However, [All work and no play makes Jack a dull boy](https://en.wikipedia.org/wiki/All_work_and_no_play_makes_Jack_a_dull_boy)! So let us start with a basic PsychoPy scaffolding. Here the code structure:
 ```python
 import libraries (from psychopy)
@@ -113,7 +113,7 @@ Try doing it from scratch. I have left hints to help you with this and you can a
 Put your code into [code01.py]{.program-filename}.
 :::
 
-## Three moles
+## Three moles {#three-moles}
 Let us create three moles that will be represented by [circles](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle). Create a new list variable `moles` and put three circles into it. One should go to the left, one dead center, and one to the right. Watch a video above to see what I mean. Think of a reasonable size (which [units](#psychopy-units) make keeping circle a circle easier?) and position. You can also use different colors for them, as I did.
 
 You can either create an empty list and then `.append()` circles one at a time or you can use square brackets to put all three of them into the list in one go. Then [draw()](https://psychopy.org/api/visual/circle.html#psychopy.visual.circle.Circle.draw) circles before you [flip](https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip) the window and wait for a key press. Note that you have to draw them one at a time. Therefore, you will need to add three lines for this but the next section will show you an easier way.
@@ -257,7 +257,7 @@ I hope that you used a small number of trials because (on my advice, yes!) we di
 Put your code into [code08.py]{.program-filename}.
 :::
 
-## Whacking that mole
+## Whacking that mole {#whack-mole}
 We have moles that appear at a random location after a random delay for a random period of time. Now we just need to add an ability to whack 'em! You whack a mole only when it is present. Thus, we only need to modify and handle the [waitKeys()](https://psychopy.org/api/event.html#psychopy.event.waitKeys) call for the presentation interval. 
 
 First, create a new constant with three keys that correspond to three locations. I would suggest using `["left", "down", "right"]`, which are cursor keys^[Want to know key codes for sure? Write a small program that opens a window and then repeatedly waits for any key press and prints out into console.]. Next, you need to use them for the `keyList` parameter. However, we cannot use this list directly, as we also need the **escape** key. The simplest way is to put "escape" into its own list and concatenate the two lists via `+`: `["escape"] + YOUR_CONSTANT_WITH_KEYS`. Do this concatenation directly when you set a value to the `keyList` in the function call. Before we continue, run the code and test that you can abort the program during the presentation (but not during the blank interval) by pressing any of these three keys. Also check that **escape** still works!

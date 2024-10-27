@@ -164,6 +164,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -173,21 +179,21 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#install-psychopy" id="toc-install-psychopy" class="nav-link active" data-scroll-target="#install-psychopy">PsychoPy</a></li>
-  <li><a href="#install-vs-code" id="toc-install-vs-code" class="nav-link" data-scroll-target="#install-vs-code">VS Code</a></li>
+<li><a href="#install-psychopy-de" id="toc-install-psychopy-de" class="nav-link active" data-scroll-target="#install-psychopy-de">PsychoPy</a></li>
+  <li><a href="#install-vs-code-de" id="toc-install-vs-code-de" class="nav-link" data-scroll-target="#install-vs-code-de">VS Code</a></li>
   <li>
-<a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a>
+<a href="#jupyter-notebooks-de" id="toc-jupyter-notebooks-de" class="nav-link" data-scroll-target="#jupyter-notebooks-de">Jupyter Notebooks</a>
   <ul class="collapse">
 <li><a href="#jupyter-notebooks-in-vs-code" id="toc-jupyter-notebooks-in-vs-code" class="nav-link" data-scroll-target="#jupyter-notebooks-in-vs-code">Jupyter Notebooks in VS Code</a></li>
   <li><a href="#jupyter-notebooks-in-anaconda" id="toc-jupyter-notebooks-in-anaconda" class="nav-link" data-scroll-target="#jupyter-notebooks-in-anaconda">Jupyter Notebooks in Anaconda</a></li>
   </ul>
 </li>
-  <li><a href="#files-folder" id="toc-files-folder" class="nav-link" data-scroll-target="#files-folder">Mach’s sauber</a></li>
+  <li><a href="#files-folder-de" id="toc-files-folder-de" class="nav-link" data-scroll-target="#files-folder-de">Mach’s sauber</a></li>
   </ul></nav>
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="software.de" class="quarto-section-identifier">Software</span></h1>
+<h1 class="title"><span id="software-de" class="quarto-section-identifier">Software</span></h1>
 </div>
 
 
@@ -208,21 +214,21 @@ ul.task-list li input[type="checkbox"] {
 <li>Jupyter Notebook zum Ausprobieren kleiner Code-Schnipsel.</li>
 </ul>
 <p>Ich werde keine detaillierten Anweisungen geben, wie man die notwendige Software installiert, sondern verweise stattdessen auf die offiziellen Handbücher. Dies macht diesen Text zukunftssicherer, da sich spezifische Details schnell ändern können.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<section id="install-psychopy" class="level2"><h2 class="anchored" data-anchor-id="install-psychopy">PsychoPy</h2>
+<section id="install-psychopy-de" class="level2"><h2 class="anchored" data-anchor-id="install-psychopy-de">PsychoPy</h2>
 <p>Wenn du Windows nutzt, lade und installiere die <a href="https://www.psychopy.org/download.html">Standalone PsychoPy</a> Version herunter. Nimm einfach die neueste (und beste) PsychoPy Version, die dir empfohlen wird (Stand PsychoPy 2024.2.3 mit Python 3.10) und folge den Anweisungen.</p>
 <p>Wenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den <a href="https://www.psychopy.org/download.html#manual-installations">aktualen Anweisungen</a>.</p>
-</section><section id="install-vs-code" class="level2"><h2 class="anchored" data-anchor-id="install-vs-code">VS Code</h2>
+</section><section id="install-vs-code-de" class="level2"><h2 class="anchored" data-anchor-id="install-vs-code-de">VS Code</h2>
 <p><a href="https://code.visualstudio.com/">Visual Studio Code</a> ist ein kostenloser, leichter und offener Quellcode-Editor mit starker Unterstützung für Python. Lade den Installer für deine Plattform herunter und folge den Anweisungen.</p>
 <p>Nächster Schritt: Folge dem Tutorial <a href="https://code.visualstudio.com/docs/python/python-tutorial">Erste Schritte mit Python in VS Code</a>. Wenn du Windows und die standalone PsychoPy-Installation verwendest, <strong>überspringe</strong> den Abschnitt <em>Installiere einen Python-Interpreter</em>, da du bereits eine Python-Installation mit PsychoPy hast. Dies ist der Interpreter, den du im Abschnitt <em>Wähle einen Python-Interpreter</em> verwenden solltest. In meinem Fall ist der Pfad <code>C:\Program Files\PsychoPy\python.exe</code>.</p>
 <p>Installiere und aktiviere einen Linter, eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode hervorhebt. Folge der <a href="https://code.visualstudio.com/docs/python/linting">Anleitung</a> auf der VS Code-Website.</p>
-</section><section id="jupyter-notebooks" class="level2"><h2 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h2>
+</section><section id="jupyter-notebooks-de" class="level2"><h2 class="anchored" data-anchor-id="jupyter-notebooks-de">Jupyter Notebooks</h2>
 <p><a href="https://jupyter.org/">Jupyter Notebooks</a> bieten eine super bequeme Möglichkeit, Text, Abbildungen und Code in einem einzigen Dokument zu vermischen. Sie erleichtern es auch, verschiedene kleine Snippets parallel auszuprobieren, ohne Skripte auszuführen. Wir werden sie für unser erstes Kapitel und gelegentliche Übungen oder Code-Tests später verwenden. Du kannst sie auf zwei Arten nutzen: 1) in VS Code unter Verwendung der Jupyter-Erweiterung, 2) im Browser unter Verwendung der klassischen Schnittstelle.</p>
 <section id="jupyter-notebooks-in-vs-code" class="level3"><h3 class="anchored" data-anchor-id="jupyter-notebooks-in-vs-code">Jupyter Notebooks in VS Code</h3>
 <p>Lies <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">die Anleitung</a> darüber, wie du das Jupyter-Paket installierst und Notebooks in VS Code verwendest.</p>
 </section><section id="jupyter-notebooks-in-anaconda" class="level3"><h3 class="anchored" data-anchor-id="jupyter-notebooks-in-anaconda">Jupyter Notebooks in Anaconda</h3>
 <p>Die einfachste Möglichkeit, Jupyter Notebooks zusammen mit vielen anderen nützlichen Datenwissenschaft-Tools zu verwenden, ist das <a href="https://www.anaconda.com/products/individual">Anaconda</a>-Toolkit. Beachte jedoch, dass dies eine <em>zweite</em> Python-Verteilung auf deinem System einführt. Dies kann zu Verwirrung führen, wenn du mit Skripten in VS Code arbeitest, wenn zufällig der Anaconda-Interpreter aktiv ist, anstatt der PsychoPy-Interpreter. Keine Panik, folge den Anweisungen unter <a href="https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter">Wähle einen Python-Interpreter</a> und stelle sicher, dass der PsychoPy-Interpreter aktiv ist.</p>
 <p>Okay, dann lade und installiere Anaconda herunter. Die Website hat einen super <a href="https://docs.anaconda.com/anaconda/user-guide/getting-started/">Einstieg</a> Abschnitt.</p>
-</section></section><section id="files-folder" class="level2"><h2 class="anchored" data-anchor-id="files-folder">Mach’s sauber</h2>
+</section></section><section id="files-folder-de" class="level2"><h2 class="anchored" data-anchor-id="files-folder-de">Mach’s sauber</h2>
 <p>Bevor wir loslegen, schlage ich vor, dass du einen Ordner namens <em>games-with-python</em> (oder so ähnlich) erstellst. Wenn du Jupyter Notebooks über Anaconda verwendest, solltest du ihn in deinem Benutzerordner erstellen, da Anaconda ihn dort erwartet. Dann erstellst du für jedes Kapitel / Spiel einen neuen Unterordner. Für das Seminar musst du einen Ordner mit allen Dateien zippen und hochladen.</p>
 
 

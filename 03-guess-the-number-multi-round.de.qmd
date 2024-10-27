@@ -4,10 +4,10 @@ In der vorherigen Kapitel hast du ein "Raten Sie die Zahl"-Spiel programmiert, b
 
 ## Kapitelkonzepte
 
-* Wiederholenden Code mit einer [while-Schleife](#while-schleife).
-* Machen eines [Notausstiegs](#break) aus einer Schleife.
+* Wiederholenden Code mit einer [while-Schleife](#while-loop-de).
+* Machen eines [Notausstiegs](#break-de) aus einer Schleife.
 
-## While-Schleife {#while-loop}
+## While-Schleife {#while-loop-de}
 Wenn du etwas wiederholen möchtest, musst du Schleifen verwenden. Es gibt zwei Arten von Schleifen: die [while](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement)-Schleife, die _solange_ eine Bedingung wahr ist, wiederholt wird, und die [for](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement)-Schleife, die über Elemente iteriert (dazu kommen wir später).
 
 Die Grundstruktur einer _while_-Schleife ist
@@ -56,7 +56,7 @@ Füge deinen Code in [code02.py]{.progam-filename} ein.
 :::
 
 
-## Abbrechen (und Beenden){#break}
+## Abbrechen (und Beenden){#break-de}
 Der Code innerhalb der _while_-Schleife wird so lange ausgeführt, wie die Bedingung `True` ist, und wichtig ist, dass der gesamte Code innerhalb ausgeführt wird, bevor die Bedingung erneut ausgewertet wird. Manchmal möchtest du jedoch früher abbrechen, ohne den restlichen Code auszuführen. Dafür hat Python einen [break](https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops)-Befehl, der das Programm dazu veranlasst, die Schleife sofort zu verlassen, ohne den restlichen Code innerhalb der Schleife auszuführen, damit das Programm mit dem Code _nach_ der Schleife fortfährt.
 
 ```python

@@ -1,20 +1,20 @@
-# Rate die Zahl: die Ein-Runden-Edition {#rate-die-zahl-ein-runden-edition}
+# Rate die Zahl: die Ein-Runden-Edition {#guess-the-number-single-round-de}
 
 Im vorherigen Kapitel haben wir die Grundlagen von Python behandelt, also bist du jetzt bereit, dein erstes Spiel zu entwickeln! Wir werden es Schritt für Schritt aufbauen, da es viel zu lernen gibt über Eingaben, Bibliotheken, bedingte Anweisungen und Einrückungen.
 
-Bevor du anfängst, erstelle einen neuen Ordner (innerhalb deines [Kursordners](#files-folder)) namens "guess-the-number" zum Beispiel, lade das [Übungsheft](notebooks/02-Guess the number - single round-de.ipynb) herunter, kopiere es in den neu erstellten Ordner und öffne es in [Jupyter Notebook](#jupyter-notebooks). Wie im Kapitel zuvor wird es Übungen zum Lesen und Verständnis des Codes enthalten.
+Bevor du anfängst, erstelle einen neuen Ordner (innerhalb deines [Kursordners](#files-folder-de)) namens "guess-the-number" zum Beispiel, lade das [Übungsheft](notebooks/02-Guess the number - single round-de.ipynb) herunter, kopiere es in den neu erstellten Ordner und öffne es in [Jupyter Notebook](#jupyter-notebooks). Wie im Kapitel zuvor wird es Übungen zum Lesen und Verständnis des Codes enthalten.
 
 Wir werden jedoch [VS Code](#install-vs-code) verwenden, um Skripte für das eigentliche Spiel zu programmieren. Du musst für jede Code-Übung eine separate Datei erstellen^[Du kannst den vorherigen Code "Speichern unter...", um zu vermeiden, dass du Dinge von Hand kopierst und einfügst.] (z.B. [code01.py]{.filename}^[Ich empfehle die Verwendung von `01` statt `1`, damit die Dateien in deinem Dateimanager sortiert sind], [code02.py]{.filename}, usw.). Das ist nicht die effizienteste Implementierung einer Versionskontrolle und es wird der Ordner sicherlich überladen. Aber es ermöglicht mir, deine Lösungen für jeden Schritt zu sehen, was das Geben von Feedback einfacher macht. Zum Einreichen der Aufgabe musst du einfach den Ordner zippen und die zip-Datei einreichen.
 
 ## Kapitelkonzepte
 
-* [Code dokumentieren](#dokumentiere-deinen-code).
-* [Code debuggen](#debuggen).
-* [Eingabe](#eingabe-funktion) von einem Benutzer erhalten.
-* [Vergleiche](#vergleiche) in [bedingten Anweisungen](#if-anweisung) verwenden.
-* [Einrückung](#einrückung) zum Zusammenfassen von Anweisungen verwenden.
-* Python [Bibliotheken](#nutze-bibliotheken) verwenden.
-* [Zufallszahlen](#wähle-eine-zahl-zufällig) generieren.
+* [Code dokumentieren](#documenting-your-code-de).
+* [Code debuggen](#debugging-de).
+* [Eingabe](#input-function-de) von einem Benutzer erhalten.
+* [Vergleiche](#comparisons-de) in [bedingten Anweisungen](#if-anweisung) verwenden.
+* [Einrückung](#indentation-de) zum Zusammenfassen von Anweisungen verwenden.
+* Python [Bibliotheken](#using-libraries-de) verwenden.
+* [Zufallszahlen](#picking-a-number-randomly-de) generieren.
 
 ## Das Spiel
 Wir werden ein Spiel programmieren, bei dem ein Teilnehmer (Computer) eine Zahl innerhalb eines bestimmten Bereichs (z.B. zwischen 1 und 10) auswählt und der andere Teilnehmer (menschlicher Spieler) versucht, sie zu erraten. Nach jedem Versuch des Menschen antwortet der Computer, ob die tatsächliche Zahl niedriger als der Versuch, höher oder gleich ist. Das Spiel ist vorbei, wenn der Spieler die Zahl richtig errät oder (in der späteren Version des Spiels) die Versuche aufgebraucht hat.
@@ -39,7 +39,7 @@ Probier doch mal diesen Zweizeiler in einem Jupyter Notebook aus (erstell einfac
 Schreib deinen Code in [code01.py]{.program-filename}.
 :::
 
-## Dein Code dokumentieren
+## Dein Code dokumentieren {#documenting-your-code-de}
 Jetzt, wo du deine erste Datei mit Python-Programm hast, solltest du sie dokumentieren. Das Dokumentieren eines zweizeiligen und simplen Programms mag albern vorkommen, aber es sollte eine automatische Sache sein. Später wirst du dich dabei erwischen, mehrere Zeilen Kommentare zu verwenden, um eine einzelne Funktionszeile zu dokumentieren. Wiederum geht es nicht darum, dass der Code funktioniert, sondern darum, dass du ihn verstehen kannst. Im Grunde ist es besser, einen sauberen, gut dokumentierten Code zu haben, der aktuell nicht korrekt funktioniert, als einen undokumentierten Spaghetticode, der funktioniert. Du kannst den Ersteren reparieren und aktualisieren, aber das Pflegen oder Aktualisieren des Letzteren...
 
 In Python, du hast zwei Möglichkeiten, Kommentare zu schreiben: mehrzeilig und einzeilig
@@ -59,7 +59,7 @@ Verwende Einzeiler-Kommentare, um zu erklären, was in einem bestimmten Code-Blo
 Dokumentiere [code01.py]{.program-filename}.
 :::
 
-## Dein Spiel in VS Code ausführen und debuggen {#debugging}
+## Dein Spiel in VS Code ausführen und debuggen {#debugging-de}
 Jetzt, wo wir ein zweizeiliges Programm haben, können wir es ausführen und schon damit beginnen, es zu debuggen. Klar, unser aktuelles Programm ist wahrscheinlich zu einfach, um tatsächliches Debugging zu erfordern, aber es ist auch einfach genug, um das Verständnis von Debugging zu erleichtern. Und Debugging ist eine wichtige Fähigkeit, die ein laufendes Programm von einem Blackbox in etwas Transparentes und leichter^[Oder zumindest einfacher.] zu verstehen verwandelt. Unten beschreibe ich, wie man in VS Code debuggt, aber du solltest eventuell die [offizielle Anleitung](https://code.visualstudio.com/docs/python/debugging) zurate ziehen, falls sich in der Zwischenzeit etwas geändert hat.
 
 Es gibt zwei Möglichkeiten, ein Python-Programm in VS Code auszuführen. Erstens kannst du das _"Python-Datei im Terminal ausführen"_ -Play-Button auf der rechten Seite verwenden. Das führt dein Programm _ohne_ einen Debugger aus, also solltest du es nur für die tatsächlichen Ausführungen des finalisierten Codes verwenden. Trotzdem kannst du es ausprobieren und sehen, ob es das ausgibt, was es sollte.
@@ -101,7 +101,7 @@ Die Antwort ist "nein", weil diese Variable noch nicht existiert. Denk dran, das
 
 Dieses Debugging-Übungsproblem war vielleicht nicht notwendig, um Probleme mit deinem aktuellen Code zu lösen, aber es hat gezeigt, wie man das in Zukunft machen kann. Zögere nicht, eine Pause im Programm einzufügen, um zu überprüfen, ob die Realität (d.h. die tatsächlichen Werte der Variablen) deinen Erwartungen entspricht. Verwende das Durchlaufen des Codes, um die Dinge zu verlangsamen und zuzuschauen und nachzudenken.
 
-## Rate einen Spieler nach seinem Tipp {#input-function}
+## Rate einen Spieler nach seinem Tipp {#input-function-de}
 Um das _Rate die Zahl_ Spiel zu spielen, braucht es zwei. Der Computer hat seinen Teil erledigt, indem er eine Zahl ausgewählt hat, jetzt müssen wir den Spieler bitten, seinen Tipp einzugeben. Dafür werden wir die [input()](https://docs.python.org/3/library/functions.html#input) _Funktion_ verwenden.
 
 Eine Funktion ist ein isolierter Code, der (optional) _Eingaben_ annimmt, eine _Aktion_ durchführt und optional einen Wert (_Ausgabe_) zurückgibt. Das ermöglicht es, den Code in kleinere Teile zu unterteilen, die leichter gepflegt werden können, und denselben Code wiederzuverwenden. Du hast bereits die [print()](https://docs.python.org/3/library/functions.html#print)-Funktion verwendet, um Dinge auszugeben, und die [str()](https://docs.python.org/3/library/functions.html#func-str), [bool()](https://docs.python.org/3/library/functions.html#bool), [int()](https://docs.python.org/3/library/functions.html#int) und [float()](https://docs.python.org/3/library/functions.html#float)-Funktionen, um Werte zu konvertieren. Bei [print()](https://docs.python.org/3/library/functions.html#print) ist die _Eingabe_ eine beliebige Anzahl von Werten (sogar keine, probiere es im Jupiter Notebook aus!), die _Aktion_ besteht darin, Dinge auszugeben, aber es gibt keine _Ausgabe_. Die [float()](https://docs.python.org/3/library/functions.html#float)-Funktion nimmt (etwas überraschend) null oder einen Wert als _Eingabe_ an (versuche, ihr keine oder mehr als einen Wert im Jupiter Notebook zu geben und sieh den Unterschied), versucht, den gegebenen Wert in einen Float zu konvertieren (wirft einen Fehler, wenn sie es nicht kann) und gibt einen Float-Wert als _Ausgabe_ zurück.
@@ -113,7 +113,7 @@ Gleiche _Eingabe_ → _Aktion_ → _Ausgabe_ Regel gilt für die [input(prompt)]
 Aktualisiere deine [code01.py]{.program-filename}.
 :::
 
-## Bedingte _if_-Anweisung {#if-anweisung}
+## Bedingte _if_-Anweisung {#if-statement-de}
 Jetzt haben wir zwei Zahlen: Eine, die der Computer ausgewählt hat (`number_picked`) und eine, die der Spieler eingegeben hat (`guess`). Wir müssen sie vergleichen, um eine korrekte Ausgabenachricht bereitzustellen. Dafür werden wir eine bedingte [if-Anweisung](https://docs.python.org/3/tutorial/controlflow.html#if-statements) verwenden:
 ```python
 if some_condition_is_true:
@@ -138,7 +138,7 @@ if some_condition_is_true:
 
 Bevor wir bedingte Anweisungen in unserem Spiel verwenden können, musst du (1) die Bedingungen selbst und (2) die Verwendung von Einrückungen als Mittel zur Gruppierung von Anweisungen verstehen.
 
-## Bedingungen und Vergleiche {#vergleiche}
+## Bedingungen und Vergleiche {#comparisons-de}
 Bedingung ist jeder Ausdruck, der bewertet werden kann, um festzustellen, ob er `True` oder `False` ist. Ein einfaches Beispiel für einen solchen Ausdruck sind Vergleiche, die in der Menschensprache ausgedrückt werden: _Ist heute Donnerstag?_ _Ist die Antwort (gleich) 42?_ _Regnet es und ich habe einen Schirm?_ Wir werden uns für einen Moment auf Vergleiche wie diese konzentrieren, aber später wirst du sehen, dass in Python _jeder_ Ausdruck entweder `True` oder `False` ist, sogar wenn er nicht wie ein Vergleich aussieht^[Dies liegt daran, dass du jeden Wert mit der [bool()](https://docs.python.org/3/library/functions.html#bool)-Funktion, die du beim letzten Mal kennengelernt hast, in einen logischen Wert umwandeln kannst und daher jeder Wert entweder `True` oder `False` ist.].
 
 Für den Vergleich kannst du folgende Operatoren verwenden:
@@ -204,7 +204,7 @@ Mach Übung #6.
 
 Endgedanke zu Vergleichen: Zögere nicht, sie in Jupyter Notebook mit verschiedenen Kombinationen von Werten zu testen oder das Programm an der Bedingung via einem Breakpoint anzuhalten und einen Vergleich in _Watch_ oder _Debug Console_ auszuwerten.
 
-## Statements gruppieren über Einrückung {#einrueckung}
+## Statements gruppieren über Einrückung {#indentation-de}
 Gehen wir zurück zu einer bedingten if-Anweisung. Schau dir das folgende Code-Beispiel an (und beachte das `:` am Ende von `if some_condition_is_true:`), bei dem _Statement #1_ nur ausgeführt wird, wenn _some condition_ wahr ist, während _Statement #2_ danach ausgeführt wird, _unabhängig_ von der Bedingung.
 ```python
 if some_condition_is_true:
@@ -259,7 +259,7 @@ Erweitere dein Programm um den Vergleich in [code02.py]{.filename}
 
 Teste, ob dein Code funktioniert. Verwende wieder Breakpoints, wenn du den Kontrollfluss besser verstehen möchtest und überprüfe, ob Vergleiche so funktionieren, wie du es erwartest.
 
-## Bibliotheken verwenden {#bibliotheken-verwenden}
+## Bibliotheken verwenden {#using-libraries-de}
 Unser Spiel ist "funktionsvollendet": Der Computer wählt eine Zahl, der Spieler rät, der Computer reagiert entsprechend. Allerdings spielen wir momentan auf beiden Seiten. Lassen wir den Computer selbst eine zufällige Zahl wählen. Dafür benötigen wir die Funktion [randint(a, b)](https://docs.python.org/3/library/random.html#random.randint). Es ist Teil jeder Python-Distribution, so dass du es auch hast, wenn du eine Vanilla-Python-Distribution installierst, anstatt eine von PsychoPy zu verwenden. Allerdings kannst du sie nicht direkt wie `print()` oder `input()` verwenden. Gib `randint(1, 3)` in deinem Jupyter Notebook ein und beobachte _NameError: name 'randint' is not defined_.
 
 Das liegt daran, dass Python eine Menge Funktionen hat und das Laden all dieser Funktionen auf einmal den Speicher mit Dingen verstopfen würde, die du nie verwenden wolltest. Stattdessen sind sie in _Bibliotheken_ gepackt, damit du nur die Funktionen (oder Bibliotheken) importieren kannst, die du tatsächlich für dein Programm benötigst. Du importierst sie über eine `import`-Anweisung, die oben in deine Datei gehören sollte (aber unter dem Kommentar zum Dateiinhalt). Es gibt mehrere Möglichkeiten, Bibliotheken zu importieren. Zunächst kannst du eine _gesamte_ Bibliothek importieren (wie die _random_-Bibliothek, die die Funktion `randint()` enthält, die wir benötigen) und dann ihre Funktionen als `<Bibliothek>.<Funktion>` verwenden. Für `randint` würde dies wie folgt aussehen:
@@ -296,7 +296,7 @@ computer_pick = random_integer(1, 5)
 
 Endlich gibt es eine **sehr schlechte Art**, Funktionen aus einer Bibliothek zu importieren: `from random import *`. Das Sternchen bedeutet, dass du alle Funktionen aus der Bibliothek importieren möchtest und sie ohne `random.` Präfix aufrufen möchtest. Nie, nie, nie^[Habe ich schon erwähnt, dass du das nie tun sollst? Nie!] solltest du das tun! Das füllt deine Umgebung mit Funktionen, von denen du vielleicht nichts weißt, überschreibt möglicherweise andere Funktionen und verursacht Konflikte usw. Niemals! Ich zeige dir das nur, weil du irgendwann einmal einen Code sehen wirst, der diese Methode verwendet, und du könntest denken, dass das eine gute Idee ist. Das ist eine furchtbare Idee! Importiere die Bibliothek, nicht die Funktionen, damit du explizit zeigen kannst, auf welche Bibliothek du dich beim Aufrufen einer Funktion verlässt. Denke immer an das [Zen of Python](https://www.python.org/dev/peps/pep-0020/): "Explizit ist besser als implizit."
 
-## Eine Zahl zufällig auswählen
+## Eine Zahl zufällig auswählen {#picking-a-number-randomly-de}
 Jetzt, wo du weißt, wie man eine Bibliothek importiert, können wir die Funktion [randint()](https://docs.python.org/3/library/random.html#random.randint) verwenden. Dazu speicherst du eine Kopie deines vorherigen Codes in [code03.py]{.filename}. Importiere die Bibliothek und verwende [randint()](https://docs.python.org/3/library/random.html#random.randint), um eine zufällige Zahl zwischen 1 und 10 zu erzeugen. Lies die Dokumentation zu [randint()](https://docs.python.org/3/library/random.html#random.randint), um zu verstehen, wie man sie verwendet. Das Lesen von Handbüchern ist ein notwendiger Teil des Programmierens, also ist das ein guter Punkt, um damit anzufangen zu üben.
 
 Okay, nachdem du das in [code03.py]{.filename} umgesetzt hast, führ es ein paar Mal aus, um sicherzustellen, dass der Computer tatsächlich verschiedene zufällige Werte auswählt. Wie immer, du kannst Breakpoints verwenden, wenn du nochmal nachprüfen möchtest, was da abläuft.

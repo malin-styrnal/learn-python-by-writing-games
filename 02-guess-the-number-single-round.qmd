@@ -40,7 +40,7 @@ Try out this two-liner in a Jupyter Notebook (create an empty notebook just for 
 Put your code into [code01.py]{.program-filename}.
 :::
 
-## Documenting your code
+## Documenting your code {#documenting-your-code}
 Now that you have your first file with Python program, you should document it. Documenting a two-lines long and simple program may feel silly but it should be an automatic thing. Later on you will find yourself using several lines of comments to document a single line function. Again, it is not about the code that works, it is about the code you can understand. In a sense, it is better to have a clean well-documented program that currently does not work correctly than an undocumented spaghetti code that does. You can fix and update the former, but maintaining or updating the latter...
 
 In Python, you have two ways to write comments: multiline and single line
@@ -293,7 +293,7 @@ computer_pick = random_integer(1, 5)
 
 Finally, there is a **very bad way** to import functions from a library: `from random import *`. The asterisk means that you want to import _all_ functions from the library and you want to call them by their names without `random.` prefix. Never, never, never^[Did I already say never? Never!] do this! This fills your environment with functions that you may not be aware of, potentially overwriting some other functions, creating conflicts, etc. Never ever! I am showing you this only because you will, at some point, see a code that uses this approach and you might think that this is a good idea. It is a terrible idea! Import the library, not the functions, so you can explicitly show which library you are relying on when calling a function. Always remember the [Zen of Python](https://www.python.org/dev/peps/pep-0020/): "Explicit is better than implicit."
 
-## Picking a number randomly
+## Picking a number randomly {#picking-a-number-randomly}
 Now that you know how to import a library, we can use [randint()](https://docs.python.org/3/library/random.html#random.randint) function. For this, save a copy of your previous code into [code03.py]{.filename}. Import the library and use [randint()](https://docs.python.org/3/library/random.html#random.randint) to generate a random number between 1 and 10. Read the documentation  on [randint()](https://docs.python.org/3/library/random.html#random.randint) to understand how to use it. Reading manuals is a necessary part of programming, so this is a good point to start practicing.
 
 

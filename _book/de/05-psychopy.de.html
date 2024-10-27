@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>  <span class="chapter-title">Guitar Hero</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.de.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         
     </ul>
 </div>
@@ -208,16 +214,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#kapitelkonzepte" id="toc-kapitelkonzepte" class="nav-link active" data-scroll-target="#kapitelkonzepte"><span class="header-section-number">5.1</span> Kapitelkonzepte</a></li>
-  <li><a href="#minimal-psychopy" id="toc-minimal-psychopy" class="nav-link" data-scroll-target="#minimal-psychopy"><span class="header-section-number">5.2</span> Minimal PsychoPy-Code</a></li>
+  <li><a href="#minimal-psychopy-de" id="toc-minimal-psychopy-de" class="nav-link" data-scroll-target="#minimal-psychopy-de"><span class="header-section-number">5.2</span> Minimal PsychoPy-Code</a></li>
   <li><a href="#klassen-und-objekte" id="toc-klassen-und-objekte" class="nav-link" data-scroll-target="#klassen-und-objekte"><span class="header-section-number">5.3</span> Klassen und Objekte</a></li>
   <li><a href="#arguments-by-position-or-name-de" id="toc-arguments-by-position-or-name-de" class="nav-link" data-scroll-target="#arguments-by-position-or-name-de"><span class="header-section-number">5.4</span> Funktionsparameter: Standardwerte, Position oder Name</a></li>
-  <li><a href="#hauptschleife-hinzuf%C3%BCgen" id="toc-hauptschleife-hinzufügen" class="nav-link" data-scroll-target="#hauptschleife-hinzufügen"><span class="header-section-number">5.5</span> Hauptschleife hinzufügen</a></li>
-  <li><a href="#textnachricht-hinzuf%C3%BCgen" id="toc-textnachricht-hinzufügen" class="nav-link" data-scroll-target="#textnachricht-hinzufügen"><span class="header-section-number">5.6</span> Textnachricht hinzufügen</a></li>
-  <li><a href="#ein-quadrat-hinzuf%C3%BCgen-und-es-nicht-in-die-mitte-des-fensters-setzen" id="toc-ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen" class="nav-link" data-scroll-target="#ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen"><span class="header-section-number">5.7</span> Ein Quadrat hinzufügen und es <em>nicht</em> in die Mitte des Fensters setzen</a></li>
+  <li><a href="#psychopy-main-loop-de" id="toc-psychopy-main-loop-de" class="nav-link" data-scroll-target="#psychopy-main-loop-de"><span class="header-section-number">5.5</span> Hauptschleife hinzufügen</a></li>
+  <li><a href="#psychopy-textstim-de" id="toc-psychopy-textstim-de" class="nav-link" data-scroll-target="#psychopy-textstim-de"><span class="header-section-number">5.6</span> Textnachricht hinzufügen</a></li>
+  <li><a href="#psychopy-rect-de" id="toc-psychopy-rect-de" class="nav-link" data-scroll-target="#psychopy-rect-de"><span class="header-section-number">5.7</span> Ein Quadrat hinzufügen und es <em>nicht</em> in die Mitte des Fensters setzen</a></li>
   <li>
-<a href="#psychopy-einheiten" id="toc-psychopy-einheiten" class="nav-link" data-scroll-target="#psychopy-einheiten"><span class="header-section-number">5.8</span> Fünf Einheitensysteme</a>
+<a href="#psychopy-units-de" id="toc-psychopy-units-de" class="nav-link" data-scroll-target="#psychopy-units-de"><span class="header-section-number">5.8</span> Fünf Einheitensysteme</a>
   <ul class="collapse">
-<li><a href="#psychopy-units-height" id="toc-psychopy-units-height" class="nav-link" data-scroll-target="#psychopy-units-height"><span class="header-section-number">5.8.1</span> Height units</a></li>
+<li><a href="#psychopy-units-height-de" id="toc-psychopy-units-height-de" class="nav-link" data-scroll-target="#psychopy-units-height-de"><span class="header-section-number">5.8.1</span> Height units</a></li>
   <li><a href="#psychopy-einheiten-norm" id="toc-psychopy-einheiten-norm" class="nav-link" data-scroll-target="#psychopy-einheiten-norm"><span class="header-section-number">5.8.2</span> Normale Einheiten</a></li>
   <li><a href="#bildschirmpixel" id="toc-bildschirmpixel" class="nav-link" data-scroll-target="#bildschirmpixel"><span class="header-section-number">5.8.3</span> Bildschirmpixel</a></li>
   <li><a href="#visuelle-winkelgrade" id="toc-visuelle-winkelgrade" class="nav-link" data-scroll-target="#visuelle-winkelgrade"><span class="header-section-number">5.8.4</span> Visuelle Winkelgrade</a></li>
@@ -231,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="psychopy-basics" class="quarto-section-identifier"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></h1>
+<h1 class="title"><span id="psychopy-basics-de" class="quarto-section-identifier"><span class="chapter-number">5</span>  <span class="chapter-title">Los geht’s mit PsychoPy</span></span></h1>
 </div>
 
 
@@ -249,11 +255,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="kapitelkonzepte" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="kapitelkonzepte">
 <span class="header-section-number">5.1</span> Kapitelkonzepte</h2>
 <ul>
-<li>Verstehen, wie man <a href="#klassen-und-objekte">Klassen und Objekte</a> verwendet.</li>
+<li>Verstehen, wie man <a href="#classes-and-objects-de">Klassen und Objekte</a> verwendet.</li>
 <li>Verwenden von <a href="#position-oder-name">benannten Parametern</a> in Funktionen.</li>
 <li>Verstehen des PsychoPy <a href="#psychopy-einheiten">Einheitensystems</a>.</li>
 <li>Verwenden grundlegender Psycho <a href="#text-nachricht-hinzuf%C3%BCgen">visueller Reize</a> und Verwalten von <a href="#lasse-den-quadrat-springen-bei-deinem-befehl">Benutzereingaben</a>.</li>
-</ul></section><section id="minimal-psychopy" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="minimal-psychopy">
+</ul></section><section id="minimal-psychopy-de" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="minimal-psychopy-de">
 <span class="header-section-number">5.2</span> Minimal PsychoPy-Code</h2>
 <p>Kopier den folgenden Code in die Datei <span class="filename">code01.py</span> (du hast doch eine neue Mappe für das Kapitel erstellt, oder?):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
@@ -274,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># das Fenster schließen</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>win.close()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Lauf es, um zu prüfen, ob PsychoPy funktioniert. Wenn du einen Fehler bekommst, der besagt, dass die <code>psychopy</code>-Bibliothek nicht gefunden wurde, überprüfe den <a href="001-software.de.html#install-vs-code">aktiven Python-Interpreter</a>. Du solltest ein graues Fenster mit der Überschrift <em>PsychoPy</em> erhalten. Drücke eine beliebige Taste (klicke auf das Fenster, falls du zu einem anderen gewechselt hast, damit es die Tasteneingabe registriert) und es sollte sich schließen. Nicht sehr aufregend, aber es zeigt, dass alles wie erwartet funktioniert.</p>
+<p>Lauf es, um zu prüfen, ob PsychoPy funktioniert. Wenn du einen Fehler bekommst, der besagt, dass die <code>psychopy</code>-Bibliothek nicht gefunden wurde, überprüfe den <a href="#install-vs-code">aktiven Python-Interpreter</a>. Du solltest ein graues Fenster mit der Überschrift <em>PsychoPy</em> erhalten. Drücke eine beliebige Taste (klicke auf das Fenster, falls du zu einem anderen gewechselt hast, damit es die Tasteneingabe registriert) und es sollte sich schließen. Nicht sehr aufregend, aber es zeigt, dass alles wie erwartet funktioniert.</p>
 <div class="program">
 <p>Füge den Code in <span class="program-filename">code01.py</span></p>
 </div>
@@ -291,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="arguments-by-position-or-name-de" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="arguments-by-position-or-name-de">
 <span class="header-section-number">5.4</span> Funktionsparameter: Standardwerte, Position oder Name</h2>
 <p>In der <code>visual.Window(size=(800, 600))</code>-Aufrufzeile gibt es noch ein paar interessante Dinge, über die wir sprechen müssen. Diese Merkwürdigkeiten beziehen sich auf Funktionen (und damit auf Methoden, die Funktionen sind, die zu einer Klasse gehören) und nicht auf Klassen an sich. Erstens hat die Konstruktor-Methode der Window-Klasse <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">viele Argumente</a> (wenn wir ein Objekt konstruieren, rufen wir eine Konstruktor-Methode der Klasse auf, deshalb sprechen wir über Funktionen). Und doch haben wir nur eines davon übergeben. Das liegt daran, dass du für einzelne Parameter <a href="https://docs.python.org/3/tutorial/controlflow.html#default-argument-values">Standardwerte</a> festlegen kannst. In diesem Fall wird, wenn ein Parameter weggelassen wird, ein Standardwert verwendet.</p>
-<div id="d98fcbbc" class="cell" data-execution_count="1">
+<div id="cc0f1432" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divide(x1, x2<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Teilt Zahlen, verwendet 2 als zweiten Wert, wenn ein zweiter Term weggelassen wird.</span></span>
@@ -316,28 +322,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Wenn du die <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window">Dokumentation</a> ansiehst, wirst du sehen, dass für den Window-Klassen-Konstruktor <em>alle</em> Parameter einen Standardwert haben. Das ist ein Teil der PsychoPy-Philosophie, die reichhaltige Anpassungsfähigkeit (schau dir nur die Anzahl der Parameter an!) mit Einfachheit der Benutzung durch sinnvolle Standardwerte verbindet (spezifiziere nichts und das Fenster funktioniert trotzdem).</p>
 <p>Zweitens, wir haben den Wert nicht nur übergeben, sondern auch angegeben, für welchen Parameter dieser Wert bestimmt ist, und zwar über <code>size=(800, 600)</code>. Diese Schreibweise nennt sich <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">Schlüsselwortargumente</a>. Der Vorteil besteht darin, dass es eindeutiger macht, welchen Parameter du einem Wert zuweist. Außerdem kannst du die Parameter in beliebiger Reihenfolge angeben, solange es im Kontext sinnvoll ist<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Wenn du keine Namen verwendest, werden die Werte den einzelnen Parametern basierend auf ihrer <em>Position</em> (auch bekannt als Positionsparameter) zugewiesen. Du kannst sogar beides mischen, aber Positionsparameter müssen zuerst kommen, siehe <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">Dokumentation</a>, wenn du mehr erfahren möchtest.</p>
-<div id="e5bdd7a1" class="cell" data-execution_count="2">
+<div id="155b9bce" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verwendung von Positionsparametern</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, <span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="c3a2ec42" class="cell" data-execution_count="3">
+<div id="1c6604d4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mit Keyword-Argumenten</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(x2<span class="op">=</span><span class="dv">4</span>, x1<span class="op">=</span><span class="dv">2</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="66bcc1cf" class="cell" data-execution_count="4">
+<div id="7428f0e7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixen von Positions- und Keyword-Argumenten</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x2<span class="op">=</span><span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<div id="7fc6ca11" class="cell" data-execution_count="5">
+<div id="13f4e004" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(divide(<span class="dv">2</span>, x1<span class="op">=</span><span class="dv">4</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -350,7 +356,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 </div>
 </div>
 </div>
-</section><section id="hauptschleife-hinzufügen" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="hauptschleife-hinzufügen">
+</section><section id="psychopy-main-loop-de" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="psychopy-main-loop-de">
 <span class="header-section-number">5.5</span> Hauptschleife hinzufügen</h2>
 <p>Momentan passiert in unserem Programm nicht viel. Eine Sache, die wir hinzufügen müssen, ist eine Schleife, in der wir wiederholt in ein Fenster zeichnen (und es über seine <a href="https://psychopy.org/api/visual/window.html#psychopy.visual.Window.flip">flip()</a>-Methode aktualisieren) können, die Benutzereingabe überprüfen und andere notwendige Aktionen durchführen.</p>
 <p>Okay, dann fangen wir mal damit an, die Schleife und die Verarbeitung von Benutzereingaben hinzuzufügen (das lustige Zeichenteil kommt als nächstes). Die Schleife befindet sich zwischen dem Öffnen und Schließen des Fensters:</p>
@@ -364,7 +370,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <div class="program">
 <p>Schreib deinen Code in <span class="program-filename">code02.py</span>.</p>
 </div>
-</section><section id="textnachricht-hinzufügen" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="textnachricht-hinzufügen">
+</section><section id="psychopy-textstim-de" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="psychopy-textstim-de">
 <span class="header-section-number">5.6</span> Textnachricht hinzufügen</h2>
 <p>Obwohl wir jetzt eine nette Game-Loop laufen haben, haben wir immer noch nur ein langweiliges graues Fenster, auf das wir schauen können. Lass uns eine Textstimulanz erstellen, die “Escape drücken zum Beenden” sagt und sie während der Schleife anzeigt. Dafür werden wir die <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a>-Klasse aus der PsychoPy-Bibliothek verwenden.</p>
 <p>Erstmal musst du das <code>press_escape_text</code>-Objekt (Instanz der <a href="https://psychopy.org/api/visual/textstim.html-Klasse">TextStim</a>) vor der Hauptschleife erstellen. Es gibt einige Parameter, mit denen du herumspielen kannst, aber mindestens musst du das Fenster, in dem der Text angezeigt werden soll (unsere <code>win</code>-Variable), und den tatsächlichen Text, den du anzeigen möchtest (<code>text="Escape drücken, um zu beenden"</code>), übergeben. PsychoPy wird für alle anderen Einstellungen seine <a href="#arguments-by-position-or-name">Voreinstellungen</a> verwenden (Standard-Schriftfamilie, -farbe und -größe, mittig im Fenster platziert).</p>
@@ -375,7 +381,7 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <p>Schreib deinen Code in <span class="program-filename">code03.py</span>.</p>
 </div>
 <p>Jetzt solltest du eine nette, wenn auch statische, Nachricht in der Mitte des Fensters haben, die dir zeigt, wie du das Spiel beenden kannst. Schau dir die Handbuchseite für <a href="https://psychopy.org/api/visual/textstim.html">visual.TextStim</a> an und versuche, es zu ändern, indem du zusätzliche Parameter an den Klassenaufruf übergibst. Zum Beispiel kannst du seine <code>Farbe</code>, ob der Text <strong>fett</strong> und/oder <em>kursiv</em> ist, wie er ausgerichtet ist, usw. ändern. Aber wenn du ändern möchtest, <em>wo</em> der Text angezeigt wird, lies weiter unten.</p>
-</section><section id="ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="ein-quadrat-hinzufügen-und-es-nicht-in-die-mitte-des-fensters-setzen">
+</section><section id="psychopy-rect-de" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="psychopy-rect-de">
 <span class="header-section-number">5.7</span> Ein Quadrat hinzufügen und es <em>nicht</em> in die Mitte des Fensters setzen</h2>
 <p>Jetzt müssen wir rausfinden, wie man visuelle Elemente an eine beliebige Stelle auf dem Bildschirm bewegt. Im Grunde ist das sehr einfach, denn jeder visuelle Stimulus (inklusive <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a>, das wir gerade verwendet haben) hat eine <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim.pos">pos</a>-Eigenschaft, die seine Position innerhalb eines Fensters angibt. Aber PsychoPy macht es erstmal komplizierter, indem es <strong>fünf</strong> (5!) verschiedene Positionseinheiten-Systeme hat.</p>
 <p>Bevor wir mit den Einheiten loslegen, lass uns ein einfaches weißes Quadrat erstellen. Die Klasse, die wir dafür brauchen, ist <a href="https://psychopy.org/api/visual/rect.html">visual.Rect</a>. Genau wie <a href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">TextStim</a> benötigt es die <code>win</code>-Variable (damit es weiß, zu welchem Fenster es gehört), <code>width</code> (standardmäßig 0,5 dieser mysteriösen Einheiten), <code>height</code> (auch standardmäßig 0,5), <code>pos</code> (standardmäßig (0,0)), <code>lineColor</code> (standardmäßig <code>white</code>) und <code>fillColor</code> (standardmäßig <code>None</code>). Also, um ein “standardmäßiges” weißes Quadrat mit der Größe <code>(0,5, 0,5)</code> Einheiten an der Position <code>(0, 0)</code> zu erhalten, musst du nur die <code>win</code>-Variable übergeben: <code>white_square = visual.Rect(win)</code>. Allerdings kann es auf <em>einigen</em> Computern zu einem seltsamen Fehler kommen, der PsychoPy daran hindert, den Rahmen korrekt zu zeichnen. Wenn du also auf einen leeren Bildschirm starrst<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, füge <code>fillColor="white"</code> zum Aufruf hinzu und du solltest ein ausgefülltes weißes Quadrat sehen.</p>
@@ -384,9 +390,9 @@ Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <p>Schreib deinen Code in <span class="program-filename">code04.py</span>.</p>
 </div>
 <p>Na, dein Quadrat ist kein richtiges Quadrat? Ich hab’s dir ja gesagt: <a href="https://psychopy.org/general/units.html#units">Fünf Einheitensysteme</a>!</p>
-</section><section id="psychopy-einheiten" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="psychopy-einheiten">
+</section><section id="psychopy-units-de" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="psychopy-units-de">
 <span class="header-section-number">5.8</span> Fünf Einheitensysteme</h2>
-<section id="psychopy-units-height" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="psychopy-units-height">
+<section id="psychopy-units-height-de" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="psychopy-units-height-de">
 <span class="header-section-number">5.8.1</span> Height units</h3>
 <p>Mit <a href="https://psychopy.org/general/units.html#height-units">height units</a> wird alles in den Einheiten der Fensterhöhe angegeben. Die Mitte des Fensters befindet sich bei <code>(0,0)</code> und das Fenster verläuft vertikal von <code>-0.5</code> bis <code>0.5</code>. Die horizontalen Grenzen hängen jedoch vom Seitenverhältnis ab. Für unser 800×600-Fenster (Seitenverhältnis 4:3) verläuft es von -0.666 bis 0.666 (das Fenster ist 1.3333 Fensterhöhen breit). Für ein 600×800-Fenster (Seitenverhältnis 3:4) von -0.375 bis 0.375 (das Fenster ist 0.75 Fensterhöhen breit), für ein quadratisches Fenster 600×600 (Seitenverhältnis 1:1) von -0.5 bis 0.5 (in allen diesen Fällen verläuft es von -0.5 bis 0.5 vertikal). Das bedeutet, dass der tatsächliche Bildschirmabstand für die Einheiten auf beiden Achsen gleich ist. Daher ist ein Quadrat mit <code>size=(0.5, 0.5)</code> tatsächlich ein Quadrat (es spannt den gleichen Abstand vertikal und horizontal). Dadurch erleichtern height units das <em>Größenfestlegen</em> von Objekten, machen das <em>korrekte Platzieren auf der horizontalen Achse</em> jedoch schwieriger (da du das Seitenverhältnis kennen musst).</p>
 <p>Mach dein Code besser, indem du das Einheitensystem beim Erstellen des Fensters festlegst: <code>win = visual.Window(..., units="height")</code>. Spiele mit deinem Code, indem du die Position des Quadrats beim Erstellen festlegst. Du musst nur einen zusätzlichen Parameter <code>pos=(&lt;x&gt;, &lt;y&gt;)</code> übergeben.</p>

@@ -7,10 +7,10 @@ Um dieses Programm zu implementieren, musst du lernen, was Funktionen sind, wie 
 
 ## Kapitelbegriffe.
 
-* Schreibe deine eigenen [Funktionen](#funktion).
-* Verstehe die [Gültigkeitsbereiche](#gültigkeitsbereiche-für-unveränderliche-werte) von Variablen.
-* Verwende [Standardmethoden](#numpy-dokumentation) zur Dokumentation deines Codes.
-* Verwende deine eigenen [Bibliotheken](#nutze-deine-eigenen-bibliotheken).
+* Schreibe deine eigenen [Funktionen](#function-de).
+* Verstehe die [Gültigkeitsbereiche](#scopes-for-immutable-values-de) von Variablen.
+* Verwende [Standardmethoden](#numpy-docstring-de) zur Dokumentation deines Codes.
+* Verwende deine eigenen [Bibliotheken](#using-you-own-libraries).
 
 ## Spielerantwort{#guess-the-number-players-response}
 Lassen wir uns aufwärmen, indem wir einen Code schreiben, der es einem Spieler ermöglicht, auf die Vermutung des Computers zu reagieren. Denke daran, dass es nur drei Optionen gibt: deine Zahl ist größer, kleiner oder gleich der Vermutung des Computers. Ich würde vorschlagen, die Symbole `>`, `<` und `=` zu verwenden, um dies mitzuteilen. Du musst den Code schreiben, der den Spieler nach seiner Antwort fragt, bis er eines dieser Symbole eingibt. D.h., die Eingabeaufforderung sollte wiederholt werden, wenn er etwas anderes eingibt. Also brauchst du auf jeden Fall die [input([prompt])](https://docs.python.org/3/library/functions.html#input)-Funktion und eine [while](#while-schleife)-Schleife. Denke dir eine nützliche und informative Promptnachricht dafür aus. Teste, ob es funktioniert. Das Setzen von Breakpoints kann hier sehr nützlich sein.
