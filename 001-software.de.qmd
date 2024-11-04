@@ -1,34 +1,34 @@
 # Software {- #software-de}
-Um dieses Buch und Seminar zu nutzen, musst du installieren
+Für dieses Buch und Seminar musst du folgende Software installieren:
 
 * PsychoPy.
-* De IDE deiner Wahl. Meine Anweisungen gelten für Visual Studio Code, das eine sehr gute Python-Unterstützung hat.
+* eine IDE deiner Wahl. Die Anleitungen in diesem Buch sind für Visual Studio Code geschrieben, da diese IDE über eine gute Python-Unterstützung verfügt.
 * Jupyter Notebook zum Ausprobieren kleiner Code-Schnipsel.
 
-Ich werde keine detaillierten Anweisungen geben, wie man die notwendige Software installiert, sondern verweise stattdessen auf die offiziellen Handbücher. Dies macht diesen Text zukunftssicherer, da sich spezifische Details schnell ändern können.^[Wenn du Teil des Seminars bist, frag mich einfach, wenn du Probleme hast oder unsicher bist, wie du fortfahren sollst.]
+Ich werde keine detaillierten Anleitung für die Installation der Software geben, sondern verweise stattdessen auf die offiziellen Manuale. So ist der Text auch noch in Zukunft korrekt, da sich Details schnell ändern können.^[Wenn du am Seminar teilnimmst, frag mich einfach, wenn du Probleme hast oder unsicher bist, wie du weitermachen sollst.]
 
 ## PsychoPy {#install-psychopy-de}
 Wenn du Windows nutzt, lade und installiere die [Standalone PsychoPy](https://www.psychopy.org/download.html) Version herunter. Nimm einfach die neueste (und beste) PsychoPy Version, die dir empfohlen wird (Stand PsychoPy 2024.2.3 mit Python 3.10) und folge den Anweisungen.
 
-Wenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den [aktualen Anweisungen](https://www.psychopy.org/download.html#manual-installations).
+Wenn du einen Mac oder Linux verwendest, hast du die Optionen, PsychoPy über pip oder Anaconda zu installieren. Bitte folge den [aktuellen Anweisungen](https://www.psychopy.org/download.html#manual-installations).
 
 ## VS Code {#install-vs-code-de}
-[Visual Studio Code](https://code.visualstudio.com/) ist ein kostenloser, leichter und offener Quellcode-Editor mit starker Unterstützung für Python. Lade den Installer für deine Plattform herunter und folge den Anweisungen.
+[Visual Studio Code](https://code.visualstudio.com/) ist ein kostenloser, leicht zu nutzender und frei verfügbarer Code-Editor, der über eine sehr gute Python-Unterstützung verfügt. Lade den Installer für deine Plattform herunter und folge den Anweisungen.
 
 Nächster Schritt: Folge dem Tutorial [Erste Schritte mit Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial). Wenn du Windows und die standalone PsychoPy-Installation verwendest, **überspringe** den Abschnitt _Installiere einen Python-Interpreter_, da du bereits eine Python-Installation mit PsychoPy hast. Dies ist der Interpreter, den du im Abschnitt _Wähle einen Python-Interpreter_ verwenden solltest. In meinem Fall ist der Pfad `C:\Program Files\PsychoPy\python.exe`.
 
-Installiere und aktiviere einen Linter, eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode hervorhebt. Folge der [Anleitung](https://code.visualstudio.com/docs/python/linting) auf der VS Code-Website.
+Installiere und aktiviere einen Linter. Ein Linter ist eine Software, die syntaktische und stilistische Probleme in deinem Python-Quellcode anzeigt und hervorhebt. Folge der [Anleitung](https://code.visualstudio.com/docs/python/linting) auf der VS Code-Website.
 
 ## Jupyter Notebooks {#jupyter-notebooks-de}
-[Jupyter Notebooks](https://jupyter.org/) bieten eine super bequeme Möglichkeit, Text, Abbildungen und Code in einem einzigen Dokument zu vermischen. Sie erleichtern es auch, verschiedene kleine Snippets parallel auszuprobieren, ohne Skripte auszuführen. Wir werden sie für unser erstes Kapitel und gelegentliche Übungen oder Code-Tests später verwenden. Du kannst sie auf zwei Arten nutzen: 1) in VS Code unter Verwendung der Jupyter-Erweiterung, 2) im Browser unter Verwendung der klassischen Schnittstelle.
+[Jupyter Notebooks](https://jupyter.org/) bieten eine sehr bequeme Möglichkeit, Text, Abbildungen und Code in einem einzigen Dokument einzubinden. Sie erleichtern es auch, verschiedene kleine Code-Schnipsel parallel auszuprobieren, ohne ganze Skripte auszuführen. Wir werden sie für unser erstes Kapitel und später für gelegentliche Übungen oder Code-Tests verwenden. Du kannst sie auf zwei Arten nutzen: 1) in VS Code mit Verwendung der Jupyter-Erweiterung, 2) im Browser.
 
 ### Jupyter Notebooks in VS Code
-Lies [die Anleitung](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) darüber, wie du das Jupyter-Paket installierst und Notebooks in VS Code verwendest.
+Lies [diese Anleitung](https://code.visualstudio.com/docs/datascience/jupyter-notebooks), um Jupyter Notebook in VS Code zu installieren.
 
 ### Jupyter Notebooks in Anaconda
-Die einfachste Möglichkeit, Jupyter Notebooks zusammen mit vielen anderen nützlichen Datenwissenschaft-Tools zu verwenden, ist das [Anaconda](https://www.anaconda.com/products/individual)-Toolkit. Beachte jedoch, dass dies eine _zweite_ Python-Verteilung auf deinem System einführt. Dies kann zu Verwirrung führen, wenn du mit Skripten in VS Code arbeitest, wenn zufällig der Anaconda-Interpreter aktiv ist, anstatt der PsychoPy-Interpreter. Keine Panik, folge den Anweisungen unter [Wähle einen Python-Interpreter](https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter) und stelle sicher, dass der PsychoPy-Interpreter aktiv ist.
+Die einfachste Möglichkeit, Jupyter Notebooks zusammen mit vielen anderen nützlichen Data Science-Tools zu verwenden, ist [Anaconda](https://www.anaconda.com/products/individual). Beachte jedoch, dass dies einen _zweiten_ Python-Interpreter auf deinem System installiert. Dies kann zu Verwirrung führen, wenn du mit Skripten in VS Code arbeitest, wenn zufällig der Anaconda-Interpreter aktiv ist, anstatt der PsychoPy-Interpreter. Keine Panik, folge den Anweisungen unter [Wähle einen Python-Interpreter](https://code.visualstudio.com/docs/python/python-tutorial#_select-a-python-interpreter) und stelle sicher, dass der PsychoPy-Interpreter aktiviert ist.
 
-Okay, dann lade und installiere Anaconda herunter. Die Website hat einen super [Einstieg](https://docs.anaconda.com/anaconda/user-guide/getting-started/) Abschnitt.
+Okay, dann lade und installiere Anaconda herunter. Die Website hat einen super [Einstiegs-](https://docs.anaconda.com/anaconda/user-guide/getting-started/) Abschnitt.
 
-## Mach's sauber {#files-folder-de}
-Bevor wir loslegen, schlage ich vor, dass du einen Ordner namens _games-with-python_ (oder so ähnlich) erstellst. Wenn du Jupyter Notebooks über Anaconda verwendest, solltest du ihn in deinem Benutzerordner erstellen, da Anaconda ihn dort erwartet. Dann erstellst du für jedes Kapitel / Spiel einen neuen Unterordner. Für das Seminar musst du einen Ordner mit allen Dateien zippen und hochladen.
+## Mach's ordentlich {#files-folder-de}
+Bevor wir loslegen, schlage ich vor, dass du einen Ordner namens _games-with-python_ (oder so ähnlich) erstellst. Wenn du Jupyter Notebooks mit Anaconda verwendest, solltest du ihn in deinem Benutzerordner erstellen, da Anaconda ihn dort erwartet. Dann erstellst du für jedes Kapitel / Spiel einen neuen Unterordner. Für das Seminar musst du einen Ordner mit allen Dateien zippen und hochladen.s
